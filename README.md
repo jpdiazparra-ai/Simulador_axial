@@ -1,6 +1,6 @@
-# PILOTOS_ANA_WANT
+# Simulador_axial
 
-App Streamlit independiente basada en `WANT.py`.
+App Streamlit para simulacion axial y visualizacion tecnica.
 
 ## Ejecutar local
 
