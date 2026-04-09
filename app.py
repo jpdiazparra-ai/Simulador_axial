@@ -49,6 +49,9 @@ st.markdown("""
 
 .main .block-container {
     padding-top: 0rem;
+    max-width: 1280px;
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
 }
 
 .main .block-container > div.element-container:has(> div[data-testid="stExpander"]) {
@@ -1211,6 +1214,37 @@ st.markdown("""
 
 .block-container {
     padding-top: 1.2rem !important;     /* Estaba en 5–6rem → reducimos a ~1 */
+    max-width: 1280px !important;
+    padding-left: 1.4rem !important;
+    padding-right: 1.4rem !important;
+}
+
+section[data-testid="stSidebar"] {
+    width: 252px !important;
+    min-width: 252px !important;
+    max-width: 252px !important;
+}
+
+section[data-testid="stSidebar"] > div {
+    width: 252px !important;
+    min-width: 252px !important;
+    max-width: 252px !important;
+}
+
+@media (max-width: 900px) {
+    .main .block-container,
+    .block-container {
+        max-width: 100% !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    section[data-testid="stSidebar"],
+    section[data-testid="stSidebar"] > div {
+        width: auto !important;
+        min-width: auto !important;
+        max-width: none !important;
+    }
 }
 
 header[data-testid="stHeader"] {
