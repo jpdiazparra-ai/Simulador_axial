@@ -4227,7 +4227,15 @@ with analysis_content_container:
 
         df_polar = build_lift_drag_polar(t_rel=t_rel, symmetric=is_symmetric)
 
-        with st.expander("Cargar polar Lift-Drag (CSV o pegado)", expanded=False):
+        use_custom_polar = False
+        polar_file = None
+        polar_table = None
+        show_polar_loader = st.toggle(
+            "Mostrar carga de polar Lift-Drag (CSV o pegado)",
+            value=False,
+            key="show_polar_loader",
+        )
+        if show_polar_loader:
             use_custom_polar = st.checkbox(
                 "Usar datos cargados",
                 value=False,
