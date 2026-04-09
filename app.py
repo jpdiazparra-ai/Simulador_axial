@@ -985,6 +985,8 @@ def render_analysis_switcher():
     ]
     if "active_analysis_block" not in st.session_state:
         st.session_state["active_analysis_block"] = "aero"
+    if "analysis_map_open" not in st.session_state:
+        st.session_state["analysis_map_open"] = False
     valid_keys = {key for key, _, _, _, _ in blocks}
     if st.session_state["active_analysis_block"] not in valid_keys:
         st.session_state["active_analysis_block"] = "aero"
@@ -992,7 +994,7 @@ def render_analysis_switcher():
     active_key = st.session_state["active_analysis_block"]
     active_label = next((title for key, _, title, _, _ in blocks if key == active_key), blocks[0][2])
 
-    with st.expander("🗺️ Mapa de análisis técnico", expanded=False):
+    with st.expander("🗺️ Mapa de análisis técnico", expanded=st.session_state["analysis_map_open"]):
         cols = st.columns(len(blocks))
         for col, (key, block_name, title, subtitle, accent) in zip(cols, blocks):
             with col:
@@ -1014,6 +1016,7 @@ def render_analysis_switcher():
                     type="primary" if is_active else "secondary",
                 ):
                     st.session_state["active_analysis_block"] = key
+                    st.session_state["analysis_map_open"] = True
                     st.rerun()
 
         content_container = st.container()
