@@ -1013,7 +1013,7 @@ def render_analysis_switcher():
         st.session_state["analysis_map_open"] = False
     if "pending_scroll_anchor" not in st.session_state:
         st.session_state["pending_scroll_anchor"] = None
-    valid_keys = {key for key, _, _, _, _ in blocks}
+    valid_keys = {block[0] for block in blocks}
     if st.session_state["active_analysis_block"] not in valid_keys:
         st.session_state["active_analysis_block"] = None
 
