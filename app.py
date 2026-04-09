@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -630,9 +631,9 @@ st.markdown("""
     min-height: 138px;
     padding: 0.8rem 0.78rem 0.72rem 0.82rem;
     border-radius: 18px;
-    border: 1px solid color-mix(in srgb, var(--analysis-accent) 28%, rgba(203,213,225,0.92));
+    border: 1px solid var(--analysis-border, rgba(203,213,225,0.92));
     background:
-        linear-gradient(90deg, color-mix(in srgb, var(--analysis-accent) 12%, #ffffff), rgba(255,255,255,0.98)),
+        linear-gradient(90deg, var(--analysis-bg, #f8fbff), rgba(255,255,255,0.98)),
         #ffffff;
     box-shadow: 0 10px 20px rgba(15,23,42,0.06);
     margin-bottom: 0.5rem;
@@ -643,7 +644,7 @@ st.markdown("""
     position: absolute;
     inset: 0 auto 0 0;
     width: 7px;
-    background: linear-gradient(180deg, var(--analysis-accent), color-mix(in srgb, var(--analysis-accent) 58%, #ffffff));
+    background: linear-gradient(180deg, var(--analysis-accent), var(--analysis-accent-soft, var(--analysis-accent)));
 }
 
 .analysis-card__eyebrow {
@@ -651,7 +652,7 @@ st.markdown("""
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--analysis-accent) 68%, #475569);
+    color: var(--analysis-label, #475569);
     margin-bottom: 0.55rem;
 }
 
@@ -950,6 +951,28 @@ def section_header(text: str, level: int = 2, anchor: str | None = None) -> None
     st.markdown(f"<div class='{cls}'{anchor_attr}>{escape(text)}</div>", unsafe_allow_html=True)
 
 
+def restore_scroll_to_anchor(anchor_id: str) -> None:
+    """Reposiciona la vista en un ancla del documento principal tras el rerun de Streamlit."""
+    safe_anchor = escape(anchor_id, quote=True)
+    components.html(
+        f"""
+        <script>
+        const anchorId = "{safe_anchor}";
+        const scrollToAnchor = () => {{
+          const anchor = window.parent.document.getElementById(anchorId);
+          if (!anchor) return;
+          anchor.scrollIntoView({{ behavior: "auto", block: "start" }});
+        }};
+        window.parent.requestAnimationFrame(() => {{
+          scrollToAnchor();
+          window.parent.setTimeout(scrollToAnchor, 120);
+        }});
+        </script>
+        """,
+        height=0,
+    )
+
+
 PALETTE_WARM_GRAY = "#b7b4b2"
 PALETTE_CORAL = "#d95f5f"
 PALETTE_MUSTARD = "#d9a766"
@@ -975,33 +998,36 @@ def sub_block_header(text: str, subtitle: str, accent: str = PALETTE_SAGE) -> No
 
 
 def render_analysis_switcher():
+    scroll_anchor_id = "analysis-map-anchor"
     blocks = [
-        ("aero", "BLOQUE 1", "🌀 Aerodinámica y comportamiento del perfil", "Abrir vista estratégica", PALETTE_SAGE),
-        ("control", "BLOQUE 2", "⚙️ Operación y control del rotor", "Abrir vista estratégica", PALETTE_MUSTARD),
-        ("power", "BLOQUE 3", "📈 Potencia y eficiencia global", "Abrir vista estratégica", PALETTE_CORAL),
-        ("mechanical", "BLOQUE 4", "🛠️ Tren mecánico y cargas", "Abrir vista estratégica", PALETTE_SLATE),
-        ("electrical", "BLOQUE 5", "🔌 Sistema eléctrico y vibraciones", "Abrir vista estratégica", PALETTE_SLATE),
-        ("resource", "BLOQUE 6", "🌬️ Recurso y energía anual", "Abrir vista estratégica", PALETTE_SAGE),
+        ("aero", "BLOQUE 1", "🌀 Aerodinámica y comportamiento del perfil", "Abrir vista estratégica", PALETTE_SAGE, "#d8e5e2", "#f4faf8", "#6f8f8b", "#c6d8d4"),
+        ("control", "BLOQUE 2", "⚙️ Operación y control del rotor", "Abrir vista estratégica", PALETTE_MUSTARD, "#ead7b0", "#fdf8ef", "#967a4f", "#efdcbf"),
+        ("power", "BLOQUE 3", "📈 Potencia y eficiencia global", "Abrir vista estratégica", PALETTE_CORAL, "#e8b8b8", "#fdf4f4", "#9e5858", "#ebbcbc"),
+        ("mechanical", "BLOQUE 4", "🛠️ Tren mecánico y cargas", "Abrir vista estratégica", PALETTE_SLATE, "#c7cfda", "#f5f8fc", "#5f6c80", "#d0d6e0"),
+        ("electrical", "BLOQUE 5", "🔌 Sistema eléctrico y vibraciones", "Abrir vista estratégica", PALETTE_SLATE, "#c7cfda", "#f5f8fc", "#5f6c80", "#d0d6e0"),
+        ("resource", "BLOQUE 6", "🌬️ Recurso y energía anual", "Abrir vista estratégica", PALETTE_SAGE, "#d8e5e2", "#f4faf8", "#6f8f8b", "#c6d8d4"),
     ]
     if "active_analysis_block" not in st.session_state:
-        st.session_state["active_analysis_block"] = "aero"
+        st.session_state["active_analysis_block"] = None
     if "analysis_map_open" not in st.session_state:
         st.session_state["analysis_map_open"] = False
+    if "pending_scroll_anchor" not in st.session_state:
+        st.session_state["pending_scroll_anchor"] = None
     valid_keys = {key for key, _, _, _, _ in blocks}
     if st.session_state["active_analysis_block"] not in valid_keys:
-        st.session_state["active_analysis_block"] = "aero"
+        st.session_state["active_analysis_block"] = None
 
     active_key = st.session_state["active_analysis_block"]
-    active_label = next((title for key, _, title, _, _ in blocks if key == active_key), blocks[0][2])
 
+    st.markdown(f"<div id='{scroll_anchor_id}'></div>", unsafe_allow_html=True)
     with st.expander("🗺️ Mapa de análisis técnico", expanded=st.session_state["analysis_map_open"]):
         cols = st.columns(len(blocks))
-        for col, (key, block_name, title, subtitle, accent) in zip(cols, blocks):
+        for col, (key, block_name, title, subtitle, accent, border_color, bg_color, label_color, soft_accent) in zip(cols, blocks):
             with col:
                 is_active = active_key == key
                 st.markdown(
                     f"""
-                    <div class="analysis-card" style="--analysis-accent:{accent};">
+                    <div class="analysis-card" style="--analysis-accent:{accent}; --analysis-border:{border_color}; --analysis-bg:{bg_color}; --analysis-label:{label_color}; --analysis-accent-soft:{soft_accent};">
                       <div class="analysis-card__eyebrow">{block_name}</div>
                       <div class="analysis-card__title">{escape(title)}</div>
                       <div class="analysis-card__sub">{'Vista activa para análisis' if is_active else escape(subtitle)}</div>
@@ -1017,9 +1043,14 @@ def render_analysis_switcher():
                 ):
                     st.session_state["active_analysis_block"] = key
                     st.session_state["analysis_map_open"] = True
+                    st.session_state["pending_scroll_anchor"] = scroll_anchor_id
                     st.rerun()
 
         content_container = st.container()
+
+    if st.session_state.get("pending_scroll_anchor") == scroll_anchor_id:
+        restore_scroll_to_anchor(scroll_anchor_id)
+        st.session_state["pending_scroll_anchor"] = None
 
     return active_key, content_container
 
@@ -4210,6 +4241,17 @@ with st.expander("🧬 Escenarios y comparación de configuraciones", expanded=F
         st.info("Guarda al menos dos escenarios para habilitar el comparador A/B.")
 
 with analysis_content_container:
+    if active_analysis_block is None:
+        st.markdown(
+            """
+            <div class="comment-box">
+              <div class="comment-title">Selecciona un bloque</div>
+              <p>Abre una vista del mapa para cargar su contenido estratégico y mantener el foco en esa sección.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
     if active_analysis_block == "aero":
         # Bloque – Aerodinámica
         macro_section_header(
