@@ -973,6 +973,13 @@ def restore_scroll_to_anchor(anchor_id: str) -> None:
     )
 
 
+def select_analysis_block(block_key: str, scroll_anchor_id: str) -> None:
+    """Actualiza el bloque activo sin forzar un rerun adicional."""
+    st.session_state["active_analysis_block"] = block_key
+    st.session_state["analysis_map_open"] = True
+    st.session_state["pending_scroll_anchor"] = scroll_anchor_id
+
+
 PALETTE_WARM_GRAY = "#b7b4b2"
 PALETTE_CORAL = "#d95f5f"
 PALETTE_MUSTARD = "#d9a766"
@@ -1040,11 +1047,10 @@ def render_analysis_switcher():
                     key=f"analysis_block_{key}",
                     use_container_width=True,
                     type="primary" if is_active else "secondary",
+                    on_click=select_analysis_block,
+                    args=(key, scroll_anchor_id),
                 ):
-                    st.session_state["active_analysis_block"] = key
-                    st.session_state["analysis_map_open"] = True
-                    st.session_state["pending_scroll_anchor"] = scroll_anchor_id
-                    st.rerun()
+                    pass
 
         content_container = st.container()
 
