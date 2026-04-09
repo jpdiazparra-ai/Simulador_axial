@@ -52,12 +52,12 @@ st.markdown("""
 }
 
 .main .block-container > div.element-container:has(> div[data-testid="stExpander"]) {
-    margin: 0 !important;
+    margin: 0 0 1.15rem 0 !important;
     padding: 0 !important;
 }
 
 .main .block-container > div.element-container:has(> div[data-testid="stExpander"]) + div.element-container:has(> div[data-testid="stExpander"]) {
-    margin-top: 1.15rem !important;
+    margin-top: 0 !important;
 }
 
 .main .block-container div[data-testid="stExpander"] {
@@ -143,7 +143,9 @@ st.markdown("""
 
 .hero-banner {
     width: 100%;
+    aspect-ratio: 4.9 / 1;
     min-height: 168px;
+    max-height: 182px;
     border-radius: 24px;
     background-size: cover;
     background-position: center 38%;
@@ -232,7 +234,9 @@ st.markdown("""
 @media (max-width: 900px) {
     .hero-banner {
         width: 100%;
+        aspect-ratio: 2.35 / 1;
         min-height: 190px;
+        max-height: none;
         background-position: center center;
         margin: -2.6rem 0 2rem;
     }
@@ -4247,17 +4251,6 @@ with st.expander("🧬 Escenarios y comparación de configuraciones", expanded=F
         st.info("Guarda al menos dos escenarios para habilitar el comparador A/B.")
 
 with analysis_content_container:
-    if active_analysis_block is None:
-        st.markdown(
-            """
-            <div class="comment-box">
-              <div class="comment-title">Selecciona un bloque</div>
-              <p>Abre una vista del mapa para cargar su contenido estratégico y mantener el foco en esa sección.</p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
     if active_analysis_block == "aero":
         # Bloque – Aerodinámica
         macro_section_header(
