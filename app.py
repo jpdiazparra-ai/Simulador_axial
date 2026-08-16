@@ -3,12 +3,14 @@ import streamlit.components.v1 as components
 import numpy as np
 import pandas as pd
 import plotly.express as px
-from math import pi, sqrt
+from math import gamma, pi, sqrt
 from contextlib import contextmanager
 from html import escape
 from pathlib import Path
 import base64
 import io
+import os
+import re
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
@@ -36,8 +38,13 @@ COLOR_SEQ = [
     "#a855f7",  # violeta
 ]
 px.defaults.color_discrete_sequence = COLOR_SEQ
+os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib-cache")
 
-st.set_page_config(page_title="Diseño VAWT – Aerodinámica + Generador GDG-1100", layout="wide")
+st.set_page_config(
+    page_title="Diseño VAWT – Aerodinámica + Generador GDG-1100",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 st.markdown('<div id="top"></div>', unsafe_allow_html=True)
 
 
@@ -49,13 +56,14 @@ st.markdown("""
 
 .main .block-container {
     padding-top: 0rem;
-    max-width: 1280px;
+    max-width: min(100%, 1840px);
+    width: 100%;
     padding-left: 1.4rem;
     padding-right: 1.4rem;
 }
 
 .main .block-container > div.element-container:has(> div[data-testid="stExpander"]) {
-    margin: 0 0 1.15rem 0 !important;
+    margin: 0 0 1.05rem 0 !important;
     padding: 0 !important;
 }
 
@@ -68,55 +76,110 @@ st.markdown("""
 }
 
 .main .block-container div[data-testid="stExpander"] details {
-    border-radius: 20px !important;
-    border: 1px solid rgba(79,90,105,0.14) !important;
-    background: linear-gradient(180deg, #fcfbf9 0%, #f4f1ed 100%) !important;
-    box-shadow: 0 10px 24px rgba(79,90,105,0.08) !important;
+    position: relative !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(71, 85, 105, 0.22) !important;
+    border-top: 4px solid #3d5a80 !important;
+    background:
+        linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, #ffffff 0%, #f7fafc 100%) !important;
+    background-size: 24px 24px, 24px 24px, auto !important;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255,255,255,0.9) !important;
     overflow: hidden !important;
+}
+
+.main .block-container div[data-testid="stExpander"] details::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background: linear-gradient(180deg, #3d5a80 0%, #2a9d8f 48%, #d9a766 100%);
+    opacity: 0.95;
+    z-index: 1;
+}
+
+.main .block-container div[data-testid="stExpander"] details[open] {
+    border-color: rgba(61, 90, 128, 0.36) !important;
+    box-shadow: 0 16px 34px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255,255,255,0.95) !important;
 }
 
 .main .block-container div[data-testid="stExpander"] summary {
     position: relative !important;
-    padding: 0.95rem 1.05rem !important;
+    padding: 0.95rem 1.2rem 0.95rem 1.6rem !important;
     background:
-        radial-gradient(circle at top right, rgba(132,169,164,0.08), transparent 30%),
-        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,242,238,0.98)) !important;
-    border-radius: 20px !important;
-    font-weight: 700 !important;
-    color: #253142 !important;
+        linear-gradient(90deg, rgba(15, 23, 42, 0.04), rgba(255,255,255,0.76) 32%, rgba(244,247,250,0.92)),
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(240,245,248,0.98)) !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(71,85,105,0.12) !important;
+    font-weight: 800 !important;
+    color: #182235 !important;
+    min-height: 58px !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 .main .block-container div[data-testid="stExpander"] summary:hover {
     background:
-        radial-gradient(circle at top right, rgba(132,169,164,0.12), transparent 34%),
-        linear-gradient(180deg, rgba(255,255,255,1), rgba(242,238,234,1)) !important;
+        linear-gradient(90deg, rgba(42, 157, 143, 0.09), rgba(255,255,255,0.9) 34%, rgba(239,246,249,1)),
+        linear-gradient(180deg, rgba(255,255,255,1), rgba(238,244,247,1)) !important;
 }
 
 .main .block-container div[data-testid="stExpander"] summary::before {
+    content: "ENG";
+    position: absolute;
+    right: 3.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.25rem 0.52rem;
+    border-radius: 6px;
+    border: 1px solid rgba(61,90,128,0.20);
+    background: rgba(255,255,255,0.72);
+    color: #3d5a80;
+    font-size: 0.58rem;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    font-weight: 900;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.75);
+}
+
+.main .block-container div[data-testid="stExpander"] summary::after {
     content: "";
     position: absolute;
-    left: 0;
-    top: 16%;
-    bottom: 16%;
-    width: 5px;
-    border-radius: 0 8px 8px 0;
-    background: linear-gradient(180deg, #84a9a4, #4f5a69);
+    left: 1.55rem;
+    right: 1.2rem;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(61,90,128,0.38), rgba(42,157,143,0.24), transparent);
 }
 
 .main .block-container div[data-testid="stExpander"] summary p {
-    font-size: 1rem !important;
-    letter-spacing: -0.01em;
+    font-size: 1.02rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0 !important;
+    color: #182235 !important;
+    text-transform: none !important;
 }
 
 .main .block-container div[data-testid="stExpanderDetails"] {
-    padding-top: 0.35rem !important;
-    padding-bottom: 0 !important;
+    padding: 0.8rem 1rem 0.95rem 1.35rem !important;
     margin-bottom: 0 !important;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.72), rgba(248,250,252,0.88)) !important;
 }
 
 .main .block-container div[data-testid="stExpanderDetails"] > div {
     padding-top: 0 !important;
     margin-top: 0 !important;
+}
+
+.main .block-container div[data-testid="stExpanderDetails"] [data-testid="stMetric"] {
+    border-radius: 8px !important;
+    border: 1px solid rgba(71,85,105,0.14) !important;
+    background: rgba(255,255,255,0.72) !important;
+    padding: 0.55rem 0.65rem !important;
 }
 
 .main .block-container > div.element-container:has(style),
@@ -473,6 +536,88 @@ st.markdown("""
 
 [data-testid="stSidebar"] [data-testid="stExpander"] + [data-testid="stExpander"] {
     margin-top: 0.55rem !important;
+}
+
+/* ===== BLOQUES DESPLEGABLES DEL CUERPO PRINCIPAL — ESTILO INGENIERÍA ===== */
+[data-testid="stMain"] div[data-testid="stExpander"] details {
+    position: relative !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(51, 65, 85, 0.28) !important;
+    border-top: 4px solid #3d5a80 !important;
+    background:
+        linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+    background-size: 22px 22px, 22px 22px, auto !important;
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.10), inset 0 1px 0 rgba(255,255,255,0.92) !important;
+    overflow: hidden !important;
+}
+
+[data-testid="stMain"] div[data-testid="stExpander"] details::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 9px !important;
+    background: linear-gradient(180deg, #3d5a80 0%, #2a9d8f 52%, #d9a766 100%) !important;
+    z-index: 1 !important;
+}
+
+[data-testid="stMain"] div[data-testid="stExpander"] details[open] {
+    border-color: rgba(61, 90, 128, 0.44) !important;
+    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.14), inset 0 1px 0 rgba(255,255,255,0.95) !important;
+}
+
+[data-testid="stMain"] div[data-testid="stExpander"] summary {
+    position: relative !important;
+    min-height: 64px !important;
+    padding: 1rem 1.25rem 1rem 1.75rem !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(71,85,105,0.14) !important;
+    background:
+        linear-gradient(90deg, rgba(15, 23, 42, 0.055), rgba(255,255,255,0.86) 34%, rgba(241,245,249,0.96)),
+        linear-gradient(180deg, #ffffff, #eef4f7) !important;
+    color: #182235 !important;
+    font-weight: 850 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+[data-testid="stMain"] div[data-testid="stExpander"] summary:hover {
+    background:
+        linear-gradient(90deg, rgba(42, 157, 143, 0.12), rgba(255,255,255,0.94) 36%, rgba(236,244,247,1)),
+        linear-gradient(180deg, #ffffff, #eaf2f5) !important;
+}
+
+[data-testid="stMain"] div[data-testid="stExpander"] summary::before {
+    content: "ENG" !important;
+    position: absolute !important;
+    right: 3.9rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    padding: 0.28rem 0.56rem !important;
+    border-radius: 6px !important;
+    border: 1px solid rgba(61,90,128,0.26) !important;
+    background: rgba(255,255,255,0.82) !important;
+    color: #3d5a80 !important;
+    font-size: 0.58rem !important;
+    line-height: 1 !important;
+    letter-spacing: 0.14em !important;
+    font-weight: 900 !important;
+}
+
+[data-testid="stMain"] div[data-testid="stExpander"] summary p {
+    font-size: 1.03rem !important;
+    line-height: 1.22 !important;
+    letter-spacing: 0 !important;
+    color: #182235 !important;
+    font-weight: 850 !important;
+}
+
+[data-testid="stMain"] div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] {
+    padding: 0.95rem 1rem 1.05rem 1.45rem !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(248,250,252,0.92)) !important;
 }
 
 .section-header {
@@ -1009,6 +1154,19 @@ def sub_block_header(text: str, subtitle: str, accent: str = PALETTE_SAGE) -> No
         """,
         unsafe_allow_html=True,
     )
+    if "render_section_download_button" in globals():
+        render_section_download_button(
+            label=f"Descargar sub-bloque: {text}",
+            section_title=text,
+            section_rows=[
+                {"Campo": "Sub-bloque", "Valor": text},
+                {"Campo": "Descripción", "Valor": subtitle},
+                {"Campo": "Bloque activo", "Valor": st.session_state.get("active_analysis_block", "Mapa técnico")},
+            ],
+            key_suffix=f"mapa_{st.session_state.get('active_analysis_block', 'sin_bloque')}_{text}",
+            extra_sheets=analysis_block_export_sheets(st.session_state.get("active_analysis_block")),
+            help_text="Descarga el contexto principal y los datos relevantes de este sub-bloque del mapa técnico.",
+        )
 
 
 def render_analysis_switcher():
@@ -1169,6 +1327,257 @@ def read_uploaded_csv(file_bytes: bytes) -> pd.DataFrame:
     return pd.read_csv(io.BytesIO(file_bytes))
 
 
+def _numeric_column_name(value) -> float | None:
+    try:
+        text = str(value).strip().replace(",", ".")
+        if not text:
+            return None
+        return float(text)
+    except Exception:
+        return None
+
+
+def detect_wind_height_profile(df_in: pd.DataFrame) -> tuple[bool, list[str], str | None]:
+    height_cols = []
+    for col in df_in.columns:
+        height = _numeric_column_name(col)
+        if height is None or height <= 0:
+            continue
+        series = pd.to_numeric(df_in[col], errors="coerce")
+        if series.notna().sum() >= max(5, int(len(df_in) * 0.2)):
+            height_cols.append(col)
+    time_col = None
+    for col in df_in.columns:
+        if col in height_cols:
+            continue
+        parsed = pd.to_datetime(df_in[col], errors="coerce")
+        if parsed.notna().sum() >= max(5, int(len(df_in) * 0.2)):
+            time_col = col
+            break
+    return len(height_cols) >= 3, height_cols, time_col
+
+
+def default_turbine_resource_height(p_nom_kw: float) -> float:
+    """Altura efectiva de recurso acordada para cada tamaño de turbina."""
+    try:
+        return 24.0 if float(p_nom_kw) >= 40.0 else 14.0
+    except Exception:
+        return 14.0
+
+
+def _fit_power_law_speed(row: np.ndarray, heights_arr: np.ndarray, target_height: float) -> tuple[float, float]:
+    valid = np.isfinite(row) & np.isfinite(heights_arr) & (row > 0) & (heights_arr > 0)
+    if valid.sum() < 2:
+        return np.nan, np.nan
+    x = np.log(heights_arr[valid])
+    y = np.log(row[valid])
+    alpha, log_v_ref = np.polyfit(x, y, 1)
+    target_speed = float(np.exp(log_v_ref + alpha * np.log(target_height)))
+    return target_speed, float(alpha)
+
+
+def build_wind_profile_inputs(df_in: pd.DataFrame, height_cols: list[str], target_height: float, time_col: str | None = None) -> dict:
+    numeric_profile = pd.DataFrame()
+    heights = []
+    for col in height_cols:
+        height = _numeric_column_name(col)
+        if height is None:
+            continue
+        numeric_profile[str(height)] = pd.to_numeric(df_in[col], errors="coerce")
+        heights.append(float(height))
+    if numeric_profile.empty:
+        return {}
+
+    ordered = sorted(zip(heights, numeric_profile.columns), key=lambda item: item[0])
+    heights_arr = np.array([item[0] for item in ordered], dtype=float)
+    data = numeric_profile[[item[1] for item in ordered]].copy()
+    data.columns = [item[0] for item in ordered]
+    data = data.dropna(how="all")
+    if data.empty:
+        return {}
+
+    values = data.to_numpy(dtype=float)
+    row_valid = np.isfinite(values).sum(axis=1) >= 2
+    valid_index = data.index[row_valid]
+    values = values[row_valid]
+    if values.size == 0:
+        return {}
+
+    target_height = float(target_height) if np.isfinite(target_height) and target_height > 0 else float(heights_arr[0])
+    fitted = [_fit_power_law_speed(row, heights_arr, target_height) for row in values]
+    target_series_full = np.array([item[0] for item in fitted], dtype=float)
+    alpha_series = np.array([item[1] for item in fitted], dtype=float)
+    target_series = target_series_full[np.isfinite(target_series_full) & (target_series_full >= 0)]
+    if target_series.size < 5:
+        return {}
+
+    v_mean = float(np.mean(target_series))
+    v_std = float(np.std(target_series, ddof=1)) if target_series.size > 1 else 0.0
+    if v_mean > 0 and v_std > 0:
+        k_est = float(np.clip((v_std / v_mean) ** -1.086, 1.0, 10.0))
+        c_est = float(v_mean / gamma(1.0 + 1.0 / k_est))
+    else:
+        k_est = 2.0
+        c_est = max(v_mean, 0.1) / gamma(1.5)
+
+    mean_by_height = np.nanmean(values, axis=0)
+    profile_summary = pd.DataFrame(
+        {
+            "Altura m": heights_arr,
+            "Velocidad media m/s": mean_by_height,
+            "P10 m/s": np.nanpercentile(values, 10, axis=0),
+            "P50 m/s": np.nanpercentile(values, 50, axis=0),
+            "P90 m/s": np.nanpercentile(values, 90, axis=0),
+        }
+    )
+    profile_summary = profile_summary[np.isfinite(profile_summary["Velocidad media m/s"]) & (profile_summary["Velocidad media m/s"] > 0)]
+    if len(profile_summary) >= 2:
+        x = np.log(profile_summary["Altura m"].to_numpy(dtype=float))
+        y = np.log(profile_summary["Velocidad media m/s"].to_numpy(dtype=float))
+        alpha = float(np.polyfit(x, y, 1)[0])
+    else:
+        alpha = np.nan
+
+    result = {
+        "active": True,
+        "mode": "wind_height_profile",
+        "method": "Ley de potencia por timestamp: V(z)=a·z^alpha",
+        "time_col": time_col,
+        "target_height_m": target_height,
+        "source_height_min_m": float(np.nanmin(heights_arr)),
+        "source_height_max_m": float(np.nanmax(heights_arr)),
+        "sample_count": int(target_series.size),
+        "v_mean": v_mean,
+        "v_std": v_std,
+        "weibull_k": k_est,
+        "weibull_c": c_est,
+        "shear_alpha": alpha,
+        "shear_alpha_median": float(np.nanmedian(alpha_series)) if np.isfinite(alpha_series).any() else np.nan,
+        "target_series_sample": target_series[:5000].tolist(),
+        "profile_summary": profile_summary.to_dict("records"),
+    }
+    if time_col and time_col in df_in.columns:
+        parsed_time = pd.to_datetime(df_in.loc[valid_index, time_col], errors="coerce")
+        if parsed_time.notna().any():
+            result["start"] = str(parsed_time.min())
+            result["end"] = str(parsed_time.max())
+            aligned = pd.DataFrame(
+                {
+                    "timestamp": parsed_time,
+                    "v_target_m_s": target_series_full,
+                    "alpha": alpha_series,
+                }
+            )
+            aligned = aligned[
+                aligned["timestamp"].notna()
+                & np.isfinite(aligned["v_target_m_s"])
+                & (aligned["v_target_m_s"] >= 0)
+            ].sort_values("timestamp")
+            if not aligned.empty:
+                result["target_series_records"] = aligned.to_dict("records")
+    return result
+
+
+ENTEL_POWER_CURVE_URL = (
+    "https://docs.google.com/spreadsheets/d/e/"
+    "2PACX-1vS8Ms69pErI9GaORqBL2179NtK0E-H05Gvu26_kpkzl8EcY9U1CEJT1PtrZ7mbJMA/"
+    "pub?output=csv"
+)
+ENTEL_OFFER_DIAMETER_M = 5.0
+ENTEL_OFFER_ROTOR_HEIGHT_M = 7.0
+ENTEL_OFFER_INSTALLATION_HEIGHT_M_10KW = 14.0
+ENTEL_OFFER_MAST_HEIGHT_M = 6.0
+ENTEL_OFFER_AREA_M2 = ENTEL_OFFER_DIAMETER_M * ENTEL_OFFER_ROTOR_HEIGHT_M
+
+
+def _parse_locale_number(value) -> float:
+    text = str(value).strip().replace("%", "")
+    if not text or text.lower() in {"nan", "none"}:
+        return np.nan
+    if "," in text:
+        text = text.replace(".", "").replace(",", ".")
+    elif re.fullmatch(r"\d{1,3}(\.\d{3})+", text):
+        text = text.replace(".", "")
+    try:
+        return float(text)
+    except Exception:
+        return np.nan
+
+
+@st.cache_data(show_spinner=False, ttl=900)
+def load_entel_power_curve_from_url(url: str = ENTEL_POWER_CURVE_URL) -> pd.DataFrame:
+    def fallback_df() -> pd.DataFrame:
+        return pd.DataFrame({
+            "v (m/s)": [0.0, 3.0, 4.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 14.0, 16.0, 17.9, 19.9],
+            "rpm_rotor": [0.0, 21.8, 29.0, 43.5, 50.8, 58.1, 65.3, 77.0, 77.0, 77.0, 77.0, 77.0, 77.0, 0.0],
+            "λ_efectiva": [np.nan, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 2.0, 1.8, 1.7, 1.4, 1.3, 1.1, np.nan],
+            "P_aero (kW)": [0.0, 0.200, 0.506, 1.854, 3.009, 4.564, 6.578, 9.084, 11.831, 10.305, 9.667, 10.194, 10.194, 0.0],
+            "P_mec_gen (kW)": [0.0, 0.200, 0.506, 1.854, 3.009, 4.564, 6.578, 9.084, 11.831, 10.305, 9.667, 10.194, 10.194, 0.0],
+            "P_el (kW)": [0.0, 0.043, 0.279, 1.415, 2.414, 3.767, 5.523, 7.705, 10.090, 8.772, 8.216, 8.676, 8.676, 0.0],
+            "P_out (clip) kW": [0.0, 0.043, 0.279, 1.415, 2.414, 3.767, 5.523, 7.705, 10.090, 8.772, 8.216, 8.676, 8.676, 0.0],
+            "η_gen (curve)": [np.nan, 0.216, 0.551, 0.763, 0.802, 0.825, 0.840, 0.848, 0.853, 0.851, 0.850, 0.851, 0.851, np.nan],
+            "Cp_el_equiv": [np.nan, 0.346, 0.369, 0.400, 0.409, 0.416, 0.421, 0.424, 0.415, 0.278, 0.164, 0.116, 0.083, np.nan],
+            "Cp_aero_equiv": [np.nan, 0.346, 0.369, 0.400, 0.409, 0.416, 0.421, 0.424, 0.415, 0.278, 0.164, 0.116, 0.083, np.nan],
+            "Cp(λ_efectiva)": [np.nan, 0.346, 0.369, 0.400, 0.409, 0.416, 0.421, 0.424, 0.415, 0.278, 0.164, 0.116, 0.083, np.nan],
+            "Estado curva URL": [
+                "Detenida (bajo cut-in)", "Seguimiento λ=1,90", "Seguimiento λ=1,90", "Seguimiento λ=1,90",
+                "Seguimiento λ=1,90", "Seguimiento λ=1,90", "Seguimiento λ=1,90", "Régimen nominal (77 rpm)",
+                "Régimen nominal (77 rpm)", "Régimen nominal (77 rpm)", "Régimen nominal (77 rpm)",
+                "Régimen nominal (77 rpm)", "Velocidad de corte (cut-out)", "Detenida (sobre cut-out)",
+            ],
+        })
+
+    try:
+        raw = pd.read_csv(url, skiprows=3, dtype=str)
+    except Exception:
+        return fallback_df()
+    if raw.empty:
+        return fallback_df()
+
+    norm_cols = {
+        col: re.sub(r"\s+", " ", str(col).replace("\n", " ")).strip().lower()
+        for col in raw.columns
+    }
+
+    def pick_col(*patterns: str):
+        for col, normalized in norm_cols.items():
+            if all(pattern in normalized for pattern in patterns):
+                return col
+        return None
+
+    v_col = pick_col("velocidad", "viento")
+    rpm_col = pick_col("velocidad", "giro")
+    tsr_col = pick_col("tsr")
+    p_mec_col = pick_col("potencia", "mec")
+    p_net_col = pick_col("potencia", "el", "neta")
+    eta_col = pick_col("rendimiento")
+    cp_col = pick_col("cp")
+    estado_col = pick_col("estado")
+    if not v_col or not p_net_col:
+        return fallback_df()
+
+    out = pd.DataFrame()
+    out["v (m/s)"] = raw[v_col].map(_parse_locale_number)
+    out["rpm_rotor"] = raw[rpm_col].map(_parse_locale_number) if rpm_col else np.nan
+    out["λ_efectiva"] = raw[tsr_col].map(_parse_locale_number) if tsr_col else np.nan
+    p_mec_w = raw[p_mec_col].map(_parse_locale_number) if p_mec_col else np.nan
+    p_net_w = raw[p_net_col].map(_parse_locale_number)
+    out["P_aero (kW)"] = pd.to_numeric(p_mec_w, errors="coerce") / 1000.0
+    out["P_mec_gen (kW)"] = pd.to_numeric(p_mec_w, errors="coerce") / 1000.0
+    out["P_el (kW)"] = pd.to_numeric(p_net_w, errors="coerce") / 1000.0
+    out["P_out (clip) kW"] = pd.to_numeric(p_net_w, errors="coerce") / 1000.0
+    out["η_gen (curve)"] = raw[eta_col].map(_parse_locale_number) / 100.0 if eta_col else np.nan
+    out["Cp_el_equiv"] = raw[cp_col].map(_parse_locale_number) if cp_col else np.nan
+    out["Cp_aero_equiv"] = out["Cp_el_equiv"]
+    out["Cp(λ_efectiva)"] = out["Cp_el_equiv"]
+    out["Estado curva URL"] = raw[estado_col].astype(str) if estado_col else ""
+
+    out = out[np.isfinite(out["v (m/s)"]) & np.isfinite(out["P_out (clip) kW"])].copy()
+    out = out.sort_values("v (m/s)").drop_duplicates("v (m/s)", keep="last")
+    out = out[out["v (m/s)"] >= 0]
+    return out.reset_index(drop=True) if not out.empty else fallback_df()
+
+
 @st.cache_data(show_spinner=False)
 def build_default_polar_rows() -> pd.DataFrame:
     return pd.DataFrame(
@@ -1214,21 +1623,64 @@ st.markdown("""
 
 .block-container {
     padding-top: 1.2rem !important;     /* Estaba en 5–6rem → reducimos a ~1 */
-    max-width: 1280px !important;
+    max-width: min(100%, 1840px) !important;
+    width: 100% !important;
     padding-left: 1.4rem !important;
     padding-right: 1.4rem !important;
 }
 
-section[data-testid="stSidebar"] {
+div[data-testid="stAppViewContainer"] .main {
+    width: 100% !important;
+}
+
+div[data-testid="stMain"],
+main[data-testid="stMain"],
+section.main,
+.main {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+div[data-testid="stMain"] > div,
+main[data-testid="stMain"] > div {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+section[data-testid="stSidebar"][aria-expanded="false"] ~ div[data-testid="stAppViewContainer"] .main .block-container,
+section[data-testid="stSidebar"][aria-expanded="false"] ~ div[data-testid="stAppViewContainer"] .block-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+}
+
+section[data-testid="stSidebar"][aria-expanded="true"] {
     width: 252px !important;
     min-width: 252px !important;
     max-width: 252px !important;
 }
 
-section[data-testid="stSidebar"] > div {
+section[data-testid="stSidebar"][aria-expanded="true"] > div {
     width: 252px !important;
     min-width: 252px !important;
     max-width: 252px !important;
+}
+
+section[data-testid="stSidebar"][aria-expanded="false"] {
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+section[data-testid="stSidebar"][aria-expanded="false"] > div {
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 @media (max-width: 900px) {
@@ -2024,6 +2476,611 @@ def build_pdf_report(df_view, figs_dict, kpi_text=""):
 
 
 # =========================================================
+# Descargas por pestaña / sub-bloque
+# =========================================================
+def _download_slug(text: str, max_len: int = 70) -> str:
+    slug = re.sub(r"[^A-Za-z0-9]+", "_", str(text)).strip("_").lower()
+    return (slug or "reporte")[:max_len]
+
+
+def _sheet_name(name: str) -> str:
+    safe = re.sub(r"[\[\]\:\*\?\/\\]", " ", str(name)).strip()
+    return (safe or "Hoja")[:31]
+
+
+def _rows_df(rows) -> pd.DataFrame:
+    if isinstance(rows, pd.DataFrame):
+        return rows.copy()
+    return pd.DataFrame(rows or [])
+
+
+def _unique_sheet_name(raw_name: str, used_names: set[str]) -> str:
+    base = _sheet_name(raw_name)
+    candidate = base
+    counter = 2
+    while candidate in used_names:
+        suffix = f" {counter}"
+        candidate = f"{base[:31 - len(suffix)]}{suffix}"
+        counter += 1
+    used_names.add(candidate)
+    return candidate
+
+
+def build_section_workbook(section_title: str, section_rows=None, extra_sheets=None) -> bytes:
+    buffer = io.BytesIO()
+    try:
+        import xlsxwriter  # noqa: F401
+        excel_engine = "xlsxwriter"
+    except ModuleNotFoundError:
+        excel_engine = "openpyxl"
+
+    with pd.ExcelWriter(buffer, engine=excel_engine) as writer:
+        used_sheet_names = set()
+        context_df = globals().get("download_context_df", pd.DataFrame())
+        if isinstance(context_df, pd.DataFrame) and not context_df.empty:
+            context_df.to_excel(writer, sheet_name=_unique_sheet_name("Panel principal", used_sheet_names), index=False)
+
+        section_df = _rows_df(section_rows)
+        if not section_df.empty:
+            section_df.to_excel(writer, sheet_name=_unique_sheet_name(section_title, used_sheet_names), index=False)
+
+        for raw_name, raw_df in (extra_sheets or {}).items():
+            sheet_df = _rows_df(raw_df)
+            if not sheet_df.empty:
+                sheet_df.to_excel(writer, sheet_name=_unique_sheet_name(raw_name, used_sheet_names), index=False)
+
+        if excel_engine == "xlsxwriter":
+            workbook = writer.book
+            header_fmt = workbook.add_format({
+                "bold": True,
+                "font_color": "white",
+                "bg_color": "#334155",
+                "border": 1,
+            })
+            for worksheet in writer.sheets.values():
+                worksheet.freeze_panes(1, 0)
+                worksheet.set_row(0, None, header_fmt)
+                worksheet.set_column(0, 0, 26)
+                worksheet.set_column(1, 20, 18)
+        else:
+            from openpyxl.styles import Font, PatternFill
+
+            for worksheet in writer.sheets.values():
+                worksheet.freeze_panes = "A2"
+                for cell in worksheet[1]:
+                    cell.font = Font(bold=True, color="FFFFFF")
+                    cell.fill = PatternFill("solid", fgColor="334155")
+                worksheet.column_dimensions["A"].width = 26
+                for col_letter in "BCDEFGHIJKLMNOPQRSTU":
+                    worksheet.column_dimensions[col_letter].width = 18
+
+    return buffer.getvalue()
+
+
+def default_pdf_figures():
+    return build_all_plotly_export_figures()
+
+
+def _style_export_fig(title, fig, xaxis_title=None, yaxis_title=None, add_wind_lines=True):
+    fig.update_layout(
+        title=title,
+        template="plotly_white",
+        hovermode="x unified",
+        legend_title=None,
+        margin=dict(l=56, r=24, t=58, b=46),
+    )
+    if xaxis_title:
+        fig.update_xaxes(title_text=xaxis_title)
+    if yaxis_title:
+        fig.update_yaxes(title_text=yaxis_title)
+    if add_wind_lines:
+        for x_val, color, label in [
+            (globals().get("v_cut_in", np.nan), "rgba(100,116,139,0.7)", "v_cut-in"),
+            (globals().get("v_rated", np.nan), "rgba(217,167,102,0.85)", "v_rated"),
+            (globals().get("v_cut_out", np.nan), "rgba(217,95,95,0.8)", "v_cut-out"),
+        ]:
+            try:
+                if np.isfinite(float(x_val)):
+                    fig.add_vline(x=float(x_val), line_dash="dot", line_color=color, annotation_text=label)
+            except Exception:
+                pass
+    return fig
+
+
+def build_all_plotly_export_figures():
+    df_src = globals().get("df", pd.DataFrame())
+    if not isinstance(df_src, pd.DataFrame) or df_src.empty or "v (m/s)" not in df_src.columns:
+        return []
+
+    figs = []
+
+    try:
+        df_polar_export = build_lift_drag_polar(t_rel=t_rel, symmetric=is_symmetric)
+        fig_polar_export = make_subplots(specs=[[{"secondary_y": True}]])
+        fig_polar_export.add_trace(go.Scatter(x=df_polar_export["alpha_deg"], y=df_polar_export["Cl"], mode="lines", name="Cl"), secondary_y=False)
+        fig_polar_export.add_trace(go.Scatter(x=df_polar_export["alpha_deg"], y=df_polar_export["Cd"], mode="lines", name="Cd"), secondary_y=True)
+        fig_polar_export.add_trace(go.Scatter(x=df_polar_export["alpha_deg"], y=df_polar_export["ClCd"], mode="lines", name="Cl/Cd"), secondary_y=False)
+        fig_polar_export.update_yaxes(title_text="Cl / ClCd", secondary_y=False)
+        fig_polar_export.update_yaxes(title_text="Cd", secondary_y=True)
+        figs.append(("🌀 Aerodinámica - Polar Lift-Drag del perfil", _style_export_fig("Polar Lift-Drag del perfil", fig_polar_export, "alpha [deg]", "Cl / ClCd", add_wind_lines=False)))
+    except Exception:
+        pass
+
+    try:
+        theta_deg_export = np.linspace(0, 360, 361)
+        theta_rad_export = np.deg2rad(theta_deg_export)
+        lam_used_export = max(float(tsr_ref), 0.1)
+        alpha_base_export = np.rad2deg(np.arctan2(np.sin(theta_rad_export), lam_used_export + np.cos(theta_rad_export))) + float(pitch_deg)
+        df_alpha_export = pd.DataFrame({"theta_deg": theta_deg_export, "alpha_deg": alpha_base_export})
+        fig_alpha_export = px.line(df_alpha_export, x="theta_deg", y="alpha_deg", markers=False)
+        figs.append(("🌀 Aerodinámica - Ciclo de ángulo de ataque", _style_export_fig("Ciclo de ángulo de ataque alpha(theta)", fig_alpha_export, "theta [deg]", "alpha [deg]", add_wind_lines=False)))
+    except Exception:
+        pass
+
+    try:
+        df_cp_export = cp_curve_for_plot(cp_params)
+        fig_cp_curve_export = px.line(df_cp_export, x="λ", y=["Cp_prom", "Cp_upwind", "Cp_downwind"], markers=False)
+        figs.append(("🌀 Aerodinámica - Curva Cp(lambda)", _style_export_fig("Curva Cp(lambda) promedio y componentes", fig_cp_curve_export, "lambda", "Cp", add_wind_lines=False)))
+    except Exception:
+        pass
+
+    figure_specs = [
+        ("⚙️ Operación - rpm rotor / generador", ["rpm_rotor", "rpm_gen"], "rpm"),
+        ("⚙️ Operación - lambda, U_tip y frecuencia eléctrica", ["λ_efectiva", "U_tip (m/s)", "f_e (Hz)"], "valor"),
+        ("📈 Potencia - Curva de potencia por etapa", ["P_aero (kW)", "P_mec_gen (kW)", "P_gen_curve (kW)", "P_el (kW)", "P_out (clip) kW"], "kW"),
+        ("📈 Potencia - Cp equivalente por etapa", ["Cp(λ_efectiva)", "Cp_aero_equiv", "Cp_shaft_equiv", "Cp_el_equiv"], "Cp"),
+        ("📈 Potencia - Pérdidas por etapa", ["P_loss_mec (kW)", "P_loss_gen (kW)", "P_loss_elec (kW)", "P_loss_clip (kW)"], "kW"),
+        ("🛠️ Tren mecánico - Momentos y aceleración", ["M_base (kN·m)", "M_por_strut (kN·m)", "a_cen (g)"], "valor"),
+        ("🛠️ Tren mecánico - Tensiones y márgenes", ["sigma_root (MPa)", "sigma_strut (MPa)", "margen_root (%)", "margen_strut (%)"], "valor"),
+        ("🛠️ Tren mecánico - Par rotor / generador", ["T_rotor (N·m)", "T_gen (N·m)"], "N·m"),
+        ("🛠️ Tren mecánico - Frecuencias 1P / 3P", ["f_1P (Hz)", "f_3P (Hz)"], "Hz"),
+        ("🔌 Eléctrico - Tensión, frecuencia y corriente", ["V_LL (V)", "V_LL (Ke) [V]", "f_e (Hz)", "I_est (A)"], "valor"),
+        ("🔌 Eléctrico - Potencia, eficiencia y duty DC", ["P_gen_curve (kW)", "P_el (kW)", "P_out (clip) kW", "η_gen (curve)", "Duty_DC (%)"], "valor"),
+        ("🌬️ Recurso - Ruido estimado", ["Lw (dB)", "Lp_obs (dB)"], "dB"),
+    ]
+    for title, cols, y_label in figure_specs:
+        y_cols = [col for col in cols if col in df_src.columns]
+        if y_cols:
+            fig = px.line(df_src, x="v (m/s)", y=y_cols, markers=True)
+            figs.append((title, _style_export_fig(title, fig, "v (m/s)", y_label)))
+
+    try:
+        v_w_export = np.linspace(0.01, max(v_cut_out, v_max, 20.0), 400)
+        P_curve_W_export = df_src["P_out (clip) kW"].values * 1000.0
+        P_curve_W_export[df_src["v (m/s)"].values < v_cut_in] = 0.0
+        P_curve_W_export[df_src["v (m/s)"].values > v_cut_out] = 0.0
+        P_interp_export = np.interp(v_w_export, df_src["v (m/s)"].values, P_curve_W_export, left=0.0, right=0.0) / 1000.0
+        pdf_w_export = weibull_pdf(v_w_export, k_w, c_w)
+        fig_weib_export = make_subplots(specs=[[{"secondary_y": True}]])
+        fig_weib_export.add_trace(go.Scatter(x=v_w_export, y=P_interp_export, mode="lines", name="P_out [kW]"), secondary_y=False)
+        fig_weib_export.add_trace(go.Scatter(x=v_w_export, y=pdf_w_export, mode="lines", name="Weibull PDF"), secondary_y=True)
+        fig_weib_export.update_yaxes(title_text="P_out [kW]", secondary_y=False)
+        fig_weib_export.update_yaxes(title_text="Probabilidad", secondary_y=True)
+        figs.append(("🌬️ Recurso - Weibull y curva de potencia", _style_export_fig("Distribución Weibull y curva de potencia", fig_weib_export, "v (m/s)", "P_out [kW]")))
+    except Exception:
+        pass
+
+    return figs
+
+
+def default_pdf_chart_specs():
+    df_src = globals().get("df", pd.DataFrame())
+    if not isinstance(df_src, pd.DataFrame) or df_src.empty or "v (m/s)" not in df_src.columns:
+        return []
+
+    candidates = [
+        ("lambda efectiva, U_tip y frecuencia eléctrica", ["λ_efectiva", "U_tip (m/s)", "f_e (Hz)"], "valor"),
+        ("rpm rotor / generador vs velocidad de viento", ["rpm_rotor", "rpm_gen"], "rpm"),
+        ("Curva de potencia por etapa vs velocidad de viento", ["P_aero (kW)", "P_mec_gen (kW)", "P_gen_curve (kW)", "P_el (kW)", "P_out (clip) kW"], "kW"),
+        ("Pérdidas por etapa", ["P_loss_mec (kW)", "P_loss_gen (kW)", "P_loss_elec (kW)", "P_loss_clip (kW)"], "kW"),
+        ("Par en rotor / generador", ["T_rotor (N·m)", "T_gen (N·m)"], "N·m"),
+        ("Cp equivalente por etapa", ["Cp(λ_efectiva)", "Cp_aero_equiv", "Cp_shaft_equiv", "Cp_el_equiv"], "Cp"),
+        ("Cargas principales vs velocidad de viento", ["M_base (kN·m)", "M_por_strut (kN·m)", "a_cen (g)"], "valor"),
+        ("Tensiones y márgenes estructurales", ["sigma_root (MPa)", "sigma_strut (MPa)", "margen_root (%)", "margen_strut (%)"], "valor"),
+        ("Corriente estimada vs velocidad de viento", ["I_est (A)"], "A"),
+        ("Tensión, frecuencia y corriente", ["V_LL (V)", "V_LL (Ke) [V]", "f_e (Hz)", "I_est (A)"], "valor"),
+        ("Potencia, eficiencia y duty DC", ["P_gen_curve (kW)", "P_el (kW)", "P_out (clip) kW", "η_gen (curve)", "Duty_DC (%)"], "valor"),
+        ("Frecuencias 1P / 3P del rotor", ["f_1P (Hz)", "f_3P (Hz)"], "Hz"),
+        ("Ruido estimado vs velocidad de viento", ["Lw (dB)", "Lp_obs (dB)"], "dB"),
+    ]
+
+    specs = []
+    for title, cols, y_label in candidates:
+        y_cols = [col for col in cols if col in df_src.columns]
+        if y_cols:
+            specs.append({
+                "title": title,
+                "df": df_src[["v (m/s)"] + y_cols].copy(),
+                "x_col": "v (m/s)",
+                "y_cols": y_cols,
+                "y_label": y_label,
+            })
+    try:
+        df_polar_pdf = build_lift_drag_polar(t_rel=t_rel, symmetric=is_symmetric)
+        specs.insert(0, {
+            "title": "Aerodinámica - Polar Lift-Drag",
+            "df": df_polar_pdf.copy(),
+            "x_col": "alpha_deg",
+            "y_cols": ["Cl", "Cd", "ClCd"],
+            "y_label": "valor",
+            "wind_lines": False,
+        })
+    except Exception:
+        pass
+    try:
+        df_cp_pdf = cp_curve_for_plot(cp_params)
+        specs.insert(1, {
+            "title": "Aerodinámica - Curva Cp(lambda)",
+            "df": df_cp_pdf.copy(),
+            "x_col": "λ",
+            "y_cols": ["Cp_prom", "Cp_upwind", "Cp_downwind"],
+            "y_label": "Cp",
+            "wind_lines": False,
+        })
+    except Exception:
+        pass
+    return specs
+
+
+def matplotlib_chart_png(spec) -> bytes:
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    chart_df = spec["df"].copy()
+    x_col = spec["x_col"]
+    y_cols = spec["y_cols"]
+
+    fig, ax = plt.subplots(figsize=(8.2, 4.6), dpi=150)
+    for idx, col in enumerate(y_cols):
+        ax.plot(chart_df[x_col], chart_df[col], marker="o", linewidth=1.7, markersize=3.5, label=col)
+
+    if spec.get("wind_lines", True) and x_col == "v (m/s)":
+        for x_val, color, label in [
+            (globals().get("v_cut_in", np.nan), "#64748b", "cut-in"),
+            (globals().get("v_rated", np.nan), "#d9a766", "rated"),
+            (globals().get("v_cut_out", np.nan), "#d95f5f", "cut-out"),
+        ]:
+            if np.isfinite(x_val):
+                ax.axvline(float(x_val), linestyle="--", linewidth=1.0, color=color, alpha=0.75)
+                ax.text(float(x_val), 0.98, label, transform=ax.get_xaxis_transform(), rotation=90, va="top", ha="right", fontsize=7, color=color)
+
+    ax.set_title(spec["title"], fontsize=11, fontweight="bold")
+    ax.set_xlabel(x_col)
+    ax.set_ylabel(spec.get("y_label", "valor"))
+    ax.grid(True, alpha=0.25)
+    ax.legend(loc="best", fontsize=7)
+    fig.tight_layout()
+
+    img_buffer = io.BytesIO()
+    fig.savefig(img_buffer, format="png", bbox_inches="tight")
+    plt.close(fig)
+    return img_buffer.getvalue()
+
+
+def build_section_pdf(section_title: str, section_rows=None, extra_sheets=None, figures=None) -> bytes:
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=A4, rightMargin=1.1 * cm, leftMargin=1.1 * cm)
+    styles = getSampleStyleSheet()
+    story = [
+        Paragraph(section_title, styles["Title"]),
+        Spacer(1, 10),
+        Paragraph("Exportación técnica de pestaña con contexto del panel principal y gráficos del modelo.", styles["BodyText"]),
+        Spacer(1, 12),
+    ]
+
+    context_df = globals().get("download_context_df", pd.DataFrame())
+    if isinstance(context_df, pd.DataFrame) and not context_df.empty:
+        story.append(Paragraph("Parámetros de prueba del panel izquierdo", styles["Heading2"]))
+        ctx = context_df[["Grupo", "Campo", "Valor"]].copy()
+        ctx["Valor"] = ctx["Valor"].astype(str)
+        table_data = [ctx.columns.tolist()] + ctx.values.tolist()
+        table = Table(table_data, repeatRows=1)
+        table.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#334155")),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 7),
+            ("GRID", (0, 0), (-1, -1), 0.25, colors.lightgrey),
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ]))
+        story.append(table)
+        story.append(Spacer(1, 12))
+
+    section_df = _rows_df(section_rows)
+    if not section_df.empty:
+        story.append(Paragraph("Información de la pestaña", styles["Heading2"]))
+        sec = section_df.head(35).copy()
+        sec = sec.astype(str)
+        table_data = [sec.columns.tolist()] + sec.values.tolist()
+        table = Table(table_data, repeatRows=1)
+        table.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#475569")),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 7),
+            ("GRID", (0, 0), (-1, -1), 0.25, colors.lightgrey),
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ]))
+        story.append(table)
+        story.append(PageBreak())
+
+    chart_specs = default_pdf_chart_specs()
+    for spec in chart_specs:
+        story.append(Paragraph(str(spec["title"]), styles["Heading2"]))
+        story.append(Spacer(1, 6))
+        try:
+            png_bytes = matplotlib_chart_png(spec)
+            img = Image(io.BytesIO(png_bytes), width=480, height=280)
+            story.append(img)
+        except Exception as exc:
+            story.append(Paragraph(
+                f"No se pudo renderizar este gráfico en PDF. Detalle: {escape(str(exc))}",
+                styles["BodyText"],
+            ))
+        story.append(PageBreak())
+
+    for raw_name, raw_df in (extra_sheets or {}).items():
+        sheet_df = _rows_df(raw_df)
+        if sheet_df.empty:
+            continue
+        story.append(Paragraph(f"Datos anexos: {raw_name}", styles["Heading2"]))
+        short_df = sheet_df.head(18).copy().astype(str)
+        table_data = [short_df.columns.tolist()] + short_df.values.tolist()
+        table = Table(table_data, repeatRows=1)
+        table.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#334155")),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 6),
+            ("GRID", (0, 0), (-1, -1), 0.25, colors.lightgrey),
+        ]))
+        story.append(table)
+        story.append(PageBreak())
+
+    doc.build(story)
+    pdf_value = buffer.getvalue()
+    buffer.close()
+    return pdf_value
+
+
+def design_assumption_rows():
+    return [
+        {"Campo": "Geometría", "Valor": f"D {D:.1f} m · H {H:.1f} m · A {A:.1f} m²"},
+        {"Campo": "Rotor", "Valor": f"N {int(N)} · c {c:.2f} m · σ_int {sig_int:.2f} · σ_conv {sig_conv:.2f}"},
+        {"Campo": "Control", "Valor": f"{control_mode} · TSR ref {tsr_ref:.2f} · rpm nominal {rpm_rotor_rated:.1f}"},
+        {"Campo": "Transmisión", "Valor": f"G {G:.2f} · η_mec {eta_mec:.3f} · η_elec {eta_elec:.3f}"},
+        {"Campo": "Perfil", "Valor": f"{airfoil_name} · {tipo_perfil} · e/c {t_rel:.1f}%"},
+        {"Campo": "Viento", "Valor": f"cut-in {v_cut_in:.1f} · rated {v_rated:.1f} · cut-out {v_cut_out:.1f} m/s"},
+        {"Campo": "Generador", "Valor": GEN["label"] if "GEN" in globals() else ""},
+    ]
+
+
+def kpi_export_frames():
+    return {
+        "KPIs rotor aero": pd.DataFrame([
+            {"KPI": "Área barrida A = D·H", "Valor": A, "Unidad": "m²"},
+            {"KPI": "Solidez σ_int", "Valor": sig_int, "Unidad": "-"},
+            {"KPI": "Solidez σ_conv", "Valor": sig_conv, "Unidad": "-"},
+            {"KPI": "TSR referencia", "Valor": tsr_ref, "Unidad": "-"},
+            {"KPI": "λ_opt estimado", "Valor": cp_params["lam_opt"], "Unidad": "-"},
+            {"KPI": "Cp_max estimado", "Valor": cp_params["cmax"], "Unidad": "-"},
+            {"KPI": "U_tip @ v_max", "Valor": U_tip[-1], "Unidad": "m/s"},
+            {"KPI": "λ_efectiva @ v_rated", "Valor": np.interp(v_rated, v_grid, lambda_eff), "Unidad": "-"},
+            {"KPI": "Cp_el_equiv @ v_rated", "Valor": np.interp(v_rated, v_grid, Cp_el), "Unidad": "-"},
+        ]),
+        "KPIs tren potencia": pd.DataFrame([
+            {"KPI": "Relación G", "Valor": G, "Unidad": "-"},
+            {"KPI": "Polos totales", "Valor": poles_total, "Unidad": "-"},
+            {"KPI": "T_rated", "Valor": T_rated, "Unidad": "N·m"},
+            {"KPI": "k_MPPT", "Valor": k_mppt, "Unidad": "N·m·s²"},
+            {"KPI": "η_mec", "Valor": eta_mec, "Unidad": "-"},
+            {"KPI": "η_elec", "Valor": eta_elec, "Unidad": "-"},
+            {"KPI": "rpm rotor nominal", "Valor": rpm_rotor_rated, "Unidad": "rpm"},
+            {"KPI": "rpm generador nominal", "Valor": rpm_gen_rated, "Unidad": "rpm"},
+        ]),
+        "KPIs pala cargas": pd.DataFrame([
+            {"KPI": "Perfil aerodinámico", "Valor": airfoil_name, "Unidad": ""},
+            {"KPI": "Tipo de perfil", "Valor": tipo_perfil, "Unidad": ""},
+            {"KPI": "Espesor relativo", "Valor": t_rel, "Unidad": "%"},
+            {"KPI": "Masa total palas", "Valor": mass_total_blades, "Unidad": "kg"},
+            {"KPI": "Inercia palas", "Valor": I_blades, "Unidad": "kg·m²"},
+            {"KPI": "F centrípeta por pala", "Valor": F_centripetal_per_blade / 1000.0, "Unidad": "kN"},
+            {"KPI": "a centrípeta nominal", "Valor": g_per_blade_rated, "Unidad": "g"},
+            {"KPI": "Re @ 8 m/s", "Valor": Re_8, "Unidad": "-"},
+            {"KPI": "Re @ v_max", "Valor": Re_max, "Unidad": "-"},
+            {"KPI": "M_base nominal", "Valor": M_root_rated / 1000.0, "Unidad": "kN·m"},
+            {"KPI": "M_por_strut nominal", "Valor": M_strut_rated / 1000.0, "Unidad": "kN·m/strut"},
+        ]),
+    }
+
+
+def global_export_index_rows():
+    subblocks = [
+        ("Mapa técnico", "Aerodinámica", "Polar Lift-Drag del perfil seleccionado"),
+        ("Mapa técnico", "Aerodinámica", "Ciclo de ángulo de ataque alpha(theta)"),
+        ("Mapa técnico", "Control", "rpm rotor / rpm generador"),
+        ("Mapa técnico", "Control", "lambda efectiva, U_tip y frecuencia eléctrica"),
+        ("Mapa técnico", "Control", "Curva Cp(lambda)"),
+        ("Mapa técnico", "Potencia", "Curva de potencia por etapa"),
+        ("Mapa técnico", "Potencia", "Cp equivalente por etapa"),
+        ("Mapa técnico", "Potencia", "Pérdidas por etapa"),
+        ("Mapa técnico", "Mecánico", "Momentos y cargas en pala/struts"),
+        ("Mapa técnico", "Mecánico", "Par en rotor/generador"),
+        ("Mapa técnico", "Mecánico", "Frecuencias 1P/3P"),
+        ("Mapa técnico", "Eléctrico", "Curvas eléctricas y corriente"),
+        ("Mapa técnico", "Eléctrico", "Sistema eléctrico y vibraciones"),
+        ("Mapa técnico", "Recurso", "Distribución Weibull y AEP"),
+        ("Mapa técnico", "Recurso", "Ruido estimado"),
+    ]
+    rows = [
+        {"Tipo": "Pestaña", "Bloque": "Panel principal", "Contenido": "Contexto global del diseño"},
+        {"Tipo": "Pestaña", "Bloque": "Supuestos", "Contenido": "Supuestos y parámetros de diseño"},
+        {"Tipo": "Pestaña", "Bloque": "KPIs", "Contenido": "Rotor, tren de potencia, pala y cargas"},
+        {"Tipo": "Pestaña", "Bloque": "Resultados", "Contenido": "Resultados operativos por velocidad de viento"},
+        {"Tipo": "Pestaña", "Bloque": "Riesgos", "Contenido": "Alertas y márgenes IEC"},
+        {"Tipo": "Pestaña", "Bloque": "Escenarios", "Contenido": "Escenarios y comparación"},
+    ]
+    rows.extend({"Tipo": tipo, "Bloque": bloque, "Contenido": contenido} for tipo, bloque, contenido in subblocks)
+    return rows
+
+
+def build_global_export_sheets():
+    theta_deg_export = np.linspace(0, 360, 361)
+    theta_rad_export = np.deg2rad(theta_deg_export)
+    lam_used_export = max(float(tsr_ref), 0.1)
+    alpha_base_export = np.rad2deg(np.arctan2(np.sin(theta_rad_export), lam_used_export + np.cos(theta_rad_export))) + float(pitch_deg)
+    sheets = {
+        "Parametros panel": globals().get("download_context_df", pd.DataFrame()).copy(),
+        "Indice": pd.DataFrame(global_export_index_rows()),
+        "Supuestos": pd.DataFrame(design_assumption_rows()),
+        "Polar Lift Drag": build_lift_drag_polar(t_rel=t_rel, symmetric=is_symmetric),
+        "Curva Cp lambda": cp_curve_for_plot(cp_params),
+        "Alpha theta": pd.DataFrame({"theta_deg": theta_deg_export, "alpha_deg": alpha_base_export}),
+        "Resultados completos": df.copy(),
+    }
+    sheets.update(kpi_export_frames())
+    for block_key, block_label in [
+        ("aero", "Mapa aero"),
+        ("control", "Mapa control"),
+        ("power", "Mapa potencia"),
+        ("mechanical", "Mapa mecanico"),
+        ("electrical", "Mapa electrico"),
+        ("resource", "Mapa recurso"),
+    ]:
+        for sheet_name, sheet_df in analysis_block_export_sheets(block_key).items():
+            sheets[f"{block_label} {sheet_name}"] = sheet_df
+
+    alert_rows = []
+    for name, value, limit in [
+        ("T_gen (N·m)", globals().get("max_T_gen", np.nan), globals().get("T_gen_max", np.nan)),
+        ("T_rotor (N·m)", globals().get("max_T_rotor", np.nan), globals().get("T_rotor_max_iec", np.nan)),
+        ("I_est (A)", globals().get("max_I_est", np.nan), globals().get("GDG_RATED_I", np.nan)),
+        ("P_out (kW)", globals().get("max_P_out", np.nan), globals().get("P_nom_kW", np.nan)),
+        ("M_base (kN·m)", globals().get("max_M_base", np.nan), globals().get("M_base_max_iec", np.nan)),
+    ]:
+        usage = value / limit * 100 if np.isfinite(value) and np.isfinite(limit) and limit > 0 else np.nan
+        alert_rows.append({"Indicador": name, "Máximo": value, "Límite": limit, "Uso_%": usage, "Margen_%": 100 - usage if np.isfinite(usage) else np.nan})
+    sheets["Riesgos alertas"] = pd.DataFrame(alert_rows)
+
+    escenarios = st.session_state.get("escenarios", [])
+    if escenarios:
+        sheets["Escenarios"] = pd.DataFrame(escenarios)
+    return sheets
+
+
+def build_global_html_report() -> bytes:
+    context_html = download_context_df.to_html(index=False, classes="data-table", border=0) if "download_context_df" in globals() else ""
+    index_html = pd.DataFrame(global_export_index_rows()).to_html(index=False, classes="data-table", border=0)
+    figs_html = []
+    for title, fig in default_pdf_figures():
+        figs_html.append(f"<section><h2>{escape(title)}</h2>{fig.to_html(full_html=False, include_plotlyjs='cdn')}</section>")
+    html = f"""
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Reporte completo VAWT</title>
+  <style>
+    body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 28px; color: #182235; background: #f8fafc; }}
+    h1 {{ margin-bottom: 4px; }}
+    h2 {{ border-left: 6px solid #3d5a80; padding-left: 10px; margin-top: 28px; }}
+    .panel {{ background: white; border: 1px solid #cbd5e1; border-radius: 10px; padding: 16px; margin: 16px 0; box-shadow: 0 10px 24px rgba(15,23,42,.08); }}
+    .data-table {{ border-collapse: collapse; width: 100%; background: white; font-size: 13px; }}
+    .data-table th {{ background: #334155; color: white; text-align: left; padding: 8px; }}
+    .data-table td {{ border-bottom: 1px solid #e2e8f0; padding: 7px 8px; vertical-align: top; }}
+  </style>
+</head>
+<body>
+  <h1>Reporte completo VAWT</h1>
+  <p>Exportación integral del panel principal, pestañas, sub-bloques y gráficos interactivos.</p>
+  <div class="panel"><h2>Parámetros de prueba del panel izquierdo</h2>{context_html}</div>
+  <div class="panel"><h2>Índice exportado</h2>{index_html}</div>
+  {''.join(figs_html)}
+</body>
+</html>
+"""
+    return html.encode("utf-8")
+
+
+def render_section_download_button(
+    label: str,
+    section_title: str,
+    section_rows=None,
+    key_suffix: str = "",
+    extra_sheets=None,
+    help_text: str | None = None,
+    pdf_figures=None,
+):
+    safe_key = _download_slug(key_suffix or section_title, 90)
+    st.download_button(
+        label=f"📥 {label}",
+        data=build_section_workbook(section_title, section_rows, extra_sheets),
+        file_name=f"{_download_slug(section_title)}.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        key=f"download_{safe_key}",
+        help=help_text,
+        use_container_width=True,
+    )
+    if st.button(
+        f"📄 Generar PDF – {section_title}",
+        key=f"make_pdf_{safe_key}",
+        use_container_width=True,
+        help="Genera un PDF con contexto, tablas resumidas y gráficos técnicos del modelo.",
+    ):
+        pdf_bytes = build_section_pdf(section_title, section_rows, extra_sheets, pdf_figures)
+        st.download_button(
+            label=f"📥 Descargar PDF – {section_title}",
+            data=pdf_bytes,
+            file_name=f"{_download_slug(section_title)}.pdf",
+            mime="application/pdf",
+            key=f"download_pdf_{safe_key}",
+            use_container_width=True,
+        )
+
+
+def analysis_block_export_sheets(block_key):
+    df_src = globals().get("df", pd.DataFrame())
+    if not isinstance(df_src, pd.DataFrame) or df_src.empty:
+        return {}
+
+    column_groups = {
+        "aero": [
+            "v (m/s)", "λ_efectiva", "U_tip (m/s)", "Re (mid-span)",
+            "Cp(λ_efectiva)", "Cp_aero_equiv", "P_aero (kW)",
+        ],
+        "control": [
+            "v (m/s)", "rpm_rotor", "rpm_gen", "λ_efectiva",
+            "T_rotor (N·m)", "T_gen (N·m)", "P_out (clip) kW",
+        ],
+        "power": [
+            "v (m/s)", "P_aero (kW)", "P_mec_gen (kW)", "P_gen_curve (kW)",
+            "P_el (kW)", "P_out (clip) kW", "Cp_el_equiv",
+            "P_loss_mec (kW)", "P_loss_gen (kW)", "P_loss_elec (kW)", "P_loss_clip (kW)",
+        ],
+        "mechanical": [
+            "v (m/s)", "T_rotor (N·m)", "T_gen (N·m)", "F_cen/pala (kN)",
+            "a_cen (g)", "M_base (kN·m)", "M_por_strut (kN·m)",
+            "sigma_root (MPa)", "sigma_strut (MPa)", "margen_root (%)", "margen_strut (%)",
+            "f_1P (Hz)", "f_3P (Hz)",
+        ],
+        "electrical": [
+            "v (m/s)", "rpm_gen", "P_gen_curve (kW)", "V_LL (V)", "V_LL (Ke) [V]",
+            "f_e (Hz)", "η_gen (curve)", "T_gen (N·m)", "P_el (kW)",
+            "P_out (clip) kW", "I_est (A)", "Duty_DC (%)",
+        ],
+        "resource": [
+            "v (m/s)", "P_out (clip) kW", "Cp_el_equiv", "Lw (dB)", "Lp_obs (dB)",
+        ],
+    }
+    cols = [c for c in column_groups.get(block_key, list(df_src.columns)) if c in df_src.columns]
+    sheets = {"Datos del bloque": df_src[cols].copy() if cols else df_src.copy()}
+    if "df_alerts_top" in globals():
+        sheets["Alertas principales"] = globals()["df_alerts_top"]
+    return sheets
+
+
+# =========================================================
 # Curvas de generadores axiales (80 kW y 10 kW)
 # =========================================================
 
@@ -2795,54 +3852,122 @@ with st.sidebar:
         if file_scada is not None:
             df_scada = read_uploaded_csv(file_scada.getvalue())
             st.session_state["df_scada_raw"] = df_scada
+            st.session_state["df_scada_filename"] = getattr(file_scada, "name", "archivo_cargado.csv")
 
             st.caption(f"Columnas detectadas: {', '.join(df_scada.columns.astype(str))}")
 
             cols = df_scada.columns.tolist()
+            is_height_profile, height_cols, time_col = detect_wind_height_profile(df_scada)
 
-            # Heurística simple para defaults
-            def guess_col(substr, default_idx=0):
-                substr = substr.lower()
-                for i, c in enumerate(cols):
-                    if substr in str(c).lower():
-                        return i
-                return default_idx
+            if is_height_profile:
+                height_values = [_numeric_column_name(c) for c in height_cols]
+                height_values = [float(v) for v in height_values if v is not None]
+                auto_target_height = default_turbine_resource_height(P_nom_kW)
+                target_height = st.number_input(
+                    "Altura efectiva de extrapolación [m]",
+                    min_value=1.0,
+                    value=float(auto_target_height),
+                    step=0.5,
+                    help=(
+                        "La app usa 14 m para la turbina de 10 kW y 24 m para la de 80 kW. "
+                        "Con archivos de perfil vertical se calcula V(z)=a·z^alpha por timestamp."
+                    ),
+                )
+                scada_resource_inputs = build_wind_profile_inputs(df_scada, height_cols, target_height, time_col)
+                st.session_state["scada_resource_inputs"] = scada_resource_inputs
+                st.session_state["scada_map"] = {
+                    "mode": "wind_height_profile",
+                    "v": f"{target_height:.1f} m extrapolado",
+                    "P": None,
+                    "rpm_rotor": None,
+                    "rpm_gen": None,
+                    "I": None,
+                }
 
-            v_col = st.selectbox(
-                "Columna velocidad viento [m/s]",
-                cols,
-                index=guess_col("viento"),
-            )
-            P_col = st.selectbox(
-                "Columna potencia [kW]",
-                cols,
-                index=guess_col("pot"),
-            )
-            rpm_rotor_col = st.selectbox(
-                "Columna rpm rotor (opcional)",
-                ["(ninguna)"] + cols,
-                index=0,
-            )
-            rpm_gen_col = st.selectbox(
-                "Columna rpm generador (opcional)",
-                ["(ninguna)"] + cols,
-                index=0,
-            )
-            I_col = st.selectbox(
-                "Columna corriente [A] (opcional)",
-                ["(ninguna)"] + cols,
-                index=0,
-            )
+                if scada_resource_inputs:
+                    c_sc1, c_sc2, c_sc3 = st.columns(3)
+                    c_sc1.metric("Viento medio rotor [m/s]", f"{scada_resource_inputs['v_mean']:.2f}")
+                    c_sc2.metric("Weibull k / c", f"{scada_resource_inputs['weibull_k']:.2f} / {scada_resource_inputs['weibull_c']:.2f}")
+                    c_sc3.metric("Alpha vertical", f"{scada_resource_inputs['shear_alpha']:.3f}" if np.isfinite(scada_resource_inputs["shear_alpha"]) else "-")
+                    if scada_resource_inputs.get("start") and scada_resource_inputs.get("end"):
+                        st.caption(f"Periodo detectado: {scada_resource_inputs['start']} → {scada_resource_inputs['end']} · {scada_resource_inputs['sample_count']:,} registros válidos.")
+                    else:
+                        st.caption(f"{scada_resource_inputs['sample_count']:,} registros válidos para cálculo eólico.")
+                    st.caption(
+                        f"Método: {scada_resource_inputs.get('method', 'ley de potencia')} · "
+                        f"alturas fuente {scada_resource_inputs.get('source_height_min_m', np.nan):.1f}-"
+                        f"{scada_resource_inputs.get('source_height_max_m', np.nan):.1f} m · "
+                        f"altura objetivo {scada_resource_inputs.get('target_height_m', np.nan):.1f} m."
+                    )
 
-            st.session_state["scada_map"] = {
-                "v": v_col,
-                "P": P_col,
-                "rpm_rotor": None if rpm_rotor_col == "(ninguna)" else rpm_rotor_col,
-                "rpm_gen":  None if rpm_gen_col   == "(ninguna)" else rpm_gen_col,
-                "I":        None if I_col          == "(ninguna)" else I_col,
-            }
+                    profile_table = pd.DataFrame(scada_resource_inputs["profile_summary"])
+                    st.dataframe(
+                        profile_table.style.format(
+                            {
+                                "Altura m": "{:.1f}",
+                                "Velocidad media m/s": "{:.2f}",
+                                "P10 m/s": "{:.2f}",
+                                "P50 m/s": "{:.2f}",
+                                "P90 m/s": "{:.2f}",
+                            }
+                        ),
+                        use_container_width=True,
+                        hide_index=True,
+                    )
+                    st.caption(
+                        "Este perfil vertical alimenta el bloque de Recurso y energía anual: "
+                        "viento medio, Weibull k/c y altura efectiva para estimar producción."
+                    )
+                else:
+                    st.warning("El CSV parece tener alturas, pero no se pudo construir un perfil eólico válido.")
 
-            st.caption("La calibración se mostrará en el cuerpo principal cuando se complete la simulación.")
+            else:
+                st.session_state["scada_resource_inputs"] = {}
+
+                # Heurística simple para defaults
+                def guess_col(substr, default_idx=0):
+                    substr = substr.lower()
+                    for i, c in enumerate(cols):
+                        if substr in str(c).lower():
+                            return i
+                    return default_idx
+
+                v_col = st.selectbox(
+                    "Columna velocidad viento [m/s]",
+                    cols,
+                    index=guess_col("viento"),
+                )
+                P_col = st.selectbox(
+                    "Columna potencia [kW]",
+                    cols,
+                    index=guess_col("pot"),
+                )
+                rpm_rotor_col = st.selectbox(
+                    "Columna rpm rotor (opcional)",
+                    ["(ninguna)"] + cols,
+                    index=0,
+                )
+                rpm_gen_col = st.selectbox(
+                    "Columna rpm generador (opcional)",
+                    ["(ninguna)"] + cols,
+                    index=0,
+                )
+                I_col = st.selectbox(
+                    "Columna corriente [A] (opcional)",
+                    ["(ninguna)"] + cols,
+                    index=0,
+                )
+
+                st.session_state["scada_map"] = {
+                    "mode": "classic_scada",
+                    "v": v_col,
+                    "P": P_col,
+                    "rpm_rotor": None if rpm_rotor_col == "(ninguna)" else rpm_rotor_col,
+                    "rpm_gen":  None if rpm_gen_col   == "(ninguna)" else rpm_gen_col,
+                    "I":        None if I_col          == "(ninguna)" else I_col,
+                }
+
+                st.caption("La calibración se mostrará en el cuerpo principal cuando se complete la simulación.")
 
         
 
@@ -3079,6 +4204,121 @@ M_strut_rated = M_root_rated / max(struts_per_blade, 1)
 
 Re_8 = np.interp(8.0, v_grid, Re_mid) if (v_grid[0] <= 8.0 <= v_grid[-1]) else Re_mid[-1]
 Re_max = Re_mid[-1] if len(Re_mid) > 0 else 0.0
+active_resource_inputs = st.session_state.get("scada_resource_inputs", {}) or {}
+use_extrapolated_resource = bool(active_resource_inputs.get("active")) and active_resource_inputs.get("mode") == "wind_height_profile"
+k_energy = float(active_resource_inputs.get("weibull_k", k_w)) if use_extrapolated_resource else k_w
+c_energy = float(active_resource_inputs.get("weibull_c", c_w)) if use_extrapolated_resource else c_w
+resource_height_m = float(active_resource_inputs.get("target_height_m", default_turbine_resource_height(P_nom_kW))) if use_extrapolated_resource else default_turbine_resource_height(P_nom_kW)
+scada_filename = st.session_state.get("df_scada_filename", "")
+scada_source_label = f"CSV {scada_filename}" if scada_filename else "CSV cargado"
+resource_origin = f"{scada_source_label} - perfil vertical extrapolado" if use_extrapolated_resource else "Weibull manual"
+
+_P_curve_W_export = df["P_out (clip) kW"].values * 1000.0
+_P_curve_W_export[v_grid < v_cut_in] = 0.0
+_P_curve_W_export[v_grid > v_cut_out] = 0.0
+_v_w_export = np.linspace(0.01, max(v_cut_out, v_max, 20.0), 400)
+_P_interp_W_export = np.interp(_v_w_export, v_grid, _P_curve_W_export, left=0.0, right=0.0)
+AEP_kWh, _P_mean_W_export = aep_from_weibull(_v_w_export, _P_interp_W_export, k_energy, c_energy)
+CF = _P_mean_W_export / (P_nom_kW * 1000.0) if P_nom_kW > 0 else np.nan
+download_aep_kwh = globals().get("AEP_kWh", np.nan)
+download_cf = globals().get("CF", np.nan)
+
+download_context_df = pd.DataFrame([
+    {"Grupo": "Geometría", "Campo": "Diámetro D [m]", "Valor": D},
+    {"Grupo": "Geometría", "Campo": "Altura H [m]", "Valor": H},
+    {"Grupo": "Geometría", "Campo": "Área barrida A [m²]", "Valor": A},
+    {"Grupo": "Geometría", "Campo": "Número de palas", "Valor": N},
+    {"Grupo": "Geometría", "Campo": "Cuerda c [m]", "Valor": c},
+    {"Grupo": "Geometría", "Campo": "Solidez σ_int", "Valor": sig_int},
+    {"Grupo": "Geometría", "Campo": "Solidez σ_conv", "Valor": sig_conv},
+    {"Grupo": "Perfil", "Campo": "Perfil aerodinámico", "Valor": airfoil_name},
+    {"Grupo": "Perfil", "Campo": "Tipo de perfil", "Valor": tipo_perfil},
+    {"Grupo": "Perfil", "Campo": "Espesor relativo [%]", "Valor": t_rel},
+    {"Grupo": "Control", "Campo": "Modo operativo", "Valor": control_mode},
+    {"Grupo": "Control", "Campo": "TSR referencia", "Valor": tsr_ref},
+    {"Grupo": "Control", "Campo": "rpm rotor nominal", "Valor": rpm_rotor_rated},
+    {"Grupo": "Viento", "Campo": "v_cut_in [m/s]", "Valor": v_cut_in},
+    {"Grupo": "Viento", "Campo": "v_rated [m/s]", "Valor": v_rated},
+    {"Grupo": "Viento", "Campo": "v_cut_out [m/s]", "Valor": v_cut_out},
+    {"Grupo": "Viento", "Campo": "Weibull k", "Valor": k_w},
+    {"Grupo": "Viento", "Campo": "Weibull c [m/s]", "Valor": c_w},
+    {"Grupo": "Viento", "Campo": "Origen recurso activo", "Valor": resource_origin},
+    {"Grupo": "Viento", "Campo": "Altura recurso activa [m]", "Valor": resource_height_m},
+    {"Grupo": "Viento", "Campo": "Weibull k activo", "Valor": k_energy},
+    {"Grupo": "Viento", "Campo": "Weibull c activo [m/s]", "Valor": c_energy},
+    {"Grupo": "Tren de potencia", "Campo": "Relación G", "Valor": G},
+    {"Grupo": "Tren de potencia", "Campo": "η_mec", "Valor": eta_mec},
+    {"Grupo": "Tren de potencia", "Campo": "η_elec", "Valor": eta_elec},
+    {"Grupo": "Tren de potencia", "Campo": "Potencia nominal [kW]", "Valor": P_nom_kW},
+    {"Grupo": "Generador", "Campo": "Generador", "Valor": GEN["label"] if "GEN" in globals() else ""},
+    {"Grupo": "Generador", "Campo": "Polos totales", "Valor": poles_total},
+    {"Grupo": "Generador", "Campo": "I nominal [A]", "Valor": GDG_RATED_I},
+    {"Grupo": "Generador", "Campo": "T nominal [N·m]", "Valor": GDG_RATED_T_Nm},
+    {"Grupo": "Energía", "Campo": "AEP [kWh/año]", "Valor": download_aep_kwh},
+    {"Grupo": "Energía", "Campo": "Factor de planta", "Valor": download_cf},
+    {"Grupo": "Cargas", "Campo": "Masa total palas [kg]", "Valor": mass_total_blades},
+    {"Grupo": "Cargas", "Campo": "T_rated [N·m]", "Valor": T_rated},
+    {"Grupo": "Cargas", "Campo": "F centrípeta/pala nominal [kN]", "Valor": F_centripetal_per_blade / 1000.0},
+    {"Grupo": "Cargas", "Campo": "M_base nominal [kN·m]", "Valor": M_root_rated / 1000.0},
+])
+
+st.markdown("""
+<div class="comment-box" style="border-left: 6px solid #3d5a80;">
+  <div class="comment-title">📦 Descarga integral del dashboard</div>
+  <p>
+    Exporta en un solo archivo el panel principal, todas las pestañas, sub-bloques del mapa técnico,
+    tablas de cálculo y gráficos principales del modelo.
+  </p>
+</div>
+""", unsafe_allow_html=True)
+
+global_export_sheets = build_global_export_sheets()
+global_index_rows = global_export_index_rows()
+col_export_xlsx, col_export_pdf, col_export_html = st.columns(3)
+with col_export_xlsx:
+    st.download_button(
+        "📥 Descargar TODO Excel",
+        data=build_section_workbook(
+            "Reporte completo dashboard",
+            section_rows=global_index_rows,
+            extra_sheets=global_export_sheets,
+        ),
+        file_name="reporte_completo_vawt.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        key="download_global_excel_dashboard",
+        use_container_width=True,
+    )
+with col_export_pdf:
+    if st.button(
+        "📄 Generar TODO PDF",
+        key="make_global_pdf_dashboard",
+        use_container_width=True,
+        help="Genera PDF integral con panel principal, tablas y gráficos técnicos. Para fidelidad interactiva de gráficos usa el HTML.",
+    ):
+        global_pdf_bytes = build_section_pdf(
+            "Reporte completo dashboard VAWT",
+            section_rows=global_index_rows,
+            extra_sheets=global_export_sheets,
+        )
+        st.download_button(
+            "📥 Descargar TODO PDF",
+            data=global_pdf_bytes,
+            file_name="reporte_completo_vawt.pdf",
+            mime="application/pdf",
+            key="download_global_pdf_dashboard",
+            use_container_width=True,
+        )
+with col_export_html:
+    st.download_button(
+        "🌐 Descargar HTML web",
+        data=build_global_html_report(),
+        file_name="reporte_completo_vawt_web.html",
+        mime="text/html",
+        key="download_global_html_dashboard",
+        use_container_width=True,
+        help="Conserva los gráficos Plotly interactivos con diseño web de forma más fiel que PDF.",
+    )
+
 with st.expander("📐 Supuestos y parámetros de diseño", expanded=False):
     st.markdown(f"""
     <div class="design-summary">
@@ -3126,6 +4366,21 @@ with st.expander("📐 Supuestos y parámetros de diseño", expanded=False):
       </div>
     </div>
     """, unsafe_allow_html=True)
+    render_section_download_button(
+        label="Descargar supuestos y parámetros de diseño",
+        section_title="Supuestos y parámetros de diseño",
+        section_rows=[
+            {"Campo": "Geometría", "Valor": f"D {D:.1f} m · H {H:.1f} m · A {A:.1f} m²"},
+            {"Campo": "Rotor", "Valor": f"N {int(N)} · c {c:.2f} m · σ_int {sig_int:.2f} · σ_conv {sig_conv:.2f}"},
+            {"Campo": "Control", "Valor": f"{control_mode} · TSR ref {tsr_ref:.2f} · rpm nominal {rpm_rotor_rated:.1f}"},
+            {"Campo": "Transmisión", "Valor": f"G {G:.2f} · η_mec {eta_mec:.3f} · η_elec {eta_elec:.3f}"},
+            {"Campo": "Perfil", "Valor": f"{airfoil_name} · {tipo_perfil} · e/c {t_rel:.1f}%"},
+            {"Campo": "Viento", "Valor": f"cut-in {v_cut_in:.1f} · rated {v_rated:.1f} · cut-out {v_cut_out:.1f} m/s"},
+            {"Campo": "Generador", "Valor": GEN["label"] if "GEN" in globals() else ""},
+        ],
+        key_suffix="supuestos_parametros_diseno",
+        extra_sheets={"Tabla operativa completa": df.copy()},
+    )
 
 
 with st.expander("📊 KPIs clave del piloto", expanded=False):
@@ -3181,6 +4436,23 @@ with st.expander("📊 KPIs clave del piloto", expanded=False):
             "Rotor dimensionado para trabajar cercano a λ_opt y Cp_max con la geometría y solidez definidas. "
             "λ_efectiva refleja la ley de control por regiones (cut-in / rated / cut-out)."
         )
+        render_section_download_button(
+            label="Descargar KPIs de rotor y aerodinámica",
+            section_title="KPIs rotor y aerodinámica",
+            section_rows=[
+                {"KPI": "Área barrida A = D·H", "Valor": A, "Unidad": "m²"},
+                {"KPI": "Solidez σ_int", "Valor": sig_int, "Unidad": "-"},
+                {"KPI": "Solidez σ_conv", "Valor": sig_conv, "Unidad": "-"},
+                {"KPI": "TSR referencia", "Valor": tsr_ref, "Unidad": "-"},
+                {"KPI": "λ_opt estimado", "Valor": cp_params["lam_opt"], "Unidad": "-"},
+                {"KPI": "Cp_max estimado", "Valor": cp_params["cmax"], "Unidad": "-"},
+                {"KPI": "U_tip @ v_max", "Valor": U_tip[-1], "Unidad": "m/s"},
+                {"KPI": "λ_efectiva @ v_rated", "Valor": np.interp(v_rated, v_grid, lambda_eff), "Unidad": "-"},
+                {"KPI": "Cp_el_equiv @ v_rated", "Valor": np.interp(v_rated, v_grid, Cp_el), "Unidad": "-"},
+            ],
+            key_suffix="kpis_rotor_aerodinamica",
+            extra_sheets=analysis_block_export_sheets("aero"),
+        )
 
     with tab_tren:
         t1, t2, t3 = st.columns(3)
@@ -3200,6 +4472,22 @@ with st.expander("📊 KPIs clave del piloto", expanded=False):
             kpi_card("η_elec (rect+inv)", f"{eta_elec:.3f}", "Eficiencia típica electrónica de potencia", accent="mustard")
 
         st.caption("Estos parámetros definen el comportamiento del tren de potencia y el ajuste de control MPPT para el piloto.")
+        render_section_download_button(
+            label="Descargar KPIs de tren de potencia",
+            section_title="KPIs tren de potencia",
+            section_rows=[
+                {"KPI": "Relación G", "Valor": G, "Unidad": "-"},
+                {"KPI": "Polos totales", "Valor": poles_total, "Unidad": "-"},
+                {"KPI": "T_rated", "Valor": T_rated, "Unidad": "N·m"},
+                {"KPI": "k_MPPT", "Valor": k_mppt, "Unidad": "N·m·s²"},
+                {"KPI": "η_mec", "Valor": eta_mec, "Unidad": "-"},
+                {"KPI": "η_elec", "Valor": eta_elec, "Unidad": "-"},
+                {"KPI": "rpm rotor nominal", "Valor": rpm_rotor_rated, "Unidad": "rpm"},
+                {"KPI": "rpm generador nominal", "Valor": rpm_gen_rated, "Unidad": "rpm"},
+            ],
+            key_suffix="kpis_tren_potencia",
+            extra_sheets=analysis_block_export_sheets("control"),
+        )
 
     with tab_pala:
         p1, p2, p3 = st.columns(3)
@@ -3239,6 +4527,25 @@ with st.expander("📊 KPIs clave del piloto", expanded=False):
         st.caption(
             "Las propiedades de la pala permiten evaluar esfuerzos en uniones, ejes y rodamientos, "
             "además de la respuesta dinámica del rotor. Re indica el régimen aerodinámico del perfil."
+        )
+        render_section_download_button(
+            label="Descargar KPIs de pala y cargas inerciales",
+            section_title="KPIs pala y cargas inerciales",
+            section_rows=[
+                {"KPI": "Perfil aerodinámico", "Valor": airfoil_name, "Unidad": ""},
+                {"KPI": "Tipo de perfil", "Valor": tipo_perfil, "Unidad": ""},
+                {"KPI": "Espesor relativo", "Valor": t_rel, "Unidad": "%"},
+                {"KPI": "Masa total palas", "Valor": mass_total_blades, "Unidad": "kg"},
+                {"KPI": "Inercia palas", "Valor": I_blades, "Unidad": "kg·m²"},
+                {"KPI": "F centrípeta por pala", "Valor": F_centripetal_per_blade / 1000.0, "Unidad": "kN"},
+                {"KPI": "a centrípeta nominal", "Valor": g_per_blade_rated, "Unidad": "g"},
+                {"KPI": "Re @ 8 m/s", "Valor": Re_8, "Unidad": "-"},
+                {"KPI": "Re @ v_max", "Valor": Re_max, "Unidad": "-"},
+                {"KPI": "M_base nominal", "Valor": M_root_rated / 1000.0, "Unidad": "kN·m"},
+                {"KPI": "M_por_strut nominal", "Valor": M_strut_rated / 1000.0, "Unidad": "kN·m/strut"},
+            ],
+            key_suffix="kpis_pala_cargas",
+            extra_sheets=analysis_block_export_sheets("mechanical"),
         )
 
 
@@ -3433,6 +4740,13 @@ range_accents = [
 
 with st.expander("🌬️ Resultados operativos por velocidad de viento", expanded=False):
     question_prompt("¿Qué rango de viento revela discrepancias entre variables aero, mecánicas y eléctricas que debamos priorizar en las siguientes simulaciones?")
+    scada_resource_inputs = st.session_state.get("scada_resource_inputs", {}) or {}
+    if scada_resource_inputs.get("active"):
+        st.caption(
+                f"Nota: {scada_source_label} alimenta el bloque de Recurso y energía anual. "
+            "Esta tabla operativa se mantiene calculada con los supuestos de diseño del sidebar "
+            "(geometría, control, densidad, cut-in/rated/cut-out y rango de viento), por lo que el SCADA no sobrescribe sus filas."
+        )
 
     col_kpis = st.columns(len(range_kpis))
     for idx, (col, card) in enumerate(zip(col_kpis, range_kpis)):
@@ -3464,10 +4778,11 @@ with st.expander("🌬️ Resultados operativos por velocidad de viento", expand
     left, center, right = st.columns([1, 4, 1])
     with center:
         sel_label = st.radio(
-            "",
+            "Módulo de resultados operativos",
             list(pill_labels.keys()),
             horizontal=True,
             key="radio_modulos",
+            label_visibility="collapsed",
         )
 
     mod_sel = pill_labels[sel_label]
@@ -3869,6 +5184,21 @@ with st.expander("🌬️ Resultados operativos por velocidad de viento", expand
         mime="text/csv",
         key="csv_tabla_resultados"
     )
+    render_section_download_button(
+        label=f"Descargar Excel – resultados operativos: {mod_sel}",
+        section_title=f"Resultados operativos por velocidad - {mod_sel}",
+        section_rows=[
+            {"Campo": "Vista seleccionada", "Valor": mod_sel},
+            {"Campo": "Filas exportadas", "Valor": len(df_view)},
+            {"Campo": "Columnas exportadas", "Valor": ", ".join(map(str, df_view.columns))},
+            {"Campo": "Criterio IEC", "Valor": f"cut-in {v_cut_in:.1f} / rated {v_rated:.1f} / cut-out {v_cut_out:.1f} m/s"},
+        ],
+        key_suffix=f"resultados_operativos_{mod_sel}",
+        extra_sheets={
+            "Vista seleccionada": df_view.copy(),
+            "Tabla operativa completa": df_range.copy(),
+        },
+    )
 
 
 
@@ -4180,6 +5510,25 @@ with st.expander("🚨 Riesgos y alertas de diseño", expanded=False):
         mime="text/csv",
         key="csv_iec_resumen_alertas",
     )
+    render_section_download_button(
+        label="Descargar riesgos, alertas y resumen IEC",
+        section_title="Riesgos y alertas de diseño",
+        section_rows=[
+            {"Campo": "Rango evaluado", "Valor": f"{v_cut_in:.1f} a {v_cut_out:.1f} m/s"},
+            {"Campo": "T_gen máximo [N·m]", "Valor": max_T_gen},
+            {"Campo": "T_rotor máximo [N·m]", "Valor": max_T_rotor},
+            {"Campo": "I_est máximo [A]", "Valor": max_I_est},
+            {"Campo": "P_out máximo [kW]", "Valor": max_P_out},
+            {"Campo": "a_cen máximo [g]", "Valor": max_g_pala},
+            {"Campo": "M_base máximo [kN·m]", "Valor": max_M_base},
+            {"Campo": "Cantidad de alertas", "Valor": len(flag_entries)},
+        ],
+        key_suffix="riesgos_alertas_diseno",
+        extra_sheets={
+            "Márgenes principales": df_alerts_top.copy(),
+            "Resumen IEC": df_iec.copy(),
+        },
+    )
 
     st.markdown("""
     ### 📄 Nota técnica (IEC 61400-2)
@@ -4283,6 +5632,1827 @@ with st.expander("🧬 Escenarios y comparación de configuraciones", expanded=F
         st.dataframe(pd.DataFrame(compare_rows), use_container_width=True)
     else:
         st.info("Guarda al menos dos escenarios para habilitar el comparador A/B.")
+
+    escenarios_df_export = pd.DataFrame(st.session_state["escenarios"]) if st.session_state["escenarios"] else pd.DataFrame()
+    comparison_export = pd.DataFrame(compare_rows) if "compare_rows" in locals() else pd.DataFrame()
+    render_section_download_button(
+        label="Descargar escenarios y comparación",
+        section_title="Escenarios y comparación de configuraciones",
+        section_rows=[
+            {"Campo": "Escenario actual sugerido", "Valor": nombre_esc_top},
+            {"Campo": "Escenarios guardados", "Valor": len(st.session_state["escenarios"])},
+            {"Campo": "AEP actual [kWh/año]", "Valor": AEP_kWh},
+            {"Campo": "Factor de planta actual", "Valor": CF},
+            {"Campo": "P_nom actual [kW]", "Valor": P_nom_kW},
+            {"Campo": "G actual", "Valor": G},
+            {"Campo": "TSR actual", "Valor": tsr_ref},
+        ],
+        key_suffix="escenarios_comparacion_configuraciones",
+        extra_sheets={
+            "Escenarios guardados": escenarios_df_export,
+            "Comparación A B": comparison_export,
+            "Tabla operativa actual": df.copy(),
+        },
+    )
+
+with st.expander("📡 Entel - entregables RFP", expanded=False):
+    entel_delivery_rows = [
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Plano general, ficha técnica y modelo 3D o plano de conjunto", "Evidencia en esta pestaña": "Ficha técnica resumida del rotor y parámetros principales", "Estado": "Parcial: adjuntar plano/modelo 3D"},
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Potencia nominal de 10 kW o capacidad equivalente con velocidad, densidad, rpm y condiciones eléctricas", "Evidencia en esta pestaña": "KPIs nominales, rpm rotor/generador y tabla por viento", "Estado": "Calculado"},
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Curva de potencia completa desde cut-in hasta cut-out, metodología y pérdidas", "Evidencia en esta pestaña": "Curva de potencia, tabla por bins y pérdidas por etapa", "Estado": "Calculado"},
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Disponibilidad >= 95% y vida útil esperada >= 20 años", "Evidencia en esta pestaña": "Supuesto de disponibilidad y compromiso de vida útil", "Estado": "A declarar comercialmente"},
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Control de velocidad, potencia, sobrevelocidad y parada segura independiente", "Evidencia en esta pestaña": "Filosofía de control y matriz causa-efecto preliminar", "Estado": "Preliminar"},
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Ingeniería estructural e interfaces para mástil y fundación", "Evidencia en esta pestaña": "Cargas, momentos, aceleraciones y checklist de planos de interfaz", "Estado": "Parcial: validar por cálculo estructural/FEM"},
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Protecciones eléctricas, seccionamiento, puesta a tierra y parada de emergencia", "Evidencia en esta pestaña": "Checklist eléctrico y parámetros preliminares", "Estado": "Preliminar"},
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Instrumentación y SCADA con viento, potencia, rpm, tensión, corriente, estados, alarmas y disponibilidad", "Evidencia en esta pestaña": "Lista de señales e integración de datos", "Estado": "Definido para propuesta"},
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Plan de calidad, trazabilidad y protocolos FAT/SAT", "Evidencia en esta pestaña": "Checklist ITP/QCP y ensayos", "Estado": "A formalizar"},
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Garantía técnica, repuestos y soporte disponible en Chile", "Evidencia en esta pestaña": "Matriz de garantías, SLA y repuestos críticos", "Estado": "A declarar comercialmente"},
+        {"Capítulo RFP": "3.1 Características generales", "Entregable solicitado": "Matriz de cumplimiento y desviaciones completa", "Evidencia en esta pestaña": "Matriz exportable de cumplimiento Entel", "Estado": "Lista para completar/firma"},
+        {"Capítulo RFP": "3.2 Producción energética", "Entregable solicitado": "Energy Yield Assessment con P50, sensibilidades, disponibilidad, pérdidas, incertidumbre y degradación", "Evidencia en esta pestaña": "Resumen energético y tabla de sensibilidades", "Estado": "Calculado con supuestos del simulador"},
+        {"Capítulo RFP": "3.3 Desempeño aerodinámico", "Entregable solicitado": "Cut-in, nominal, máxima operación, cut-out, Cp y AEP para 4 a 8 m/s", "Evidencia en esta pestaña": "Tabla aerodinámica y sensibilidad por viento medio", "Estado": "Calculado"},
+        {"Capítulo RFP": "3.4 Características eléctricas", "Entregable solicitado": "Tensión, frecuencia, inversor, on-grid, off-grid, baterías, rendimiento, anti-isla y tierra", "Evidencia en esta pestaña": "Checklist eléctrico preliminar", "Estado": "Parcial: completar con proveedor/inversor"},
+        {"Capítulo RFP": "4 Sistema de monitoreo", "Entregable solicitado": "Monitoreo web/móvil, históricos 24 meses, exportación CSV/Excel, API/MQTT/Modbus/SNMP/SCADA", "Evidencia en esta pestaña": "Arquitectura y lista de señales", "Estado": "Definido para integración"},
+        {"Capítulo RFP": "5 Instalación", "Entregable solicitado": "Planos montaje, obra civil, cálculo estructural, cargas fundación, tierra y seguridad operacional", "Evidencia en esta pestaña": "Checklist de instalación y cargas principales", "Estado": "Parcial"},
+        {"Capítulo RFP": "6 Experiencia proveedor", "Entregable solicitado": "Experiencia desarrollando tecnología VAWT", "Evidencia en esta pestaña": "Lista de antecedentes a adjuntar", "Estado": "A adjuntar"},
+        {"Capítulo RFP": "7 Garantías", "Entregable solicitado": "Garantías, repuestos, soporte remoto/presencial, SLA y disponibilidad anual", "Evidencia en esta pestaña": "Tabla de garantía y SLA objetivo", "Estado": "A validar comercialmente"},
+        {"Capítulo RFP": "8 Repuestos y servicio local", "Entregable solicitado": "Inventario en Chile, bodega, tiempos de entrega, repuestos críticos y técnicos certificados", "Evidencia en esta pestaña": "Lista de repuestos críticos y servicio", "Estado": "A completar"},
+        {"Capítulo RFP": "9 Importación y logística", "Entregable solicitado": "Entrega en Santiago, bodegaje 2 meses y plazo menor a 120 días deseable", "Evidencia en esta pestaña": "Checklist logístico", "Estado": "A declarar"},
+        {"Capítulo RFP": "10 Documentación técnica", "Entregable solicitado": "Datasheet, curvas, certificaciones, unilineales, O&M, repuestos, catálogo, garantías y mantenimiento", "Evidencia en esta pestaña": "Índice documental", "Estado": "Checklist listo"},
+        {"Capítulo RFP": "11 Seguridad", "Entregable solicitado": "Normativa eléctrica, estructural, prevención de riesgos, LOTO y protección atmosférica", "Evidencia en esta pestaña": "Matriz de seguridad", "Estado": "A validar por especialidad"},
+    ]
+    entel_delivery_df = pd.DataFrame(entel_delivery_rows)
+    entel_explanation_map = {
+        "3.1 Características generales": "Define si la solución es técnicamente aceptable: potencia, curva de potencia, control, estructura, protecciones, SCADA, calidad, garantías y matriz de desviaciones.",
+        "3.2 Producción energética": "Permite comparar tecnologías por energía útil anual y factor de planta en el sitio, no solo por potencia nominal de catálogo.",
+        "3.3 Desempeño aerodinámico": "Documenta velocidades operativas, Cp, estabilidad, ruido, vibración y producción esperada a vientos medios de 4 a 8 m/s.",
+        "3.4 Características eléctricas": "Aterriza la compatibilidad con red, baterías, inversor, protecciones anti-isla, rendimiento y puesta a tierra.",
+        "4 Sistema de monitoreo": "Asegura trazabilidad operativa del piloto: datos históricos, señales críticas, alarmas, disponibilidad e integración SCADA.",
+        "5 Instalación": "Entrega las bases para que ENTEL o terceros diseñen mástil, fundación, montaje, puesta a tierra y seguridad operacional.",
+        "6 Experiencia proveedor": "Acredita capacidad real de desarrollo/fabricación/pruebas VAWT con antecedentes verificables.",
+        "7 Garantías": "Fija cobertura técnica, SLA, soporte remoto/presencial, tratamiento de defectos críticos y garantía de disponibilidad.",
+        "8 Repuestos y servicio local": "Reduce riesgo operacional declarando inventario, tiempos de reposición, técnicos disponibles y estrategia de obsolescencia.",
+        "9 Importación y logística": "Ordena entrega en Santiago, bodegaje mínimo y plazo comprometido desde adjudicación hasta entrega física.",
+        "10 Documentación técnica": "Lista los anexos exigidos para revisión técnica, operación, mantenimiento, garantías y aceptación del piloto.",
+        "11 Seguridad": "Cubre normativa eléctrica/estructural, prevención de riesgos, bloqueo-etiquetado y protección contra descargas atmosféricas.",
+    }
+    entel_delivery_df["Explicación técnica"] = entel_delivery_df["Capítulo RFP"].map(entel_explanation_map).fillna(
+        "Evidencia requerida para responder la solicitud técnica de ENTEL."
+    )
+    entel_delivery_df["Acción propuesta"] = np.where(
+        entel_delivery_df["Estado"].str.contains("Calculado|Definido|Lista", case=False, na=False),
+        "Usar datos de esta app y exportar anexo.",
+        "Adjuntar documento externo o completar compromiso del proveedor.",
+    )
+
+    entel_url_curve_df = load_entel_power_curve_from_url()
+    if not entel_url_curve_df.empty:
+        entel_curve_df = entel_url_curve_df.copy()
+        entel_curve_source = "Curva de potencia URL Google Sheets"
+        entel_curve_source_detail = ENTEL_POWER_CURVE_URL
+    else:
+        entel_curve_df = df.copy()
+        entel_curve_source = "Curva interna del simulador"
+        entel_curve_source_detail = "Fallback automático: el URL no respondió o no tuvo columnas válidas."
+
+    for supplemental_col in [
+        "rpm_gen", "I_est (A)", "Duty_DC (%)", "V_LL (V)", "V_LL (Ke) [V]",
+        "f_e (Hz)", "P_gen_curve (kW)", "U_tip (m/s)", "a_cen (g)",
+        "f_1P (Hz)", "f_3P (Hz)", "Lw (dB)", "Lp_obs (dB)",
+    ]:
+        if supplemental_col not in entel_curve_df.columns and supplemental_col in df.columns and "v (m/s)" in entel_curve_df.columns:
+            entel_curve_df[supplemental_col] = np.interp(
+                entel_curve_df["v (m/s)"].to_numpy(dtype=float),
+                df["v (m/s)"].to_numpy(dtype=float),
+                pd.to_numeric(df[supplemental_col], errors="coerce").fillna(0.0).to_numpy(dtype=float),
+                left=np.nan,
+                right=np.nan,
+            )
+
+    v_curve = entel_curve_df["v (m/s)"].values if "v (m/s)" in entel_curve_df.columns else np.array([])
+    p_curve_kw = entel_curve_df["P_out (clip) kW"].values if "P_out (clip) kW" in entel_curve_df.columns else np.array([])
+    entel_D_m = ENTEL_OFFER_DIAMETER_M
+    entel_H_m = ENTEL_OFFER_ROTOR_HEIGHT_M
+    entel_installation_height_m = ENTEL_OFFER_INSTALLATION_HEIGHT_M_10KW
+    entel_mast_height_m = ENTEL_OFFER_MAST_HEIGHT_M
+    entel_A_m2 = ENTEL_OFFER_AREA_M2
+    entel_state_series = entel_curve_df.get("Estado curva URL", pd.Series(dtype=str)).astype(str).str.lower()
+    entel_positive_power_mask = pd.to_numeric(entel_curve_df.get("P_out (clip) kW", pd.Series(dtype=float)), errors="coerce").fillna(0.0) > 0
+    entel_nominal_mask = entel_state_series.str.contains("nominal", na=False)
+    entel_cutout_state_mask = entel_state_series.str.contains("velocidad de corte|cut-out", na=False)
+    entel_stopped_high_mask = entel_state_series.str.contains("sobre cut-out", na=False)
+    entel_v_cut_in = (
+        float(entel_curve_df.loc[entel_positive_power_mask, "v (m/s)"].min())
+        if entel_positive_power_mask.any()
+        else float(v_cut_in)
+    )
+    entel_v_rated = (
+        float(entel_curve_df.loc[entel_nominal_mask, "v (m/s)"].min())
+        if entel_nominal_mask.any()
+        else float(entel_curve_df.loc[pd.to_numeric(entel_curve_df["P_out (clip) kW"], errors="coerce").idxmax(), "v (m/s)"])
+        if "P_out (clip) kW" in entel_curve_df.columns and entel_curve_df["P_out (clip) kW"].notna().any()
+        else float(v_rated)
+    )
+    entel_v_cut_out = (
+        float(entel_curve_df.loc[entel_cutout_state_mask & ~entel_stopped_high_mask, "v (m/s)"].max())
+        if (entel_cutout_state_mask & ~entel_stopped_high_mask).any()
+        else float(entel_curve_df.loc[entel_positive_power_mask, "v (m/s)"].max())
+        if entel_positive_power_mask.any()
+        else float(v_cut_out)
+    )
+    entel_v_max_plot = max(entel_v_cut_out, float(np.nanmax(v_curve)) if len(v_curve) else 20.0, 20.0)
+    entel_p_nom_kw = float(np.nanmax(p_curve_kw)) if len(p_curve_kw) else P_nom_kW
+    v_w_entel_base = np.linspace(0.01, entel_v_max_plot, 700)
+    p_interp_entel_w = np.interp(v_w_entel_base, v_curve, p_curve_kw * 1000.0, left=0.0, right=0.0) if len(v_curve) and len(p_curve_kw) else np.zeros_like(v_w_entel_base)
+    p_interp_entel_w[v_w_entel_base < entel_v_cut_in] = 0.0
+    p_interp_entel_w[v_w_entel_base > entel_v_cut_out] = 0.0
+    entel_AEP_kWh, entel_P_mean_W = aep_from_weibull(v_w_entel_base, p_interp_entel_w, k_energy, c_energy)
+    entel_CF = entel_AEP_kWh / (entel_p_nom_kw * 8760.0) if entel_p_nom_kw > 0 else np.nan
+
+    def entel_num_es(value, decimals: int = 1, suffix: str = "") -> str:
+        try:
+            numeric_value = float(value)
+        except (TypeError, ValueError):
+            return str(value) if value is not None else "-"
+        if not np.isfinite(numeric_value):
+            return "-"
+        text = f"{numeric_value:,.{decimals}f}"
+        text = text.replace(",", "§").replace(".", ",").replace("§", ".")
+        return f"{text}{suffix}"
+
+    def entel_int_es(value, suffix: str = "") -> str:
+        return entel_num_es(value, 0, suffix)
+
+    entel_summary_rows = [
+        {"Campo": "Proyecto", "Valor": "Aerogenerador de eje vertical para sitio ENTEL zona austral"},
+        {"Campo": "Alcance RFP", "Valor": "Suministro VAWT, transporte/entrega Santiago, documentación, capacitación, monitoreo, datos y soporte postventa"},
+        {"Campo": "Potencia objetivo RFP [kW]", "Valor": 10.0},
+        {"Campo": "Potencia nominal curva Entel [kW]", "Valor": entel_p_nom_kw},
+        {"Campo": "Diámetro rotor D Entel [m]", "Valor": entel_D_m},
+        {"Campo": "Altura rotor H Entel [m]", "Valor": entel_H_m},
+        {"Campo": "Altura instalación Entel [m]", "Valor": entel_installation_height_m},
+        {"Campo": "Altura mástil Entel [m]", "Valor": entel_mast_height_m},
+        {"Campo": "Área barrida Entel [m²]", "Valor": entel_A_m2},
+        {"Campo": "Cut-in Entel [m/s]", "Valor": entel_v_cut_in},
+        {"Campo": "Velocidad nominal Entel [m/s]", "Valor": entel_v_rated},
+        {"Campo": "Cut-out Entel [m/s]", "Valor": entel_v_cut_out},
+        {"Campo": "TSR referencia", "Valor": tsr_ref},
+        {"Campo": "Relación transmisión G", "Valor": G},
+        {"Campo": "Generador", "Valor": GEN["label"] if "GEN" in globals() else ""},
+        {"Campo": "Origen recurso eólico", "Valor": resource_origin},
+        {"Campo": "Altura instalación/recurso Entel [m]", "Valor": entel_installation_height_m},
+        {"Campo": "Weibull activo k", "Valor": k_energy},
+        {"Campo": "Weibull activo c [m/s]", "Valor": c_energy},
+        {"Campo": "Fuente curva de potencia Entel", "Valor": entel_curve_source},
+        {"Campo": "Detalle fuente curva", "Valor": entel_curve_source_detail},
+        {"Campo": "AEP P50 técnico [kWh/año]", "Valor": entel_AEP_kWh},
+        {"Campo": "Factor de planta P50 [%]", "Valor": entel_CF * 100},
+        {"Campo": "Disponibilidad mínima RFP [%]", "Valor": 95.0},
+        {"Campo": "Vida útil esperada RFP [años]", "Valor": 20},
+    ]
+    entel_summary_df = pd.DataFrame(entel_summary_rows)
+
+    entel_mean_wind_rows = []
+    for mean_v in [4, 5, 6, 7, 8]:
+        try:
+            c_mean = mean_v / gamma(1.0 + 1.0 / max(float(k_energy), 0.1))
+            v_w_entel = np.linspace(0.01, entel_v_max_plot, 500)
+            p_interp_w = np.interp(v_w_entel, v_curve, p_curve_kw * 1000.0, left=0.0, right=0.0)
+            p_interp_w[v_w_entel < entel_v_cut_in] = 0.0
+            p_interp_w[v_w_entel > entel_v_cut_out] = 0.0
+            aep_mean, p_mean_w = aep_from_weibull(v_w_entel, p_interp_w, k_energy, c_mean)
+            cf_mean = aep_mean / (entel_p_nom_kw * 8760.0) if entel_p_nom_kw > 0 else np.nan
+        except Exception:
+            aep_mean, p_mean_w, cf_mean = np.nan, np.nan, np.nan
+        entel_mean_wind_rows.append({
+            "Viento medio [m/s]": mean_v,
+            "AEP estimado [kWh/año]": aep_mean,
+            "Potencia promedio [kW]": p_mean_w / 1000.0 if np.isfinite(p_mean_w) else np.nan,
+            "Factor planta [%]": cf_mean * 100 if np.isfinite(cf_mean) else np.nan,
+            "Base técnica verificable": f"Cálculo Weibull con k activo {entel_num_es(k_energy, 2)}",
+        })
+    entel_mean_wind_df = pd.DataFrame(entel_mean_wind_rows)
+
+    entel_sensitivity_df = pd.DataFrame([
+        {"Caso": "P50 técnico base", "Supuesto": entel_curve_source, "AEP [kWh/año]": entel_AEP_kWh, "Factor planta [%]": entel_CF * 100},
+        {"Caso": "P50 con disponibilidad RFP", "Supuesto": "Disponibilidad 95%", "AEP [kWh/año]": entel_AEP_kWh * 0.95, "Factor planta [%]": entel_CF * 95},
+        {"Caso": "Sensibilidad recurso -10%", "Supuesto": "Incertidumbre recurso baja", "AEP [kWh/año]": entel_AEP_kWh * 0.90, "Factor planta [%]": entel_CF * 90},
+        {"Caso": "Sensibilidad recurso +10%", "Supuesto": "Incertidumbre recurso alta", "AEP [kWh/año]": entel_AEP_kWh * 1.10, "Factor planta [%]": entel_CF * 110},
+        {"Caso": "Pérdidas eléctricas adicionales", "Supuesto": "Pérdida adicional 3%", "AEP [kWh/año]": entel_AEP_kWh * 0.97, "Factor planta [%]": entel_CF * 97},
+        {"Caso": "Degradación año 1", "Supuesto": "Degradación anual 0,5%", "AEP [kWh/año]": entel_AEP_kWh * 0.995, "Factor planta [%]": entel_CF * 99.5},
+    ])
+
+    month_names_entel = {
+        1: "Enero", 2: "Febrero", 3: "Marzo", 4: "Abril",
+        5: "Mayo", 6: "Junio", 7: "Julio", 8: "Agosto",
+        9: "Septiembre", 10: "Octubre", 11: "Noviembre", 12: "Diciembre",
+    }
+
+    def build_entel_monthly_energy_df() -> pd.DataFrame:
+        records = active_resource_inputs.get("target_series_records", []) if use_extrapolated_resource else []
+        if records:
+            monthly_source = pd.DataFrame(records)
+            if {"timestamp", "v_target_m_s"}.issubset(monthly_source.columns):
+                monthly_source["timestamp"] = pd.to_datetime(monthly_source["timestamp"], errors="coerce")
+                monthly_source["v_target_m_s"] = pd.to_numeric(monthly_source["v_target_m_s"], errors="coerce")
+                monthly_source = monthly_source.dropna(subset=["timestamp", "v_target_m_s"]).sort_values("timestamp")
+                if not monthly_source.empty:
+                    diffs_h = monthly_source["timestamp"].diff().dt.total_seconds().div(3600.0)
+                    dt_h = float(diffs_h[(diffs_h > 0) & np.isfinite(diffs_h)].median()) if diffs_h.notna().any() else 1.0
+                    if not np.isfinite(dt_h) or dt_h <= 0:
+                        dt_h = 1.0
+                    monthly_source["P_est_kW"] = np.interp(
+                        monthly_source["v_target_m_s"].to_numpy(dtype=float),
+                        v_curve,
+                        p_curve_kw,
+                        left=0.0,
+                        right=0.0,
+                    )
+                    monthly_source.loc[monthly_source["v_target_m_s"] < entel_v_cut_in, "P_est_kW"] = 0.0
+                    monthly_source.loc[monthly_source["v_target_m_s"] > entel_v_cut_out, "P_est_kW"] = 0.0
+                    monthly_source["E_direct_kWh"] = monthly_source["P_est_kW"] * dt_h
+                    grouped = monthly_source.groupby(monthly_source["timestamp"].dt.month)["E_direct_kWh"].sum()
+                    direct_total = float(grouped.sum())
+                    if direct_total > 0 and np.isfinite(entel_AEP_kWh):
+                        rows = []
+                        for month_idx in range(1, 13):
+                            direct_kwh = float(grouped.get(month_idx, 0.0))
+                            share = direct_kwh / direct_total if direct_total > 0 else 0.0
+                            rows.append({
+                                "Mes": month_names_entel[month_idx],
+                                "Producción esperada [kWh/mes]": entel_AEP_kWh * share,
+                                "Participación anual [%]": share * 100.0,
+                                "Producción serie directa [kWh/periodo]": direct_kwh,
+                                "Base técnica verificable": f"Distribución mensual desde {scada_source_label} extrapolado; escalada al AEP P50 técnico anual",
+                            })
+                        return pd.DataFrame(rows)
+
+        return pd.DataFrame([
+            {
+                "Mes": mes,
+                "Producción esperada [kWh/mes]": entel_AEP_kWh / 12.0,
+                "Participación anual [%]": 100.0 / 12.0,
+                "Producción serie directa [kWh/periodo]": np.nan,
+                "Base técnica verificable": "Distribución uniforme referencial; cargar serie SCADA con fecha para estacionalidad mensual",
+            }
+            for mes in month_names_entel.values()
+        ])
+
+    entel_monthly_df = build_entel_monthly_energy_df()
+
+    active_resource_df = pd.DataFrame(active_resource_inputs.get("profile_summary", [])) if use_extrapolated_resource else pd.DataFrame()
+    entel_resource_summary_df = pd.DataFrame([
+        {"Parámetro": "Origen", "Valor": resource_origin},
+        {"Parámetro": "Altura objetivo Entel [m]", "Valor": entel_num_es(entel_installation_height_m, 1)},
+        {"Parámetro": "Método extrapolación", "Valor": active_resource_inputs.get("method", "No aplica")},
+        {"Parámetro": "Alturas fuente [m]", "Valor": f"{entel_num_es(active_resource_inputs.get('source_height_min_m', np.nan), 1)} a {entel_num_es(active_resource_inputs.get('source_height_max_m', np.nan), 1)}" if use_extrapolated_resource else "No aplica"},
+        {"Parámetro": "Velocidad media a altura objetivo [m/s]", "Valor": entel_num_es(active_resource_inputs.get("v_mean", np.nan), 2) if use_extrapolated_resource else "No aplica"},
+        {"Parámetro": "Alpha vertical medio", "Valor": entel_num_es(active_resource_inputs.get("shear_alpha", np.nan), 3) if use_extrapolated_resource else "No aplica"},
+        {"Parámetro": "Alpha vertical mediano", "Valor": entel_num_es(active_resource_inputs.get("shear_alpha_median", np.nan), 3) if use_extrapolated_resource else "No aplica"},
+        {"Parámetro": "Registros válidos", "Valor": entel_int_es(active_resource_inputs.get("sample_count", np.nan)) if use_extrapolated_resource else "No aplica"},
+    ])
+
+    entel_control_df = pd.DataFrame([
+        {"Evento": "Viento bajo cut-in", "Condición": f"v < {entel_num_es(entel_v_cut_in, 1)} m/s", "Acción": "Rotor disponible, sin inyección de potencia", "Señales": "viento, rpm, estado"},
+        {"Evento": "Región MPPT", "Condición": f"{entel_num_es(entel_v_cut_in, 1)} <= v < {entel_num_es(entel_v_rated, 1)} m/s", "Acción": "Seguimiento TSR y optimización de potencia", "Señales": "rpm, potencia, torque/corriente"},
+        {"Evento": "Potencia limitada", "Condición": f"{entel_num_es(entel_v_rated, 1)} <= v <= {entel_num_es(entel_v_cut_out, 1)} m/s", "Acción": "Limitación de potencia/corriente y control de rpm", "Señales": "P_out, I_est, rpm_gen"},
+        {"Evento": "Sobre cut-out", "Condición": f"v > {entel_num_es(entel_v_cut_out, 1)} m/s", "Acción": "Parada segura y bloqueo hasta condición de rearme", "Señales": "alarma viento alto, estado freno"},
+        {"Evento": "Falla crítica", "Condición": "Sobrevelocidad, sobrecorriente, vibración, E-stop o pérdida comunicación crítica", "Acción": "Parada independiente fail-safe y alarma SCADA", "Señales": "alarmas, estados, disponibilidad"},
+    ])
+
+    entel_scada_df = pd.DataFrame([
+        {"Grupo": "Tiempo real", "Señal": "Potencia instantánea", "Formato/uso": "kW, tendencia y alarma"},
+        {"Grupo": "Tiempo real", "Señal": "Energía acumulada", "Formato/uso": "kWh, acumulado diario/mensual/anual"},
+        {"Grupo": "Tiempo real", "Señal": "Velocidad de viento", "Formato/uso": "m/s, bin energético y protección"},
+        {"Grupo": "Tiempo real", "Señal": "RPM rotor/generador", "Formato/uso": "rpm, control y sobrevelocidad"},
+        {"Grupo": "Eléctrico", "Señal": "Tensión, corriente y frecuencia", "Formato/uso": "V, A, Hz para calidad eléctrica"},
+        {"Grupo": "Operación", "Señal": "Estado operativo", "Formato/uso": "Disponible, operando, limitada, detenida, falla"},
+        {"Grupo": "Operación", "Señal": "Alarmas y eventos", "Formato/uso": "Registro con timestamp"},
+        {"Grupo": "Disponibilidad", "Señal": "Horas disponibles y no disponibles", "Formato/uso": "Cálculo SLA >= 95%"},
+        {"Grupo": "Plataforma", "Señal": "Históricos", "Formato/uso": "24 meses mínimo, exportación CSV/Excel"},
+        {"Grupo": "Integración", "Señal": "API/MQTT/Modbus TCP/IP/SNMP", "Formato/uso": "Conexión con SCADA ENTEL"},
+    ])
+
+    entel_electrical_df = pd.DataFrame([
+        {"Ítem": "Tensión nominal de salida", "Respuesta preliminar": "Completar según inversor/controlador ofertado"},
+        {"Ítem": "Frecuencia", "Respuesta preliminar": "50 Hz para integración AC cuando aplique"},
+        {"Ítem": "Tipo de inversor", "Respuesta preliminar": "On-grid/off-grid/híbrido según arquitectura del sitio"},
+        {"Ítem": "Compatibilidad on-grid", "Respuesta preliminar": "A confirmar con protecciones anti-isla y norma local"},
+        {"Ítem": "Compatibilidad off-grid/baterías", "Respuesta preliminar": "A confirmar con bus DC/BMS/controlador"},
+        {"Ítem": "Rendimiento inversor", "Respuesta preliminar": "Declarar curva y eficiencia europea/ponderada"},
+        {"Ítem": "Protección anti-isla", "Respuesta preliminar": "Requerida si existe paralelismo con red"},
+        {"Ítem": "Puesta a tierra y descargas atmosféricas", "Respuesta preliminar": "Malla/tierra, SPD y coordinación con mástil/fundación"},
+        {"Ítem": "Seccionamiento y parada emergencia", "Respuesta preliminar": "Seccionador bloqueable, E-stop y LOTO"},
+    ])
+
+    entel_service_df = pd.DataFrame([
+        {"Categoría": "Garantía equipos/fabricación", "Compromiso RFP": "24 meses desde aceptación provisional o 30 meses desde entrega"},
+        {"Categoría": "Reparaciones/reemplazos", "Compromiso RFP": "12 meses desde intervención o saldo de garantía, el período mayor"},
+        {"Categoría": "Software/configuración", "Compromiso RFP": "Corrección de defectos, respaldo y compatibilidad durante garantía"},
+        {"Categoría": "Defectos críticos", "Compromiso RFP": "Atención remota prioritaria y plan documentado"},
+        {"Categoría": "SLA remoto", "Compromiso RFP": "Respuesta remota <= 24 horas"},
+        {"Categoría": "SLA presencial", "Compromiso RFP": "Atención presencial <= 72 horas"},
+        {"Categoría": "Repuestos críticos", "Compromiso RFP": "Rodamientos, controladores, sensores, freno, inversores, módulos comunicación"},
+        {"Categoría": "Logística", "Compromiso RFP": "Entrega Santiago, bodegaje 2 meses, plazo deseable < 120 días"},
+    ])
+
+    entel_docs_df = pd.DataFrame([
+        {"Documento": "Datasheet oficial", "Uso Entel": "Ficha técnica y condiciones nominales", "Responsable": "Proveedor"},
+        {"Documento": "Curva de potencia y CSV/planilla editable", "Uso Entel": "Evaluación energética objetiva", "Responsable": "Simulador/proveedor"},
+        {"Documento": "Certificaciones", "Uso Entel": "Cumplimiento normativo y calidad", "Responsable": "Proveedor"},
+        {"Documento": "Diagramas unilineales", "Uso Entel": "Integración eléctrica y protecciones", "Responsable": "Ingeniería eléctrica"},
+        {"Documento": "Manual O&M", "Uso Entel": "Operación y mantenimiento", "Responsable": "Proveedor"},
+        {"Documento": "Lista de repuestos", "Uso Entel": "Soporte 2 años y obsolescencia", "Responsable": "Proveedor"},
+        {"Documento": "Catálogo técnico", "Uso Entel": "Información comercial/técnica", "Responsable": "Proveedor"},
+        {"Documento": "Garantías", "Uso Entel": "Cobertura contractual", "Responsable": "Comercial/proveedor"},
+        {"Documento": "Plan de mantenimiento", "Uso Entel": "Preventivo/correctivo", "Responsable": "Proveedor/O&M"},
+        {"Documento": "Planos montaje e interfaz", "Uso Entel": "Mástil, fundación y montaje", "Responsable": "Ingeniería mecánica/civil"},
+        {"Documento": "Memoria estructural y cargas", "Uso Entel": "Diseño fundación/mástil", "Responsable": "Ingeniería estructural"},
+        {"Documento": "Protocolos FAT/SAT e ITP/QCP", "Uso Entel": "Calidad, ensayos y aceptación", "Responsable": "Calidad/proveedor"},
+    ])
+
+    entel_color_map = {
+        "P_aero (kW)": "#4f8a8b",
+        "Potencia aerodinámica [kW]": "#4f8a8b",
+        "P_mec_gen (kW)": "#2f5f73",
+        "Potencia mecánica [kW]": "#2f5f73",
+        "P_gen_curve (kW)": "#2f5f73",
+        "P_el (kW)": "#c47a3c",
+        "Potencia eléctrica [kW]": "#c47a3c",
+        "P_out (clip) kW": "#9b4f5f",
+        "Potencia eléctrica neta [kW]": "#9b4f5f",
+        "Cp(λ_efectiva)": "#d9a766",
+        "Cp_aero_equiv": "#a36a2d",
+        "Cp_el_equiv": "#7c4d8b",
+        "η_gen (curve)": "#5f7f75",
+        "V_LL (V)": "#2f5f73",
+        "V_LL (Ke) [V]": "#84a9a4",
+        "f_e (Hz)": "#d9a766",
+        "I_est (A)": "#9b4f5f",
+        "Duty_DC (%)": "#6b7280",
+        "U_tip (m/s)": "#2f5f73",
+        "f_1P (Hz)": "#c47a3c",
+        "f_3P (Hz)": "#d95f5f",
+        "Lp_obs (dB)": "#6b7280",
+        "Horas/año": "#6b7280",
+        "Energía bin": "#2f5f73",
+        "Energía neta": "#5f7f75",
+        "Pérdida": "#d95f5f",
+        "Producción mensual": "#2f5f73",
+        "Acumulado": "#5f7f75",
+        "Base": "#2f5f73",
+        "Disponibilidad": "#d95f5f",
+        "Pérdidas eléctricas": "#c47a3c",
+        "Incertidumbre recurso": "#d9a766",
+        "Degradación": "#6b7280",
+        "Combinado conservador": "#5f7f75",
+    }
+
+    entel_power_curve_df = entel_curve_df.copy()
+    entel_power_fig = go.Figure()
+    entel_power_series = [
+        ("P_mec_gen (kW)", "Potencia mecánica [kW]", entel_color_map["Potencia mecánica [kW]"]),
+        ("P_out (clip) kW", "Potencia eléctrica neta [kW]", entel_color_map["Potencia eléctrica neta [kW]"]),
+    ]
+    for col_name, display_name, color in entel_power_series:
+        if col_name not in entel_power_curve_df.columns:
+            continue
+        entel_power_fig.add_trace(go.Scatter(
+            x=entel_power_curve_df["v (m/s)"],
+            y=entel_power_curve_df[col_name],
+            mode="lines+markers",
+            name=display_name,
+            line=dict(color=color, width=3),
+            marker=dict(size=7, color=color, line=dict(width=1.2, color="#ffffff")),
+            hovertemplate="Viento: %{x:.1f} m/s<br>" + display_name + ": %{y:.3f}<extra></extra>",
+        ))
+    entel_power_fig.update_layout(title="Curva de potencia y pérdidas por etapa para anexo Entel")
+    entel_power_fig.update_layout(xaxis_title="Velocidad de viento [m/s]", yaxis_title="Potencia [kW]", legend_title=None)
+    for x_val, label in [(entel_v_cut_in, "cut-in"), (entel_v_rated, "nominal"), (entel_v_cut_out, "cut-out")]:
+        if np.isfinite(x_val):
+            entel_power_fig.add_vline(x=float(x_val), line_dash="dot", annotation_text=label)
+
+    entel_sens_fig = px.bar(
+        entel_sensitivity_df,
+        x="Caso",
+        y="AEP [kWh/año]",
+        text="Factor planta [%]",
+        title="P50 técnico y sensibilidades solicitadas por Entel",
+    )
+    entel_sens_fig.update_traces(texttemplate="%{text:.1f}% FP", textposition="outside")
+    entel_sens_fig.update_layout(xaxis_title="", yaxis_title="AEP [kWh/año]")
+
+    entel_mean_fig = px.line(
+        entel_mean_wind_df,
+        x="Viento medio [m/s]",
+        y="AEP estimado [kWh/año]",
+        markers=True,
+        title="Producción anual estimada para vientos medios 4 a 8 m/s",
+    )
+    entel_mean_fig.update_layout(yaxis_title="AEP [kWh/año]")
+
+    entel_month_plot_df = entel_monthly_df.copy()
+    entel_month_plot_df["Producción esperada [kWh/mes]"] = pd.to_numeric(
+        entel_month_plot_df["Producción esperada [kWh/mes]"], errors="coerce"
+    )
+    entel_month_plot_df["Participación anual [%]"] = pd.to_numeric(
+        entel_month_plot_df.get("Participación anual [%]", np.nan), errors="coerce"
+    )
+    monthly_avg_kwh = float(entel_month_plot_df["Producción esperada [kWh/mes]"].mean())
+    entel_month_plot_df["Delta vs promedio [kWh]"] = entel_month_plot_df["Producción esperada [kWh/mes]"] - monthly_avg_kwh
+    entel_month_plot_df["Acumulado [kWh]"] = entel_month_plot_df["Producción esperada [kWh/mes]"].cumsum()
+    entel_month_plot_df["Color"] = np.where(entel_month_plot_df["Delta vs promedio [kWh]"] >= 0, entel_color_map["Producción mensual"], "#d9a766")
+    entel_month_fig = go.Figure()
+    entel_month_fig.add_trace(go.Bar(
+        x=entel_month_plot_df["Mes"],
+        y=entel_month_plot_df["Producción esperada [kWh/mes]"],
+        name="Producción mensual",
+        marker_color=entel_month_plot_df["Color"],
+        text=entel_month_plot_df["Producción esperada [kWh/mes]"],
+        texttemplate="%{text:,.0f}",
+        textposition="outside",
+        cliponaxis=False,
+        customdata=np.stack([
+            entel_month_plot_df["Participación anual [%]"].fillna(0.0),
+            entel_month_plot_df["Delta vs promedio [kWh]"].fillna(0.0),
+            entel_month_plot_df["Acumulado [kWh]"].fillna(0.0),
+        ], axis=-1),
+        hovertemplate=(
+            "<b>%{x}</b><br>"
+            "Producción: %{y:,.1f} kWh/mes<br>"
+            "Participación anual: %{customdata[0]:.2f}%<br>"
+            "Delta vs promedio: %{customdata[1]:+,.1f} kWh<br>"
+            "Acumulado anual: %{customdata[2]:,.1f} kWh"
+            "<extra></extra>"
+        ),
+    ))
+    entel_month_fig.add_trace(go.Scatter(
+        x=entel_month_plot_df["Mes"],
+        y=entel_month_plot_df["Acumulado [kWh]"],
+        name="Acumulado",
+        mode="lines+markers",
+        yaxis="y2",
+        line=dict(color=entel_color_map["Acumulado"], width=3, shape="spline"),
+        marker=dict(size=8, color=entel_color_map["Acumulado"], line=dict(width=1.2, color="#ffffff")),
+        hovertemplate="<b>%{x}</b><br>Acumulado: %{y:,.1f} kWh<extra></extra>",
+    ))
+    entel_month_fig.add_hline(
+        y=monthly_avg_kwh,
+        line_dash="dot",
+        line_color="rgba(79,90,105,0.70)",
+        annotation_text=f"Promedio {entel_int_es(monthly_avg_kwh)} kWh/mes",
+        annotation_font_size=11,
+        annotation_font_color="#4f5a69",
+    )
+    entel_month_fig.update_layout(
+        title="Producción mensual esperada y acumulado anual",
+        xaxis_title="",
+        yaxis=dict(title="kWh/mes"),
+        yaxis2=dict(title="Acumulado [kWh]", overlaying="y", side="right", rangemode="tozero"),
+        legend_title=None,
+    )
+
+    entel_availability = 0.95
+
+    def entel_annual_kwh_from_col(col_name: str) -> float:
+        if col_name not in entel_curve_df.columns:
+            return np.nan
+        p_kw = pd.to_numeric(entel_curve_df[col_name], errors="coerce").fillna(0.0).to_numpy(dtype=float)
+        v_col = pd.to_numeric(entel_curve_df["v (m/s)"], errors="coerce").fillna(0.0).to_numpy(dtype=float)
+        p_w = np.interp(v_w_entel_base, v_col, p_kw * 1000.0, left=0.0, right=0.0)
+        p_w[v_w_entel_base < entel_v_cut_in] = 0.0
+        p_w[v_w_entel_base > entel_v_cut_out] = 0.0
+        aep_col, _ = aep_from_weibull(v_w_entel_base, p_w, k_energy, c_energy)
+        return aep_col
+
+    aep_aero_kwh = entel_annual_kwh_from_col("P_aero (kW)")
+    aep_mec_kwh = entel_annual_kwh_from_col("P_mec_gen (kW)")
+    aep_elec_kwh = entel_annual_kwh_from_col("P_el (kW)")
+    aep_net_kwh = entel_annual_kwh_from_col("P_out (clip) kW")
+    p_avg_kw = entel_AEP_kWh / 8760.0 if np.isfinite(entel_AEP_kWh) else np.nan
+    equivalent_hours = entel_AEP_kWh / entel_p_nom_kw if entel_p_nom_kw > 0 else np.nan
+    aep_with_availability = entel_AEP_kWh * entel_availability if np.isfinite(entel_AEP_kWh) else np.nan
+
+    entel_performance_kpi_df = pd.DataFrame([
+        {"Indicador": "Producción energética anual esperada", "Valor": entel_AEP_kWh, "Unidad": "kWh/año", "Criterio técnico del oferente": f"AEP P50 técnico antes de disponibilidad; curva usada: {entel_curve_source}."},
+        {"Indicador": "Producción anual con disponibilidad considerada", "Valor": aep_with_availability, "Unidad": "kWh/año", "Criterio técnico del oferente": "AEP neto aplicando disponibilidad mínima RFP de 95%."},
+        {"Indicador": "Potencia promedio generada", "Valor": p_avg_kw, "Unidad": "kW", "Criterio técnico del oferente": "Potencia media equivalente sobre 8.760 h/año."},
+        {"Indicador": "Horas equivalentes de operación", "Valor": equivalent_hours, "Unidad": "h/año", "Criterio técnico del oferente": "AEP dividido por potencia nominal AC declarada en curva Entel."},
+        {"Indicador": "Factor de planta esperado", "Valor": entel_CF * 100, "Unidad": "%", "Criterio técnico del oferente": "Relación entre potencia media y potencia nominal de la curva Entel."},
+        {"Indicador": "Disponibilidad considerada", "Valor": entel_availability * 100, "Unidad": "%", "Criterio técnico del oferente": "Supuesto mínimo indicado por RFP Entel."},
+    ])
+
+    entel_losses_df = pd.DataFrame([
+        {"Etapa": "Aerodinámica bruta", "Energía anual [kWh/año]": aep_aero_kwh, "Pérdida aplicada [kWh/año]": 0.0, "Explicación": "Energía disponible desde la curva aerodinámica base antes del tren de potencia."},
+        {"Etapa": "Pérdidas mecánicas", "Energía anual [kWh/año]": aep_mec_kwh, "Pérdida aplicada [kWh/año]": max(aep_aero_kwh - aep_mec_kwh, 0.0) if np.isfinite(aep_aero_kwh) and np.isfinite(aep_mec_kwh) else np.nan, "Explicación": "Diferencia entre potencia aerodinámica y potencia mecánica en generador."},
+        {"Etapa": "Pérdidas eléctricas", "Energía anual [kWh/año]": aep_elec_kwh, "Pérdida aplicada [kWh/año]": max(aep_mec_kwh - aep_elec_kwh, 0.0) if np.isfinite(aep_mec_kwh) and np.isfinite(aep_elec_kwh) else np.nan, "Explicación": "Pérdidas de generador, rectificación e inversión modeladas."},
+        {"Etapa": "Clipping / limitación", "Energía anual [kWh/año]": aep_net_kwh, "Pérdida aplicada [kWh/año]": max(aep_elec_kwh - aep_net_kwh, 0.0) if np.isfinite(aep_elec_kwh) and np.isfinite(aep_net_kwh) else np.nan, "Explicación": "Energía no inyectada por límite de potencia nominal o control."},
+        {"Etapa": "Disponibilidad", "Energía anual [kWh/año]": aep_with_availability, "Pérdida aplicada [kWh/año]": entel_AEP_kWh * (1.0 - entel_availability) if np.isfinite(entel_AEP_kWh) else np.nan, "Explicación": "Corrección contractual por disponibilidad anual considerada."},
+    ])
+    base_loss = aep_aero_kwh if np.isfinite(aep_aero_kwh) and aep_aero_kwh > 0 else np.nan
+    entel_losses_df["Pérdida sobre aero [%]"] = entel_losses_df["Pérdida aplicada [kWh/año]"] / base_loss * 100.0
+
+    entel_yield_site_df = pd.DataFrame([
+        {"Ítem solicitado 3.2": "Distribución de velocidades de viento", "Estado en app": "Calculada desde recurso activo", "Valor / evidencia": f"Weibull k={entel_num_es(k_energy, 2)}, c={entel_num_es(c_energy, 2)} m/s", "Criterio técnico del oferente": "La distribución se integra contra la curva de potencia para obtener AEP y factor de planta."},
+        {"Ítem solicitado 3.2": "Coordenadas del sitio", "Estado en app": "Por completar con estudio mandante", "Valor / evidencia": "Latitud / longitud no declaradas en el archivo cargado", "Criterio técnico del oferente": "Debe incorporarse la coordenada oficial Entel para trazabilidad de rugosidad, exposición, densidad y restricciones del emplazamiento."},
+        {"Ítem solicitado 3.2": "Altura de instalación considerada", "Estado en app": "Fija desde oferta Entel", "Valor / evidencia": entel_num_es(entel_installation_height_m, 1, " m"), "Criterio técnico del oferente": f"Altura total de instalación con mástil de {entel_num_es(entel_mast_height_m, 1)} m; para área barrida se usa H rotor={entel_num_es(entel_H_m, 1)} m y D={entel_num_es(entel_D_m, 1)} m."},
+        {"Ítem solicitado 3.2": "Estudio de recurso eólico", "Estado en app": resource_origin, "Valor / evidencia": resource_origin if use_extrapolated_resource else "Parámetros Weibull manuales", "Criterio técnico del oferente": "Si Entel entrega serie o matriz por alturas, la app extrapola a la altura efectiva antes de calcular la producción."},
+    ])
+
+    entel_yield_methodology_df = pd.DataFrame([
+        {"Paso metodológico": "1. Normalización del recurso", "Aplicación en esta propuesta": f"Se usa el recurso activo del panel lateral o {scada_source_label} cuando queda como perfil vertical cargado.", "Salida verificable": "Weibull k/c, velocidad media y altura de recurso."},
+        {"Paso metodológico": "2. Ajuste / extrapolación vertical", "Aplicación en esta propuesta": "Cuando hay columnas por altura, se ajusta ley de potencia por timestamp y se estima viento a la altura de instalación.", "Salida verificable": "Altura objetivo, alpha vertical medio/mediano y registros válidos."},
+        {"Paso metodológico": "3. Curva de potencia", "Aplicación en esta propuesta": f"La curva P_out (clip) kW se integra por bin de velocidad usando {entel_curve_source}.", "Salida verificable": "Tabla de curva por bin y gráfico potencia-viento."},
+        {"Paso metodológico": "4. Energy Yield Assessment", "Aplicación en esta propuesta": "Integración de distribución Weibull activa contra la curva de potencia neta.", "Salida verificable": "AEP P50 técnico, potencia promedio, horas equivalentes y factor de planta."},
+        {"Paso metodológico": "5. Sensibilidades", "Aplicación en esta propuesta": "Se calculan escenarios para disponibilidad, pérdidas eléctricas, incertidumbre de recurso y degradación.", "Salida verificable": "Tabla y gráfico de P50 + sensibilidades."},
+        {"Paso metodológico": "6. Pérdidas y turbulencia", "Aplicación en esta propuesta": "Las pérdidas se separan por etapa; la turbulencia se declara como criterio de revisión y proxy de variabilidad cuando existe serie temporal.", "Salida verificable": "Matriz de pérdidas y consideraciones de turbulencia."},
+    ])
+
+    entel_distribution_grid = np.linspace(0.01, entel_v_max_plot, 900)
+    entel_distribution_pdf = weibull_pdf(entel_distribution_grid, k_energy, c_energy)
+    entel_distribution_power_kw = np.interp(
+        entel_distribution_grid,
+        v_curve,
+        p_curve_kw,
+        left=0.0,
+        right=0.0,
+    ) if len(v_curve) and len(p_curve_kw) else np.zeros_like(entel_distribution_grid)
+    entel_distribution_power_kw[entel_distribution_grid < entel_v_cut_in] = 0.0
+    entel_distribution_power_kw[entel_distribution_grid > entel_v_cut_out] = 0.0
+
+    entel_speed_edges = [0, 3, 4, 5, 6, 7, 8, 10, 12, 15, float(entel_v_max_plot)]
+    entel_distribution_rows = []
+    for lower, upper in zip(entel_speed_edges[:-1], entel_speed_edges[1:]):
+        mask = (entel_distribution_grid >= lower) & (entel_distribution_grid < upper)
+        if not np.any(mask):
+            probability = 0.0
+            energy_bin = 0.0
+            p_bin = 0.0
+        else:
+            probability = float(np.trapz(entel_distribution_pdf[mask], entel_distribution_grid[mask]))
+            energy_bin = float(np.trapz(entel_distribution_power_kw[mask] * entel_distribution_pdf[mask], entel_distribution_grid[mask]) * 8760.0)
+            p_bin = energy_bin / (probability * 8760.0) if probability > 0 else 0.0
+        entel_distribution_rows.append({
+            "Bin viento [m/s]": f"{lower:.0f}-{upper:.0f}",
+            "Probabilidad [%]": probability * 100.0,
+            "Horas/año": probability * 8760.0,
+            "Potencia media bin [kW]": p_bin,
+            "Energía bin [kWh/año]": energy_bin,
+            "Estado operativo del bin": "Bajo cut-in" if upper <= entel_v_cut_in else ("Zona productiva" if lower < entel_v_cut_out else "Fuera de operación"),
+        })
+    entel_wind_distribution_df = pd.DataFrame(entel_distribution_rows)
+
+    entel_yield_assessment_df = pd.DataFrame([
+        {"Indicador EYA 3.2": "AEP P50 técnico", "Valor": entel_AEP_kWh, "Unidad": "kWh/año", "Base técnica verificable": f"Distribución Weibull activa x curva de potencia neta ({entel_curve_source})."},
+        {"Indicador EYA 3.2": "AEP P50 con disponibilidad 95%", "Valor": aep_with_availability, "Unidad": "kWh/año", "Base técnica verificable": "AEP P50 técnico corregido por disponibilidad contractual."},
+        {"Indicador EYA 3.2": "Potencia promedio neta", "Valor": p_avg_kw, "Unidad": "kW", "Base técnica verificable": "AEP / 8.760 h."},
+        {"Indicador EYA 3.2": "Horas equivalentes", "Valor": equivalent_hours, "Unidad": "h/año", "Base técnica verificable": "AEP / potencia nominal de la curva Entel."},
+        {"Indicador EYA 3.2": "Factor de planta P50", "Valor": entel_CF * 100, "Unidad": "%", "Base técnica verificable": "Potencia media / potencia nominal de la curva Entel."},
+        {"Indicador EYA 3.2": "Velocidad media Weibull", "Valor": c_energy * gamma(1.0 + 1.0 / max(float(k_energy), 0.1)), "Unidad": "m/s", "Base técnica verificable": "Media de la distribución estadística activa."},
+    ])
+
+    entel_yield_sensitivity_df = pd.DataFrame([
+        {"Familia": "Base", "Caso": "P50 técnico esperado", "Ajuste aplicado": "Sin castigo adicional", "AEP [kWh/año]": entel_AEP_kWh, "Factor planta [%]": entel_CF * 100, "Uso en evaluación": "Caso central de comparación técnica."},
+        {"Familia": "Disponibilidad", "Caso": "Disponibilidad 95%", "Ajuste aplicado": "-5,0% energía", "AEP [kWh/año]": entel_AEP_kWh * 0.95, "Factor planta [%]": entel_CF * 95, "Uso en evaluación": "Disponibilidad mínima exigida por RFP."},
+        {"Familia": "Pérdidas eléctricas", "Caso": "Pérdida eléctrica adicional", "Ajuste aplicado": "-3,0% energía", "AEP [kWh/año]": entel_AEP_kWh * 0.97, "Factor planta [%]": entel_CF * 97, "Uso en evaluación": "Margen para inversor, cableado, rectificación y calidad eléctrica."},
+        {"Familia": "Incertidumbre recurso", "Caso": "Recurso bajo P50", "Ajuste aplicado": "-10,0% energía", "AEP [kWh/año]": entel_AEP_kWh * 0.90, "Factor planta [%]": entel_CF * 90, "Uso en evaluación": "Sensibilidad por medición, extrapolación, rugosidad y representatividad temporal."},
+        {"Familia": "Incertidumbre recurso", "Caso": "Recurso alto P50", "Ajuste aplicado": "+10,0% energía", "AEP [kWh/año]": entel_AEP_kWh * 1.10, "Factor planta [%]": entel_CF * 110, "Uso en evaluación": "Escenario superior para comparar upside técnico."},
+        {"Familia": "Degradación", "Caso": "Año 1 degradado", "Ajuste aplicado": "-0,5% energía", "AEP [kWh/año]": entel_AEP_kWh * 0.995, "Factor planta [%]": entel_CF * 99.5, "Uso en evaluación": "Sensibilidad por envejecimiento inicial de rotor, generador y electrónica."},
+        {"Familia": "Combinado conservador", "Caso": "Disponibilidad + pérdidas + degradación", "Ajuste aplicado": "95% x 97% x 99,5%", "AEP [kWh/año]": entel_AEP_kWh * 0.95 * 0.97 * 0.995, "Factor planta [%]": entel_CF * 95 * 0.97 * 0.995, "Uso en evaluación": "Caso de estrés para revisión contractual."},
+    ])
+
+    turbulence_proxy = (
+        float(active_resource_inputs.get("v_std", np.nan)) / float(active_resource_inputs.get("v_mean", np.nan)) * 100.0
+        if use_extrapolated_resource and float(active_resource_inputs.get("v_mean", np.nan)) > 0
+        else np.nan
+    )
+    entel_turbulence_losses_df = pd.DataFrame([
+        {"Aspecto solicitado": "Consideración de turbulencia", "Tratamiento en esta versión": f"Declaración técnica + proxy de variabilidad temporal si existe {scada_source_label}", "Valor / criterio": f"{entel_num_es(turbulence_proxy, 1)}% proxy σ/μ" if np.isfinite(turbulence_proxy) else "Requiere TI o serie de alta frecuencia del estudio mandante", "Impacto en EYA": "Puede reducir producción efectiva y aumentar cargas/fatiga; debe validarse con IEC/sitio."},
+        {"Aspecto solicitado": "Pérdidas mecánicas", "Tratamiento en esta versión": "Eficiencias de rodamientos, caja/transmisión y tren mecánico", "Valor / criterio": f"η_mec={entel_num_es(eta_mec, 3)}; η_rodamientos={entel_num_es(eta_bear, 3)}; η_caja={entel_num_es(eta_gear, 3)}", "Impacto en EYA": "Castigan la energía entre rotor y generador."},
+        {"Aspecto solicitado": "Pérdidas eléctricas", "Tratamiento en esta versión": "Eficiencia electrónica/inversor y curva de generador", "Valor / criterio": f"η_elec={entel_num_es(eta_elec, 3)}", "Impacto en EYA": "Castigan salida útil AC/DC y definen sensibilidad eléctrica."},
+        {"Aspecto solicitado": "Clipping / control", "Tratamiento en esta versión": "Limitación por potencia nominal y ventana cut-in/cut-out", "Valor / criterio": f"P_nom={entel_num_es(entel_p_nom_kw, 1)} kW; cut-in={entel_num_es(entel_v_cut_in, 1)}; cut-out={entel_num_es(entel_v_cut_out, 1)} m/s", "Impacto en EYA": "Evita sobrepotencia pero reduce energía en vientos altos."},
+        {"Aspecto solicitado": "Disponibilidad", "Tratamiento en esta versión": "Disponibilidad mínima RFP", "Valor / criterio": f"{entel_num_es(entel_availability * 100, 1)}%", "Impacto en EYA": "Transforma P50 técnico en P50 neto disponible."},
+    ])
+
+    entel_wind_distribution_plot_df = entel_wind_distribution_df.copy()
+    entel_wind_distribution_plot_df["Bin viento [m/s]"] = (
+        entel_wind_distribution_plot_df["Bin viento [m/s]"]
+        .astype(str)
+        .str.replace("-", " a ", regex=False)
+    )
+    entel_wind_distribution_fig = make_subplots(
+        rows=2,
+        cols=1,
+        shared_xaxes=True,
+        vertical_spacing=0.16,
+        subplot_titles=("Frecuencia anual del viento por bin", "Energía anual aportada por bin"),
+    )
+    entel_wind_distribution_fig.add_trace(
+        go.Bar(
+            x=entel_wind_distribution_plot_df["Bin viento [m/s]"],
+            y=entel_wind_distribution_plot_df["Horas/año"],
+            name="Horas/año",
+            marker_color="#2f5f73",
+            text=entel_wind_distribution_plot_df["Probabilidad [%]"],
+            texttemplate="%{text:.1f}%",
+            textposition="outside",
+            cliponaxis=False,
+            hovertemplate="Bin %{x} m/s<br>Horas: %{y:,.0f}<br>Probabilidad: %{text:.2f}%<extra></extra>",
+        ),
+        row=1,
+        col=1,
+    )
+    entel_wind_distribution_fig.add_trace(
+        go.Bar(
+            x=entel_wind_distribution_plot_df["Bin viento [m/s]"],
+            y=entel_wind_distribution_plot_df["Energía bin [kWh/año]"],
+            name="Energía bin",
+            marker_color="#c47a3c",
+            text=entel_wind_distribution_plot_df["Potencia media bin [kW]"],
+            texttemplate="%{text:.2f} kW",
+            textposition="outside",
+            cliponaxis=False,
+            hovertemplate="Bin %{x} m/s<br>Energía: %{y:,.0f} kWh/año<br>Potencia media bin: %{text:.3f} kW<extra></extra>",
+        ),
+        row=2,
+        col=1,
+    )
+    entel_wind_distribution_fig.update_layout(
+        title="Distribución estadística del viento y contribución energética por bin",
+        xaxis2_title="Bin de velocidad [m/s]",
+        yaxis=dict(title="Horas/año"),
+        yaxis2=dict(title="kWh/año"),
+        legend_title=None,
+        height=640,
+        bargap=0.24,
+    )
+    entel_wind_distribution_fig.update_xaxes(type="category", tickangle=0)
+
+    entel_yield_sensitivity_fig = px.bar(
+        entel_yield_sensitivity_df,
+        x="Caso",
+        y="AEP [kWh/año]",
+        color="Familia",
+        color_discrete_map=entel_color_map,
+        text="Factor planta [%]",
+        title="EYA 3.2: P50 técnico y sensibilidades de factor de planta",
+    )
+    entel_yield_sensitivity_fig.update_traces(texttemplate="%{text:.1f}% FP", textposition="outside", cliponaxis=False)
+    entel_yield_sensitivity_fig.update_layout(xaxis_title="", yaxis_title="AEP [kWh/año]", legend_title=None)
+
+    entel_assumptions_df = pd.DataFrame([
+        {"Supuesto requerido RFP": "Curva de potencia utilizada", "Valor declarado": entel_curve_source, "Criterio técnico del oferente": f"Fuente usada para cálculos Entel: {entel_curve_source_detail}"},
+        {"Supuesto requerido RFP": "Altura de instalación considerada", "Valor declarado": entel_num_es(entel_installation_height_m, 1, " m"), "Criterio técnico del oferente": f"Altura de instalación Entel independiente del panel. Área barrida calculada con D={entel_num_es(entel_D_m, 1)} m y H rotor={entel_num_es(entel_H_m, 1)} m."},
+        {"Supuesto requerido RFP": "Factores de corrección", "Valor declarado": f"Densidad {entel_num_es(rho, 3)} kg/m³, Weibull k={entel_num_es(k_energy, 2)}, c={entel_num_es(c_energy, 2)} m/s", "Criterio técnico del oferente": "Incluye recurso activo y condiciones configuradas para la evaluación de producción."},
+        {"Supuesto requerido RFP": "Pérdidas eléctricas", "Valor declarado": f"η_elec={entel_num_es(eta_elec, 3)}", "Criterio técnico del oferente": "Incluye electrónica de conversión según modelo actual."},
+        {"Supuesto requerido RFP": "Pérdidas mecánicas", "Valor declarado": f"η_mec={entel_num_es(eta_mec, 3)}; η_rodamientos={entel_num_es(eta_bear, 3)}; η_caja={entel_num_es(eta_gear, 3)}", "Criterio técnico del oferente": "Pérdidas de transmisión desde rotor hacia generador."},
+        {"Supuesto requerido RFP": "Pérdidas por disponibilidad", "Valor declarado": f"{entel_num_es((1.0 - entel_availability) * 100, 1)}% de indisponibilidad", "Criterio técnico del oferente": "Se aplica disponibilidad considerada de 95%."},
+    ])
+
+    entel_performance_curve_df = entel_curve_df[[
+        col for col in [
+            "v (m/s)", "P_aero (kW)", "P_mec_gen (kW)", "P_el (kW)", "P_out (clip) kW",
+            "Cp_el_equiv", "rpm_rotor", "rpm_gen", "I_est (A)", "Estado curva URL"
+        ]
+        if col in entel_curve_df.columns
+    ]].copy()
+
+    loss_mechanical = max(aep_aero_kwh - aep_mec_kwh, 0.0) if np.isfinite(aep_aero_kwh) and np.isfinite(aep_mec_kwh) else 0.0
+    loss_electrical = max(aep_mec_kwh - aep_elec_kwh, 0.0) if np.isfinite(aep_mec_kwh) and np.isfinite(aep_elec_kwh) else 0.0
+    loss_clipping = max(aep_elec_kwh - aep_net_kwh, 0.0) if np.isfinite(aep_elec_kwh) and np.isfinite(aep_net_kwh) else 0.0
+    loss_availability = entel_AEP_kWh * (1.0 - entel_availability) if np.isfinite(entel_AEP_kWh) else 0.0
+    waterfall_values = [
+        aep_aero_kwh,
+        -loss_mechanical,
+        -loss_electrical,
+        -loss_clipping,
+        -loss_availability,
+        0,
+    ]
+    waterfall_labels = [
+        "Energía bruta",
+        "Pérdida mecánica",
+        "Pérdida eléctrica",
+        "Clipping",
+        "Disponibilidad",
+        "Energía neta",
+    ]
+    waterfall_custom = np.array([
+        [aep_aero_kwh, 0.0],
+        [aep_mec_kwh, loss_mechanical],
+        [aep_elec_kwh, loss_electrical],
+        [aep_net_kwh, loss_clipping],
+        [aep_with_availability, loss_availability],
+        [aep_with_availability, 0.0],
+    ], dtype=float)
+    waterfall_text = [
+        entel_int_es(aep_aero_kwh, " kWh"),
+        f"-{entel_int_es(loss_mechanical, ' kWh')}",
+        f"-{entel_int_es(loss_electrical, ' kWh')}",
+        f"-{entel_int_es(loss_clipping, ' kWh')}",
+        f"-{entel_int_es(loss_availability, ' kWh')}",
+        entel_int_es(aep_with_availability, " kWh"),
+    ]
+    waterfall_max = max(
+        [
+            value
+            for value in [aep_aero_kwh, aep_mec_kwh, aep_elec_kwh, aep_net_kwh, aep_with_availability]
+            if np.isfinite(value)
+        ] or [1.0]
+    )
+    entel_energy_waterfall_fig = go.Figure(go.Waterfall(
+        name="Balance energético",
+        orientation="v",
+        measure=["absolute", "relative", "relative", "relative", "relative", "total"],
+        x=waterfall_labels,
+        y=waterfall_values,
+        text=waterfall_text,
+        textposition="outside",
+        textfont=dict(size=13, color="#1f2a3a"),
+        cliponaxis=False,
+        customdata=waterfall_custom,
+        decreasing={"marker": {"color": entel_color_map["Pérdida"]}},
+        increasing={"marker": {"color": entel_color_map["Potencia aerodinámica [kW]"]}},
+        totals={"marker": {"color": entel_color_map["Energía neta"]}},
+        connector={"line": {"color": "rgba(79,90,105,0.50)", "width": 1.5}},
+        hovertemplate=(
+            "<b>%{x}</b><br>"
+            "Movimiento: %{y:,.1f} kWh/año<br>"
+            "Energía después de etapa: %{customdata[0]:,.1f} kWh/año<br>"
+            "Pérdida etapa: %{customdata[1]:,.1f} kWh/año"
+            "<extra></extra>"
+        ),
+    ))
+    entel_energy_waterfall_fig.update_layout(
+        title="Balance anual de energía: desde recurso bruto hasta energía neta disponible",
+        yaxis_title="kWh/año",
+        showlegend=False,
+        height=520,
+        bargap=0.28,
+        hoverlabel=dict(bgcolor="#ffffff", bordercolor="#d7dee8", font_size=13, font_color="#1f2a3a"),
+    )
+    entel_energy_waterfall_fig.update_yaxes(range=[0, waterfall_max * 1.22], tickformat=",.0f")
+    entel_energy_waterfall_fig.update_xaxes(tickangle=0, automargin=True)
+
+    entel_cp_fig = px.line(
+        entel_performance_curve_df,
+        x="v (m/s)",
+        y=[col for col in ["P_out (clip) kW", "Cp_el_equiv"] if col in entel_performance_curve_df.columns],
+        color_discrete_map=entel_color_map,
+        markers=True,
+        title="Curva certificable usada en simulación: potencia neta y Cp equivalente",
+    )
+    entel_cp_fig.update_layout(xaxis_title="Velocidad de viento [m/s]", yaxis_title="Valor", legend_title=None)
+
+    entel_aero_operating_df = pd.DataFrame([
+        {"Parámetro solicitado": "Velocidad de arranque (cut-in)", "Valor": entel_v_cut_in, "Unidad": "m/s", "Criterio técnico del oferente": "Inicio de producción útil; bajo cut-in la turbina permanece disponible sin inyección."},
+        {"Parámetro solicitado": "Velocidad nominal", "Valor": entel_v_rated, "Unidad": "m/s", "Criterio técnico del oferente": "Punto de transición hacia potencia limitada y control de carga."},
+        {"Parámetro solicitado": "Velocidad máxima de operación", "Valor": entel_v_cut_out, "Unidad": "m/s", "Criterio técnico del oferente": "Límite operativo previo a estrategia de parada segura según curva URL."},
+        {"Parámetro solicitado": "Velocidad de corte (cut-out)", "Valor": entel_v_cut_out, "Unidad": "m/s", "Criterio técnico del oferente": "Sobre este umbral no se considera producción y debe dominar protección estructural."},
+        {"Parámetro solicitado": "Cp máximo eléctrico equivalente", "Valor": float(np.nanmax(entel_curve_df["Cp_el_equiv"])) if "Cp_el_equiv" in entel_curve_df.columns else np.nan, "Unidad": "-", "Criterio técnico del oferente": "Eficiencia global viento a salida AC; revisar que no se logre a costa de sobrecarga."},
+        {"Parámetro solicitado": "Cp a velocidad nominal", "Valor": float(np.interp(entel_v_rated, entel_curve_df["v (m/s)"], entel_curve_df["Cp_el_equiv"])) if "Cp_el_equiv" in entel_curve_df.columns else np.nan, "Unidad": "-", "Criterio técnico del oferente": "Eficiencia esperada en el punto de diseño declarado."},
+        {"Parámetro solicitado": "Potencia neta a velocidad nominal", "Valor": float(np.interp(entel_v_rated, entel_curve_df["v (m/s)"], entel_curve_df["P_out (clip) kW"])) if "P_out (clip) kW" in entel_curve_df.columns else np.nan, "Unidad": "kW", "Criterio técnico del oferente": "Debe ser consistente con la potencia nominal ofertada y la curva certificada."},
+    ])
+
+    entel_aero_curve_df = entel_curve_df[[
+        col for col in [
+            "v (m/s)", "P_out (clip) kW", "P_aero (kW)", "Cp(λ_efectiva)", "Cp_aero_equiv",
+            "Cp_el_equiv", "λ_efectiva", "U_tip (m/s)", "rpm_rotor", "a_cen (g)",
+            "f_1P (Hz)", "f_3P (Hz)", "Lw (dB)", "Lp_obs (dB)", "Estado curva URL"
+        ]
+        if col in entel_curve_df.columns
+    ]].copy()
+
+    entel_aero_stability_df = pd.DataFrame([
+        {"Criterio valorado": "Bajo nivel de vibración", "Indicador usado": "Frecuencias 1P/3P, aceleración centrípeta y rpm", "Resultado modelo": f"f_1P máx {entel_num_es(np.nanmax(df['f_1P (Hz)']), 2)} Hz; f_3P máx {entel_num_es(np.nanmax(df['f_3P (Hz)']), 2)} Hz" if "f_1P (Hz)" in df.columns and "f_3P (Hz)" in df.columns else "No disponible", "Criterio técnico del oferente": "Cruzar estas bandas con modos propios de mástil, struts y fundación antes de liberar fabricación."},
+        {"Criterio valorado": "Bajo nivel de ruido", "Indicador usado": "Lp_obs y velocidad de punta", "Resultado modelo": f"Lp_obs máx {entel_num_es(np.nanmax(df['Lp_obs (dB)']), 1)} dB; U_tip máx {entel_num_es(np.nanmax(df['U_tip (m/s)']), 1)} m/s" if "Lp_obs (dB)" in df.columns and "U_tip (m/s)" in df.columns else "No disponible", "Criterio técnico del oferente": "La aceptabilidad depende de distancia al receptor y norma/criterio acústico del sitio."},
+        {"Criterio valorado": "Operación estable urbana/semiurbana", "Indicador usado": "Cut-in bajo, control de rpm, potencia limitada y margen de cut-out", "Resultado modelo": f"Ventana útil {entel_num_es(entel_v_cut_in, 1)}-{entel_num_es(entel_v_cut_out, 1)} m/s; rated {entel_num_es(entel_v_rated, 1)} m/s", "Criterio técnico del oferente": "La curva debe subir de forma progresiva y limitar potencia sin saltos abruptos de rpm o corriente."},
+    ])
+
+    entel_aero_power_fig = px.line(
+        entel_aero_curve_df,
+        x="v (m/s)",
+        y=[col for col in ["P_out (clip) kW", "P_aero (kW)"] if col in entel_aero_curve_df.columns],
+        color_discrete_map=entel_color_map,
+        markers=True,
+        title="Desempeño aerodinámico: curva de potencia ofertada",
+    )
+    entel_aero_power_fig.update_layout(xaxis_title="Velocidad de viento [m/s]", yaxis_title="Potencia [kW]", legend_title=None)
+    for x_val, label in [(entel_v_cut_in, "cut-in"), (entel_v_rated, "nominal"), (entel_v_cut_out, "cut-out")]:
+        if np.isfinite(x_val):
+            entel_aero_power_fig.add_vline(x=float(x_val), line_dash="dot", annotation_text=label)
+
+    entel_aero_cp_fig = px.line(
+        entel_aero_curve_df,
+        x="v (m/s)",
+        y=[col for col in ["Cp(λ_efectiva)", "Cp_aero_equiv", "Cp_el_equiv"] if col in entel_aero_curve_df.columns],
+        color_discrete_map=entel_color_map,
+        markers=True,
+        title="Coeficiente de potencia Cp por velocidad de viento",
+    )
+    entel_aero_cp_fig.update_layout(xaxis_title="Velocidad de viento [m/s]", yaxis_title="Cp [-]", legend_title=None)
+
+    entel_aero_energy_fig = px.bar(
+        entel_mean_wind_df,
+        x="Viento medio [m/s]",
+        y="AEP estimado [kWh/año]",
+        color_discrete_sequence=[entel_color_map["Energía bin"]],
+        text="Factor planta [%]",
+        title="Producción anual estimada para 4, 5, 6, 7 y 8 m/s",
+    )
+    entel_aero_energy_fig.update_traces(texttemplate="%{text:.1f}% FP", textposition="outside")
+    entel_aero_energy_fig.update_layout(xaxis_title="Viento medio [m/s]", yaxis_title="AEP [kWh/año]")
+
+    entel_aero_stability_fig = px.line(
+        entel_aero_curve_df,
+        x="v (m/s)",
+        y=[col for col in ["U_tip (m/s)", "f_1P (Hz)", "f_3P (Hz)", "Lp_obs (dB)"] if col in entel_aero_curve_df.columns],
+        color_discrete_map=entel_color_map,
+        markers=True,
+        title="Indicadores de ruido, vibración y estabilidad operativa",
+    )
+    entel_aero_stability_fig.update_layout(xaxis_title="Velocidad de viento [m/s]", yaxis_title="Indicador", legend_title=None)
+
+    entel_electrical_specs_df = pd.DataFrame([
+        {"Requisito Entel": "Tensión nominal de salida", "Valor declarado": f"{entel_int_es(GEN['V_LL_nom'])} Vac L-L" if "GEN" in globals() else "A definir", "Base técnica verificable": "Ficha del generador seleccionado y curva V_LL vs rpm", "Criterio técnico del oferente": "Debe coordinarse con rectificador/inversor, protecciones y tensión de acoplamiento del sitio."},
+        {"Requisito Entel": "Frecuencia", "Valor declarado": "50 Hz en salida AC del inversor; frecuencia eléctrica variable en generador", "Base técnica verificable": f"f_e máx modelo {entel_num_es(np.nanmax(df['f_e (Hz)']), 1)} Hz" if "f_e (Hz)" in df.columns else "Modelo eléctrico", "Criterio técnico del oferente": "El inversor desacopla la frecuencia variable del generador de la frecuencia AC del sitio."},
+        {"Requisito Entel": "Tipo de inversor", "Valor declarado": "Inversor eólico/híbrido con rectificación, MPPT, anti-isla y comunicación SCADA", "Base técnica verificable": "Arquitectura recomendada para on-grid/off-grid", "Criterio técnico del oferente": "Debe aceptar bus DC, rango de tensión, corriente térmica y estrategia de frenado."},
+        {"Requisito Entel": "Compatibilidad on-grid", "Valor declarado": "Compatible con on-grid sujeto a anti-isla, PF, THD, protecciones y código de red", "Base técnica verificable": f"PF {entel_num_es(pf_setpoint, 2)}; THD {entel_num_es(thd_cap_pct, 1)}% estimada", "Criterio técnico del oferente": "Requiere estudio de protecciones, seccionamiento, sincronismo y coordinación con red existente."},
+        {"Requisito Entel": "Compatibilidad off-grid", "Valor declarado": "Compatible con off-grid/híbrido sujeto a controlador DC, baterías/BMS y dump load/freno", "Base técnica verificable": f"Bus DC nominal {entel_int_es(V_dc_nom)} V; corriente DC nominal {entel_int_es(I_dc_nom)} A", "Criterio técnico del oferente": "Debe validarse con perfil de carga telecom, baterías y lógica de prioridad energética."},
+    ])
+
+    entel_electrical_curve_df = entel_curve_df[[
+        col for col in [
+            "v (m/s)", "rpm_gen", "V_LL (V)", "V_LL (Ke) [V]", "f_e (Hz)", "I_est (A)",
+            "P_mec_gen (kW)", "P_el (kW)", "P_out (clip) kW", "η_gen (curve)", "Duty_DC (%)"
+        ]
+        if col in entel_curve_df.columns
+    ]].copy()
+
+    entel_electrical_limits_df = pd.DataFrame([
+        {"Indicador": "Tensión nominal generador", "Valor modelo": GEN["V_LL_nom"] if "GEN" in globals() else np.nan, "Límite/referencia": GEN["V_LL_nom"] if "GEN" in globals() else np.nan, "Unidad": "Vac L-L", "Criterio técnico del oferente": "Nivel nominal para coordinación de rectificador e inversor."},
+        {"Indicador": "Tensión máxima curva V_LL", "Valor modelo": float(np.nanmax(df["V_LL (V)"])) if "V_LL (V)" in df.columns else np.nan, "Límite/referencia": GEN["V_LL_nom"] if "GEN" in globals() else np.nan, "Unidad": "Vac L-L", "Criterio técnico del oferente": "Verifica rango de entrada AC/DC y margen de aislamiento."},
+        {"Indicador": "Frecuencia eléctrica máxima generador", "Valor modelo": float(np.nanmax(df["f_e (Hz)"])) if "f_e (Hz)" in df.columns else np.nan, "Límite/referencia": 50.0, "Unidad": "Hz", "Criterio técnico del oferente": "Frecuencia interna del generador; salida a sitio debe ser 50 Hz mediante inversor."},
+        {"Indicador": "Corriente estimada máxima", "Valor modelo": max_I_est, "Límite/referencia": GDG_RATED_I, "Unidad": "A", "Criterio técnico del oferente": "Dimensiona cables, breaker, térmica de inversor y márgenes de generador."},
+        {"Indicador": "Corriente térmica inversor", "Valor modelo": I_inv_thermal_A, "Límite/referencia": max_I_est, "Unidad": "A", "Criterio técnico del oferente": "Debe exceder corriente RMS continua esperada con margen."},
+        {"Indicador": "Factor de potencia operativo", "Valor modelo": pf_setpoint, "Límite/referencia": pf_min_grid, "Unidad": "-", "Criterio técnico del oferente": "Requisito típico de interconexión y penalizaciones por reactivos."},
+        {"Indicador": "THD estimada", "Valor modelo": thd_cap_pct, "Límite/referencia": thd_req_pct, "Unidad": "%", "Criterio técnico del oferente": "Evalúa necesidad de filtro LCL y calidad de onda."},
+        {"Indicador": "Duty bus DC máximo", "Valor modelo": float(np.nanmax(df["Duty_DC (%)"])) if "Duty_DC (%)" in df.columns else np.nan, "Límite/referencia": 100.0, "Unidad": "%", "Criterio técnico del oferente": "Margen de utilización energética del bus DC."},
+    ])
+    entel_electrical_limits_df["Margen [%]"] = np.where(
+        pd.to_numeric(entel_electrical_limits_df["Límite/referencia"], errors="coerce") > 0,
+        (
+            pd.to_numeric(entel_electrical_limits_df["Límite/referencia"], errors="coerce")
+            - pd.to_numeric(entel_electrical_limits_df["Valor modelo"], errors="coerce")
+        )
+        / pd.to_numeric(entel_electrical_limits_df["Límite/referencia"], errors="coerce")
+        * 100.0,
+        np.nan,
+    )
+
+    entel_grid_modes_df = pd.DataFrame([
+        {"Modo": "On-grid", "Compatibilidad": "Sí, condicionada", "Elementos requeridos": "Inversor on-grid, anti-isla, seccionamiento, protecciones AC/DC, PF/THD dentro de norma, puesta a tierra", "Riesgo a cerrar": "Coordinación con red existente, selectividad de protecciones y permisos de conexión."},
+        {"Modo": "Off-grid", "Compatibilidad": "Sí, condicionada", "Elementos requeridos": "Controlador DC, banco de baterías, BMS, dump load/freno, lógica de carga prioritaria, protecciones DC", "Riesgo a cerrar": "Estabilidad del bus, absorción de excedentes y compatibilidad con cargas telecom."},
+        {"Modo": "Híbrido", "Compatibilidad": "Recomendado para piloto", "Elementos requeridos": "Inversor híbrido o arquitectura rectificador + bus DC + inversor, SCADA y control de disponibilidad", "Riesgo a cerrar": "Definir interfaz exacta con energía existente, baterías y monitoreo Entel."},
+    ])
+
+    entel_electrical_closing_df = pd.DataFrame([
+        {"Punto solicitado": "Compatibilidad con bancos de baterías", "Declaración técnica": "Compatible en arquitectura off-grid/híbrida mediante bus DC, controlador de carga, BMS y protecciones DC coordinadas.", "Parámetro de referencia": f"Bus DC nominal {entel_int_es(V_dc_nom)} V; I_dc nominal {entel_int_es(I_dc_nom)} A", "Condición para oferta": "Definir tensión del banco, química, BMS, potencia de carga/descarga, límites SOC y lógica de prioridad con la carga telecom."},
+        {"Punto solicitado": "Rendimiento del inversor", "Declaración técnica": "El rendimiento del inversor/electrónica queda representado por la eficiencia electrónica configurada y debe respaldarse con curva del fabricante.", "Parámetro de referencia": f"η_elec configurada {entel_num_es(eta_elec, 3)}; η_gen máx {entel_num_es(eta_gen_max, 3)}", "Condición para oferta": "Adjuntar curva de eficiencia vs carga y confirmar rendimiento ponderado en la ventana de operación del sitio."},
+        {"Punto solicitado": "Protección anti-isla", "Declaración técnica": "Requerida para operación on-grid; debe venir integrada en el inversor o en relé externo certificado.", "Parámetro de referencia": f"PF operativo {entel_num_es(pf_setpoint, 2)}; THD estimada {entel_num_es(thd_cap_pct, 1)}%", "Condición para oferta": "Declarar norma/certificación del equipo, tiempos de despeje, umbrales V/f y procedimiento de prueba SAT."},
+        {"Punto solicitado": "Sistema de puesta a tierra", "Declaración técnica": "Debe integrar puesta a tierra de generador, inversor, mástil, tablero, SPD y protección contra descargas atmosféricas.", "Parámetro de referencia": "Malla/tierra del sitio + coordinación AC/DC + protección atmosférica", "Condición para oferta": "Entregar esquema de tierra, criterios de equipotencialidad, SPD, conductor PE y puntos de medición/ensayo."},
+    ])
+
+    entel_voltage_fig = px.line(
+        entel_electrical_curve_df,
+        x="v (m/s)",
+        y=[col for col in ["V_LL (V)", "V_LL (Ke) [V]", "f_e (Hz)"] if col in entel_electrical_curve_df.columns],
+        color_discrete_map=entel_color_map,
+        markers=True,
+        title="Tensión y frecuencia eléctrica del generador",
+    )
+    entel_voltage_fig.update_layout(xaxis_title="Velocidad de viento [m/s]", yaxis_title="V / Hz", legend_title=None)
+
+    entel_current_fig = px.line(
+        entel_electrical_curve_df,
+        x="v (m/s)",
+        y=[col for col in ["I_est (A)", "Duty_DC (%)"] if col in entel_electrical_curve_df.columns],
+        color_discrete_map=entel_color_map,
+        markers=True,
+        title="Corriente estimada y utilización del bus DC",
+    )
+    entel_current_fig.update_layout(xaxis_title="Velocidad de viento [m/s]", yaxis_title="A / %", legend_title=None)
+    if np.isfinite(GDG_RATED_I) and GDG_RATED_I > 0:
+        entel_current_fig.add_hline(y=float(GDG_RATED_I), line_dash="dot", annotation_text="I_nom generador")
+    if np.isfinite(I_inv_thermal_A):
+        entel_current_fig.add_hline(y=float(I_inv_thermal_A), line_dash="dash", annotation_text="I térmica inversor")
+
+    entel_power_elec_fig = px.line(
+        entel_electrical_curve_df,
+        x="v (m/s)",
+        y=[col for col in ["P_mec_gen (kW)", "P_out (clip) kW", "η_gen (curve)"] if col in entel_electrical_curve_df.columns],
+        color_discrete_map=entel_color_map,
+        markers=True,
+        title="Potencia mecánica, salida neta URL y eficiencia de generador",
+    )
+    entel_power_elec_fig.update_layout(xaxis_title="Velocidad de viento [m/s]", yaxis_title="kW / eficiencia", legend_title=None)
+
+    entel_electrical_chart_colors = [
+        entel_color_map["P_mec_gen (kW)"],
+        entel_color_map["P_out (clip) kW"],
+        entel_color_map["P_el (kW)"],
+        entel_color_map["Cp_el_equiv"],
+        entel_color_map["Energía bin"],
+        entel_color_map["Disponibilidad"],
+        entel_color_map["Duty_DC (%)"],
+    ]
+
+    def style_entel_electrical_fig(fig, height: int = 430, add_wind_refs: bool = True):
+        for trace in fig.data:
+            trace_type = getattr(trace, "type", "")
+            trace_name = str(getattr(trace, "name", "") or "")
+            mapped_color = entel_color_map.get(trace_name)
+            if trace_type == "scatter":
+                line_style = dict(color=mapped_color or getattr(getattr(trace, "line", None), "color", None), width=3)
+                trace.line = line_style
+                trace.marker = dict(
+                    size=7,
+                    color=mapped_color or getattr(getattr(trace, "marker", None), "color", None),
+                    symbol="circle",
+                    line=dict(width=1.2, color="#ffffff"),
+                )
+            elif trace_type == "bar":
+                if mapped_color:
+                    trace.marker.color = mapped_color
+                trace.marker.line = dict(width=1.1, color="#ffffff")
+            elif trace_type == "waterfall":
+                trace.connector = dict(line=dict(color="rgba(79,90,105,0.35)", width=1))
+            elif hasattr(trace, "line"):
+                trace.line = dict(color=mapped_color or getattr(getattr(trace, "line", None), "color", None), width=3)
+        fig.update_layout(
+            template="plotly_white",
+            height=height,
+            colorway=entel_electrical_chart_colors,
+            separators=",.",
+            font=dict(family="Inter, Arial, sans-serif", color="#1f2933", size=12),
+            title=dict(font=dict(size=17, color="#243447"), x=0.01, xanchor="left"),
+            margin=dict(l=58, r=34, t=76, b=128),
+            plot_bgcolor="#fbfcfd",
+            paper_bgcolor="#ffffff",
+            hovermode="x unified",
+            legend=dict(
+                orientation="h",
+                yanchor="top",
+                y=-0.24,
+                xanchor="center",
+                x=0.5,
+                bgcolor="rgba(255,255,255,0.84)",
+                bordercolor="rgba(79,90,105,0.16)",
+                borderwidth=1,
+            ),
+            xaxis=dict(
+                showgrid=True,
+                gridcolor="rgba(79,90,105,0.13)",
+                zeroline=False,
+                linecolor="rgba(79,90,105,0.35)",
+                ticks="outside",
+            ),
+            yaxis=dict(
+                showgrid=True,
+                gridcolor="rgba(79,90,105,0.13)",
+                zeroline=False,
+                linecolor="rgba(79,90,105,0.35)",
+                ticks="outside",
+            ),
+        )
+        if add_wind_refs:
+            for x_val, label in [(entel_v_cut_in, "cut-in"), (entel_v_rated, "nominal"), (entel_v_cut_out, "cut-out")]:
+                if np.isfinite(x_val):
+                    fig.add_vline(
+                        x=float(x_val),
+                        line_width=1.1,
+                        line_dash="dot",
+                        line_color="rgba(79,90,105,0.45)",
+                        annotation_text=label,
+                        annotation_font_size=10,
+                        annotation_font_color="#4f5a69",
+                    )
+        return fig
+
+    entel_voltage_fig = style_entel_electrical_fig(entel_voltage_fig, height=420)
+    entel_current_fig = style_entel_electrical_fig(entel_current_fig, height=420)
+    entel_power_elec_fig = style_entel_electrical_fig(entel_power_elec_fig, height=450)
+
+    def entel_electrical_table_style(styler):
+        return styler.set_table_styles([
+            {"selector": "thead th", "props": [
+                ("background-color", "#263447"),
+                ("color", "#ffffff"),
+                ("font-weight", "800"),
+                ("border", "1px solid #d7dde4"),
+                ("text-align", "left"),
+                ("padding", "9px 10px"),
+            ]},
+            {"selector": "tbody td", "props": [
+                ("border", "1px solid #e2e7ed"),
+                ("padding", "9px 10px"),
+                ("vertical-align", "top"),
+                ("font-size", "12px"),
+                ("color", "#1f2933"),
+            ]},
+            {"selector": "tbody tr:nth-child(even)", "props": [("background-color", "#f7f9fb")]},
+            {"selector": "tbody tr:nth-child(odd)", "props": [("background-color", "#ffffff")]},
+        ]).set_properties(**{"white-space": "normal"})
+
+    def format_entel_display_table(
+        df_table: pd.DataFrame,
+        formats: dict[str, str] | None = None,
+        precision: int | None = None,
+    ) -> pd.DataFrame:
+        display_df = df_table.copy()
+        formats = formats or {}
+
+        def _format_cell(value, fmt: str | None):
+            if pd.isna(value):
+                return "-"
+            if fmt:
+                try:
+                    formatted = fmt.format(value)
+                    if isinstance(value, (int, float, np.integer, np.floating)):
+                        return formatted.replace(",", "§").replace(".", ",").replace("§", ".")
+                    return formatted
+                except (ValueError, TypeError):
+                    return str(value)
+            if precision is not None and isinstance(value, (int, float, np.integer, np.floating)):
+                return entel_num_es(value, precision)
+            if isinstance(value, (int, float, np.integer, np.floating)):
+                return entel_num_es(value, 3)
+            return str(value)
+
+        for col in display_df.columns:
+            fmt = formats.get(col)
+            display_df[col] = display_df[col].map(lambda value, fmt=fmt: _format_cell(value, fmt))
+        return display_df
+
+    def render_entel_fixed_table(df_table: pd.DataFrame, widths: list[int] | None = None) -> None:
+        widths = widths or [28, 46, 26]
+        column_count = len(df_table.columns)
+        if len(widths) < column_count:
+            widths = widths + [widths[-1]] * (column_count - len(widths))
+        elif len(widths) > column_count:
+            widths = widths[:column_count]
+        total_width = float(sum(widths)) if sum(widths) else 100.0
+        normalized_widths = [width / total_width * 100.0 for width in widths]
+        header_cells = "".join(
+            f'<th style="width:{normalized_widths[i]:.3f}%;">{escape(str(col))}</th>'
+            for i, col in enumerate(df_table.columns)
+        )
+        body_rows = []
+        for _, row in df_table.iterrows():
+            cells = "".join(f"<td>{escape(str(value))}</td>" for value in row)
+            body_rows.append(f"<tr>{cells}</tr>")
+        st.markdown(
+            f"""
+            <div class="entel-fixed-table-wrap">
+              <table class="entel-fixed-table">
+                <thead><tr>{header_cells}</tr></thead>
+                <tbody>{''.join(body_rows)}</tbody>
+              </table>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    entel_wind_distribution_fig = style_entel_electrical_fig(entel_wind_distribution_fig, height=640, add_wind_refs=False)
+    entel_wind_distribution_fig.update_layout(margin=dict(l=64, r=38, t=112, b=138))
+    entel_wind_distribution_fig.update_yaxes(rangemode="tozero", automargin=True)
+    entel_yield_sensitivity_fig = style_entel_electrical_fig(entel_yield_sensitivity_fig, height=600, add_wind_refs=False)
+    entel_yield_sensitivity_fig.update_layout(
+        margin=dict(l=64, r=38, t=104, b=196),
+        legend=dict(
+            orientation="h",
+            yanchor="top",
+            y=-0.36,
+            xanchor="center",
+            x=0.5,
+            bgcolor="rgba(255,255,255,0.88)",
+            bordercolor="rgba(79,90,105,0.16)",
+            borderwidth=1,
+        ),
+    )
+    entel_yield_sensitivity_fig.update_xaxes(tickangle=-20, automargin=True)
+    entel_yield_sensitivity_fig.update_yaxes(rangemode="tozero", automargin=True)
+    entel_month_fig = style_entel_electrical_fig(entel_month_fig, height=560, add_wind_refs=False)
+    entel_month_fig.update_layout(margin=dict(l=64, r=38, t=104, b=132), bargap=0.22)
+    entel_month_fig.update_yaxes(rangemode="tozero", automargin=True)
+    entel_energy_waterfall_fig = style_entel_electrical_fig(entel_energy_waterfall_fig, height=620, add_wind_refs=False)
+    entel_energy_waterfall_fig.update_layout(margin=dict(l=72, r=42, t=128, b=142))
+    entel_energy_waterfall_fig.update_yaxes(range=[0, waterfall_max * 1.24], automargin=True)
+    entel_power_fig = style_entel_electrical_fig(entel_power_fig, height=450)
+    entel_cp_fig = style_entel_electrical_fig(entel_cp_fig, height=430)
+    entel_aero_power_fig = style_entel_electrical_fig(entel_aero_power_fig, height=430, add_wind_refs=False)
+    entel_aero_cp_fig = style_entel_electrical_fig(entel_aero_cp_fig, height=430)
+    entel_aero_energy_fig = style_entel_electrical_fig(entel_aero_energy_fig, height=430, add_wind_refs=False)
+    entel_aero_stability_fig = style_entel_electrical_fig(entel_aero_stability_fig, height=430)
+
+    st.markdown(
+        """
+        <style>
+        .entel-eng-panel {
+            border: 1px solid rgba(79,90,105,0.18);
+            border-left: 6px solid var(--accent);
+            border-radius: 8px;
+            background:
+                linear-gradient(rgba(79,90,105,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(79,90,105,0.035) 1px, transparent 1px),
+                linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+            background-size: 22px 22px, 22px 22px, auto;
+            padding: 0.95rem 1.05rem;
+            margin: 0.35rem 0 1.0rem 0;
+            box-shadow: 0 10px 24px rgba(31,41,51,0.08);
+        }
+        .entel-eng-panel__eyebrow {
+            color: var(--accent);
+            font-size: 0.68rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+        .entel-eng-panel__title {
+            color: #1f2933;
+            font-size: 1.02rem;
+            font-weight: 850;
+            line-height: 1.22;
+        }
+        .entel-eng-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.78rem;
+            margin: 0.35rem 0 1.05rem 0;
+        }
+        .entel-eng-kpi-grid--three {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .entel-eng-kpi {
+            min-height: 106px;
+            border: 1px solid rgba(79,90,105,0.18);
+            border-top: 4px solid var(--accent);
+            border-radius: 8px;
+            background: linear-gradient(180deg, #ffffff 0%, #f7f9fb 100%);
+            padding: 0.78rem 0.82rem;
+            box-shadow: 0 8px 18px rgba(31,41,51,0.07);
+        }
+        .entel-eng-kpi__label {
+            color: #52606d;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.28rem;
+        }
+        .entel-eng-kpi__value {
+            color: #1f2933;
+            font-size: 1.34rem;
+            font-weight: 900;
+            line-height: 1.05;
+        }
+        .entel-eng-kpi__sub {
+            color: #6b7280;
+            font-size: 0.76rem;
+            line-height: 1.25;
+            margin-top: 0.35rem;
+        }
+        .entel-eng-section {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin: 1.15rem 0 0.55rem 0;
+            color: #1f2933;
+            font-size: 1.02rem;
+            font-weight: 900;
+        }
+        .entel-eng-section::before {
+            content: "";
+            width: 9px;
+            height: 26px;
+            border-radius: 3px;
+            background: linear-gradient(180deg, var(--accent), #d9a766);
+            display: inline-block;
+        }
+        .entel-fixed-table-wrap {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            margin: 0.15rem 0 1.0rem 0;
+            border: 1px solid rgba(79,90,105,0.18);
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 10px 24px rgba(31,41,51,0.07);
+        }
+        .entel-fixed-table {
+            width: 100%;
+            max-width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+            color: #1f2933;
+        }
+        .entel-fixed-table th {
+            background: #263447;
+            color: #ffffff;
+            font-weight: 850;
+            text-align: left;
+            padding: 0.62rem 0.7rem;
+            border-right: 1px solid rgba(255,255,255,0.16);
+            line-height: 1.22;
+            white-space: normal;
+            overflow-wrap: anywhere;
+        }
+        .entel-fixed-table td {
+            padding: 0.68rem 0.7rem;
+            border-top: 1px solid #e2e7ed;
+            border-right: 1px solid #e2e7ed;
+            vertical-align: top;
+            line-height: 1.32;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: normal;
+            hyphens: auto;
+        }
+        .entel-fixed-table tr:nth-child(even) td {
+            background: #f7f9fb;
+        }
+        .entel-fixed-table tr:nth-child(odd) td {
+            background: #ffffff;
+        }
+        @media (max-width: 900px) {
+            .entel-eng-kpi-grid,
+            .entel-eng-kpi-grid--three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .entel-fixed-table { font-size: 0.72rem; }
+            .entel-fixed-table th,
+            .entel-fixed-table td { padding: 0.52rem 0.48rem; }
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    tab_yield_entel, tab_sim_desempeno, tab_aero_entel, tab_electrical_entel = st.tabs([
+        "3.2 Estudio de Producción Energética y Factor de Planta",
+        "Simulador de desempeño",
+        "Desempeño aerodinámico",
+        "Características Eléctricas",
+    ])
+
+    with tab_yield_entel:
+        st.markdown("### 3.2 Estudio de Producción Energética y Factor de Planta")
+        st.markdown(
+            """
+            <div class="entel-eng-panel" style="--accent:#5f7f75;">
+              <div class="entel-eng-panel__eyebrow">Energy Yield Assessment</div>
+              <div class="entel-eng-panel__title">Producción energética, recurso eólico activo, P50 técnico y sensibilidades de factor de planta para evaluación Entel.</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            comment_box(
+                "Alcance del Energy Yield Assessment",
+                [
+                    comment_paragraph("Esta pestaña responde el punto 3.2 del RFP: estimar el desempeño energético de la turbina propuesta para el sitio definido por Entel usando el recurso eólico disponible, la distribución de velocidades y la curva de potencia de la oferta."),
+                    comment_paragraph("El resultado principal es el P50 técnico esperado y sus sensibilidades para disponibilidad, pérdidas eléctricas, incertidumbre del recurso, degradación y factor de planta. La lectura está ordenada para revisión de ingeniería de proyectos eólicos."),
+                ],
+            ),
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            f"""
+            <div class="entel-eng-kpi-grid">
+              <div class="entel-eng-kpi" style="--accent:#5f7f75;">
+                <div class="entel-eng-kpi__label">AEP P50 técnico</div>
+                <div class="entel-eng-kpi__value">{entel_int_es(entel_AEP_kWh, " kWh/año") if np.isfinite(entel_AEP_kWh) else "-"}</div>
+                <div class="entel-eng-kpi__sub">Caso central de producción energética esperada.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#2f5f73;">
+                <div class="entel-eng-kpi__label">Factor planta P50</div>
+                <div class="entel-eng-kpi__value">{entel_num_es(entel_CF * 100, 1, "%") if np.isfinite(entel_CF) else "-"}</div>
+                <div class="entel-eng-kpi__sub">Relación entre potencia media y potencia nominal.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#d9a766;">
+                <div class="entel-eng-kpi__label">Altura recurso</div>
+                <div class="entel-eng-kpi__value">{entel_num_es(entel_installation_height_m, 1, " m")}</div>
+                <div class="entel-eng-kpi__sub">Altura efectiva usada para extrapolación/cálculo.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#d95f5f;">
+                <div class="entel-eng-kpi__label">Weibull k / c</div>
+                <div class="entel-eng-kpi__value">{entel_num_es(k_energy, 2)} / {entel_num_es(c_energy, 2)}</div>
+                <div class="entel-eng-kpi__sub">Distribución estadística activa del sitio.</div>
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#5f7f75;">Información base entregada por el mandante</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(entel_yield_site_df, widths=[20, 21, 29, 30])
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#5f7f75;">Metodología utilizada</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(entel_yield_methodology_df, widths=[22, 52, 26])
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#5f7f75;">Resultados Energy Yield Assessment</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(entel_yield_assessment_df, formats={"Valor": "{:,.3f}"}),
+            widths=[28, 16, 14, 42],
+        )
+        st.plotly_chart(entel_wind_distribution_fig, use_container_width=True)
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#5f7f75;">P50 técnico y sensibilidades</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(
+                entel_yield_sensitivity_df,
+                formats={
+                    "AEP [kWh/año]": "{:,.1f}",
+                    "Factor planta [%]": "{:.2f}",
+                },
+            ),
+            widths=[11, 16, 15, 13, 11, 34],
+        )
+        st.plotly_chart(entel_yield_sensitivity_fig, use_container_width=True)
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#5f7f75;">Distribución estadística de velocidades</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(
+                entel_wind_distribution_df,
+                formats={
+                    "Probabilidad [%]": "{:.2f}",
+                    "Horas/año": "{:,.1f}",
+                    "Potencia media bin [kW]": "{:,.3f}",
+                    "Energía bin [kWh/año]": "{:,.1f}",
+                },
+            ),
+            widths=[19, 18, 18, 21, 24],
+        )
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#5f7f75;">Ajustes, extrapolaciones, turbulencia y pérdidas</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(entel_resource_summary_df.astype({"Valor": "string"}), widths=[24, 76])
+        render_entel_fixed_table(entel_turbulence_losses_df, widths=[16, 22, 25, 37])
+        st.markdown(
+            comment_box(
+                "Declaración técnica del oferente",
+                [
+                    comment_paragraph("La estimación de producción se basa en el recurso eólico cargado, la altura de instalación declarada para la oferta y la curva de potencia utilizada en el cálculo. La trazabilidad queda separada por origen del recurso, altura, distribución Weibull k/c y método de extrapolación."),
+                    comment_paragraph("Las sensibilidades presentadas cuantifican el impacto técnico de disponibilidad, pérdidas eléctricas, incertidumbre de recurso y degradación sobre el P50. Esto permite revisar el desempeño esperado y sus márgenes de riesgo de forma transparente."),
+                    comment_paragraph("La consideración de turbulencia se declara como supuesto de ingeniería y, cuando existe serie temporal, se incorpora un indicador de variabilidad del recurso. La validación final de cargas, vibración y fatiga debe quedar respaldada en los anexos técnicos de la oferta."),
+                ],
+            ),
+            unsafe_allow_html=True,
+        )
+
+    with tab_sim_desempeno:
+        st.markdown("### Simulación de Desempeño")
+        st.markdown(
+            """
+            <div class="entel-eng-panel" style="--accent:#2f5f73;">
+              <div class="entel-eng-panel__eyebrow">Simulador de desempeño</div>
+              <div class="entel-eng-panel__title">Balance energético mensual/anual, pérdidas por etapa, disponibilidad y curva certificable usada en la simulación.</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            comment_box(
+                "Alcance del cálculo de desempeño",
+                [
+                    comment_paragraph("La simulación consolida producción mensual, producción anual, potencia promedio, horas equivalentes, factor de planta, disponibilidad y pérdidas aplicadas para la turbina ofertada."),
+                    comment_paragraph(f"La curva `P_out (clip) kW` usada en el cálculo proviene de: {entel_curve_source}. La trazabilidad conserva origen de curva, bins de viento y supuestos energéticos asociados."),
+                ],
+            ),
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            f"""
+            <div class="entel-eng-kpi-grid entel-eng-kpi-grid--three">
+              <div class="entel-eng-kpi" style="--accent:#2f5f73;">
+                <div class="entel-eng-kpi__label">AEP esperado</div>
+                <div class="entel-eng-kpi__value">{entel_int_es(entel_AEP_kWh, " kWh/año") if np.isfinite(entel_AEP_kWh) else "-"}</div>
+                <div class="entel-eng-kpi__sub">Producción anual P50 técnico.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#84a9a4;">
+                <div class="entel-eng-kpi__label">Potencia promedio</div>
+                <div class="entel-eng-kpi__value">{entel_num_es(p_avg_kw, 2, " kW") if np.isfinite(p_avg_kw) else "-"}</div>
+                <div class="entel-eng-kpi__sub">Potencia equivalente sobre 8.760 h/año.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#d9a766;">
+                <div class="entel-eng-kpi__label">Factor planta</div>
+                <div class="entel-eng-kpi__value">{entel_num_es(entel_CF * 100, 1, "%") if np.isfinite(entel_CF) else "-"}</div>
+                <div class="entel-eng-kpi__sub">Relación producción nominal anual.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#6b7280;">
+                <div class="entel-eng-kpi__label">Horas equivalentes</div>
+                <div class="entel-eng-kpi__value">{entel_int_es(equivalent_hours, " h/año") if np.isfinite(equivalent_hours) else "-"}</div>
+                <div class="entel-eng-kpi__sub">AEP dividido por potencia nominal.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#d95f5f;">
+                <div class="entel-eng-kpi__label">Disponibilidad</div>
+                <div class="entel-eng-kpi__value">{entel_num_es(entel_availability * 100, 1, "%")}</div>
+                <div class="entel-eng-kpi__sub">Disponibilidad considerada en cálculo.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#5f7f75;">
+                <div class="entel-eng-kpi__label">AEP con disponibilidad</div>
+                <div class="entel-eng-kpi__value">{entel_int_es(aep_with_availability, " kWh/año") if np.isfinite(aep_with_availability) else "-"}</div>
+                <div class="entel-eng-kpi__sub">Producción neta con disponibilidad RFP.</div>
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#2f5f73;">Resultados mínimos exigidos por Entel</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(entel_performance_kpi_df, formats={"Valor": "{:,.2f}"}),
+            widths=[31, 16, 14, 39],
+        )
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#2f5f73;">Producción energética mensual esperada</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(
+                entel_monthly_df,
+                formats={
+                    "Producción esperada [kWh/mes]": "{:,.1f}",
+                    "Participación anual [%]": "{:.2f}",
+                    "Producción serie directa [kWh/periodo]": "{:,.1f}",
+                },
+            ),
+            widths=[10, 17, 13, 18, 42],
+        )
+        st.plotly_chart(entel_month_fig, use_container_width=True)
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#2f5f73;">Producción energética anual y pérdidas</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(
+                entel_losses_df,
+                formats={
+                    "Energía anual [kWh/año]": "{:,.1f}",
+                    "Pérdida aplicada [kWh/año]": "{:,.1f}",
+                    "Pérdida sobre aero [%]": "{:.2f}",
+                },
+            ),
+            widths=[15, 15, 15, 40, 15],
+        )
+        st.plotly_chart(entel_energy_waterfall_fig, use_container_width=True)
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#2f5f73;">Curva de potencia utilizada en la simulación</div>', unsafe_allow_html=True)
+        st.plotly_chart(entel_power_fig, use_container_width=True)
+        st.plotly_chart(entel_cp_fig, use_container_width=True)
+        render_entel_fixed_table(
+            format_entel_display_table(entel_performance_curve_df, precision=3),
+            widths=[7, 9, 10, 8, 16, 13, 7, 7, 7, 16],
+        )
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#2f5f73;">Supuestos de Cálculo</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(entel_assumptions_df, widths=[24, 28, 48])
+        st.markdown(
+            comment_box(
+                "Conclusiones técnicas del simulador",
+                [
+                    comment_paragraph("El AEP P50 técnico queda determinado por la curva de potencia declarada y la distribución Weibull activa del sitio; la trazabilidad del cálculo se mantiene separada entre recurso, curva, altura de instalación y disponibilidad."),
+                    comment_paragraph("El balance anual identifica la energía bruta, las pérdidas mecánicas, las pérdidas eléctricas, el clipping y la disponibilidad como etapas independientes; esta separación permite auditar el impacto energético de cada supuesto."),
+                    comment_paragraph("Las horas equivalentes y el factor de planta quedan definidos como indicadores de desempeño contractual de la oferta; ambos dependen de la producción neta anual y de la potencia nominal declarada en la curva Entel."),
+                ],
+            ),
+            unsafe_allow_html=True,
+        )
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#2f5f73;">Recurso usado para la simulación</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(entel_resource_summary_df.astype({"Valor": "string"}), widths=[28, 72])
+
+    with tab_aero_entel:
+        st.markdown("### 3.3 Desempeño Aerodinámico")
+        st.markdown(
+            """
+            <div class="entel-eng-panel" style="--accent:#d9a766;">
+              <div class="entel-eng-panel__eyebrow">Desempeño aerodinámico</div>
+              <div class="entel-eng-panel__title">Velocidades características, Cp, curva de potencia, producción a vientos medios y estabilidad operacional para revisión eólica.</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            comment_box(
+                "Alcance aerodinámico declarado",
+                [
+                    comment_paragraph("La sección documenta velocidades características, curva de potencia, coeficientes Cp y producción anual estimada para vientos medios entre 4 y 8 m/s."),
+                    comment_paragraph("El desempeño aerodinámico se presenta junto con indicadores de estabilidad, vibración y ruido para respaldar la consistencia técnica de la oferta."),
+                ],
+            ),
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            f"""
+            <div class="entel-eng-kpi-grid">
+              <div class="entel-eng-kpi" style="--accent:#5f7f75;">
+                <div class="entel-eng-kpi__label">Cut-in</div>
+                <div class="entel-eng-kpi__value">{entel_num_es(entel_v_cut_in, 1, " m/s")}</div>
+                <div class="entel-eng-kpi__sub">Inicio de producción útil.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#d9a766;">
+                <div class="entel-eng-kpi__label">Vel. nominal</div>
+                <div class="entel-eng-kpi__value">{entel_num_es(entel_v_rated, 1, " m/s")}</div>
+                <div class="entel-eng-kpi__sub">Punto de transición a control/limitación.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#d95f5f;">
+                <div class="entel-eng-kpi__label">Cut-out</div>
+                <div class="entel-eng-kpi__value">{entel_num_es(entel_v_cut_out, 1, " m/s")}</div>
+                <div class="entel-eng-kpi__sub">Umbral de parada segura por viento alto.</div>
+              </div>
+              <div class="entel-eng-kpi" style="--accent:#2f5f73;">
+                <div class="entel-eng-kpi__label">Cp_el máx</div>
+                <div class="entel-eng-kpi__value">{entel_num_es(float(np.nanmax(entel_curve_df['Cp_el_equiv'])), 3) if "Cp_el_equiv" in entel_curve_df.columns else "-"}</div>
+                <div class="entel-eng-kpi__sub">Eficiencia eléctrica equivalente máxima.</div>
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#d9a766;">Velocidades características y coeficiente de potencia</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(entel_aero_operating_df, formats={"Valor": "{:,.3f}"}),
+            widths=[28, 15, 13, 44],
+        )
+
+        aero_col1, aero_col2 = st.columns(2)
+        with aero_col1:
+            st.plotly_chart(entel_aero_power_fig, use_container_width=True)
+        with aero_col2:
+            st.plotly_chart(entel_aero_cp_fig, use_container_width=True)
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#d9a766;">Producción energética anual estimada por viento medio</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(
+                entel_mean_wind_df,
+                formats={
+                    "AEP estimado [kWh/año]": "{:,.1f}",
+                    "Potencia promedio [kW]": "{:,.3f}",
+                    "Factor planta [%]": "{:.2f}",
+                },
+            ),
+            widths=[18, 24, 22, 18, 18],
+        )
+        st.plotly_chart(entel_aero_energy_fig, use_container_width=True)
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#d9a766;">Ruido, vibración y estabilidad operacional</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(entel_aero_stability_df, widths=[18, 17, 21, 44])
+        st.plotly_chart(entel_aero_stability_fig, use_container_width=True)
+        st.markdown(
+            comment_box(
+                "Conclusiones aerodinámicas relevantes",
+                [
+                    comment_paragraph("La evaluación de vibración se resume mediante frecuencias 1P/3P, rpm y aceleración centrípeta; estos indicadores permiten identificar bandas críticas para validación estructural."),
+                    comment_paragraph("La evaluación acústica considera Lp_obs y velocidad de punta; ambos indicadores permiten revisar la aptitud de operación en entornos urbanos o semiurbanos."),
+                    comment_paragraph("La estabilidad operacional se verifica por continuidad de la curva de potencia entre cut-in, régimen nominal y cut-out, evitando saltos de rpm, corriente o carga."),
+                ],
+            ),
+            unsafe_allow_html=True,
+        )
+
+        st.markdown('<div class="entel-eng-section" style="--accent:#d9a766;">Tabla aerodinámica por bin de viento</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(entel_aero_curve_df, precision=3),
+            widths=[6, 7, 7, 6, 6, 6, 5, 6, 5, 5, 5, 5, 5, 5, 21],
+        )
+
+    with tab_electrical_entel:
+        st.markdown(
+            """
+            <style>
+            .entel-elec-panel {
+                border: 1px solid rgba(79,90,105,0.18);
+                border-left: 6px solid #2f5f73;
+                border-radius: 8px;
+                background:
+                    linear-gradient(rgba(79,90,105,0.035) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(79,90,105,0.035) 1px, transparent 1px),
+                    linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+                background-size: 22px 22px, 22px 22px, auto;
+                padding: 0.95rem 1.05rem;
+                margin: 0.35rem 0 1.0rem 0;
+                box-shadow: 0 10px 24px rgba(31,41,51,0.08);
+            }
+            .entel-elec-panel__eyebrow {
+                color: #2f5f73;
+                font-size: 0.68rem;
+                font-weight: 900;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                margin-bottom: 0.25rem;
+            }
+            .entel-elec-panel__title {
+                color: #1f2933;
+                font-size: 1.02rem;
+                font-weight: 850;
+                line-height: 1.22;
+            }
+            .entel-elec-kpi-grid {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 0.78rem;
+                margin: 0.35rem 0 1.05rem 0;
+            }
+            .entel-elec-kpi {
+                min-height: 106px;
+                border: 1px solid rgba(79,90,105,0.18);
+                border-top: 4px solid var(--accent);
+                border-radius: 8px;
+                background: linear-gradient(180deg, #ffffff 0%, #f7f9fb 100%);
+                padding: 0.78rem 0.82rem;
+                box-shadow: 0 8px 18px rgba(31,41,51,0.07);
+            }
+            .entel-elec-kpi__label {
+                color: #52606d;
+                font-size: 0.72rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                margin-bottom: 0.28rem;
+            }
+            .entel-elec-kpi__value {
+                color: #1f2933;
+                font-size: 1.34rem;
+                font-weight: 900;
+                line-height: 1.05;
+            }
+            .entel-elec-kpi__sub {
+                color: #6b7280;
+                font-size: 0.76rem;
+                line-height: 1.25;
+                margin-top: 0.35rem;
+            }
+            .entel-elec-section {
+                display: flex;
+                align-items: center;
+                gap: 0.55rem;
+                margin: 1.15rem 0 0.55rem 0;
+                color: #1f2933;
+                font-size: 1.02rem;
+                font-weight: 900;
+            }
+            .entel-elec-section::before {
+                content: "";
+                width: 9px;
+                height: 26px;
+                border-radius: 3px;
+                background: linear-gradient(180deg, #2f5f73, #d9a766);
+                display: inline-block;
+            }
+            @media (max-width: 900px) {
+                .entel-elec-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown("### 3.4 Características Eléctricas")
+        st.markdown(
+            """
+            <div class="entel-elec-panel">
+              <div class="entel-elec-panel__eyebrow">Anexo técnico eléctrico</div>
+              <div class="entel-elec-panel__title">Interfaz generador-inversor-red/baterías, límites operativos y condiciones de integración para revisión de cliente.</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            comment_box(
+                "Alcance eléctrico declarado",
+                [
+                    comment_paragraph("La sección resume tensión nominal, frecuencia, arquitectura de inversor, compatibilidad on-grid/off-grid, baterías, rendimiento, anti-isla y puesta a tierra."),
+                    comment_paragraph("La arquitectura separa variables internas del generador y salida útil al sitio: el generador opera con tensión/frecuencia variable y el inversor entrega interfaz AC regulada o bus DC híbrido."),
+                ],
+            ),
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            f"""
+            <div class="entel-elec-kpi-grid">
+              <div class="entel-elec-kpi" style="--accent:#2f5f73;">
+                <div class="entel-elec-kpi__label">V_LL nominal</div>
+                <div class="entel-elec-kpi__value">{entel_int_es(GEN['V_LL_nom'], " Vac") if "GEN" in globals() else "-"}</div>
+                <div class="entel-elec-kpi__sub">Referencia de coordinación generador / rectificador / inversor.</div>
+              </div>
+              <div class="entel-elec-kpi" style="--accent:#d9a766;">
+                <div class="entel-elec-kpi__label">Salida AC</div>
+                <div class="entel-elec-kpi__value">50 Hz</div>
+                <div class="entel-elec-kpi__sub">Frecuencia regulada en salida útil del inversor.</div>
+              </div>
+              <div class="entel-elec-kpi" style="--accent:#84a9a4;">
+                <div class="entel-elec-kpi__label">I_est máx</div>
+                <div class="entel-elec-kpi__value">{entel_num_es(max_I_est, 1, " A") if np.isfinite(max_I_est) else "-"}</div>
+                <div class="entel-elec-kpi__sub">Base para cableado, protecciones y margen térmico.</div>
+              </div>
+              <div class="entel-elec-kpi" style="--accent:#d95f5f;">
+                <div class="entel-elec-kpi__label">PF operativo</div>
+                <div class="entel-elec-kpi__value">{entel_num_es(pf_setpoint, 2)}</div>
+                <div class="entel-elec-kpi__sub">Referencia de calidad eléctrica e interconexión.</div>
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown('<div class="entel-elec-section">Requisitos eléctricos solicitados por Entel</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(entel_electrical_specs_df, widths=[18, 25, 22, 35])
+
+        st.markdown('<div class="entel-elec-section">Comportamiento eléctrico por velocidad de viento</div>', unsafe_allow_html=True)
+        elec_col1, elec_col2 = st.columns(2)
+        with elec_col1:
+            st.plotly_chart(entel_voltage_fig, use_container_width=True)
+        with elec_col2:
+            st.plotly_chart(entel_current_fig, use_container_width=True)
+
+        st.plotly_chart(entel_power_elec_fig, use_container_width=True)
+
+        st.markdown('<div class="entel-elec-section">Límites, márgenes y calidad eléctrica</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(
+                entel_electrical_limits_df,
+                formats={
+                    "Valor modelo": "{:,.2f}",
+                    "Límite/referencia": "{:,.2f}",
+                    "Margen [%]": "{:,.2f}",
+                },
+            ),
+            widths=[22, 13, 15, 10, 28, 12],
+        )
+
+        st.markdown('<div class="entel-elec-section">Compatibilidad on-grid / off-grid</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(entel_grid_modes_df, widths=[12, 18, 38, 32])
+        st.markdown('<div class="entel-elec-section">Cierre eléctrico requerido por Entel</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(entel_electrical_closing_df, widths=[18, 31, 21, 30])
+        st.markdown(
+            comment_box(
+                "Conclusiones de integración eléctrica",
+                [
+                    comment_paragraph("La compatibilidad on-grid requiere anti-isla, seccionamiento, factor de potencia, THD, puesta a tierra, protecciones y cumplimiento del código de red aplicable."),
+                    comment_paragraph("La compatibilidad off-grid requiere estabilidad de bus DC, banco de baterías, BMS, absorción de excedentes y lógica de prioridad energética para continuidad de servicio."),
+                    comment_paragraph("Los anexos eléctricos deben respaldar arquitectura DC/BMS, certificado anti-isla, esquema de puesta a tierra, SPD y criterios de prueba SAT."),
+                    comment_paragraph("La tabla por bin entrega corriente, tensión, frecuencia y potencia para dimensionamiento de cables, breaker, inversor, rectificador e integración SCADA."),
+                ],
+            ),
+            unsafe_allow_html=True,
+        )
+
+        st.markdown('<div class="entel-elec-section">Tabla eléctrica por bin de viento</div>', unsafe_allow_html=True)
+        render_entel_fixed_table(
+            format_entel_display_table(entel_electrical_curve_df, precision=3),
+            widths=[9, 9, 10, 10, 10, 9, 11, 10, 12, 10, 10],
+        )
+
+    render_section_download_button(
+        label="Descargar entregables Entel",
+        section_title="Entel - entregables RFP",
+        section_rows=entel_summary_df,
+        key_suffix="entel_entregables_rfp",
+        extra_sheets={
+            "Matriz cumplimiento": entel_delivery_df,
+            "Resumen técnico": entel_summary_df,
+            "EYA 3.2 sitio": entel_yield_site_df,
+            "EYA 3.2 metodología": entel_yield_methodology_df,
+            "EYA 3.2 resultados": entel_yield_assessment_df,
+            "EYA 3.2 sensibilidades": entel_yield_sensitivity_df,
+            "EYA 3.2 dist viento": entel_wind_distribution_df,
+            "EYA 3.2 turbul pérdidas": entel_turbulence_losses_df,
+            "Sim desempeño KPIs": entel_performance_kpi_df,
+            "Sim desempeño supuestos": entel_assumptions_df,
+            "Sim desempeño pérdidas": entel_losses_df,
+            "Sim curva potencia": entel_performance_curve_df,
+            "Aero velocidades Cp": entel_aero_operating_df,
+            "Aero curva bins": entel_aero_curve_df,
+            "Aero ruido vibración": entel_aero_stability_df,
+            "Elect especificación": entel_electrical_specs_df,
+            "Elect curva bins": entel_electrical_curve_df,
+            "Elect límites": entel_electrical_limits_df,
+            "Elect on off grid": entel_grid_modes_df,
+            "Elect cierre Entel": entel_electrical_closing_df,
+            "Sensibilidades P50": entel_sensitivity_df,
+            "AEP viento medio 4-8": entel_mean_wind_df,
+            "Producción mensual": entel_monthly_df,
+            "Recurso extrapolado": entel_resource_summary_df,
+            "Perfil vertical": active_resource_df,
+            "Control parada segura": entel_control_df,
+            "SCADA señales": entel_scada_df,
+            "Características eléctricas": entel_electrical_df,
+            "Garantías SLA logística": entel_service_df,
+            "Índice documental": entel_docs_df,
+            "Curva potencia bins": entel_power_curve_df,
+            "IEC resumen": df_iec.copy() if "df_iec" in globals() else pd.DataFrame(),
+        },
+        help_text="Exporta la matriz de cumplimiento y anexos técnicos solicitados en el RFP de Entel.",
+    )
 
 with analysis_content_container:
     if active_analysis_block == "aero":
@@ -7019,6 +10189,19 @@ with analysis_content_container:
             accent=PALETTE_SAGE,
         )
         question_prompt("¿Qué combinación de parámetros Weibull explica mejor tu sitio y justifica cambios en P_nom o v_rated?")
+        scada_resource_inputs = st.session_state.get("scada_resource_inputs", {}) or {}
+        use_scada_resource = bool(scada_resource_inputs.get("active")) and scada_resource_inputs.get("mode") == "wind_height_profile"
+        k_resource = float(scada_resource_inputs.get("weibull_k", k_w)) if use_scada_resource else k_w
+        c_resource = float(scada_resource_inputs.get("weibull_c", c_w)) if use_scada_resource else c_w
+        if use_scada_resource:
+            st.success(
+                "Recurso activo desde Datos piloto (SCADA): "
+                f"altura {scada_resource_inputs.get('target_height_m', np.nan):.1f} m, "
+                f"v media {scada_resource_inputs.get('v_mean', np.nan):.2f} m/s, "
+                f"Weibull k={k_resource:.2f}, c={c_resource:.2f}."
+            )
+        else:
+            st.caption("Recurso activo desde inputs manuales Weibull del panel lateral.")
 
         # Generación del vector Weibull
         v_w_max = max(v_cut_out, v_max, 20.0)
@@ -7038,15 +10221,16 @@ with analysis_content_container:
         )
 
         # Weibull PDF
-        pdf_w = weibull_pdf(v_w, k_w, c_w)
+        pdf_w = weibull_pdf(v_w, k_resource, c_resource)
 
         # AEP y CF
-        AEP_kWh, P_mean_W = aep_from_weibull(v_w, P_interp_W, k_w, c_w)
+        AEP_kWh, P_mean_W = aep_from_weibull(v_w, P_interp_W, k_resource, c_resource)
         CF = P_mean_W / (P_nom_kW * 1000.0)
 
-        colW1, colW2 = st.columns(2)
+        colW1, colW2, colW3 = st.columns(3)
         colW1.metric("AEP [kWh/año]", f"{AEP_kWh:,.0f}")
         colW2.metric("Factor de Planta [%]", f"{CF*100:.1f}")
+        colW3.metric("Weibull activo k / c", f"{k_resource:.2f} / {c_resource:.2f}")
 
         # Dataframe para gráfico técnico
         df_weib = pd.DataFrame({
@@ -8424,6 +11608,130 @@ with analysis_content_container:
                 "Sube un CSV en el panel lateral (expander 'Datos piloto (SCADA)') "
                 "para comparar el modelo con las mediciones del piloto."
             )
+        elif scada_map.get("mode") == "wind_height_profile":
+            scada_resource_inputs = st.session_state.get("scada_resource_inputs", {}) or {}
+            if not scada_resource_inputs:
+                st.warning("El CSV cargado fue detectado como perfil vertical, pero no hay resumen eólico válido.")
+            else:
+                section_header("Perfil vertical de viento: estructura FS608", level=3)
+                st.caption(
+                    "El archivo se interpreta como matriz temporal de velocidades por altura. "
+                    "Las columnas numéricas son alturas [m] y los valores son viento [m/s]."
+                )
+
+                profile_summary = pd.DataFrame(scada_resource_inputs.get("profile_summary", []))
+                k_scada = float(scada_resource_inputs.get("weibull_k", np.nan))
+                c_scada = float(scada_resource_inputs.get("weibull_c", np.nan))
+                target_height = float(scada_resource_inputs.get("target_height_m", np.nan))
+                v_mean_scada = float(scada_resource_inputs.get("v_mean", np.nan))
+                alpha_scada = float(scada_resource_inputs.get("shear_alpha", np.nan))
+
+                P_curve_W_scada = df["P_out (clip) kW"].values * 1000.0
+                P_curve_W_scada[v_grid < v_cut_in] = 0.0
+                P_curve_W_scada[v_grid > v_cut_out] = 0.0
+                v_w_scada = np.linspace(0.01, max(v_cut_out, v_max, 20.0), 400)
+                P_interp_scada = np.interp(v_w_scada, v_grid, P_curve_W_scada, left=0.0, right=0.0)
+                AEP_scada, P_mean_scada = aep_from_weibull(v_w_scada, P_interp_scada, k_scada, c_scada)
+                CF_scada = P_mean_scada / (P_nom_kW * 1000.0) if P_nom_kW > 0 else np.nan
+
+                cS1, cS2, cS3, cS4 = st.columns(4)
+                cS1.metric("Altura efectiva [m]", f"{target_height:.1f}" if np.isfinite(target_height) else "-")
+                cS2.metric("Viento medio [m/s]", f"{v_mean_scada:.2f}" if np.isfinite(v_mean_scada) else "-")
+                cS3.metric("AEP estimado [kWh/año]", f"{AEP_scada:,.0f}" if np.isfinite(AEP_scada) else "-")
+                cS4.metric("Factor planta [%]", f"{CF_scada*100:.1f}" if np.isfinite(CF_scada) else "-")
+
+                if not profile_summary.empty:
+                    height_aep_rows = []
+                    for _, row_h in profile_summary.iterrows():
+                        mean_h = float(row_h.get("Velocidad media m/s", np.nan))
+                        if not np.isfinite(mean_h) or mean_h <= 0 or not np.isfinite(k_scada) or k_scada <= 0:
+                            continue
+                        c_h = mean_h / gamma(1.0 + 1.0 / k_scada)
+                        aep_h, p_mean_h = aep_from_weibull(v_w_scada, P_interp_scada, k_scada, c_h)
+                        height_aep_rows.append(
+                            {
+                                "Altura m": float(row_h["Altura m"]),
+                                "Velocidad media m/s": mean_h,
+                                "AEP kWh/año": aep_h,
+                                "Factor planta %": p_mean_h / (P_nom_kW * 1000.0) * 100.0 if P_nom_kW > 0 else np.nan,
+                            }
+                        )
+                    height_aep_df = pd.DataFrame(height_aep_rows)
+
+                    profile_left, profile_right = st.columns([1.0, 1.05])
+                    with profile_left:
+                        fig_profile = go.Figure()
+                        fig_profile.add_trace(
+                            go.Scatter(
+                                x=profile_summary["Velocidad media m/s"],
+                                y=profile_summary["Altura m"],
+                                mode="lines+markers",
+                                name="Media por altura",
+                                hovertemplate="Altura %{y:.1f} m<br>V media %{x:.2f} m/s<extra></extra>",
+                            )
+                        )
+                        fig_profile.add_trace(
+                            go.Scatter(
+                                x=profile_summary["P90 m/s"],
+                                y=profile_summary["Altura m"],
+                                mode="lines",
+                                name="P90",
+                                line=dict(dash="dot"),
+                                hovertemplate="Altura %{y:.1f} m<br>P90 %{x:.2f} m/s<extra></extra>",
+                            )
+                        )
+                        fig_profile.update_layout(
+                            title=f"Perfil vertical de viento · alpha={alpha_scada:.3f}" if np.isfinite(alpha_scada) else "Perfil vertical de viento",
+                            xaxis_title="Velocidad [m/s]",
+                            yaxis_title="Altura [m]",
+                            height=430,
+                            legend_title=None,
+                        )
+                        st.plotly_chart(fig_profile, use_container_width=True)
+                    with profile_right:
+                        if not height_aep_df.empty:
+                            fig_height_aep = px.bar(
+                                height_aep_df,
+                                x="Altura m",
+                                y="AEP kWh/año",
+                                text="Factor planta %",
+                                title="Producción estimada si la altura efectiva cambia",
+                            )
+                            fig_height_aep.update_traces(texttemplate="%{text:.1f}% FP", textposition="outside")
+                            fig_height_aep.update_layout(
+                                xaxis_title="Altura efectiva [m]",
+                                yaxis_title="AEP [kWh/año]",
+                                height=430,
+                            )
+                            st.plotly_chart(fig_height_aep, use_container_width=True)
+
+                    st.dataframe(
+                        profile_summary.style.format(
+                            {
+                                "Altura m": "{:.1f}",
+                                "Velocidad media m/s": "{:.2f}",
+                                "P10 m/s": "{:.2f}",
+                                "P50 m/s": "{:.2f}",
+                                "P90 m/s": "{:.2f}",
+                            }
+                        ),
+                        use_container_width=True,
+                        hide_index=True,
+                    )
+
+                st.markdown("""
+                <div class="comment-box">
+                  <div class="comment-title">🔍 Interpretación técnica (perfil SCADA)</div>
+                  <p>
+                    Este formato no calibra potencia medida contra potencia modelo; alimenta el recurso eólico real:
+                    velocidad media a altura efectiva, Weibull k/c, gradiente vertical y producción anual esperada.
+                  </p>
+                  <p>
+                    Usa la altura efectiva más representativa del rotor para que el AEP del bloque de recurso no dependa
+                    de supuestos manuales. Si el alpha vertical es alto, pequeños cambios de altura impactan fuertemente la producción.
+                  </p>
+                </div>
+                """, unsafe_allow_html=True)
         else:
             # Limpieza básica
             df_sc = df_scada.copy()
