@@ -1,0 +1,226 @@
+{
+  "metadata": {
+    "filename": "Torre_RevW_rotor_V80_v4_D14m_H14m.ifc",
+    "sha256": "8d4eea74f8414e48ddbaacbcaccf95253b5ea7af367dd9e14574c264b5b96eb9",
+    "schema": "IFC4",
+    "units": "m",
+    "products": 633,
+    "meshes": 633,
+    "vertices": 28114,
+    "triangles": 50284,
+    "bounds": [
+      [
+        -6.552177906036377,
+        -4.348704814910889,
+        -1.5820000171661377
+      ],
+      [
+        6.358421325683594,
+        7.139999866485596,
+        20.0
+      ]
+    ],
+    "axis": [
+      0.0,
+      0.0,
+      0
+    ],
+    "diameter": 14,
+    "bladeHeight": 14,
+    "bladeCount": 3,
+    "chord": 1.4,
+    "sweptArea": 196,
+    "bladeZ": [
+      6.0,
+      20.0
+    ],
+    "generatorDeclaredKW": 100,
+    "gearRatioDeclared": 8,
+    "status": "Propuesta según propiedades del IFC; no validada por calculista",
+    "projectName": "Torre reticulada — aerogenerador vertical (estructura y fundacion)",
+    "projectDescription": "Rev. U: zapata apernada, empalme por traslapo 30 cm con 6 pernos 3/4 por ala, altura 11.66 m | Rev. W: montantes inferiores L150x150x15, diagonales paneles 4-6 L75x75x6, riostras de esquina | + Rotor H-Darrieus V80 v4: D 14 m, 3 palas 14 x 1,4 m de +6 a +20 m (196 m2, IEC 61400-2), 6 diagonales 8 pulg SCH40 a buje 12 pulg SCH80, anillo de barras Ø20, eje macizo Ø210 en 2 rodamientos a 1,2 m, caja 1:8 colgada, freno de disco en eje rapido y generador 100 kW a +8,9 m (PROPUESTA, no validada)",
+    "converter": "IfcOpenShell 0.9.0.post1",
+    "omitted": []
+  },
+  "layers": [
+    {
+      "name": "Torre: montantes y riostras",
+      "count": 92,
+      "rotating": false,
+      "color": [
+        0.12,
+        0.37,
+        0.82
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Pernos y fijaciones de torre",
+      "count": 400,
+      "rotating": false,
+      "color": [
+        0.15,
+        0.15,
+        0.15
+      ],
+      "defaultVisible": false
+    },
+    {
+      "name": "Placas y conexiones de torre",
+      "count": 60,
+      "rotating": false,
+      "color": [
+        0.55,
+        0.57,
+        0.6
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Fundación y morteros",
+      "count": 9,
+      "rotating": false,
+      "color": [
+        0.62,
+        0.61,
+        0.58
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Rotor: palas",
+      "count": 3,
+      "rotating": true,
+      "color": [
+        0.9137254901960784,
+        0.9019607843137255,
+        0.8745098039215686
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Rotor: brazos",
+      "count": 6,
+      "rotating": true,
+      "color": [
+        0.36470588235294116,
+        0.4196078431372549,
+        0.47058823529411764
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Rotor: carenados",
+      "count": 6,
+      "rotating": true,
+      "color": [
+        0.9568627450980393,
+        0.9490196078431372,
+        0.9254901960784314
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Rotor: uniones",
+      "count": 6,
+      "rotating": true,
+      "color": [
+        0.788235294117647,
+        0.5411764705882353,
+        0.16862745098039217
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Rotor: anillo",
+      "count": 12,
+      "rotating": true,
+      "color": [
+        0.16862745098039217,
+        0.16862745098039217,
+        0.16862745098039217
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Rotor: buje y eje",
+      "count": 12,
+      "rotating": true,
+      "color": [
+        0.24705882352941178,
+        0.2901960784313726,
+        0.3333333333333333
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Tren de potencia",
+      "count": 9,
+      "rotating": false,
+      "color": [
+        0.7019607843137254,
+        0.23137254901960785,
+        0.1803921568627451
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Cabezal y soportes nuevos",
+      "count": 18,
+      "rotating": false,
+      "color": [
+        0.8156862745098039,
+        0.47843137254901963,
+        0.16470588235294117
+      ],
+      "defaultVisible": true
+    }
+  ],
+  "bladeBounds": [
+    {
+      "id": 14930,
+      "bounds": [
+        [
+          -0.41999998688697815,
+          6.895020008087158,
+          6.0
+        ],
+        [
+          0.9800000190734863,
+          7.104979991912842,
+          20.0
+        ]
+      ]
+    },
+    {
+      "id": 14956,
+      "bounds": [
+        [
+          -6.552177906036377,
+          -3.8680825233459473,
+          6.0
+        ],
+        [
+          -5.830065727233887,
+          -2.6512951850891113,
+          20.0
+        ]
+      ]
+    },
+    {
+      "id": 14981,
+      "bounds": [
+        [
+          5.572177886962891,
+          -4.348704814910889,
+          6.0
+        ],
+        [
+          6.294290065765381,
+          -3.1319174766540527,
+          20.0
+        ]
+      ]
+    }
+  ]
+}

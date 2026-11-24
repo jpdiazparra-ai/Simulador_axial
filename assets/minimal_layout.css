@@ -1,0 +1,28 @@
+/* The HTML dashboard is the primary workspace; sidebar widgets retain shared state. */
+section[data-testid="stSidebar"][aria-expanded="false"]{display:none!important;}
+[data-testid="stMain"],section.main{flex:1 1 0%!important;min-width:0!important;max-width:none!important;}
+[data-testid="stMain"] [data-testid="stMainBlockContainer"],[data-testid="stMain"] .block-container,.main .block-container{width:100%!important;max-width:none!important;padding:1.8rem clamp(18px,3vw,56px) 2.5rem!important;}
+.workspace-header{display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid #e6e8e5;margin:0 0 16px;padding:4px 0 19px;color:#1c2722;}
+.workspace-brand{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:650;letter-spacing:.16em;color:#67756e;text-transform:uppercase;margin-bottom:9px;}
+.workspace-brand:before{content:'';height:7px;width:7px;border-radius:50%;background:#467761;}
+.workspace-header h1{font-size:clamp(23px,2vw,32px)!important;font-weight:650!important;letter-spacing:-.045em!important;line-height:1.2!important;padding:0!important;margin:0!important;color:#192a21!important;}
+.workspace-meta{font-size:12px;color:#758078;white-space:nowrap;letter-spacing:.015em;}
+[data-testid="stCustomComponentV1"], [data-testid="stElementContainer"]:has(iframe[title*="vawt_interactive_dashboard"]){width:100%!important;max-width:none!important;}
+@media(max-width:700px){[data-testid="stMain"] [data-testid="stMainBlockContainer"],[data-testid="stMain"] .block-container{padding:1.1rem 12px 2rem!important}.workspace-header{padding:2px 4px 15px;margin-bottom:8px}.workspace-meta{display:none}.workspace-brand{font-size:9px}.workspace-header h1{font-size:24px!important}}
+/* Remove framework chrome and the layout gaps produced by style-only Markdown blocks. */
+[data-testid="stToolbar"],[data-testid="stDecoration"]{display:none!important;}
+header[data-testid="stHeader"]{height:0!important;min-height:0!important;background:transparent!important;pointer-events:none;}
+[data-testid="stExpandSidebarButton"]{pointer-events:auto!important;position:fixed!important;top:8px;left:8px;z-index:9999;border-radius:8px;background:#fff!important;border:1px solid #e6e8e5!important;}
+@media(max-width:700px){.workspace-header{padding-left:38px!important;}}
+[data-testid="stMain"] [data-testid="stElementContainer"]:has(> [data-testid="stMarkdown"] > [data-testid="stMarkdownContainer"] > style:only-child),
+[data-testid="stMain"] [data-testid="stElementContainer"]:has(> [data-testid="stMarkdown"] > [data-testid="stMarkdownContainer"] > #top:only-child){display:none!important;}
+/* Keep the native sidebar control visible and give it a clear text label. */
+header[data-testid="stHeader"]{display:block!important;visibility:visible!important;height:52px!important;min-height:52px!important;overflow:visible!important;z-index:999999!important;}
+[data-testid="stExpandSidebarButton"]{display:flex!important;visibility:visible!important;opacity:1!important;align-items:center;justify-content:center;gap:6px;top:10px!important;left:12px!important;width:auto!important;min-width:132px;height:36px!important;padding:6px 12px!important;color:#254e3d!important;box-shadow:0 2px 8px #203d2c0a;}
+[data-testid="stExpandSidebarButton"]:after{content:'Parámetros';font:600 12px/1.2 system-ui,sans-serif;letter-spacing:.01em;}
+[data-testid="stMain"] [data-testid="stMainBlockContainer"],[data-testid="stMain"] .block-container{padding-top:3.8rem!important;}
+@media(max-width:700px){.workspace-header{padding-left:4px!important;}[data-testid="stExpandSidebarButton"]{left:12px!important;}}
+/* The expand control is inside Streamlit's toolbar: keep its ancestors visible. */
+header[data-testid="stHeader"] [data-testid="stToolbar"]{display:flex!important;visibility:visible!important;pointer-events:none;}
+header[data-testid="stHeader"] button:not([data-testid="stExpandSidebarButton"]){display:none!important;}
+[data-testid="stAppViewContainer"]:has(section[data-testid="stSidebar"][aria-expanded="true"]) [data-testid="stExpandSidebarButton"]{display:none!important;}

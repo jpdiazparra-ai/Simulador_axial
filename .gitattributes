@@ -1,0 +1,2 @@
+# Preserve the published CSV bytes and original record whitespace for auditing.
+data/cost_reference_source.csv -text -whitespace

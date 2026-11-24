@@ -1,0 +1,13 @@
+# Costos del punto 6
+
+Fuente pública: pestaña Costos, gid 1070657893, del Google Sheets indicado por el usuario. El CSV de origen y la copia normalizada se incluyen para trazabilidad y funcionamiento sin red. El servidor consulta la fuente con caché de cinco minutos y conserva la copia incorporada si la consulta falla. El botón Actualizar planilla vacía esta caché sin modificar los parámetros del simulador.
+
+Se incluyen sólo filas cuyo Costo para producto sea exactamente Aplica (sin distinguir mayúsculas). Cada ID se cuenta una vez. Los importes son totales de línea publicados en CLP: no se multiplican por Cantidad ni por número de mallas. Vacíos y guiones se representan como null; los subtotales indican las partidas pendientes. La diferencia comparable suma únicamente filas con ambos valores. No se recalculan descuentos ni se usan los costos IFC como sumandos.
+
+La vista inicial corresponde a Producto 80 kW: 103 partidas; 64 vinculadas a capas IFC, 35 en categorías sin geometría y 4 sin capa. La copia inicial contiene 222 partidas Aplica de 641 registros; las referencias de 10 kW se filtran separadamente. Los vínculos fuente se respetan, incluso cuando el nombre de una partida podría sugerir otra capa. Las asignaciones de campos vacíos se guardan localmente, sin escribir en Google Sheets, y se incluyen al exportar HTML y CSV. No se interpreta este presupuesto de otro proyecto como cotización validada por unidad del modelo D14 × H14.
+
+## Vista por capa y paquete
+
+Los indicadores, el gráfico, la tabla y el CSV utilizan la misma selección de referencia, capa, paquete y búsqueda. Al seleccionar una capa, el gráfico desglosa sólo sus paquetes; al seleccionar un paquete, desglosa las actividades que lo componen. La tabla mantiene visibles las descripciones de actividad. El HTML exportado conserva esta selección.
+
+La vista derecha utiliza exactamente las mismas mallas y materiales IFC que el punto 5, con una cámara independiente. Filtra por el nombre de capa y no cambia la visibilidad ni el giro del visor principal. Las categorías comerciales sin geometría muestran un estado sin modelo. No se infieren cambios de costo por ocultar o girar geometría.
