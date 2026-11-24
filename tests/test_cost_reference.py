@@ -1,10 +1,11 @@
 import csv
 import io
 import json
+import subprocess
 from pathlib import Path
 import unittest
 from unittest.mock import patch
-from cost_reference import parse_money, parse_cost_csv, load_cost_reference, REQUIRED
+from cost_reference import parse_quantity, parse_money, parse_cost_csv, load_cost_reference, REQUIRED
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -24,6 +25,39 @@ class CostReferenceTests(unittest.TestCase):
         self.assertEqual(sum(r['current'] for r in linked),7874165)
         self.assertTrue(all(r['applies']=='Aplica' for r in data['rows']))
         self.assertEqual(len({r['id'] for r in data['rows']}),222)
+
+    def test_quantity_preserves_missing_zero_and_decimal_comma(self):
+        self.assertEqual(parse_quantity('72'),72)
+        self.assertEqual(parse_quantity('1.250,5'),1250.5)
+        self.assertEqual(parse_quantity('0'),0)
+        self.assertIsNone(parse_quantity('—'))
+        self.assertIsNone(parse_quantity(''))
+        self.assertIsNone(parse_quantity('por definir'))
+        data=parse_cost_csv((ROOT/'data/cost_reference_source.csv').read_bytes())
+        row=next(r for r in data['rows'] if r['id']=='A531')
+        self.assertEqual(row['quantityValue'],72)
+        self.assertEqual(row['current']/row['quantityValue'],6500)
+        self.assertEqual(row['previous']/row['quantityValue'],3250)
+
+    def test_html_cost_unit_and_percentage_helpers(self):
+        script = r"""
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const source=fs.readFileSync('assets/cost_dashboard.js','utf8');
+const helpers=source.slice(source.indexOf('function costKind('),source.indexOf('function costNavigation('));
+const scope={};vm.createContext(scope);vm.runInContext(helpers,scope);
+const row={criterion:'HH',quantity:'72',current:468000,previous:234000};
+assert.equal(scope.costKind(row),'hh');assert.equal(scope.costQuantity(row),72);
+assert.equal(scope.costUnit(row,'current'),6500);assert.equal(scope.costUnit(row,'previous'),3250);
+assert(Math.abs(scope.costPercent(row.current,1134000)-41.269841269841265)<1e-10);
+assert.equal(scope.costQuantity({quantity:'1.250,5'}),1250.5);
+assert.equal(scope.costUnit({quantity:'0',current:1200},'current'),null);
+assert.equal(scope.costUnit({quantity:'—',current:1200},'current'),null);
+assert.equal(scope.costUnit({quantity:'3',current:null},'current'),null);
+assert.equal(scope.costUnit({quantity:'3',current:0},'current'),0);
+assert.equal(scope.costPercent(null,100),null);assert.equal(scope.costPercent(10,0),null);
+"""
+        result=subprocess.run(['node','-e',script],cwd=ROOT,text=True,capture_output=True)
+        self.assertEqual(result.returncode,0,result.stderr)
 
     def test_missing_amount_is_not_zero(self):
         for value in ('','—','–','-','N/A'):

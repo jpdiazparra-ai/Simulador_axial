@@ -1,7 +1,7 @@
 """Read the published Costos sheet; retain source row numbers and missing values."""
 import csv
 from datetime import datetime, timezone
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal
 import hashlib
 import io
 import json
@@ -23,6 +23,14 @@ def parse_money(value):
         raise ValueError('Se esperaba CLP entero: ' + value)
     return int(number)
 
+def parse_quantity(value):
+    """Interpret published decimal-comma quantities without inventing physical units."""
+    value=value.strip().replace('\u00a0','').replace(' ','')
+    if not re.fullmatch(r'(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d+)?',value):return None
+    number=Decimal(value.replace('.','').replace(',','.'))
+    return int(number) if number==number.to_integral_value() else float(number)
+
+
 def parse_cost_csv(raw, fetched_at=None):
     if isinstance(raw, bytes): raw = raw.decode('utf-8-sig')
     rows = list(csv.reader(io.StringIO(raw)))
@@ -41,6 +49,7 @@ def parse_cost_csv(raw, fetched_at=None):
             'sourceLayer':d['Capas del Archivo'].strip(), 'system':d['Sistema'].strip(),
             'package':d['Paquete / línea'].strip(), 'activity':d['Actividad / entregable'].strip(),
             'criterion':d.get('Criterio','').strip(), 'quantity':d.get('Cantidad','').strip(),
+            'quantityValue':parse_quantity(d.get('Cantidad','')),
             'current':parse_money(d['Presupuesto vigente']), 'previous':parse_money(d['Comercial anterior']),
             'applies':'Aplica', 'approved':d.get('Base aprobada','').strip()})
     if not records: raise ValueError('La fuente no contiene partidas Aplica')
