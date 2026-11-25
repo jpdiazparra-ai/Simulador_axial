@@ -1,0 +1,13 @@
+# Modelo activo: V80 v5 del HTML
+
+Fuente: `rotor_v80_v5_source.html`, copia exacta del HTML suministrado por el usuario. SHA-256: ae9eaaed7913c150e051470066938e4ea178adbb961f5425c89df1298cfdb880. Se leen exclusivamente los literales JSON META y GEO_B64; los scripts y enlaces del archivo no se ejecutan. El modelo activo es `v80_v5_mesh.json`; `v80_v5_audit.json` registra procedencia, capas y variantes.
+
+38 prototipos y 86 instancias en total: A muestra 68 y B muestra 80. A es la recomendada sin anillo, con seis diagonales RHS 250×150×8; B utiliza RHS 250×150×6 y doce mallas de barras/tensores. Ambas comparten tres palas NACA 0018 de 14 × 1,4 m y 400 kg, carenados NACA 0022, generador GREEF GDG 100 kW y caja 1:10. El diámetro declarado es 14 m, las palas van de +6 a +20 m. El title del HTML conserva una descripción antigua D18; el encabezado, los metadatos del finalista y la geometría son D14 × H14.
+
+Las instancias se transforman exactamente con la matriz de 12 valores del HTML, en coordenadas Z vertical y metros. Las mallas de torre agrupan muchas piezas físicas: su número no equivale a cantidad de tornillos, barras ni unidades de compra. Se respeta el conjunto giratorio definido por ROTOR_KEYS del HTML, incluido el acople flexible; las carcasas del tren de potencia quedan fijas.
+
+Se mantienen capas canónicas para enlazar con los costos: Torre reforzada → Torre: montantes y riostras; Pernería torre → Pernos y fijaciones de torre; Fundación → Fundación y morteros. Suples/rellenos y placas base/zapatas se vinculan a Placas y conexiones de torre. La capa original se conserva en cada ficha. Los vínculos locales del v4 se migran únicamente si sus capas siguen existiendo. Los datos v4 se conservan como archivo histórico y ya no se cargan en los puntos 5/6.
+
+El costeo declarado en las fichas del HTML es una referencia separada del presupuesto Google Sheets del punto 6. No se suman ambos ni se cambian los importes de la planilla al alternar A/B. Las potencias y energía del estudio QBlade D12 × H16 tampoco se transfieren al v5: sólo puede copiarse opcionalmente rpm para visualizar el giro.
+
+Regeneración: `python tools/convert_v80_html.py data/rotor_v80_v5_source.html --output data/v80_v5_mesh.json` (NumPy; no necesita IfcOpenShell). El campo previousModelSha permite recuperar preferencias de costos del modelo histórico. El HTML exportado incorpora las mallas v5 y Three.js localmente.

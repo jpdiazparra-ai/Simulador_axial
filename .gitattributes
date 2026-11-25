@@ -1,2 +1,5 @@
 # Preserve the published CSV bytes and original record whitespace for auditing.
 data/cost_reference_source.csv -text -whitespace
+
+# Keep the user-supplied V5 HTML identical to its audited source.
+data/rotor_v80_v5_source.html -text -whitespace

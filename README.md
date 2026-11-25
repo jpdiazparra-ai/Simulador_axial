@@ -57,7 +57,7 @@ Al seleccionar QBlade, el espacio de trabajo presenta seis pasos con el mismo di
 2. **Qué entrega y cómo gira**: indicadores del punto seleccionado, curvas de potencia/Cp/pérdidas, rpm y balance de conversión.
 3. **Cómo trabaja la pala**: rotor y polar juntos; Reynolds de la polar elegido a partir de la serie azimutal del punto cuando existe, sin inventar ciclos ausentes.
 4. **Qué limita el diseño**: utilización normalizada de límites, evolución con el viento, márgenes y comparación de escenarios por energía/torque.
-5. **Explora el modelo 3D del IFC**: torre Rev. W y rotor V80 v4 D14 × H14, cámara, capas, propiedades y animación independiente.
+5. **Explora el modelo 3D del IFC**: torre Rev. W y rotor V80 v5 D14 × H14, cámara, capas, propiedades y animación independiente.
 6. **Costos de la turbina y sus capas**: partidas Aplica de Google Sheets, filtro por capa y paquete, actividades, comparación vigente/anterior y geometría IFC correspondiente a la derecha.
 
 Los gráficos de curvas permiten fijar el viento con un clic. Los parámetros, las tablas numéricas y los escenarios se despliegan sólo cuando se necesitan. En QBlade se omiten los antiguos resúmenes y paneles nativos duplicados; la documentación RFP se conserva en la vista histórica del modelo paramétrico y no interrumpe la lectura aerotécnica. El CSV contiene las magnitudes de rotor, generador, cargas, pérdidas y los principales supuestos. Las ecuaciones y los datos numéricos del motor no cambian con esta reorganización.
@@ -74,8 +74,13 @@ La zona roja compara |α| con el ángulo de máximo CL estático; no confirma se
 
 Cada sesión nueva comienza con **QBlade · V80 (HTML)** seleccionado en el panel izquierdo, usando la geometría del estudio D12 × H16, NACA 0015, 3 palas de cuerda 1 m y límite de 30 rpm. Se puede cambiar de modo durante la sesión; recalcular no restaura los parámetros iniciales. El panel lateral sigue comenzando cerrado.
 
-El IFC D14 × H14 se conserva por separado del estudio aerodinámico D12 × H16. El visor no transfiere las curvas de potencia entre geometrías. Los datos, procedencia y regeneración del modelo se documentan en [data/IFC_VIEWER.md](data/IFC_VIEWER.md). Three.js r158 y su licencia MIT se incorporan localmente, sin CDN. IfcOpenShell sólo se necesita para regenerar las mallas, no para ejecutar la aplicación.
+El modelo 3D V80 v5 D14 × H14 se conserva por separado del estudio aerodinámico D12 × H16. El visor no transfiere las curvas de potencia entre geometrías. Los datos, procedencia y regeneración del modelo se documentan en [data/MODEL_V80_V5.md](data/MODEL_V80_V5.md). Three.js r158 y su licencia MIT se incorporan localmente, sin CDN. IfcOpenShell sólo se necesita para regenerar las mallas, no para ejecutar la aplicación.
 
 Los costos se consultan en la pestaña Costos de la planilla pública indicada por el usuario, con caché de cinco minutos y botón de actualización. Si la consulta falla, se utiliza la copia incluida. Los filtros de referencia, capa, paquete y búsqueda controlan indicadores, gráficos, actividades y CSV; el HTML exportado conserva la selección. Los valores ausentes siguen pendientes, no equivalen a cero. La geometría derecha conserva las mallas IFC y no modifica el visor del punto 5. Ver [data/COST_REFERENCE.md](data/COST_REFERENCE.md).
 
 Para ejecutar las pruebas: `python -m unittest discover -s tests -v`. Las pruebas de paridad del motor HTML requieren Node.js disponible.
+
+
+## Modelo 3D V80 v5 activo
+
+Los puntos 5 y 6 cargan la geometría del HTML V80 v5 suministrado, en lugar del IFC v4. La variante inicial A es la recomendada sin anillo; el selector también permite explorar B con anillo. Las palas son NACA 0018, 400 kg, y la transmisión declarada es 1:10. Los datos aerodinámicos QBlade D12 × H16 y los presupuestos de Google Sheets conservan su fuente y alcance propios. La procedencia, variantes, mapeo de capas y regeneración se documentan en [data/MODEL_V80_V5.md](data/MODEL_V80_V5.md).

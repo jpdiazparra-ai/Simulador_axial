@@ -1,0 +1,232 @@
+{
+  "metadata": {
+    "filename": "Rotor V80 v5 · finalista 14 × 14 m · visor 3D de costeo.html",
+    "sha256": "ae9eaaed7913c150e051470066938e4ea178adbb961f5425c89df1298cfdb880",
+    "schema": "HTML V5 · prototipos e instancias",
+    "sourceFormat": "HTML",
+    "revision": "V5",
+    "units": "m",
+    "products": 86,
+    "meshes": 86,
+    "prototypes": 38,
+    "vertices": 36122,
+    "triangles": 46616,
+    "bounds": [
+      [
+        -6.552199840545654,
+        -4.348680019378662,
+        -1.5820000171661377
+      ],
+      [
+        6.358419895172119,
+        7.139999866485596,
+        20.0
+      ]
+    ],
+    "axis": [
+      0,
+      0,
+      0
+    ],
+    "diameter": 14,
+    "bladeHeight": 14,
+    "bladeCount": 3,
+    "chord": 1.4,
+    "sweptArea": 196,
+    "bladeZ": [
+      6,
+      20
+    ],
+    "bladeProfile": "NACA 0018",
+    "bladeMassKG": 400,
+    "generatorDeclaredKW": 100,
+    "gearRatioDeclared": 10,
+    "defaultOffer": "A",
+    "offers": {
+      "A": {
+        "label": "A · Recomendada, sin anillo",
+        "description": "6 diagonales RHS 250×150×8 · carenados NACA 0022",
+        "meshes": 68
+      },
+      "B": {
+        "label": "B · Con anillo de barras",
+        "description": "6 diagonales RHS 250×150×6 · barras Ø20 y tensores",
+        "meshes": 80
+      }
+    },
+    "omitted": [],
+    "conversion": "Extracción de GEO_B64/META, transformación de instancias a coordenadas originales Z vertical; sin ejecutar scripts",
+    "sourceLegacyTitle": "El title del HTML conserva D18; la ficha finalista, metadatos y geometría corresponden a D14 × H14.",
+    "previousModelSha": "8d4eea74f8414e48ddbaacbcaccf95253b5ea7af367dd9e14574c264b5b96eb9"
+  },
+  "layers": [
+    {
+      "name": "Rotor: palas",
+      "count": 3,
+      "rotating": true,
+      "color": [
+        0.9137254901960784,
+        0.9019607843137255,
+        0.8745098039215686
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Rotor: palas"
+      ]
+    },
+    {
+      "name": "Rotor: brazos",
+      "count": 12,
+      "rotating": true,
+      "color": [
+        0.36470588235294116,
+        0.4196078431372549,
+        0.47058823529411764
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Rotor: brazos"
+      ]
+    },
+    {
+      "name": "Rotor: carenados",
+      "count": 6,
+      "rotating": true,
+      "color": [
+        0.9568627450980393,
+        0.9490196078431372,
+        0.9254901960784314
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Rotor: carenados"
+      ]
+    },
+    {
+      "name": "Rotor: uniones",
+      "count": 6,
+      "rotating": true,
+      "color": [
+        0.788235294117647,
+        0.5411764705882353,
+        0.16862745098039217
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Rotor: uniones"
+      ]
+    },
+    {
+      "name": "Rotor: buje y eje",
+      "count": 12,
+      "rotating": true,
+      "color": [
+        0.24705882352941178,
+        0.2901960784313726,
+        0.3333333333333333
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Rotor: buje y eje"
+      ]
+    },
+    {
+      "name": "Tren de potencia",
+      "count": 9,
+      "rotating": true,
+      "color": [
+        0.7019607843137254,
+        0.23137254901960785,
+        0.1803921568627451
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Tren de potencia"
+      ]
+    },
+    {
+      "name": "Cabezal y soportes nuevos",
+      "count": 18,
+      "rotating": false,
+      "color": [
+        0.8156862745098039,
+        0.47843137254901963,
+        0.16470588235294117
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Cabezal y soportes nuevos"
+      ]
+    },
+    {
+      "name": "Rotor: anillo",
+      "count": 12,
+      "rotating": true,
+      "color": [
+        0.16862745098039217,
+        0.16862745098039217,
+        0.16862745098039217
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Rotor: anillo"
+      ]
+    },
+    {
+      "name": "Torre: montantes y riostras",
+      "count": 4,
+      "rotating": false,
+      "color": [
+        0.5529411764705883,
+        0.5764705882352941,
+        0.6
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Torre reforzada"
+      ]
+    },
+    {
+      "name": "Pernos y fijaciones de torre",
+      "count": 1,
+      "rotating": false,
+      "color": [
+        0.3568627450980392,
+        0.37254901960784315,
+        0.38823529411764707
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Pernería torre"
+      ]
+    },
+    {
+      "name": "Placas y conexiones de torre",
+      "count": 2,
+      "rotating": false,
+      "color": [
+        0.4980392156862745,
+        0.5254901960784314,
+        0.5490196078431373
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Torre reforzada"
+      ]
+    },
+    {
+      "name": "Fundación y morteros",
+      "count": 1,
+      "rotating": false,
+      "color": [
+        0.7803921568627451,
+        0.7686274509803922,
+        0.7411764705882353
+      ],
+      "defaultVisible": true,
+      "sourceLayers": [
+        "Fundación"
+      ]
+    }
+  ]
+}

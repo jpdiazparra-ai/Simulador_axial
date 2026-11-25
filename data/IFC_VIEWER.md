@@ -1,3 +1,5 @@
+> Archivo histórico del v4. El modelo activo en los puntos 5 y 6 es el HTML V80 v5; ver [MODEL_V80_V5.md](MODEL_V80_V5.md).
+
 # Modelo IFC del punto 5
 
 Fuente: `Torre_RevW_rotor_V80_v4_D14m_H14m.ifc`. SHA-256 y auditoría de piezas en `ifc_v80_v4_audit.json`. Las 633 representaciones se convierten en coordenadas mundiales y metros, sin omisiones. El eje vertical es Z. Las seis capas «Rotor: …» (45 piezas) giran alrededor de (0, 0); las otras 588 permanecen fijas. Los 400 pernos se incluyen y su capa comienza oculta.
