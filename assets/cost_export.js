@@ -68,29 +68,28 @@ function initCostOfflineReport(){
  Object.assign(CostView,initial,{data:{metadata:snapshot.source,rows:context},mapping:{...initial.mapping}});
  costSave=()=>{};
  for(const id of ['cost-layer','cost-search'])if(!$(id)){const input=document.createElement('input');input.id=id;input.hidden=true;document.body.append(input);}
- let isolatedGroup=null;const navigation=document.createElement('div');navigation.className='cost-offline-navigation';const reset=element('button',{type:'button',className:'btn'},'↶ Restablecer informe'),label=element('span');navigation.append(reset,label);$('cost-metrics').before(navigation);
- reset.onclick=()=>{isolatedGroup=null;Object.assign(CostView,structuredClone(initial),{package:'all',activity:'all'});renderCostDashboard();};
+ const navigation=document.createElement('div');navigation.className='cost-offline-navigation';const reset=element('button',{type:'button',className:'btn'},'↶ Restablecer informe'),label=element('span');navigation.append(reset,label);$('cost-metrics').before(navigation);
+ reset.onclick=()=>{Object.assign(CostView,structuredClone(initial),{package:'all',activity:'all'});renderCostDashboard();};
  const dock=element('nav',{id:'vawt-cost-dock',ariaLabel:'Aislar conjuntos del informe exportado'});dock.dataset.collapsed=String(innerWidth<700);
  const toggle=element('button',{type:'button',className:'cost-dock-toggle',ariaExpanded:String(innerWidth>=700)},innerWidth<700?'Conjuntos ›':'‹ Conjuntos');toggle.onclick=()=>{const collapsed=dock.dataset.collapsed!=='true';dock.dataset.collapsed=String(collapsed);toggle.textContent=collapsed?'Conjuntos ›':'‹ Conjuntos';toggle.setAttribute('aria-expanded',String(!collapsed));};dock.append(toggle);
- const groupTitles={rotor:'Costos del rotor',tower:'Costos de la torre',foundation:'Costos de fundación y morteros'};
  for(const [group,text]of [['rotor','Aislar rotor'],['tower','Aislar torre'],['foundation','Aislar fundación y morteros'],['all','Restablecer']]){
   const button=element('button',{type:'button',className:'cost-dock-action'},text);button.dataset.group=group;
   const names=[...new Set([...context.map(costLayer),...(snapshot.model?.meshes||[]).map(product=>product.layer)].filter(name=>turbineLayerGroup(name)===group))];
   button.disabled=group!=='all'&&!names.length;if(button.disabled)button.title='Este conjunto no está incluido en el alcance exportado';
-  button.onclick=()=>{if(group==='all'){reset.click();return;}isolatedGroup=group;Object.assign(CostView,{selectedLayers:names,modelSelectionActive:true,layer:names.length===1?names[0]:'all',package:'all',activity:'all',search:''});renderCostDashboard();};dock.append(button);
+  button.onclick=()=>{if(group==='all'){reset.click();return;}const selected=costToggleDockGroup(costDockGroups(),group),layers=[...new Set([...context.map(costLayer),...(snapshot.model?.meshes||[]).map(product=>product.layer)].filter(name=>selected.includes(turbineLayerGroup(name))))];Object.assign(CostView,{selectedLayers:layers,modelSelectionActive:true,layer:layers.length===1?layers[0]:'all',package:'all',activity:'all',search:''});renderCostDashboard();};dock.append(button);
  }
  document.body.append(dock);
  const visualReady=typeof updateCostPreview==='function'&&typeof THREE!=='undefined';
  if(visualReady){CostPreview.sourceKey=snapshot.component;CostPreview.weightScope=CostView.layer+'::'+(CostView.selectedLayers||[]).slice().sort().join('|')+'::'+IFCView.offer;}
  navigateToStep=()=>{};
  renderCostDashboard=()=>{
-  const rows=costFilteredRows(),chartRows=costChartRows();renderCostTrace(chartRows);if(isolatedGroup)$('cost-section-title').textContent=groupTitles[isolatedGroup];else if(CostView.layer==='all'&&snapshot.title)$('cost-section-title').textContent=snapshot.title;
+  const rows=costFilteredRows(),chartRows=costChartRows();renderCostTrace(chartRows);
   renderCostKpis(chartRows,costStats(chartRows));renderCostAssemblyKpis(chartRows);renderCostLayers(chartRows);renderCostTable(rows);
   $('cost-table-count').textContent=rows.length+' partidas · USD';$('cost-empty').hidden=rows.length>0;
   label.textContent=(CostView.layer==='all'?'Alcance exportado':CostView.layer)+(CostView.package!=='all'?' › '+CostView.package:'')+' · '+rows.length+' partidas';
   for(const button of document.querySelectorAll('#cost-table .cost-layer-cell button'))button.remove();
   for(const select of document.querySelectorAll('#cost-table select')){const text=element('span',{},select.options[select.selectedIndex]?.textContent||'Sin capa asignada');select.replaceWith(text);}
-  for(const button of dock.querySelectorAll('[data-group]'))button.setAttribute('aria-pressed',String(button.dataset.group===(isolatedGroup||'all')));
+  const selected=costDockGroups();for(const button of dock.querySelectorAll('[data-group]'))button.setAttribute('aria-pressed',String(button.dataset.group==='all'?selected===null:!!selected?.includes(button.dataset.group)));
   if(visualReady)updateCostPreview();
   initCostExportTableViewport();
  };

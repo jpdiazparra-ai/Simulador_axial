@@ -128,6 +128,23 @@ if(missing.assemblies[0].kg!==null||missing.assemblies[1].kg!==0||missing.total!
 `,scope);
 ''')
 
+    def test_dock_can_combine_toggle_and_clear_groups(self):
+        self.run_js(r'''
+vm.runInContext(`
+IFCView.data=model;CostView.data=costs;
+if(costDockGroups()!==null)throw Error('overview must remain distinct from empty');
+const apply=group=>{const selected=costToggleDockGroup(costDockGroups(),group),layers=model.layers.map(l=>l.name).filter(name=>selected.includes(turbineLayerGroup(name)));Object.assign(CostView,{selectedLayers:layers,modelSelectionActive:true,layer:layers.length===1?layers[0]:'all'});return selected;};
+apply('rotor');apply('tower');
+if(costDockGroups().join()!=='rotor,tower'||costSectionTitle()!=='Costos de rotor y torre')throw Error('combined state/title');
+if(costChartRows().some(r=>!['rotor','tower'].includes(turbineLayerGroup(costLayer(r)))))throw Error('unselected costs leaked');
+apply('rotor');if(costDockGroups().join()!=='tower')throw Error('toggle must preserve other active groups');
+apply('foundation');if(costDockGroups().join()!=='tower,foundation')throw Error('second combination');
+apply('tower');apply('foundation');
+if(costDockGroups().length||costChartRows().length||!costEmptyModelSelection())throw Error('empty must not mean everything');
+const saved=captureCostViewState();if(!saved.modelSelectionActive||saved.selectedLayers.length)throw Error('empty persistence');
+`,scope);
+''')
+
     def test_snapshot_includes_same_group_totals(self):
         self.run_js(r'''
 vm.runInContext(`

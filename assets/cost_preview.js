@@ -15,6 +15,7 @@ function updateCostPreview(){
  $('cost-preview-open').hidden=!matched.length;$('cost-preview-open').textContent=selected?'Ver componente en punto 5 ↗':'Abrir en punto 5 ↗';
  $('cost-preview-open').onclick=()=>selected?showIfcWeightGroup(selected):multi?showCostLayers3D(CostView.selectedLayers):layer==='all'?(navigateToStep('step-5'),$('ifc-viewport').scrollIntoView({block:'center'})):showCostLayer3D(layer);
  $('cost-preview-empty').hidden=matched.length>0;if(!matched.length)$('cost-preview-empty').textContent=$('cost-preview-note').textContent;$('cost-preview-canvas').hidden=!matched.length;$('cost-preview-tools').hidden=!matched.length;
+ if(!matched.length&&p.ready){p.group.clear();p.displaySignature=null;p.dirty=true;}
  if(!matched.length||!p.visible)return;if(!p.ready){try{createCostPreview();}catch(e){$('cost-preview-empty').hidden=false;$('cost-preview-empty').textContent='Vista 3D no disponible: '+e.message;return;}}
  const signature=scope+'::'+(p.sourceKey||'all');
  if(p.displaySignature!==signature){p.group.clear();for(const product of matched){let mesh=p.cache.get(product.id);if(!mesh){mesh=makeIfcProductMesh(product,THREE);p.cache.set(product.id,mesh);}p.group.add(mesh);}p.layer=layer;p.offer=IFCView.offer;p.displaySignature=signature;p.bounds=new THREE.Box3().setFromObject(p.group);p.bounds.getCenter(p.target);p.radius=Math.max(.2,p.bounds.getSize(new THREE.Vector3()).length()/2);p.azimuth=-Math.PI/4;p.polar=1.1;fitCostPreview();}p.dirty=true;renderCostPreview();

@@ -163,6 +163,15 @@ function costPercent(value,total){return value!==null&&Number.isFinite(value)&&t
 function costParentRows(){return costLayerSearchRows().filter(r=>CostView.package==='all'||r.package===CostView.package);}
 function costNavigation(level){const v=CostView;v.activity='all';if(level==='overview'){v.layer='all';v.selectedLayers=[];v.modelSelectionActive=false;v.package='all';}else if(level==='selection'){v.layer='all';v.package='all';}else if(level==='layer')v.package='all';v.search='';$('cost-layer').value=v.layer;$('cost-search').value='';costSave();renderCostDashboard();}
 function showCostActivity(row){const v=CostView;v.layer=costLayer(row)||'unassigned';v.package=row.package;v.activity=row.id;v.search='';$('cost-layer').value=v.layer;$('cost-search').value='';costSave();renderCostDashboard();}
+// Null means the unrestricted overview; an empty array means no selected assemblies.
+function costDockGroups(state=CostView){
+ let layers;
+ if(state.modelSelectionActive||(state.selectedLayers||[]).length)layers=state.selectedLayers||[];
+ else if(state.layer!=='all')layers=[state.layer];
+ else return null;
+ return ['rotor','tower','foundation'].filter(group=>layers.some(name=>turbineLayerGroup(name)===group));
+}
+function costToggleDockGroup(selected,group){const next=new Set(selected||[]);if(next.has(group))next.delete(group);else next.add(group);return ['rotor','tower','foundation'].filter(key=>next.has(key));}
 function costSectionTitle(state=CostView,allLayers=IFCView.data?.layers?.map(layer=>layer.name)||[]){
  const general='Costos de la turbina y sus capas',selected=state.selectedLayers||[];
  if(!state.modelSelectionActive||!selected.length||allLayers.every(name=>selected.includes(name)))return general;
@@ -170,6 +179,8 @@ function costSectionTitle(state=CostView,allLayers=IFCView.data?.layers?.map(lay
   const members=allLayers.filter(name=>turbineLayerGroup(name)===group);
   if(members.length===selected.length&&members.every(name=>selected.includes(name))&&(state.layer==='all'||selected.includes(state.layer)))return title;
  }
+ const chosen=costDockGroups(state),members=allLayers.filter(name=>chosen?.includes(turbineLayerGroup(name)));
+ if(chosen?.length===2&&members.length===selected.length&&members.every(name=>selected.includes(name)))return 'Costos de '+chosen.map(key=>({rotor:'rotor',tower:'torre',foundation:'fundación y morteros'})[key]).join(' y ');
  return general;
 }
 function renderCostTrace(rows){const v=CostView;$('cost-section-title').textContent=costSectionTitle();if(typeof updateCostDockSelection==='function')updateCostDockSelection();const filtered=v.layer!=='all'||costMultiActive()||costEmptyModelSelection();$('step-6').dataset.costLevel=v.activity!=='all'?'activity':filtered?'layer':'overview';}
