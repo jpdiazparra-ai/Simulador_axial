@@ -443,6 +443,16 @@ html[data-theme=dark] .cost-level-number{color:#14202c}
  #step-5 .ifc-main{height:520px}
 }
 
+
+/* One chart heading, one compact legend and the two comparison selectors. */
+.cost-focus-layout .cost-board-chart{border:0;border-radius:0;box-shadow:none;background:transparent;padding:0;margin:0}
+.cost-focus-layout .cost-board-top{display:flex;align-items:center;justify-content:space-between;gap:8px 14px;flex-wrap:wrap;padding:0 0 9px;margin:0;border-bottom:1px solid var(--line)}
+.cost-focus-layout .cost-board-top .cost-board-legend{flex:1 1 210px;border:0;padding:0;margin:0;gap:8px 14px;font-size:9px}
+.cost-focus-layout .cost-board-top .cost-donut-switch{flex:none;margin:0}
+.cost-focus-layout .cost-board-top .cost-donut-switch button{padding:5px 8px;font-size:10px}
+.cost-focus-layout .cost-chart-navigation{margin:8px 0 10px;gap:8px}
+.cost-focus-layout .cost-chart-context{margin:0;font-size:10px}
+@media(max-width:600px){.cost-focus-layout .cost-board-top{gap:8px}.cost-focus-layout .cost-board-top .cost-board-legend{flex-basis:100%}.cost-focus-layout .cost-board-top .cost-donut-switch{margin-left:auto}}
 </style></head><body><div class="pagina">
 <div class="cabeza"><div><h2 class="results-title">Análisis del rotor</h2><p class="sub" id="contexto"></p></div><button class="btn" id="tema">Tema</button></div>
 <aside class="source-explanation"><span id="source-label"></span><p id="source-explanation"></p></aside>

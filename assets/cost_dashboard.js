@@ -89,16 +89,16 @@ function renderCostLayers(rows){
  const v=CostView,box=$('cost-layer-chart'),board=costBoardData(rows),{by,base,groups,stats,positive,minimum,maximum}=board;
  box.replaceChildren();
  const label=base==='current'?'Costo al detalle':'Costo por mayor';
- $('cost-chart-title').textContent=by==='layer'?'Estructura de costos · visión ejecutiva':by==='package'?'Comparación de paquetes de la capa':'Comparación de actividades del paquete';
+ $('cost-chart-title').textContent=by==='layer'?'Costos por capa':by==='package'?'Costos por paquete':'Costos por actividad';
  $('cost-chart-context').textContent=costLayerScopeLabel()+' · '+rows.length+' partidas';
  $('cost-chart-back').hidden=v.layer==='all'&&!costMultiActive();$('cost-chart-back').textContent='← Atrás · capas';$('cost-chart-back').onclick=costChartBack;
  const signature=[v.milestone,v.layer,(v.selectedLayers||[]).join(','),v.search,base].join('|');if(v.chartSignature!==signature){v.chartSignature=signature;v.chartExpanded=false;}
  const panel=element('section',{className:'cost-board-chart',ariaLabel:'Comparación ejecutiva de costo al detalle y costo por mayor'});
- const top=element('div',{className:'cost-board-top'}),title=element('div');title.append(element('span',{className:'cost-board-eyebrow'},'LECTURA PARA DIRECTORIO'),element('h3',{},'Dónde se concentra la inversión'),element('p',{},'Costo al detalle y costo por mayor, lado a lado. Importes disponibles de la selección en USD.'));
+ const top=element('div',{className:'cost-board-top'});
  const switcher=element('div',{className:'cost-donut-switch',role:'group',ariaLabel:'Base para ordenar y calcular participación'});
- for(const [key,name]of [['current','Costo al detalle'],['previous','Costo por mayor']]){const button=element('button',{type:'button',ariaPressed:String(base===key)},name);button.dataset.costBase=key;button.onclick=()=>{v.chartBase=key;costSave();renderCostDashboard();};switcher.append(button);}top.append(title,switcher);panel.append(top);
- if(!groups.length){panel.append(element('p',{className:'nota'},'No hay partidas en esta selección.'));box.append(panel);$('cost-chart-hint').textContent='Ajusta los filtros para revisar los costos.';return;}
- const legend=element('div',{className:'cost-board-legend'});for(const [key,name]of [['current','Costo al detalle'],['previous','Costo por mayor']]){const item=element('span',{className:key});item.append(element('i',{ariaHidden:'true'}),element('span',{},name));legend.append(item);}legend.append(element('small',{},'Escala común · USD'));panel.append(legend);
+ for(const [key,name]of [['current','Costo al detalle'],['previous','Costo por mayor']]){const button=element('button',{type:'button',ariaPressed:String(base===key)},name);button.dataset.costBase=key;button.onclick=()=>{v.chartBase=key;costSave();renderCostDashboard();};switcher.append(button);}
+ if(!groups.length){top.append(switcher);panel.append(top);panel.append(element('p',{className:'nota'},'No hay partidas en esta selección.'));box.append(panel);$('cost-chart-hint').textContent='Ajusta los filtros para revisar los costos.';return;}
+ const legend=element('div',{className:'cost-board-legend'});for(const [key,name]of [['current','Costo al detalle'],['previous','Costo por mayor']]){const item=element('span',{className:key});item.append(element('i',{ariaHidden:'true'}),element('span',{},name));legend.append(item);}top.append(legend,switcher);panel.append(top);
  const table=element('div',{className:'cost-board-rows'}),page=v.chartExpanded?groups:groups.slice(0,8),span=maximum-minimum||1;
  const navigate=group=>{if(by==='layer')showLayerCosts(group.key==='Sin capa asignada'?'unassigned':group.key,true);else if(by==='package'){v.package=group.key;v.activity='all';costSave();renderCostDashboard();}else showCostActivity(group.rows[0]);};
  page.forEach((group,index)=>{
