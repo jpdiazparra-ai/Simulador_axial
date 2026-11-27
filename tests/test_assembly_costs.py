@@ -45,6 +45,32 @@ if(turbineLayerGroup('Fundación')!==null||turbineLayerGroup('Sistema Freno')!==
 `,scope);
 ''')
 
+    def test_group_kpis_only_show_in_complete_overview(self):
+        self.run_js(r'''
+vm.runInContext(`
+IFCView.data=model;CostView.data=costs;
+const full=model.layers.map(l=>l.name);
+if(!costAssemblyKpisVisible())throw Error('initial overview should show groups');
+CostView.modelSelectionActive=true;CostView.selectedLayers=[];
+if(costAssemblyKpisVisible())throw Error('empty selection should hide groups');
+CostView.selectedLayers=full.slice(1);
+if(costAssemblyKpisVisible())throw Error('partial selection should hide groups');
+CostView.selectedLayers=full;
+if(!costAssemblyKpisVisible())throw Error('all checked layers should show groups');
+CostView.layer='Fundación y morteros';
+renderCostAssemblyKpis(costScopedRows());
+if(!$('cost-assembly-kpis').hidden||$('cost-assembly-grid').children.length)throw Error('single foundation must hide/clear groups');
+CostView.layer='all';CostView.package='one package';
+if(costAssemblyKpisVisible())throw Error('package scope should hide groups');
+CostView.package='all';CostView.activity='A1';
+if(costAssemblyKpisVisible())throw Error('activity scope should hide groups');
+CostView.activity='all';CostView.search='fundación';
+if(costAssemblyKpisVisible())throw Error('search scope should hide groups');
+CostView.search='';renderCostAssemblyKpis(costScopedRows());
+if($('cost-assembly-kpis').hidden||$('cost-assembly-grid').children.length!==3)throw Error('restore complete overview');
+`,scope);
+''')
+
     def test_snapshot_includes_same_group_totals(self):
         self.run_js(r'''
 vm.runInContext(`

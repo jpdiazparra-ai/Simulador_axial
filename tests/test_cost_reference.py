@@ -122,10 +122,11 @@ if(costCsvData().rows.length!==1)throw Error('Selection lost');
         result=subprocess.run(['node','-e',script],cwd=ROOT,text=True,capture_output=True)
         self.assertEqual(result.returncode,0,result.stderr)
 
-    def test_rate_control_is_in_the_cost_trace_panel_and_headers_use_usd(self):
+    def test_rate_control_remains_without_panorama_panel_and_headers_use_usd(self):
         from html.parser import HTMLParser
         html=(ROOT/'assets/results_visualizer.html').read_text()
-        panel=html[html.index('<div class="cost-trace-panel">'):html.index('<div class="cost-metrics"')]
+        panel=html[html.index('<div class="cost-utility-bar">'):html.index('<div class="cost-metrics"')]
+        self.assertNotIn('<div class="cost-trace-panel">',html)
         self.assertIn('id="cost-dollar-rate"',panel)
         self.assertIn('CLP por 1 USD',panel)
         table=html[html.index('<table id="cost-table"'):html.index('</thead>',html.index('<table id="cost-table"'))]
