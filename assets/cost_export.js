@@ -2,7 +2,7 @@
 function costExportEscape(value){return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));}
 function costAnalysisSnapshot(){
  const state=captureCostViewState(),table=costFilteredRows(),context=costChartRows(),board=costBoardData(context);
- return {generatedAt:new Date().toISOString(),state,variant:IFCView.offer,tableRows:table.map(row=>({...row})),tableStats:costStats(table),contextCount:context.length,
+ return {generatedAt:new Date().toISOString(),state,variant:IFCView.offer,tableRows:table.map(row=>({...row})),tableStats:costStats(table),contextCount:context.length,assembly:costAssemblySummary(context),
   board:{...board,groups:board.groups.map(group=>({key:group.key,name:group.name,count:group.rows.length,stats:{...group.stats}}))},
   source:{...CostView.data.metadata},component:CostPreview.sourceKey||null};
 }

@@ -23,3 +23,9 @@ La tabla conserva Criterio y Cantidad, normaliza HH/hh y muestra unitarios calcu
 ## Geometría V5
 
 La geometría activa de los puntos 5/6 procede del HTML V80 v5, con variantes A/B. El v4 permanece archivado. Los nombres canónicos de capa se conservan para enlazar los presupuestos de la planilla; la capa original del HTML aparece en cada ficha. La ausencia de anillo en A se muestra como ausencia de geometría, sin borrar partidas presupuestarias. Cambiar a B actualiza la imagen, no recalcula ni reemplaza presupuestos. Las fichas de costeo del HTML v5 se identifican por separado.
+
+## Grupos rotor, torre y fundación
+
+Los botones del punto 5 y los tres KPI del punto 6 comparten `turbineLayerGroup`, evitando diferencias entre aislamiento geométrico y costos. Rotor agrupa las capas Rotor: … y Tren de potencia. Torre comprende exactamente Torre: montantes y riostras, Pernos y fijaciones de torre, Placas y conexiones de torre y Cabezal y soportes nuevos. Fundación incluye exclusivamente Fundación y morteros. Las demás categorías de fuente no se reasignan automáticamente.
+
+Los KPI utilizan el contexto de capas del gráfico del punto 6 y la base de comparación activa (costo al detalle o costo por mayor). La cifra se convierte a USD con el tipo de cambio seleccionado; el porcentaje divide el importe disponible del grupo por el total disponible de esa selección. Se indica cualquier costo fuera de los tres grupos para explicar porcentajes que no sumen 100 %. Las filas pendientes permanecen pendientes; un grupo sin partidas en el alcance se muestra en cero, y un grupo con partidas sin importes se muestra Sin dato. Cada fila se cuenta una sola vez. El HTML exportado conserva las tarjetas y su resumen de grupos en el JSON de auditoría.
