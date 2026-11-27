@@ -71,6 +71,25 @@ if($('cost-assembly-kpis').hidden||$('cost-assembly-grid').children.length!==3)t
 `,scope);
 ''')
 
+    def test_power_cost_uses_wholesale_80_kw_and_exchange_rate(self):
+        self.run_js(r'''
+vm.runInContext(`
+const rows=[{current:100000000,previous:78400000},{current:100,previous:null}];
+const render=()=>{renderCostKpis(rows,costStats(rows));return $('cost-metrics').children;};
+CostView.fxRate=980;let cards=render();
+if(cards.length!==5||!cards[3].className.includes('capacity')||!cards[2].className.includes('delta'))throw Error('power KPI must follow comparison');
+let texts=cards[3].children.map(c=>c.textContent);
+if(!texts.includes('US$ 1000.00 / kW')||!texts.includes('US$ 1000000.00 / MW'))throw Error('wholesale / 80 kW or / 0.08 MW');
+if(!texts.some(t=>t.includes('subtotal parcial')))throw Error('missing costs must remain visible');
+CostView.fxRate=1000;cards=render();
+if(!cards[3].children.some(c=>c.textContent==='US$ 980.00 / kW'))throw Error('rate not applied');
+rows[0].previous=null;cards=render();
+if(!cards[3].children.some(c=>c.textContent==='Sin dato / kW'))throw Error('missing is not zero');
+rows[0].previous=0;cards=render();
+if(!cards[3].children.some(c=>c.textContent==='US$ 0.00 / kW'))throw Error('published zero should be preserved');
+`,scope);
+''')
+
     def test_snapshot_includes_same_group_totals(self):
         self.run_js(r'''
 vm.runInContext(`
