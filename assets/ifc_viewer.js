@@ -72,13 +72,28 @@ function modelWeightGroups(products,offer){
  }
  return [...groups.values()];
 }
+function modelAssemblyMasses(groups){
+ const classify=typeof turbineLayerGroup==='function'?turbineLayerGroup:()=>null;
+ const assemblies=[['rotor','Rotor'],['tower','Torre'],['foundation','Fundación']].map(([key,label])=>{
+  const members=groups.filter(group=>classify(group.layer)===key),known=members.filter(group=>group.totalKg!==null);
+  return{key,label,count:members.length,known:known.length,kg:known.length?known.reduce((sum,group)=>sum+group.totalKg,0):null};
+ });
+ return{assemblies,complete:assemblies.every(group=>group.count>0),total:assemblies.some(group=>group.known>0)?assemblies.reduce((sum,group)=>sum+(group.kg??0),0):null};
+}
 function renderModelWeights(target,groups,title,onPick,activeKey=null){
  const box=$(target);if(!box)return;box.replaceChildren();
  const section=element('section',{className:'model-weight-panel'}),heading=element('div',{className:'model-weight-heading'});
- heading.append(element('span',{},'PESOS DECLARADOS · HTML V5'),element('h4',{},title));section.append(heading);
+ heading.append(element('span',{},'PESOS DECLARADOS · kg · HTML V5'),element('h4',{},title));section.append(heading);
  if(!groups.length){section.append(element('p',{className:'model-weight-note'},'No hay componentes del HTML v5 vinculados a esta selección.'));box.append(section);return;}
  const known=groups.filter(group=>group.totalKg!==null),total=known.reduce((sum,group)=>sum+group.totalKg,0),summary=element('div',{className:'model-weight-summary'});
- for(const [label,value]of [['Grupos de componentes',String(groups.length)],['Peso de grupos disponible',known.length?f(total,1)+' kg':'Sin dato']]){const item=element('div');item.append(element('span',{},label),element('strong',{},value));summary.append(item);}section.append(summary);
+ const mass=modelAssemblyMasses(groups);
+ if(mass.complete){summary.className+=' model-assembly-summary';summary.setAttribute('aria-label','Pesos en kg de rotor, torre, fundación y su suma');
+  for(const group of [...mass.assemblies,{key:'total',label:'Total',kg:mass.total,count:groups.length,known:known.length}]){
+   const item=element('div');item.dataset.massGroup=group.key;item.title=group.label+': '+(group.kg===null?'Sin dato':f(group.kg,1)+' kg')+(group.known<group.count?' · subtotal de pesos disponibles':'');item.append(element('span',{},group.label),element('strong',{},group.kg===null?'Sin dato':f(group.kg,1)));summary.append(item);
+  }
+ }else{summary.className+=' model-single-mass';const item=element('div');item.append(element('span',{},'Peso total disponible'),element('strong',{},known.length?f(total,1)+' kg':'Sin dato'));summary.append(item);}
+ section.append(summary);
+
  const scroll=element('div',{className:'model-weight-scroll',tabIndex:0,role:'region',ariaLabel:'Pesos de los componentes del HTML v5'}),table=element('table'),thead=element('thead'),headers=element('tr');
  for(const label of ['Componente','Cantidad','Peso unitario','Peso del grupo'])headers.append(element('th',{scope:'col'},label));thead.append(headers);table.append(thead);
  const body=element('tbody');for(const group of groups){const row=element('tr'),name=element('td'),button=element('button',{type:'button',className:'model-weight-select',ariaPressed:String(group.key===activeKey)},group.name);button.dataset.modelGroup=group.key;button.onclick=()=>onPick(group);name.append(button,element('small',{},group.layer));row.append(name,element('td',{},String(group.quantity)),element('td',{},group.unitWeight),element('td',{},group.totalWeight));body.append(row);}table.append(body);scroll.append(table);section.append(scroll);

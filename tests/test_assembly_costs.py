@@ -111,6 +111,23 @@ if(!cards[3].children.some(c=>c.textContent==='US$ 0.00 / kW'))throw Error('publ
 `,scope);
 ''')
 
+    def test_declared_mass_splits_groups_without_duplicate_mesh_weight(self):
+        self.run_js(r'''
+vm.runInContext(`
+for(const variant of ['A','B']){
+ const groups=modelWeightGroups(model.meshes,variant),mass=modelAssemblyMasses(groups);
+ if(!mass.complete)throw Error('all three assemblies must be present');
+ const total=groups.reduce((sum,g)=>sum+(g.totalKg??0),0);
+ if(Math.abs(mass.total-total)>1e-7)throw Error('assembly mass does not reconcile with declared groups');
+ if(mass.assemblies.find(g=>g.key==='foundation').kg!==41785)throw Error('foundation mass');
+ const rotor=groups.filter(g=>turbineLayerGroup(g.layer)==='rotor');
+ if(modelAssemblyMasses(rotor).complete)throw Error('isolated rotor should use the single-mass summary');
+}
+const missing=modelAssemblyMasses([{layer:'Rotor: palas',totalKg:null},{layer:'Torre: montantes y riostras',totalKg:0},{layer:'Fundación y morteros',totalKg:10}]);
+if(missing.assemblies[0].kg!==null||missing.assemblies[1].kg!==0||missing.total!==10)throw Error('missing/zero mass changed');
+`,scope);
+''')
+
     def test_snapshot_includes_same_group_totals(self):
         self.run_js(r'''
 vm.runInContext(`
