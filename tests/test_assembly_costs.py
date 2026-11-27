@@ -45,7 +45,7 @@ if(turbineLayerGroup('Fundación')!==null||turbineLayerGroup('Sistema Freno')!==
 `,scope);
 ''')
 
-    def test_group_kpis_only_show_in_complete_overview(self):
+    def test_group_kpis_show_for_two_or_more_selected_assemblies(self):
         self.run_js(r'''
 vm.runInContext(`
 IFCView.data=model;CostView.data=costs;
@@ -54,18 +54,25 @@ if(!costAssemblyKpisVisible())throw Error('initial overview should show groups')
 CostView.modelSelectionActive=true;CostView.selectedLayers=[];
 if(costAssemblyKpisVisible())throw Error('empty selection should hide groups');
 CostView.selectedLayers=full.slice(1);
-if(costAssemblyKpisVisible())throw Error('partial selection should hide groups');
+if(!costAssemblyKpisVisible())throw Error('multiple assemblies must retain their KPI');
+CostView.selectedLayers=full.filter(name=>['rotor','tower'].includes(turbineLayerGroup(name)));renderCostAssemblyKpis(costChartRows());
+const cards=$('cost-assembly-grid').children;
+if($('cost-assembly-kpis').hidden||cards.length!==2||cards.map(c=>c.dataset.costAssembly).join()!=='rotor,tower')throw Error('selected pair cards');
+if($('cost-assembly-grid').dataset.columns!=='2')throw Error('pair layout');
+const summary=costAssemblySummary(costChartRows());if(Math.abs(summary.groups.filter(g=>g.count).reduce((sum,g)=>sum+g.percent,0)-100)>1e-7)throw Error('selected denominator');
+CostView.selectedLayers=full.filter(name=>turbineLayerGroup(name)==='rotor');
+if(costAssemblyKpisVisible())throw Error('one assembly should hide group comparisons');
 CostView.selectedLayers=full;
 if(!costAssemblyKpisVisible())throw Error('all checked layers should show groups');
 CostView.layer='Fundación y morteros';
 renderCostAssemblyKpis(costScopedRows());
 if(!$('cost-assembly-kpis').hidden||$('cost-assembly-grid').children.length)throw Error('single foundation must hide/clear groups');
 CostView.layer='all';CostView.package='one package';
-if(costAssemblyKpisVisible())throw Error('package scope should hide groups');
+if(!costAssemblyKpisVisible())throw Error('package drilldown must retain multi-assembly context');
 CostView.package='all';CostView.activity='A1';
 if(costAssemblyKpisVisible())throw Error('activity scope should hide groups');
 CostView.activity='all';CostView.search='fundación';
-if(costAssemblyKpisVisible())throw Error('search scope should hide groups');
+if(!costAssemblyKpisVisible())throw Error('multi-assembly selection must retain comparisons during search');
 CostView.search='';renderCostAssemblyKpis(costScopedRows());
 if($('cost-assembly-kpis').hidden||$('cost-assembly-grid').children.length!==3)throw Error('restore complete overview');
 `,scope);
