@@ -1,0 +1,7698 @@
+{
+  "metadata": {
+    "filename": "ENSAMBLE TURBINA 80KW_1.IFC",
+    "sha256": "649e6574fcefc2376ea39cc44bfb8b52cb0e3ef8af579caa340697737b61fb90",
+    "previousModelSha": "ae9eaaed7913c150e051470066938e4ea178adbb961f5425c89df1298cfdb880",
+    "schema": "IFC2X3",
+    "sourceType": "IFC",
+    "label": "Ensamble 80 kW · IFC",
+    "units": "m",
+    "products": 378,
+    "meshes": 378,
+    "vertices": 66272,
+    "triangles": 132432,
+    "bounds": [
+      [
+        -4.118620361347717,
+        -6.430659502404674,
+        -5.475583648681638
+      ],
+      [
+        7.126771694619485,
+        6.421507813137972,
+        8.775583648681643
+      ]
+    ],
+    "axis": [
+      0,
+      0,
+      0
+    ],
+    "diameter": 14.265814762602632,
+    "bladeHeight": 14.251167297363281,
+    "bladeCount": 3,
+    "chord": null,
+    "sweptArea": 203.30451281504494,
+    "generatorDeclaredKW": null,
+    "gearRatioDeclared": null,
+    "defaultOffer": "IFC",
+    "offers": {
+      "IFC": {
+        "label": "IFC · Ensamble turbina 80 kW",
+        "description": "SolidWorks · archivo suministrado · sin torre ni fundación y sin pesos declarados",
+        "meshes": 378
+      }
+    },
+    "converter": "IfcOpenShell 0.9.0.post1",
+    "coordinateTransform": {
+      "rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "translation": [
+        -0.0,
+        -0.0,
+        0.0
+      ],
+      "sourceVerticalAxis": 1
+    },
+    "omitted": [],
+    "missingGeometryGroups": [
+      "tower",
+      "foundation"
+    ],
+    "weightStatus": "No mass quantities or property sets are provided by this IFC"
+  },
+  "layers": [
+    {
+      "name": "Rotor: buje y eje",
+      "count": 25,
+      "rotating": true,
+      "color": [
+        0.6509803921568628,
+        0.6196078431372549,
+        0.5882352941176471
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Rotor: brazos",
+      "count": 81,
+      "rotating": true,
+      "color": [
+        0.6509803921568628,
+        0.6196078431372549,
+        0.5882352941176471
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Rotor: palas",
+      "count": 66,
+      "rotating": true,
+      "color": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Rotor: uniones",
+      "count": 204,
+      "rotating": true,
+      "color": [
+        0.6980392156862745,
+        0.6980392156862745,
+        0.6980392156862745
+      ],
+      "defaultVisible": true
+    },
+    {
+      "name": "Tren de potencia",
+      "count": 2,
+      "rotating": false,
+      "color": [
+        0.792156862745098,
+        0.8196078431372549,
+        0.9333333333333333
+      ],
+      "defaultVisible": true
+    }
+  ],
+  "products": [
+    {
+      "id": 42,
+      "guid": "2VK4Gjhh9DMfr95xH6pqfr",
+      "name": "EJE 12IN SCH80 ASTM A53B · CAERIA 12IN SCH80",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.16076920926570892,
+          -0.1619500070810318,
+          0.0
+        ],
+        [
+          0.16076920926570892,
+          0.1619500070810318,
+          2.0
+        ]
+      ]
+    },
+    {
+      "id": 1930,
+      "guid": "0IUMdknOjEv8iqJF10K4pD",
+      "name": "EJE 12IN SCH80 ASTM A53B · ANILLO ACERO INTERIOR",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.15139342844486237,
+          -0.15164999663829803,
+          0.925000011920929
+        ],
+        [
+          0.15139342844486237,
+          0.15164999663829803,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": 4298,
+      "guid": "0s2BzCSKT1lP9ACsB1vbg$",
+      "name": "EJE 12IN SCH80 ASTM A53B · Saliente-Extruir4",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.15139342844486237,
+          -0.15164999663829803,
+          0.0
+        ],
+        [
+          0.15139342844486237,
+          0.15164999663829803,
+          0.02500000037252903
+        ]
+      ]
+    },
+    {
+      "id": 6666,
+      "guid": "3n0T_q2eb59xNSHCU$ZP0R",
+      "name": "EJE 12IN SCH80 ASTM A53B · Saliente-Extruir5",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.1516929268836975,
+          -0.15195000171661377,
+          2.0
+        ],
+        [
+          0.1516929268836975,
+          0.15195000171661377,
+          2.0160000324249268
+        ]
+      ]
+    },
+    {
+      "id": 7954,
+      "guid": "3C43YAlc5EDPJ7CEV9Q6YG",
+      "name": "EJE 12IN SCH80 ASTM A53B · Saliente-Extruir6",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.07500000298023224,
+          -0.012500000186264515,
+          2.0160000324249268
+        ],
+        [
+          0.07500000298023224,
+          0.012500000186264515,
+          2.103400468826294
+        ]
+      ]
+    },
+    {
+      "id": 9026,
+      "guid": "38XWreZzD0zuQTF4ek5qv3",
+      "name": "EJE 12IN SCH80 ASTM A53B · Saliente-Extruir8",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          0.16175228357315063,
+          -0.00800000037997961,
+          1.840000033378601
+        ],
+        [
+          0.2529500126838684,
+          0.00800000037997961,
+          1.9600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 10290,
+      "guid": "0NNUsJ2wn7AAroyWvESaoc",
+      "name": "EJE 12IN SCH80 ASTM A53B · Saliente-Extruir9",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          0.15435932576656342,
+          -0.04899999871850014,
+          1.840000033378601
+        ],
+        [
+          0.2529500126838684,
+          -0.032999999821186066,
+          1.9600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 11506,
+      "guid": "3ml4tfpJv5Mg2cw4uX6IGn",
+      "name": "EJE 12IN SCH80 ASTM A53B · Simetra1",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          0.15435932576656342,
+          0.032999999821186066,
+          1.840000033378601
+        ],
+        [
+          0.2529500126838684,
+          0.04899999871850014,
+          1.9600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 12722,
+      "guid": "34T3SvqWn89eabfzqmYF3L",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizL2[1]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          0.15435932576656342,
+          0.032999999821186066,
+          1.340000033378601
+        ],
+        [
+          0.2529500126838684,
+          0.04899999871850014,
+          1.4600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 13938,
+      "guid": "3ZOg26wG9EV9orNp77i8Z6",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizL2[2]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          0.16175228357315063,
+          -0.00800000037997961,
+          1.340000033378601
+        ],
+        [
+          0.2529500126838684,
+          0.00800000037997961,
+          1.4600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 15202,
+      "guid": "2bY8NHX5b4z8VUHtY8fKPZ",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizL2[3]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          0.15435932576656342,
+          -0.04899999871850014,
+          1.340000033378601
+        ],
+        [
+          0.2529500126838684,
+          -0.032999999821186066,
+          1.4600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 16418,
+      "guid": "1GgatdlbrD0OKK8csyHWdr",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[1]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.09789615869522095,
+          0.15381023287773132,
+          1.340000033378601
+        ],
+        [
+          -0.034744419157505035,
+          0.24356111884117126,
+          1.4600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 17586,
+      "guid": "3vVFstZt17AQgxJOhjocty",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[2]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.16891025006771088,
+          -0.2025611251592636,
+          1.340000033378601
+        ],
+        [
+          -0.1078549399971962,
+          -0.10917910188436508,
+          1.4600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 18754,
+      "guid": "0sLlqVDez39gkOI9iwFprr",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[3]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.16891025006771088,
+          0.10917910188436508,
+          1.340000033378601
+        ],
+        [
+          -0.1078549399971962,
+          0.2025611251592636,
+          1.4600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 19922,
+      "guid": "1JF2te2Ff9AhpegyqSQkSz",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[4]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.09789615869522095,
+          -0.24356111884117126,
+          1.340000033378601
+        ],
+        [
+          -0.034744419157505035,
+          -0.15381023287773132,
+          1.4600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 21090,
+      "guid": "24OpKxP6v8iARTexhGkf9l",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[5]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.13340319693088531,
+          0.13608159124851227,
+          1.340000033378601
+        ],
+        [
+          -0.07394794374704361,
+          0.22306112945079803,
+          1.4600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 22258,
+      "guid": "07qQMqJGLD6QUQuhP8ZVNx",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[6]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.13340319693088531,
+          -0.22306112945079803,
+          1.340000033378601
+        ],
+        [
+          -0.07394794374704361,
+          -0.13608159124851227,
+          1.4600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 23426,
+      "guid": "1IMkS8wMDBR8ErKkLkQ3IS",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[7]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.16891025006771088,
+          0.10917910188436508,
+          1.840000033378601
+        ],
+        [
+          -0.1078549399971962,
+          0.2025611251592636,
+          1.9600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 24594,
+      "guid": "0peN6G1wTBA83y9B3tHkak",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[8]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.09789615869522095,
+          -0.24356111884117126,
+          1.840000033378601
+        ],
+        [
+          -0.034744419157505035,
+          -0.15381023287773132,
+          1.9600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 25762,
+      "guid": "263mYPqQD6thYKiBfKQHv9",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[9]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.09789615869522095,
+          0.15381023287773132,
+          1.840000033378601
+        ],
+        [
+          -0.034744419157505035,
+          0.24356111884117126,
+          1.9600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 26930,
+      "guid": "2gjnkn_J16mRxqXfVaK$oP",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[10]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.16891025006771088,
+          -0.2025611251592636,
+          1.840000033378601
+        ],
+        [
+          -0.1078549399971962,
+          -0.10917910188436508,
+          1.9600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 28098,
+      "guid": "2Th8vEkxj70w8eR5$mEP$R",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[11]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.13340319693088531,
+          0.13608159124851227,
+          1.840000033378601
+        ],
+        [
+          -0.07394794374704361,
+          0.22306112945079803,
+          1.9600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 29266,
+      "guid": "2EywR$NqD8xhNsWbwohhT4",
+      "name": "EJE 12IN SCH80 ASTM A53B · MatrizC1[12]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.13340319693088531,
+          -0.22306112945079803,
+          1.840000033378601
+        ],
+        [
+          -0.07394794374704361,
+          -0.13608159124851227,
+          1.9600000381469727
+        ]
+      ]
+    },
+    {
+      "id": 30434,
+      "guid": "30ytX8fq5ARhr0XmTMiaId",
+      "name": "EJE 12IN SCH80 ASTM A53B · Matriz de croquis1[1]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.15139342844486237,
+          -0.15164999663829803,
+          1.8624999523162842
+        ],
+        [
+          0.15139342844486237,
+          0.15164999663829803,
+          1.9375
+        ]
+      ]
+    },
+    {
+      "id": 32802,
+      "guid": "3tKTPRXFb9q8$0iPNBqBzl",
+      "name": "EJE 12IN SCH80 ASTM A53B · Matriz de croquis1[2]",
+      "assembly": "EJE 12IN SCH80 ASTM A53B",
+      "layer": "Rotor: buje y eje",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.15139342844486237,
+          -0.15164999663829803,
+          1.3624999523162842
+        ],
+        [
+          0.15139342844486237,
+          0.15164999663829803,
+          1.4375
+        ]
+      ]
+    },
+    {
+      "id": 35177,
+      "guid": "3SVnz0wXf229EqAZOetk18",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          0.2416863035599528,
+          -0.07500000298023267,
+          1.8628870955466375
+        ],
+        [
+          6.763021128621709,
+          0.0750000029802403,
+          5.18711290445337
+        ]
+      ]
+    },
+    {
+      "id": 36537,
+      "guid": "2qT$ZCSn18Bhmhe_IvTWlZ",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir2",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          6.6921378117471875,
+          -0.08500000089406183,
+          5.043671081303206
+        ],
+        [
+          6.781795545931875,
+          0.08500000089407775,
+          5.203166362193629
+        ]
+      ]
+    },
+    {
+      "id": 37201,
+      "guid": "0EtBMPjDf359mxaQlObhDB",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          6.71755754176787,
+          0.008000000379987498,
+          5.073172213512294
+        ],
+        [
+          6.829755444090931,
+          0.03299999982119416,
+          5.188985763690715
+        ]
+      ]
+    },
+    {
+      "id": 38369,
+      "guid": "3Ug$ZPOGzBTBsQkdu8sSLd",
+      "name": "BRAZO 150X150X5 · Simetra1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          6.71755754176787,
+          -0.03299999982117819,
+          5.073172213512294
+        ],
+        [
+          6.829755444090931,
+          -0.00800000037997152,
+          5.188985763690715
+        ]
+      ]
+    },
+    {
+      "id": 39537,
+      "guid": "2Tr_2VCobEzQNjjp07SHl1",
+      "name": "BRAZO 150X150X5 · Simetra2[1]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          0.1749519880907311,
+          0.008000000379979146,
+          1.861014236309293
+        ],
+        [
+          0.2871498904137919,
+          0.03299999982118581,
+          1.9768277864877144
+        ]
+      ]
+    },
+    {
+      "id": 40705,
+      "guid": "1xGTK$VLr0ZP5_DvsBdNj7",
+      "name": "BRAZO 150X150X5 · Simetra2[2]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          0.1749519880907311,
+          -0.032999999821186544,
+          1.861014236309293
+        ],
+        [
+          0.2871498904137919,
+          -0.008000000379979872,
+          1.9768277864877144
+        ]
+      ]
+    },
+    {
+      "id": 41873,
+      "guid": "2KRrwGbAD0Bu7Amraha$4W",
+      "name": "BRAZO 150X150X5 · Simetra2[3]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          0.2229118862497872,
+          -0.08500000089407012,
+          1.8468336378063785
+        ],
+        [
+          0.3125696204344739,
+          0.08500000089406946,
+          2.0063289186968016
+        ]
+      ]
+    },
+    {
+      "id": 42537,
+      "guid": "1iNeBU_YHBtwA3gg0ZKTvP",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir4",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          3.4100686786399366,
+          -0.08500000089406594,
+          3.386773631467736
+        ],
+        [
+          3.593801158841164,
+          0.08500000089407368,
+          3.4843428869448476
+        ]
+      ]
+    },
+    {
+      "id": 42625,
+      "guid": "1EnJzedKHFcgSzipDPCBHR",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir5",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          3.4223537185765407,
+          -0.00800000037997584,
+          3.2197208930421137
+        ],
+        [
+          3.582353716459549,
+          0.00800000037998375,
+          3.4697208985348174
+        ]
+      ]
+    },
+    {
+      "id": 45161,
+      "guid": "3tmmsuEb589uxgqYvSJTD5",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir6",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          6.639737131720523,
+          -0.1416666656732481,
+          5.069950993518603
+        ],
+        [
+          6.71406385929551,
+          -0.07500000298022431,
+          5.11752175127284
+        ]
+      ]
+    },
+    {
+      "id": 46497,
+      "guid": "0Sx4KppJb51B5$Z4lFT8Jq",
+      "name": "BRAZO 150X150X5 · Simetra3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          6.639737131720522,
+          0.07500000298024008,
+          5.069950993518603
+        ],
+        [
+          6.714063859295509,
+          0.1416666656732638,
+          5.11752175127284
+        ]
+      ]
+    },
+    {
+      "id": 47847,
+      "guid": "2V96zmZFnDZRocSznlt2v7",
+      "name": "naca0018 1400mm · Saliente-Extruir1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.875798045296498,
+          -0.7121519098039429,
+          -5.349999999999998
+        ],
+        [
+          7.125736756820508,
+          0.6740000000242506,
+          8.650000000000002
+        ]
+      ]
+    },
+    {
+      "id": 48967,
+      "guid": "0LljtNybXCa8nQaDiFZVQ_",
+      "name": "naca0018 1400mm · Saliente-Extruir2",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.879266506631204,
+          -0.7070726403947579,
+          -2.349999999999998
+        ],
+        [
+          7.122730387945005,
+          0.6699999998342593,
+          -1.349999999999997
+        ]
+      ]
+    },
+    {
+      "id": 50519,
+      "guid": "2trxH7PPDDQ8kz2O2lcSw4",
+      "name": "naca0018 1400mm · Simetra1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.879266506631204,
+          -0.7070726403947617,
+          4.650000000000002
+        ],
+        [
+          7.122730387945005,
+          0.6699999998342554,
+          5.650000000000003
+        ]
+      ]
+    },
+    {
+      "id": 52071,
+      "guid": "2xP_jbH5TBiPN36jB4$ivM",
+      "name": "naca0018 1400mm · Dar espesor1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8747431697438435,
+          -0.6985358247514527,
+          8.650000000000002
+        ],
+        [
+          7.126771694619484,
+          0.6740000000000416,
+          8.775583648681643
+        ]
+      ]
+    },
+    {
+      "id": 68671,
+      "guid": "0tBo18XDX89gBaNN5X$sV7",
+      "name": "naca0018 1400mm · Simetra2",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.874743169743844,
+          -0.6985358247514452,
+          -5.475583648681638
+        ],
+        [
+          7.126771694619485,
+          0.6740000000000492,
+          -5.349999999999997
+        ]
+      ]
+    },
+    {
+      "id": 85271,
+      "guid": "2UK5HzTJT2lfbVa5jTqw$y",
+      "name": "naca0018 1400mm · POLIURETANO",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.889207354385682,
+          -0.025000000929431554,
+          -5.461549854278561
+        ],
+        [
+          7.112307509977648,
+          0.025000010991505617,
+          8.76073684692383
+        ]
+      ]
+    },
+    {
+      "id": 86559,
+      "guid": "0DLZitV7fDlg8OjXtV9iU6",
+      "name": "naca0018 1400mm · Dar espesor2",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.900714492995569,
+          -0.0750000128503604,
+          -5.456289863586423
+        ],
+        [
+          7.100800557632276,
+          -0.02500000092942345,
+          8.757086658477785
+        ]
+      ]
+    },
+    {
+      "id": 91495,
+      "guid": "1ZtC2WPjX9GRNYXvc8wEd4",
+      "name": "naca0018 1400mm · Dar espesor3",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.891425906319448,
+          0.025000010991497512,
+          -5.461549854278561
+        ],
+        [
+          7.110088958043882,
+          0.07534328606169605,
+          8.76064672470093
+        ]
+      ]
+    },
+    {
+      "id": 95963,
+      "guid": "2dsTn3kVv1Feyo8Z0DZpjk",
+      "name": "naca0018 1400mm · Saliente-Extruir4[1]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.899697868723699,
+          -0.5000000247712834,
+          -1.875000095367429
+        ],
+        [
+          7.101816995639631,
+          -0.025000000929425337,
+          -1.8249999046325658
+        ]
+      ]
+    },
+    {
+      "id": 96243,
+      "guid": "3cWju6Pvz54e$d_CzCubgi",
+      "name": "naca0018 1400mm · Saliente-Extruir4[2]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.88483638187153,
+          0.025000010991503174,
+          -1.875000095367429
+        ],
+        [
+          7.116637988586255,
+          0.5000000050310391,
+          -1.8249999046325653
+        ]
+      ]
+    },
+    {
+      "id": 96739,
+      "guid": "0GRqU5e09F2v2X$52$A2Qw",
+      "name": "naca0018 1400mm · Dar espesor4",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.884778692025968,
+          0.025000010991503174,
+          -1.8249999046325658
+        ],
+        [
+          7.116757205326387,
+          0.5000009736065166,
+          -1.7749999523162812
+        ]
+      ]
+    },
+    {
+      "id": 102803,
+      "guid": "0Ah0nk37f9EQ_9g9SyJ$QZ",
+      "name": "naca0018 1400mm · Dar espesor5",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.899697868723699,
+          -0.5000000247712836,
+          -1.8249999046325658
+        ],
+        [
+          7.101816995639631,
+          -0.025000000929425337,
+          -1.7749999523162816
+        ]
+      ]
+    },
+    {
+      "id": 103875,
+      "guid": "06nX2GogD9ZxolozehaUN7",
+      "name": "naca0018 1400mm · Simetra3[1]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.884778692025968,
+          0.025000010991503174,
+          -1.9250000476837132
+        ],
+        [
+          7.116757205326387,
+          0.5000000050310391,
+          -1.8750000953674286
+        ]
+      ]
+    },
+    {
+      "id": 109891,
+      "guid": "28WcV0C75FyBBzfrJEc5Le",
+      "name": "naca0018 1400mm · Simetra3[2]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.899697868723699,
+          -0.5000000247712834,
+          -1.9250000476837132
+        ],
+        [
+          7.101816995639631,
+          -0.025000000929425226,
+          -1.875000095367429
+        ]
+      ]
+    },
+    {
+      "id": 110963,
+      "guid": "1Fjg9zC7P3fBGRmNKi86Dh",
+      "name": "naca0018 1400mm · Simetra4[1]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.899697868723699,
+          -0.5000000247712874,
+          5.074999952316286
+        ],
+        [
+          7.101816995639631,
+          -0.02500000092942911,
+          5.1249999046325705
+        ]
+      ]
+    },
+    {
+      "id": 112035,
+      "guid": "3ccDacMOz67PfNYL0Vxb3q",
+      "name": "naca0018 1400mm · Simetra4[2]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.884778692025968,
+          0.0250000109914994,
+          5.074999952316286
+        ],
+        [
+          7.116757205326387,
+          0.5000000050310354,
+          5.124999904632571
+        ]
+      ]
+    },
+    {
+      "id": 118051,
+      "guid": "076DxqsGX5mBpWHj1mG7pd",
+      "name": "naca0018 1400mm · Simetra4[3]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.88483638187153,
+          0.0250000109914994,
+          5.1249999046325705
+        ],
+        [
+          7.116637988586255,
+          0.5000000050310354,
+          5.175000095367435
+        ]
+      ]
+    },
+    {
+      "id": 118547,
+      "guid": "3LwIcNBEz1HRSj7WMQP10y",
+      "name": "naca0018 1400mm · Simetra4[4]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.899697868723699,
+          -0.5000000247712874,
+          5.1249999046325705
+        ],
+        [
+          7.101816995639631,
+          -0.02500000092942911,
+          5.175000095367434
+        ]
+      ]
+    },
+    {
+      "id": 118827,
+      "guid": "1UPEiYP5f9BeqpE0C$FBz5",
+      "name": "naca0018 1400mm · Simetra4[5]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.884778692025968,
+          0.02500001099149929,
+          5.175000095367434
+        ],
+        [
+          7.116757205326387,
+          0.5000009736065129,
+          5.225000047683719
+        ]
+      ]
+    },
+    {
+      "id": 124891,
+      "guid": "1X01tQxBfBuP1h3wVpUhif",
+      "name": "naca0018 1400mm · Simetra4[6]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.899697868723699,
+          -0.5000000247712874,
+          5.175000095367434
+        ],
+        [
+          7.101816995639631,
+          -0.02500000092942911,
+          5.225000047683718
+        ]
+      ]
+    },
+    {
+      "id": 125963,
+      "guid": "1hAZ92Rf93quqbI1crKPP1",
+      "name": "naca0018 1400mm · Cortar-Extruir1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.85575743635399,
+          -0.1999905953164801,
+          -2.0500000476837132
+        ],
+        [
+          6.909618629712889,
+          0.19997263457815784,
+          -1.6499999523162816
+        ]
+      ]
+    },
+    {
+      "id": 132339,
+      "guid": "25QJ3JdNv3rg0ph7OLA8YO",
+      "name": "naca0018 1400mm · Simetra5",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          6.85575743635399,
+          -0.1999905953164839,
+          4.949999952316286
+        ],
+        [
+          6.909618629712888,
+          0.19997263457815406,
+          5.350000047683718
+        ]
+      ]
+    },
+    {
+      "id": 138722,
+      "guid": "2AJAOQhvX9aOXr67OinE8x",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir1",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.860757432129511,
+          -0.17969547212119197,
+          -2.0300000071525552
+        ],
+        [
+          6.866757432181665,
+          0.17969547212128545,
+          -1.6699999928474405
+        ]
+      ]
+    },
+    {
+      "id": 142410,
+      "guid": "0fhtp3ZF55ZQmH66JgSfbJ",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir2",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.866757432181665,
+          -0.12806306779379945,
+          -1.7629839837551096
+        ],
+        [
+          6.8892874328385085,
+          -0.08406896889205075,
+          -1.7248839795589426
+        ]
+      ]
+    },
+    {
+      "id": 143578,
+      "guid": "3aUo30frD7rPOP15q_KZkX",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.866757432181665,
+          0.08701601624493498,
+          -1.7659310311079004
+        ],
+        [
+          6.8892874328385085,
+          0.125116020441102,
+          -1.7219369322061517
+        ]
+      ]
+    },
+    {
+      "id": 144746,
+      "guid": "1BZF$KIAv0QgCBDTVo7y9O",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.866757432181665,
+          0.08406896889214427,
+          -1.9751160204410532
+        ],
+        [
+          6.8892874328385085,
+          0.12806306779389295,
+          -1.9370160162448862
+        ]
+      ]
+    },
+    {
+      "id": 145914,
+      "guid": "1E1jMZYr5DM9DEZpxo6WEk",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.866757432181665,
+          -0.1251160204410085,
+          -1.978063067793844
+        ],
+        [
+          6.8892874328385085,
+          -0.08701601624484145,
+          -1.9340689688920953
+        ]
+      ]
+    },
+    {
+      "id": 147082,
+      "guid": "3RYwxjYVH3whvRBo2trpO3",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8892874328385085,
+          0.08406896889214431,
+          -1.9751160204410532
+        ],
+        [
+          6.911817433495352,
+          0.128063067793893,
+          -1.9370160162448862
+        ]
+      ]
+    },
+    {
+      "id": 148250,
+      "guid": "0ZV4Nfzn18rA$xYpdrUVxD",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8892874328385085,
+          -0.12511602044100847,
+          -1.978063067793844
+        ],
+        [
+          6.911817433495352,
+          -0.08701601624484141,
+          -1.9340689688920953
+        ]
+      ]
+    },
+    {
+      "id": 149418,
+      "guid": "1syklbP1XCaBgLO$LPBz11",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8892874328385085,
+          -0.12806306779379942,
+          -1.7629839837551096
+        ],
+        [
+          6.911817433495352,
+          -0.0840689688920507,
+          -1.7248839795589426
+        ]
+      ]
+    },
+    {
+      "id": 150586,
+      "guid": "1Qfzrd82r05AyvMvfSOA9J",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[4]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8892874328385085,
+          0.08701601624493502,
+          -1.7659310311079004
+        ],
+        [
+          6.911817433495352,
+          0.12511602044110207,
+          -1.7219369322061517
+        ]
+      ]
+    },
+    {
+      "id": 151754,
+      "guid": "2RIsON2IjD1h0BY$FBGXuq",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · EMPAQUETADURA EPDM 3MM",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.852757432155588,
+          -0.17969547212119197,
+          -2.0300000071525552
+        ],
+        [
+          6.855757432181665,
+          0.17969547212128545,
+          -1.6699999928474405
+        ]
+      ]
+    },
+    {
+      "id": 155455,
+      "guid": "2CLzE41U53UxYL8UCF0wGS",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.842757432181665,
+          -0.1796954721211772,
+          -2.030000007152558
+        ],
+        [
+          6.852757431958148,
+          0.17969547212130024,
+          -1.6699999928474432
+        ]
+      ]
+    },
+    {
+      "id": 159143,
+      "guid": "19QJvHVOzFFfalKWkFR4Bi",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir2",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.751844911296198,
+          -0.008000000379918264,
+          -1.909999998658896
+        ],
+        [
+          6.842757432181665,
+          0.00800000038004115,
+          -1.790000001341105
+        ]
+      ]
+    },
+    {
+      "id": 160359,
+      "guid": "0$4Mz7AsTESPkGAeXbplhM",
+      "name": "ACOPLE BRAZO-ASPA A36 · MatrizL1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.751844911296198,
+          -0.04899999871843879,
+          -1.909999998658896
+        ],
+        [
+          6.842757432181665,
+          -0.032999999821124525,
+          -1.790000001341105
+        ]
+      ]
+    },
+    {
+      "id": 161575,
+      "guid": "0UCvMa9lD5XwAOnNGl3sJC",
+      "name": "ACOPLE BRAZO-ASPA A36 · Simetra1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.751844911296198,
+          0.03299999982124741,
+          -1.909999998658896
+        ],
+        [
+          6.842757432181665,
+          0.04899999871856168,
+          -1.790000001341105
+        ]
+      ]
+    },
+    {
+      "id": 162791,
+      "guid": "1vL1hgnVXAuvA8EGAdKC7i",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.813191832181665,
+          0.08643910767485566,
+          -1.7658976320697357
+        ],
+        [
+          6.919871830519887,
+          0.125692926681231,
+          -1.7219703335743006
+        ]
+      ]
+    },
+    {
+      "id": 164949,
+      "guid": "2Lj99g09TERuMW6JHcOLiX",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.839353832109177,
+          0.08070899057124536,
+          -1.7693339825150542
+        ],
+        [
+          6.842757432181665,
+          0.1314230437848417,
+          -1.718533983128982
+        ]
+      ]
+    },
+    {
+      "id": 167227,
+      "guid": "1PbV4T3YPAJxHalQqQGX1Y",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.830971832181665,
+          0.08341399463747412,
+          -1.7666034825620227
+        ],
+        [
+          6.839353832210752,
+          0.12871803971861273,
+          -1.7213343658027225
+        ]
+      ]
+    },
+    {
+      "id": 169457,
+      "guid": "0t9edMjHH79galy18p8_m$",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.813191832181665,
+          0.08410236793032566,
+          -1.9756929266811707
+        ],
+        [
+          6.919871830519887,
+          0.12802966642576077,
+          -1.936439107674795
+        ]
+      ]
+    },
+    {
+      "id": 171615,
+      "guid": "0bL6obKIP63A8UC6v1STIh",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8131918321816665,
+          -0.12569292668110893,
+          -1.9780296664257
+        ],
+        [
+          6.919871830519889,
+          -0.08643910767473342,
+          -1.934102367930265
+        ]
+      ]
+    },
+    {
+      "id": 173773,
+      "guid": "3BPgxoDkzEOO03vhp3s2wJ",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8131918321816665,
+          -0.12802966642563696,
+          -1.763560892325205
+        ],
+        [
+          6.919871830519889,
+          -0.08410236793020184,
+          -1.7243070733188295
+        ]
+      ]
+    },
+    {
+      "id": 175931,
+      "guid": "2m2l1C2QTBt84EbHWGinlG",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.830971832181665,
+          0.08339651743803878,
+          -1.9787180397185522
+        ],
+        [
+          6.839353832210752,
+          0.12866563419733903,
+          -1.9334139946374136
+        ]
+      ]
+    },
+    {
+      "id": 178161,
+      "guid": "0b6uWGS293sRv8W_O9IGTM",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.830971832181667,
+          -0.12871803971849038,
+          -1.9786656341972781
+        ],
+        [
+          6.839353832210754,
+          -0.08341399463735175,
+          -1.933396517437978
+        ]
+      ]
+    },
+    {
+      "id": 180391,
+      "guid": "08jBZEFiTFivVZQsWqCty$",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.830971832181667,
+          -0.12866563419721502,
+          -1.7665860053625866
+        ],
+        [
+          6.839353832210754,
+          -0.08339651743791475,
+          -1.721281960281448
+        ]
+      ]
+    },
+    {
+      "id": 182621,
+      "guid": "2ciF8GVPT57xiWPSbf7iQf",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.839353832109177,
+          0.08066601748500735,
+          -1.981423043784781
+        ],
+        [
+          6.842757432181665,
+          0.1314660168710795,
+          -1.9307089905711847
+        ]
+      ]
+    },
+    {
+      "id": 184899,
+      "guid": "0X3l99x854FvxQNQFAa2fE",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.839353832109178,
+          -0.13142304378471917,
+          -1.9814660168710185
+        ],
+        [
+          6.842757432181666,
+          -0.08070899057112278,
+          -1.9306660174849464
+        ]
+      ]
+    },
+    {
+      "id": 187177,
+      "guid": "3IT2U64XD6ThZ4DuOXoTiZ",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.839353832109178,
+          -0.13146601687095527,
+          -1.7692910094288155
+        ],
+        [
+          6.842757432181666,
+          -0.08066601748488311,
+          -1.718576956215219
+        ]
+      ]
+    },
+    {
+      "id": 189462,
+      "guid": "2sspygmNr6iv$pHNyk6uW_",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir1",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432852218,
+          0.08106601983314911,
+          -1.7689339801669126
+        ],
+        [
+          6.842757432181665,
+          0.1310660243034975,
+          -1.7189339756965643
+        ]
+      ]
+    },
+    {
+      "id": 191830,
+      "guid": "3EPDAfw052PeALTzGA5NVE",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432852218,
+          0.08106601983314922,
+          -1.9810660243034368
+        ],
+        [
+          6.842757432181665,
+          0.13106602430349762,
+          -1.9310660198330885
+        ]
+      ]
+    },
+    {
+      "id": 194198,
+      "guid": "0SdFpJdVX8hxx8eaSuuIph",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432852218,
+          -0.131066024303375,
+          -1.9810660243034368
+        ],
+        [
+          6.842757432181665,
+          -0.08106601983302658,
+          -1.9310660198330885
+        ]
+      ]
+    },
+    {
+      "id": 196566,
+      "guid": "3lCYVzlvD2_O_ZZ4tqu6LD",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432852218,
+          -0.1310660243033751,
+          -1.7689339801669126
+        ],
+        [
+          6.842757432181665,
+          -0.08106601983302669,
+          -1.7189339756965643
+        ]
+      ]
+    },
+    {
+      "id": 198934,
+      "guid": "2svuFYUXvAx8G3Z14lAKm4",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir2",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432852218,
+          -0.08196010440581879,
+          -1.773088744282723
+        ],
+        [
+          6.842757432181665,
+          0.0819601044059412,
+          -1.7456050053238874
+        ]
+      ]
+    },
+    {
+      "id": 199118,
+      "guid": "3TstxfShj7qe9LEjxz7un8",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432852218,
+          -0.10439499467605193,
+          -1.9319601044058805
+        ],
+        [
+          6.842757432181665,
+          -0.07691125571721624,
+          -1.7680398955941206
+        ]
+      ]
+    },
+    {
+      "id": 199302,
+      "guid": "2xHKvqCOz3SeiMSbntwc4h",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432852218,
+          -0.08196010440581868,
+          -1.9543949946761137
+        ],
+        [
+          6.842757432181665,
+          0.08196010440594131,
+          -1.926911255717278
+        ]
+      ]
+    },
+    {
+      "id": 199486,
+      "guid": "3Kvt3vf_99rwRz2AaPoAi5",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432852218,
+          0.07691125571733877,
+          -1.9319601044058805
+        ],
+        [
+          6.842757432181665,
+          0.10439499467617445,
+          -1.7680398955941206
+        ]
+      ]
+    },
+    {
+      "id": 199670,
+      "guid": "39VbeoosL4mPlwf9xM_r1C",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · EMPAQUETADURA EPDM 3MM",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.852757432181665,
+          -0.17969547212119563,
+          4.9699999928474465
+        ],
+        [
+          6.855757432207742,
+          0.17969547212128179,
+          5.330000007152561
+        ]
+      ]
+    },
+    {
+      "id": 203371,
+      "guid": "2GKgjlWMz6peMjPzdUqJKN",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir1",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.86075743212951,
+          -0.17969547212119574,
+          4.9699999928474465
+        ],
+        [
+          6.8667574321816645,
+          0.17969547212128167,
+          5.330000007152561
+        ]
+      ]
+    },
+    {
+      "id": 207059,
+      "guid": "0UHsrsRt59PRE_J95pDY$p",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir2",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8667574321816645,
+          -0.12806306779380322,
+          5.237016016244892
+        ],
+        [
+          6.889287432838508,
+          -0.08406896889205452,
+          5.275116020441059
+        ]
+      ]
+    },
+    {
+      "id": 208227,
+      "guid": "1SLe07pLv4C8Ma212jz5EJ",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8667574321816645,
+          0.0870160162449312,
+          5.234068968892101
+        ],
+        [
+          6.889287432838508,
+          0.12511602044109824,
+          5.27806306779385
+        ]
+      ]
+    },
+    {
+      "id": 209395,
+      "guid": "3BuXcBxBDCEgR2yJ4veYVn",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8667574321816645,
+          0.0840689688921405,
+          5.024883979558949
+        ],
+        [
+          6.889287432838508,
+          0.12806306779388918,
+          5.062983983755116
+        ]
+      ]
+    },
+    {
+      "id": 210563,
+      "guid": "3EvgRkYBbB5udmNbiqDIPI",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.8667574321816645,
+          -0.12511602044101228,
+          5.021936932206158
+        ],
+        [
+          6.889287432838508,
+          -0.08701601624484523,
+          5.065931031107906
+        ]
+      ]
+    },
+    {
+      "id": 211731,
+      "guid": "02ksLRPbr4ceW2lljnGZBQ",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.889287432838508,
+          0.08406896889214054,
+          5.024883979558949
+        ],
+        [
+          6.911817433495351,
+          0.12806306779388923,
+          5.062983983755116
+        ]
+      ]
+    },
+    {
+      "id": 212899,
+      "guid": "0C$ARk3JvDPA$NociGAYMn",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.889287432838508,
+          -0.12511602044101225,
+          5.021936932206158
+        ],
+        [
+          6.911817433495351,
+          -0.08701601624484519,
+          5.065931031107906
+        ]
+      ]
+    },
+    {
+      "id": 214067,
+      "guid": "2BdsOxDHTAC8Dlrw85U0Yu",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.889287432838508,
+          -0.1280630677938032,
+          5.237016016244892
+        ],
+        [
+          6.911817433495351,
+          -0.08406896889205448,
+          5.275116020441059
+        ]
+      ]
+    },
+    {
+      "id": 215235,
+      "guid": "3NC_yaQRP0FB6vWwKI_JfF",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[4]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.889287432838508,
+          0.08701601624493124,
+          5.234068968892101
+        ],
+        [
+          6.911817433495351,
+          0.1251160204410983,
+          5.27806306779385
+        ]
+      ]
+    },
+    {
+      "id": 216410,
+      "guid": "1PSm7PEg928ftp$rW6V5XJ",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir1",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432181665,
+          0.08106601983314538,
+          5.018933975696569
+        ],
+        [
+          6.842757431511113,
+          0.1310660243034938,
+          5.068933980166918
+        ]
+      ]
+    },
+    {
+      "id": 218778,
+      "guid": "0LCQzoXPL37fsMk5W8_xF$",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432181665,
+          0.08106601983314526,
+          5.231066019833094
+        ],
+        [
+          6.842757431511113,
+          0.13106602430349368,
+          5.281066024303442
+        ]
+      ]
+    },
+    {
+      "id": 221146,
+      "guid": "0cS6tpYjjBPRAtLQsJQTlo",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432181665,
+          -0.13106602430337894,
+          5.231066019833094
+        ],
+        [
+          6.842757431511113,
+          -0.08106601983303054,
+          5.281066024303442
+        ]
+      ]
+    },
+    {
+      "id": 223514,
+      "guid": "0hR9wFJVL8SvDhMlgxIQXh",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432181665,
+          -0.13106602430337883,
+          5.018933975696569
+        ],
+        [
+          6.842757431511113,
+          -0.08106601983303043,
+          5.068933980166918
+        ]
+      ]
+    },
+    {
+      "id": 225882,
+      "guid": "3WoL$T_YbF0hGEsWqjryCh",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir2",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432181665,
+          -0.08196010440582252,
+          5.0456050053238926
+        ],
+        [
+          6.842757431511113,
+          0.08196010440593747,
+          5.073088744282728
+        ]
+      ]
+    },
+    {
+      "id": 226066,
+      "guid": "1ReLT$HQ5CPhn1bdh7JfI5",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432181665,
+          -0.10439499467605577,
+          5.068039895594126
+        ],
+        [
+          6.842757431511113,
+          -0.07691125571722009,
+          5.231960104405886
+        ]
+      ]
+    },
+    {
+      "id": 226250,
+      "guid": "16AnfWZNDF1gZS73C3SpFO",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432181665,
+          -0.08196010440582263,
+          5.226911255717283
+        ],
+        [
+          6.842757431511113,
+          0.08196010440593736,
+          5.254394994676119
+        ]
+      ]
+    },
+    {
+      "id": 226434,
+      "guid": "2hc$ENByH9SOllXNG0A_tm",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.812757432181665,
+          0.07691125571733493,
+          5.068039895594126
+        ],
+        [
+          6.842757431511113,
+          0.10439499467617061,
+          5.231960104405886
+        ]
+      ]
+    },
+    {
+      "id": 226618,
+      "guid": "1_pg_2JXP1deziTf_G$bBK",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.830971832152578,
+          0.08341399463747033,
+          5.021334365802728
+        ],
+        [
+          6.839353832181665,
+          0.12871803971860896,
+          5.066603482562028
+        ]
+      ]
+    },
+    {
+      "id": 228848,
+      "guid": "2vZmgsWPHC4wPDiy_aOAtn",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.839353832109176,
+          0.08070899057124148,
+          5.018533983128988
+        ],
+        [
+          6.842757432181664,
+          0.13142304378483782,
+          5.06933398251506
+        ]
+      ]
+    },
+    {
+      "id": 231126,
+      "guid": "1omMko_PX1UPu$fwt_mHBf",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.813191832181665,
+          0.08643910767485187,
+          5.0219703335743064
+        ],
+        [
+          6.919871830519887,
+          0.12569292668122725,
+          5.065897632069741
+        ]
+      ]
+    },
+    {
+      "id": 233291,
+      "guid": "0KuoKiNT12WQXECmaTtOho",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.842757432181664,
+          -0.17969547212118087,
+          4.969999992847448
+        ],
+        [
+          6.852757431958147,
+          0.17969547212129658,
+          5.330000007152563
+        ]
+      ]
+    },
+    {
+      "id": 236979,
+      "guid": "1s0XlTNl98jRqtKGOIVDSp",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir2",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.751844911296197,
+          -0.008000000379921927,
+          5.09000000134111
+        ],
+        [
+          6.842757432181664,
+          0.008000000380037486,
+          5.209999998658901
+        ]
+      ]
+    },
+    {
+      "id": 238195,
+      "guid": "22maMSksH0TuXnyPr0YLXE",
+      "name": "ACOPLE BRAZO-ASPA A36 · MatrizL1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.751844911296197,
+          -0.048999998718442454,
+          5.09000000134111
+        ],
+        [
+          6.842757432181664,
+          -0.03299999982112819,
+          5.209999998658901
+        ]
+      ]
+    },
+    {
+      "id": 239411,
+      "guid": "1lTDOkPLP6VwNg5NUi7IRa",
+      "name": "ACOPLE BRAZO-ASPA A36 · Simetra1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.751844911296197,
+          0.03299999982124375,
+          5.09000000134111
+        ],
+        [
+          6.842757432181664,
+          0.048999998718558015,
+          5.209999998658901
+        ]
+      ]
+    },
+    {
+      "id": 240627,
+      "guid": "0Hhs3VCSjA7PSAty3e2xQp",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.813191832181665,
+          -0.12802966642564073,
+          5.024307073318834
+        ],
+        [
+          6.919871830519887,
+          -0.08410236793020562,
+          5.06356089232521
+        ]
+      ]
+    },
+    {
+      "id": 242785,
+      "guid": "1T4oQBndj7ROgfDaZVOBBc",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.839353832109177,
+          -0.13146601687095916,
+          5.018576956215224
+        ],
+        [
+          6.842757432181665,
+          -0.080666017484887,
+          5.06929100942882
+        ]
+      ]
+    },
+    {
+      "id": 245063,
+      "guid": "3h_8TAixvCHANSW4H7mVM0",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.839353832109177,
+          -0.13142304378472328,
+          5.2306660174849515
+        ],
+        [
+          6.842757432181665,
+          -0.08070899057112689,
+          5.281466016871024
+        ]
+      ]
+    },
+    {
+      "id": 247341,
+      "guid": "3avee7Cur9KfQmanzgb6UG",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.839353832109176,
+          0.08066601748500324,
+          5.230708990571189
+        ],
+        [
+          6.842757432181664,
+          0.1314660168710754,
+          5.281423043784786
+        ]
+      ]
+    },
+    {
+      "id": 249619,
+      "guid": "3LbiFfHBr2g9A9GAr2O6uN",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.813191832181665,
+          -0.12569292668111293,
+          5.23410236793027
+        ],
+        [
+          6.919871830519887,
+          -0.08643910767473742,
+          5.278029666425705
+        ]
+      ]
+    },
+    {
+      "id": 251777,
+      "guid": "0oR5G2rCD48epGRt55WyYy",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.830971832152578,
+          -0.12866563419721877,
+          5.021281960281453
+        ],
+        [
+          6.839353832181665,
+          -0.08339651743791854,
+          5.066586005362591
+        ]
+      ]
+    },
+    {
+      "id": 254007,
+      "guid": "2d6yXPkBrDMPG$BY$zYxmt",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.830971832152578,
+          0.08339651743803476,
+          5.233413994637418
+        ],
+        [
+          6.839353832181665,
+          0.128665634197335,
+          5.278718039718557
+        ]
+      ]
+    },
+    {
+      "id": 256237,
+      "guid": "3uFFzPEIXARfpv4RwMNiSl",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.813191832181665,
+          0.08410236793032166,
+          5.2364391076748
+        ],
+        [
+          6.919871830519887,
+          0.12802966642575678,
+          5.275692926681176
+        ]
+      ]
+    },
+    {
+      "id": 258395,
+      "guid": "2Z6baMI7T45x4FXH4nOPrU",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          6.830971832152578,
+          -0.12871803971849438,
+          5.233396517437983
+        ],
+        [
+          6.839353832181665,
+          -0.08341399463735577,
+          5.278665634197283
+        ]
+      ]
+    },
+    {
+      "id": 260632,
+      "guid": "1NkqAkQ21AAPsDscmmsuhP",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          0.24168630355995502,
+          -0.07500000298023249,
+          -1.8871129044533652
+        ],
+        [
+          6.763021128621711,
+          0.0750000029802442,
+          1.4371129044533664
+        ]
+      ]
+    },
+    {
+      "id": 261992,
+      "guid": "13IaUOvLfBhf4EiAHMAQmH",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir2",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          6.69213781174719,
+          -0.08500000089405776,
+          -1.9031663621936243
+        ],
+        [
+          6.781795545931876,
+          0.08500000089408166,
+          -1.743671081303201
+        ]
+      ]
+    },
+    {
+      "id": 262656,
+      "guid": "2o5kvx3D98vgIg1MU4VMoe",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          6.717557541767873,
+          -0.03299999982117412,
+          -1.8889857636907097
+        ],
+        [
+          6.829755444090933,
+          -0.008000000379967492,
+          -1.7731722135122885
+        ]
+      ]
+    },
+    {
+      "id": 263824,
+      "guid": "2Y3BpfZLb9vv1xbeYjcHMt",
+      "name": "BRAZO 150X150X5 · Simetra1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          6.717557541767873,
+          0.008000000379991564,
+          -1.8889857636907097
+        ],
+        [
+          6.829755444090933,
+          0.032999999821198195,
+          -1.7731722135122883
+        ]
+      ]
+    },
+    {
+      "id": 264992,
+      "guid": "0X$IP_yQL0VwW5Ye0voBbJ",
+      "name": "BRAZO 150X150X5 · Simetra2[1]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          0.1749519880907333,
+          -0.03299999982118647,
+          1.3231722135122894
+        ],
+        [
+          0.28714989041379413,
+          -0.008000000379979838,
+          1.4389857636907109
+        ]
+      ]
+    },
+    {
+      "id": 266160,
+      "guid": "1eM7V1ykT9ZfNSPHE8CIfu",
+      "name": "BRAZO 150X150X5 · Simetra2[2]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          0.1749519880907333,
+          0.008000000379979218,
+          1.3231722135122896
+        ],
+        [
+          0.28714989041379413,
+          0.032999999821185844,
+          1.4389857636907109
+        ]
+      ]
+    },
+    {
+      "id": 267328,
+      "guid": "35Ajk_JJv7h93CDqUotUoy",
+      "name": "BRAZO 150X150X5 · Simetra2[3]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          0.22291188624978941,
+          -0.08500000089406995,
+          1.2936710813032022
+        ],
+        [
+          0.3125696204344761,
+          0.08500000089406948,
+          1.4531663621936255
+        ]
+      ]
+    },
+    {
+      "id": 267992,
+      "guid": "335ieseAj8ex_894OM$RrC",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir4",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          3.410068678639939,
+          -0.08500000089406405,
+          -0.18434288694484297
+        ],
+        [
+          3.593801158841166,
+          0.08500000089407565,
+          -0.08677363146773154
+        ]
+      ]
+    },
+    {
+      "id": 268080,
+      "guid": "2BLjhdIp9469F7GUhWIVfh",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir5",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          3.422353718576543,
+          -0.00800000037997404,
+          -0.16972089853481304
+        ],
+        [
+          3.5823537164595507,
+          0.008000000379985574,
+          0.08027910695789076
+        ]
+      ]
+    },
+    {
+      "id": 270616,
+      "guid": "0jYg$ayfDFdg6QqhA6cMdE",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir6",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          6.6397371317205245,
+          0.07500000298024402,
+          -1.8175217512728352
+        ],
+        [
+          6.7140638592955115,
+          0.14166666567326777,
+          -1.7699509935185975
+        ]
+      ]
+    },
+    {
+      "id": 271952,
+      "guid": "1jtP5ClG5CnBB$ez4LpFr5",
+      "name": "BRAZO 150X150X5 · Simetra3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          6.6397371317205245,
+          -0.14166666567324412,
+          -1.8175217512728352
+        ],
+        [
+          6.714063859295512,
+          -0.07500000298022036,
+          -1.7699509935185977
+        ]
+      ]
+    },
+    {
+      "id": 273295,
+      "guid": "2cuLw6LX9CE8TQyLme4iWH",
+      "name": "BRAZO CENTRAL · Saliente-Extruir1",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          3.42235371787897,
+          -0.09599999821185679,
+          3.1887208993498883
+        ],
+        [
+          3.582353714302691,
+          0.06399999821186453,
+          3.2047209001098476
+        ]
+      ]
+    },
+    {
+      "id": 273383,
+      "guid": "3xh1TEC351IB6Amm9eqx$h",
+      "name": "BRAZO CENTRAL · Chafln1",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          3.42235371787897,
+          -0.02400000037997574,
+          3.2047209001098476
+        ],
+        [
+          3.582353714302691,
+          -0.007999999620016518,
+          3.3797208989922605
+        ]
+      ]
+    },
+    {
+      "id": 275919,
+      "guid": "3gdhejL19DBAR7mtB8m5y6",
+      "name": "BRAZO CENTRAL · Saliente-Extruir3",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          3.427353713110598,
+          -0.09100000298022837,
+          0.11128087592764713
+        ],
+        [
+          3.5773537190710627,
+          0.05900000298023611,
+          3.1887208993498883
+        ]
+      ]
+    },
+    {
+      "id": 277471,
+      "guid": "3JWvgMsCPBNg5zZ5rS6Hz8",
+      "name": "BRAZO CENTRAL · Simetra1[1]",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          3.42235371787897,
+          -0.02400000037997574,
+          -0.07971910881356381
+        ],
+        [
+          3.582353714302691,
+          -0.007999999620016518,
+          0.09528084350272037
+        ]
+      ]
+    },
+    {
+      "id": 280007,
+      "guid": "0qzk03OXzBYBOIwXuMM_N1",
+      "name": "BRAZO CENTRAL · Simetra1[2]",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          3.42235371787897,
+          -0.09599999821185679,
+          0.09528084350272037
+        ],
+        [
+          3.582353714302691,
+          0.06399999821186453,
+          0.11128087592764713
+        ]
+      ]
+    },
+    {
+      "id": 280102,
+      "guid": "3PVs3qs$jC6Awhi7u_KFr$",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.445300336100141,
+          -5.892895182941785,
+          -1.8871129044533657
+        ],
+        [
+          -0.05705337999071047,
+          -0.17335939940519207,
+          1.4371129044533668
+        ]
+      ]
+    },
+    {
+      "id": 280106,
+      "guid": "1ceuyW1mr5Ivjk7ySUMda$",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir2",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.461410917532236,
+          -5.911566100454508,
+          -1.9031663621936248
+        ],
+        [
+          -3.2755557613073316,
+          -5.757202476194105,
+          -1.7436710813032015
+        ]
+      ]
+    },
+    {
+      "id": 280110,
+      "guid": "3tMAe6Z3H3kgBuerkzISPM",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4434565602155125,
+          -5.91074171602782,
+          -1.8889857636907101
+        ],
+        [
+          -3.3657069744433006,
+          -5.801075482644121,
+          -1.7731722135122887
+        ]
+      ]
+    },
+    {
+      "id": 280114,
+      "guid": "0qYVjp7rzFuRdOuPuQSx2Q",
+      "name": "BRAZO 150X150X5 · Simetra1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.407949518486136,
+          -5.931241716128403,
+          -1.8889857636907101
+        ],
+        [
+          -3.3301999327139242,
+          -5.821575482744704,
+          -1.7731722135122887
+        ]
+      ]
+    },
+    {
+      "id": 280118,
+      "guid": "3jr59K6uT3KQZSMofReloO",
+      "name": "BRAZO 150X150X5 · Simetra2[1]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.17215378337692777,
+          -0.2446790996022732,
+          1.3231722135122899
+        ],
+        [
+          -0.09440419760471541,
+          -0.13501286621857433,
+          1.4389857636907113
+        ]
+      ]
+    },
+    {
+      "id": 280122,
+      "guid": "3TPxG0LOHEHhFdsZrtV4I0",
+      "name": "BRAZO 150X150X5 · Simetra2[2]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.13664674164755142,
+          -0.265179099702856,
+          1.3231722135122899
+        ],
+        [
+          -0.05889715587533906,
+          -0.15551286631915717,
+          1.4389857636907113
+        ]
+      ]
+    },
+    {
+      "id": 280126,
+      "guid": "2T7ACTe8rBVffxpvzSiUCL",
+      "name": "BRAZO 150X150X5 · Simetra2[3]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.22679795478352038,
+          -0.3090521061528717,
+          1.2936710813032026
+        ],
+        [
+          -0.040942798558615934,
+          -0.1546884818924683,
+          1.453166362193626
+        ]
+      ]
+    },
+    {
+      "id": 280130,
+      "guid": "2wvz_WPFDDuuffBZ78FaI0",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir4",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.8705127395165566,
+          -3.1548231001534344,
+          -0.184342886944843
+        ],
+        [
+          -1.6314221792240142,
+          -2.9107061039047806,
+          -0.08677363146773154
+        ]
+      ]
+    },
+    {
+      "id": 280134,
+      "guid": "12viyx4_P5PgZ3B90RJ4Mm",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir5",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.7981050617891325,
+          -3.106409323985552,
+          -0.16972089853481306
+        ],
+        [
+          -1.7042486557289331,
+          -2.9598452608334314,
+          0.0802791069578907
+        ]
+      ]
+    },
+    {
+      "id": 280138,
+      "guid": "3943JY5PzEFwkHl_tvq$Ew",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir6",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.292080021782983,
+          -5.867709796207146,
+          -1.8175217512728357
+        ],
+        [
+          -3.211062330957718,
+          -5.787681032010905,
+          -1.769950993518598
+        ]
+      ]
+    },
+    {
+      "id": 280142,
+      "guid": "1VpQXBRBL1KRh9BhJ5HA$J",
+      "name": "BRAZO 150X150X5 · Simetra3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.465838164550333,
+          -5.777049863290777,
+          -1.8175217512728357
+        ],
+        [
+          -3.3848204737250684,
+          -5.6970209139859636,
+          -1.769950993518598
+        ]
+      ]
+    },
+    {
+      "id": 280153,
+      "guid": "2AREaJ8qb9HwIIt_AAM0jV",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4453003361000807,
+          0.17335939940519385,
+          -1.8871129044533652
+        ],
+        [
+          -0.057053379990706254,
+          5.892895182941818,
+          1.4371129044533664
+        ]
+      ]
+    },
+    {
+      "id": 280157,
+      "guid": "1tlQnl_Zz2u9SuJt1hFpls",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir2",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.461410917532175,
+          5.75720247619414,
+          -1.9031663621936243
+        ],
+        [
+          -3.2755557613072703,
+          5.911566100454542,
+          -1.743671081303201
+        ]
+      ]
+    },
+    {
+      "id": 280161,
+      "guid": "2vuc4VeEj3EubGrK9ETHts",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4079495184860744,
+          5.821575482744738,
+          -1.8889857636907097
+        ],
+        [
+          -3.330199932713863,
+          5.9312417161284365,
+          -1.7731722135122885
+        ]
+      ]
+    },
+    {
+      "id": 280165,
+      "guid": "0_a4kT9Bj1D8q6P6E2p2AC",
+      "name": "BRAZO 150X150X5 · Simetra1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.443456560215451,
+          5.801075482644155,
+          -1.8889857636907097
+        ],
+        [
+          -3.3657069744432397,
+          5.910741716027854,
+          -1.7731722135122883
+        ]
+      ]
+    },
+    {
+      "id": 280169,
+      "guid": "2abMNMUmfBe80CIYjTs957",
+      "name": "BRAZO 150X150X5 · Simetra2[1]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.1366467416475472,
+          0.15551286631915806,
+          1.3231722135122894
+        ],
+        [
+          -0.05889715587533573,
+          0.26517909970285736,
+          1.4389857636907109
+        ]
+      ]
+    },
+    {
+      "id": 280173,
+      "guid": "3zl$ZqAqH6BOJRy$T71COL",
+      "name": "BRAZO 150X150X5 · Simetra2[2]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.17215378337692377,
+          0.13501286621857567,
+          1.3231722135122896
+        ],
+        [
+          -0.09440419760471253,
+          0.24467909960227496,
+          1.4389857636907109
+        ]
+      ]
+    },
+    {
+      "id": 280177,
+      "guid": "3P_e2bOrbBzBj6nzZxO1jz",
+      "name": "BRAZO 150X150X5 · Simetra2[3]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.2267979547835164,
+          0.1546884818924701,
+          1.2936710813032022
+        ],
+        [
+          -0.04094279855861194,
+          0.3090521061528726,
+          1.4531663621936255
+        ]
+      ]
+    },
+    {
+      "id": 280181,
+      "guid": "1rnaG_Ul1D5hdQFTdoBMl4",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir4",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.8705127395165237,
+          2.910706103904799,
+          -0.18434288694484297
+        ],
+        [
+          -1.6314221792239822,
+          3.154823100153452,
+          -0.08677363146773154
+        ]
+      ]
+    },
+    {
+      "id": 280185,
+      "guid": "29DnCk$mD1D8kdWbxPc5BJ",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir5",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.7981050617890992,
+          2.959845260833449,
+          -0.16972089853481304
+        ],
+        [
+          -1.7042486557289014,
+          3.10640932398557,
+          0.08027910695789076
+        ]
+      ]
+    },
+    {
+      "id": 280189,
+      "guid": "3G6civTHD8lByeB93iCS9P",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir6",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4658381645502736,
+          5.697020913985998,
+          -1.8175217512728352
+        ],
+        [
+          -3.384820473725009,
+          5.777049863290811,
+          -1.7699509935185975
+        ]
+      ]
+    },
+    {
+      "id": 280193,
+      "guid": "0t8iupOtz1e96GfKkQvKAQ",
+      "name": "BRAZO 150X150X5 · Simetra3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.292080021782922,
+          5.787681032010938,
+          -1.8175217512728352
+        ],
+        [
+          -3.211062330957658,
+          5.86770979620718,
+          -1.7699509935185977
+        ]
+      ]
+    },
+    {
+      "id": 280204,
+      "guid": "3VDYCVjhr1duSITT9VD_pZ",
+      "name": "BRAZO CENTRAL · Saliente-Extruir1",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.8743152943660886,
+          -3.1344093210335964,
+          3.1887208993498883
+        ],
+        [
+          -1.6557512346458658,
+          -2.915845261313373,
+          3.2047209001098476
+        ]
+      ]
+    },
+    {
+      "id": 280208,
+      "guid": "1Dbh0MOCDEPeIWo01zRzol",
+      "name": "BRAZO CENTRAL · Chafln1",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.8119614671712554,
+          -3.0984093221176554,
+          3.2047209001098476
+        ],
+        [
+          -1.718105061840699,
+          -2.951845260229314,
+          3.3797208989922605
+        ]
+      ]
+    },
+    {
+      "id": 280212,
+      "guid": "3XUnJ1BVvDEPK0G3oEwds6",
+      "name": "BRAZO CENTRAL · Saliente-Extruir3",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.8652722404697204,
+          -3.125366267137228,
+          0.11128087592764713
+        ],
+        [
+          -1.664794288542234,
+          -2.9248883152097416,
+          3.1887208993498883
+        ]
+      ]
+    },
+    {
+      "id": 280216,
+      "guid": "1NcxJuOg1BwRA_aJnbmgMr",
+      "name": "BRAZO CENTRAL · Simetra1[1]",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.8119614671712554,
+          -3.0984093221176554,
+          -0.07971910881356381
+        ],
+        [
+          -1.718105061840699,
+          -2.951845260229314,
+          0.09528084350272037
+        ]
+      ]
+    },
+    {
+      "id": 280220,
+      "guid": "3PFjA5AZn7xhSuYqeb9Ixi",
+      "name": "BRAZO CENTRAL · Simetra1[2]",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.8743152943660886,
+          -3.1344093210335964,
+          0.09528084350272037
+        ],
+        [
+          -1.6557512346458658,
+          -2.915845261313373,
+          0.11128087592764713
+        ]
+      ]
+    },
+    {
+      "id": 280231,
+      "guid": "3xKcmoicX4JRTFVEIee1SD",
+      "name": "BRAZO CENTRAL · Saliente-Extruir1",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.8466024814449504,
+          2.9318452613133936,
+          3.1887208993498883
+        ],
+        [
+          -1.6280384217247281,
+          3.150409321033616,
+          3.2047209001098476
+        ]
+      ]
+    },
+    {
+      "id": 280235,
+      "guid": "1oLrDZrMH1tu42gzadkOh$",
+      "name": "BRAZO CENTRAL · Chafln1",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.7842486542501166,
+          2.9678452602293337,
+          3.2047209001098476
+        ],
+        [
+          -1.690392248919562,
+          3.114409322117676,
+          3.3797208989922605
+        ]
+      ]
+    },
+    {
+      "id": 280239,
+      "guid": "3Ie7jugh90Rh9o3ZHh4PFn",
+      "name": "BRAZO CENTRAL · Saliente-Extruir3",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.837559427548582,
+          2.940888315209762,
+          0.11128087592764713
+        ],
+        [
+          -1.6370814756210965,
+          3.1413662671372475,
+          3.1887208993498883
+        ]
+      ]
+    },
+    {
+      "id": 280243,
+      "guid": "1wZUjwkn9DrgbbNe8$nQrk",
+      "name": "BRAZO CENTRAL · Simetra1[1]",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.7842486542501166,
+          2.9678452602293337,
+          -0.07971910881356381
+        ],
+        [
+          -1.690392248919562,
+          3.114409322117676,
+          0.09528084350272037
+        ]
+      ]
+    },
+    {
+      "id": 280247,
+      "guid": "3DIKaHVGP2kg845BBghzjK",
+      "name": "BRAZO CENTRAL · Simetra1[2]",
+      "assembly": "BRAZO CENTRAL",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.8466024814449504,
+          2.9318452613133936,
+          0.09528084350272037
+        ],
+        [
+          -1.6280384217247281,
+          3.150409321033616,
+          0.11128087592764713
+        ]
+      ]
+    },
+    {
+      "id": 280258,
+      "guid": "02N1lf5Cb389eylEpqQOco",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.445300336100143,
+          -5.89289518294178,
+          1.862887095546638
+        ],
+        [
+          -0.05705337999071003,
+          -0.17335939940519074,
+          5.18711290445337
+        ]
+      ]
+    },
+    {
+      "id": 280262,
+      "guid": "34mDQDcJn5HfG1rxBBebP0",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir2",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4614109175322376,
+          -5.911566100454504,
+          5.043671081303206
+        ],
+        [
+          -3.2755557613073334,
+          -5.7572024761941005,
+          5.203166362193629
+        ]
+      ]
+    },
+    {
+      "id": 280266,
+      "guid": "2he2w_E3b2HO91QP4Q8QGq",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.407949518486138,
+          -5.9312417161283975,
+          5.073172213512293
+        ],
+        [
+          -3.330199932713926,
+          -5.821575482744699,
+          5.188985763690715
+        ]
+      ]
+    },
+    {
+      "id": 280270,
+      "guid": "13C69rMFnD19My9FTF2qz8",
+      "name": "BRAZO 150X150X5 · Simetra1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4434565602155143,
+          -5.910741716027815,
+          5.073172213512293
+        ],
+        [
+          -3.3657069744433024,
+          -5.801075482644116,
+          5.188985763690715
+        ]
+      ]
+    },
+    {
+      "id": 280274,
+      "guid": "2BV77cb$9CR8XMSEGZZ4zc",
+      "name": "BRAZO 150X150X5 · Simetra2[1]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.13664674164755075,
+          -0.26517909970285425,
+          1.8610142363092934
+        ],
+        [
+          -0.058897155875338614,
+          -0.15551286631915584,
+          1.9768277864877148
+        ]
+      ]
+    },
+    {
+      "id": 280278,
+      "guid": "1M5DLraeD8_eitNWjgPsSE",
+      "name": "BRAZO 150X150X5 · Simetra2[2]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.17215378337692733,
+          -0.2446790996022714,
+          1.8610142363092934
+        ],
+        [
+          -0.09440419760471519,
+          -0.135012866218573,
+          1.9768277864877148
+        ]
+      ]
+    },
+    {
+      "id": 280282,
+      "guid": "3g0$LOMKf37OEbDMqjCHu5",
+      "name": "BRAZO 150X150X5 · Simetra2[3]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.2267979547835195,
+          -0.30905210615286993,
+          1.8468336378063788
+        ],
+        [
+          -0.04094279855861549,
+          -0.15468848189246698,
+          2.006328918696802
+        ]
+      ]
+    },
+    {
+      "id": 280286,
+      "guid": "3ykwF4mFz3RPXkSqi6u0$w",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir4",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.8705127395165573,
+          -3.1548231001534313,
+          3.386773631467736
+        ],
+        [
+          -1.631422179224015,
+          -2.9107061039047775,
+          3.4843428869448476
+        ]
+      ]
+    },
+    {
+      "id": 280290,
+      "guid": "373FOMdsbDyBfHY3MwXvs9",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir5",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.7981050617891332,
+          -3.106409323985549,
+          3.2197208930421137
+        ],
+        [
+          -1.7042486557289338,
+          -2.9598452608334282,
+          3.4697208985348174
+        ]
+      ]
+    },
+    {
+      "id": 280294,
+      "guid": "0op3ub$sP9zAIvOup7zADb",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir6",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.465838164550335,
+          -5.777049863290772,
+          5.069950993518602
+        ],
+        [
+          -3.3848204737250702,
+          -5.697020913985959,
+          5.1175217512728395
+        ]
+      ]
+    },
+    {
+      "id": 280298,
+      "guid": "3prN1McZ5Cpg_HNHjnhjH$",
+      "name": "BRAZO 150X150X5 · Simetra3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.292080021782985,
+          -5.867709796207142,
+          5.069950993518602
+        ],
+        [
+          -3.2110623309577204,
+          -5.7876810320109,
+          5.1175217512728395
+        ]
+      ]
+    },
+    {
+      "id": 280309,
+      "guid": "2H_ESQe_f0W9khwtOlMVXP",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4453003361000762,
+          0.17335939940519207,
+          1.8628870955466377
+        ],
+        [
+          -0.05705337999070492,
+          5.892895182941818,
+          5.18711290445337
+        ]
+      ]
+    },
+    {
+      "id": 280313,
+      "guid": "0Q5YW596jFDAIti6vjrvDy",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir2",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4614109175321706,
+          5.75720247619414,
+          5.043671081303206
+        ],
+        [
+          -3.275555761307266,
+          5.911566100454542,
+          5.203166362193629
+        ]
+      ]
+    },
+    {
+      "id": 280317,
+      "guid": "2lRm0dDPD2rP6wo4DirrcU",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4434565602154468,
+          5.801075482644155,
+          5.073172213512294
+        ],
+        [
+          -3.3657069744432353,
+          5.910741716027854,
+          5.188985763690715
+        ]
+      ]
+    },
+    {
+      "id": 280321,
+      "guid": "1xuBEwnMLA3R$PoeK0JNVr",
+      "name": "BRAZO 150X150X5 · Simetra1",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4079495184860695,
+          5.821575482744738,
+          5.073172213512294
+        ],
+        [
+          -3.3301999327138585,
+          5.9312417161284365,
+          5.188985763690715
+        ]
+      ]
+    },
+    {
+      "id": 280325,
+      "guid": "12ivU0P8X2ZBa1ZVIKO_im",
+      "name": "BRAZO 150X150X5 · Simetra2[1]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.17215378337692266,
+          0.1350128662185739,
+          1.8610142363092932
+        ],
+        [
+          -0.09440419760471142,
+          0.2446790996022732,
+          1.9768277864877146
+        ]
+      ]
+    },
+    {
+      "id": 280329,
+      "guid": "2bPgnwfTv6kuXjPhGGxD06",
+      "name": "BRAZO 150X150X5 · Simetra2[2]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.13664674164754587,
+          0.15551286631915628,
+          1.8610142363092932
+        ],
+        [
+          -0.05889715587533462,
+          0.2651790997028556,
+          1.9768277864877146
+        ]
+      ]
+    },
+    {
+      "id": 280333,
+      "guid": "0cN$oT7h5FN9$$P$afT4he",
+      "name": "BRAZO 150X150X5 · Simetra2[3]",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -0.22679795478351505,
+          0.1546884818924683,
+          1.8468336378063785
+        ],
+        [
+          -0.040942798558610605,
+          0.3090521061528708,
+          2.006328918696802
+        ]
+      ]
+    },
+    {
+      "id": 280337,
+      "guid": "32NERuc_T1oRucFqKOBJKm",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir4",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.870512739516521,
+          2.910706103904798,
+          3.386773631467736
+        ],
+        [
+          -1.6314221792239794,
+          3.1548231001534512,
+          3.4843428869448476
+        ]
+      ]
+    },
+    {
+      "id": 280341,
+      "guid": "0PBRKJN5v7d95GxOXYok0S",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir5",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -1.7981050617890966,
+          2.959845260833448,
+          3.2197208930421137
+        ],
+        [
+          -1.7042486557288987,
+          3.1064093239855692,
+          3.4697208985348174
+        ]
+      ]
+    },
+    {
+      "id": 280345,
+      "guid": "0zglccMXf92uHv5HgJSfTn",
+      "name": "BRAZO 150X150X5 · Saliente-Extruir6",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.2920800217829176,
+          5.787681032010938,
+          5.069950993518603
+        ],
+        [
+          -3.2110623309576534,
+          5.86770979620718,
+          5.11752175127284
+        ]
+      ]
+    },
+    {
+      "id": 280349,
+      "guid": "3qyQCUbWn7aePLIu$IlXh6",
+      "name": "BRAZO 150X150X5 · Simetra3",
+      "assembly": "BRAZO 150X150X5",
+      "layer": "Rotor: brazos",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.465838164550269,
+          5.697020913985998,
+          5.069950993518603
+        ],
+        [
+          -3.3848204737250045,
+          5.777049863290811,
+          5.11752175127284
+        ]
+      ]
+    },
+    {
+      "id": 280367,
+      "guid": "3OLn3hUcD00fMGUdIsGrOs",
+      "name": "naca0018 1400mm · Saliente-Extruir1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -4.118620361347717,
+          -6.430659502404674,
+          -5.349999999999998
+        ],
+        [
+          -2.909961703493034,
+          -5.70415975086611,
+          8.650000000000002
+        ]
+      ]
+    },
+    {
+      "id": 281487,
+      "guid": "2dnialR3fFZALkS29puvWC",
+      "name": "naca0018 1400mm · Saliente-Extruir2",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -4.112721584993659,
+          -6.426672211913698,
+          -2.349999999999998
+        ],
+        [
+          -2.9144720365445416,
+          -5.70929746180464,
+          -1.349999999999997
+        ]
+      ]
+    },
+    {
+      "id": 283039,
+      "guid": "1uIsjNsYDAQvtY0NP9NWuE",
+      "name": "naca0018 1400mm · Simetra1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -4.112721584993663,
+          -6.426672211913696,
+          4.650000000000002
+        ],
+        [
+          -2.914472036544545,
+          -5.709297461804638,
+          5.650000000000003
+        ]
+      ]
+    },
+    {
+      "id": 284591,
+      "guid": "2HZEcSOwb5oelzj7dh4ENu",
+      "name": "naca0018 1400mm · Dar espesor1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -4.108284776974138,
+          -6.430648984239339,
+          8.650000000000002
+        ],
+        [
+          -2.9099169054565484,
+          -5.708445423074575,
+          8.775583648681643
+        ]
+      ]
+    },
+    {
+      "id": 301191,
+      "guid": "0MTF5pL8nAb906VScXZz6E",
+      "name": "naca0018 1400mm · Simetra2",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -4.1082847769741315,
+          -6.430648984239343,
+          -5.475583648681638
+        ],
+        [
+          -2.909916905456542,
+          -5.708445423074579,
+          -5.349999999999997
+        ]
+      ]
+    },
+    {
+      "id": 317791,
+      "guid": "1t4wmqB5z1VuW4fT3O$sl2",
+      "name": "naca0018 1400mm · POLIURETANO",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5755726886798556,
+          -6.171938988663225,
+          -5.461549854278561
+        ],
+        [
+          -3.422953032579336,
+          -5.957594001984372,
+          8.76073684692383
+        ]
+      ]
+    },
+    {
+      "id": 319079,
+      "guid": "1zRyALynr2FRcw$AEcEcm0",
+      "name": "naca0018 1400mm · Dar espesor2",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.6133258496479215,
+          -6.133249529943116,
+          -5.456289863586423
+        ],
+        [
+          -3.4756997574541324,
+          -5.942203620962284,
+          8.757086658477785
+        ]
+      ]
+    },
+    {
+      "id": 324015,
+      "guid": "3LBY93QEL3ahZGq4uc8bYU",
+      "name": "naca0018 1400mm · Dar espesor3",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5282244991127514,
+          -6.195017672289433,
+          -5.461549854278561
+        ],
+        [
+          -3.3807610280331697,
+          -5.986932258205845,
+          8.76064672470093
+        ]
+      ]
+    },
+    {
+      "id": 328483,
+      "guid": "1slIxrPr14WRS918zhh8Qh",
+      "name": "naca0018 1400mm · Saliente-Extruir4[1]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.950611346108476,
+          -6.137853930787272,
+          -1.875000095367429
+        ],
+        [
+          -3.471499570261395,
+          -5.783008016357433,
+          -1.8249999046325658
+        ]
+      ]
+    },
+    {
+      "id": 328763,
+      "guid": "1LWUQ9yoT4$wcthuZTHBmy",
+      "name": "naca0018 1400mm · Saliente-Extruir4[2]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5314927926921005,
+          -6.395772406325896,
+          -1.875000095367429
+        ],
+        [
+          -3.019481374214365,
+          -5.983942609506582,
+          -1.8249999046325653
+        ]
+      ]
+    },
+    {
+      "id": 329259,
+      "guid": "0mw2aVqtfFU9Te$Fin9hWj",
+      "name": "naca0018 1400mm · Dar espesor4",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5314927926921005,
+          -6.395772406325896,
+          -1.8249999046325658
+        ],
+        [
+          -3.019481374214365,
+          -5.983942609506582,
+          -1.7749999523162812
+        ]
+      ]
+    },
+    {
+      "id": 335323,
+      "guid": "0kNuoJ3Lb73BWWL0dFwZew",
+      "name": "naca0018 1400mm · Dar espesor5",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.950611346108476,
+          -6.137853930787272,
+          -1.8249999046325658
+        ],
+        [
+          -3.471499570261395,
+          -5.7830080163574324,
+          -1.7749999523162816
+        ]
+      ]
+    },
+    {
+      "id": 336395,
+      "guid": "2OzKbiNLX5ywcGKvp8xhyt",
+      "name": "naca0018 1400mm · Simetra3[1]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5314927926921005,
+          -6.395772406325896,
+          -1.9250000476837132
+        ],
+        [
+          -3.019481374214365,
+          -5.983942609506582,
+          -1.8750000953674286
+        ]
+      ]
+    },
+    {
+      "id": 342411,
+      "guid": "2oY9VMhPjAv9gOIg5ZUiiu",
+      "name": "naca0018 1400mm · Simetra3[2]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.950611346108476,
+          -6.137853930787272,
+          -1.9250000476837132
+        ],
+        [
+          -3.471499570261395,
+          -5.783008016357433,
+          -1.875000095367429
+        ]
+      ]
+    },
+    {
+      "id": 343483,
+      "guid": "3MmPaGau18ZvYh7MwY6q9X",
+      "name": "naca0018 1400mm · Simetra4[1]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.950611346108479,
+          -6.13785393078727,
+          5.074999952316286
+        ],
+        [
+          -3.471499570261398,
+          -5.783008016357431,
+          5.1249999046325705
+        ]
+      ]
+    },
+    {
+      "id": 344555,
+      "guid": "3CpbcCw5H2Uf3KG2T1SA_4",
+      "name": "naca0018 1400mm · Simetra4[2]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5314927926921036,
+          -6.395772406325894,
+          5.074999952316286
+        ],
+        [
+          -3.0194813742143682,
+          -5.983942609506579,
+          5.124999904632571
+        ]
+      ]
+    },
+    {
+      "id": 350571,
+      "guid": "3TMkMrS8D19A7l4nTB73mJ",
+      "name": "naca0018 1400mm · Simetra4[3]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5314927926921036,
+          -6.395772406325894,
+          5.1249999046325705
+        ],
+        [
+          -3.0194813742143682,
+          -5.983942609506579,
+          5.175000095367435
+        ]
+      ]
+    },
+    {
+      "id": 351067,
+      "guid": "1CN4P6kR915ezl7vc5p9ds",
+      "name": "naca0018 1400mm · Simetra4[4]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.950611346108479,
+          -6.13785393078727,
+          5.1249999046325705
+        ],
+        [
+          -3.471499570261398,
+          -5.783008016357431,
+          5.175000095367434
+        ]
+      ]
+    },
+    {
+      "id": 351347,
+      "guid": "0FvnXEUtzFCRrbDYpNGMnw",
+      "name": "naca0018 1400mm · Simetra4[5]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.531492792692104,
+          -6.395772406325893,
+          5.175000095367434
+        ],
+        [
+          -3.0194813742143682,
+          -5.983942609506579,
+          5.225000047683719
+        ]
+      ]
+    },
+    {
+      "id": 357411,
+      "guid": "17RN6Rj154ou6TTTkaAB23",
+      "name": "naca0018 1400mm · Simetra4[6]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.950611346108479,
+          -6.13785393078727,
+          5.175000095367434
+        ],
+        [
+          -3.471499570261398,
+          -5.783008016357431,
+          5.225000047683718
+        ]
+      ]
+    },
+    {
+      "id": 358483,
+      "guid": "11f4G1rnr4WBGs8kT$8eBH",
+      "name": "naca0018 1400mm · Cortar-Extruir1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.628006250918517,
+          -6.0542848768558875,
+          -2.0500000476837132
+        ],
+        [
+          -3.2549666852252015,
+          -5.837429283425634,
+          -1.6499999523162816
+        ]
+      ]
+    },
+    {
+      "id": 364859,
+      "guid": "2jZYlOefH7IQlEPXFijRS3",
+      "name": "naca0018 1400mm · Simetra5",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.6280062509185202,
+          -6.054284876855885,
+          4.949999952316286
+        ],
+        [
+          -3.2549666852252046,
+          -5.8374292834256325,
+          5.350000047683718
+        ]
+      ]
+    },
+    {
+      "id": 371242,
+      "guid": "3WFloX8Q998vle0QgMJIvW",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir1",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.58899955989285,
+          -6.036634113955549,
+          -2.0300000071525552
+        ],
+        [
+          -3.2747578722627115,
+          -5.851742489366436,
+          -1.6699999928474405
+        ]
+      ]
+    },
+    {
+      "id": 374930,
+      "guid": "3tQeOFnRv7NRK2kxc8pLtQ",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir2",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5555495864152804,
+          -5.924263446364987,
+          -1.7629839837551096
+        ],
+        [
+          -3.5061845788213395,
+          -5.882754843998006,
+          -1.7248839795589426
+        ]
+      ]
+    },
+    {
+      "id": 376098,
+      "guid": "29aXry_DH7eRuGu3HPzcQL",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3692856358150487,
+          -6.028855941031563,
+          -1.7659310311079004
+        ],
+        [
+          -3.3250250639684524,
+          -5.990294386017373,
+          -1.7219369322061517
+        ]
+      ]
+    },
+    {
+      "id": 377266,
+      "guid": "2ZvDOcnOz5rOXlsF4Py4dM",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.371837853688721,
+          -6.030329464707958,
+          -1.9751160204410532
+        ],
+        [
+          -3.32247284609478,
+          -5.988820862340978,
+          -1.9370160162448862
+        ]
+      ]
+    },
+    {
+      "id": 378434,
+      "guid": "0FxEGRNZPEiQ3mEqW_yg3g",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.552997368541608,
+          -5.922789922688591,
+          -1.978063067793844
+        ],
+        [
+          -3.508736796695012,
+          -5.884228367674401,
+          -1.9340689688920953
+        ]
+      ]
+    },
+    {
+      "id": 379602,
+      "guid": "0Gn0gfOwDBnetn3HI0ANYe",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3831028540171424,
+          -6.049841017624065,
+          -1.9751160204410532
+        ],
+        [
+          -3.3337378464232015,
+          -6.008332415257084,
+          -1.9370160162448862
+        ]
+      ]
+    },
+    {
+      "id": 380770,
+      "guid": "3ZqxwnkTT40Aypu5D9aYJ_",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5642623688700295,
+          -5.9423014756046975,
+          -1.978063067793844
+        ],
+        [
+          -3.5200017970234336,
+          -5.903739920590508,
+          -1.9340689688920953
+        ]
+      ]
+    },
+    {
+      "id": 381938,
+      "guid": "0AC282M1bEd8pbpLirSSOr",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.566814586743702,
+          -5.943774999281093,
+          -1.7629839837551096
+        ],
+        [
+          -3.517449579149761,
+          -5.902266396914112,
+          -1.7248839795589426
+        ]
+      ]
+    },
+    {
+      "id": 383106,
+      "guid": "0PQsgCpgH0bgz8L379jECU",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[4]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3805506361434703,
+          -6.048367493947669,
+          -1.7659310311079004
+        ],
+        [
+          -3.336290064296874,
+          -6.0098059389334795,
+          -1.7219369322061517
+        ]
+      ]
+    },
+    {
+      "id": 384274,
+      "guid": "1fvHrmi2bBghmVhZXha9xD",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · EMPAQUETADURA EPDM 3MM",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5834995598928505,
+          -6.027107834513921,
+          -2.0300000071525552
+        ],
+        [
+          -3.2707578722757504,
+          -5.844814286158744,
+          -1.6699999928474405
+        ]
+      ]
+    },
+    {
+      "id": 387975,
+      "guid": "1GWi0ZckD2jRXxNA95N8RX",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.581999559781079,
+          -6.024509758109003,
+          -2.030000007152558
+        ],
+        [
+          -3.265757872288776,
+          -5.83615403214349,
+          -1.6699999928474432
+        ]
+      ]
+    },
+    {
+      "id": 391663,
+      "guid": "3illqHuPL3Hxop7rbvix7U",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir2",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4283069196501543,
+          -5.9300017683941,
+          -1.909999998658896
+        ],
+        [
+          -3.3689942520887253,
+          -5.843269215405223,
+          -1.790000001341105
+        ]
+      ]
+    },
+    {
+      "id": 392879,
+      "guid": "2hOd1aFkf68BlR5fcLS2Al",
+      "name": "ACOPLE BRAZO-ASPA A36 · MatrizL1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.463813959766433,
+          -5.909501768293517,
+          -1.909999998658896
+        ],
+        [
+          -3.404501293818102,
+          -5.822769216235962,
+          -1.790000001341105
+        ]
+      ]
+    },
+    {
+      "id": 394095,
+      "guid": "2U_6vuOLnBjgr0Zphzy7E6",
+      "name": "ACOPLE BRAZO-ASPA A36 · Simetra1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.392799877920778,
+          -5.9505017675633605,
+          -1.909999998658896
+        ],
+        [
+          -3.333487211972447,
+          -5.863769215505806,
+          -1.790000001341105
+        ]
+      ]
+    },
+    {
+      "id": 395311,
+      "guid": "2yewigbfnCZeXKoPxgR543",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.378427509716733,
+          -6.051524762074714,
+          -1.7658976320697357
+        ],
+        [
+          -3.2981929232306775,
+          -5.943919677362008,
+          -1.7219703335743006
+        ]
+      ]
+    },
+    {
+      "id": 397469,
+      "guid": "2QZjSwNm56xe2UdJodMVUX",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3514826799423627,
+          -5.991713290096501,
+          -1.7693339825150542
+        ],
+        [
+          -3.3058612214942684,
+          -5.963408659362606,
+          -1.718533983128982
+        ]
+      ]
+    },
+    {
+      "id": 399747,
+      "guid": "1XNCpBdt14Gwcj1YSaLqZP",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.347438277718212,
+          -5.9874131840242555,
+          -1.7666034825620227
+        ],
+        [
+          -3.3040128237692072,
+          -5.957502136523975,
+          -1.7213343658027225
+        ]
+      ]
+    },
+    {
+      "id": 399757,
+      "guid": "3Jzra6_Nf7V9XoFLsC7WPD",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3784306763470537,
+          -6.051526408051854,
+          -1.9756929266811707
+        ],
+        [
+          -3.2965697111945897,
+          -5.943907797063862,
+          -1.936439107674795
+        ]
+      ]
+    },
+    {
+      "id": 399767,
+      "guid": "07bx$0Lzf0bAYjKEKsQth3",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5621392404254713,
+          -5.945458744896731,
+          -1.9780296664257
+        ],
+        [
+          -3.4819046539394156,
+          -5.837853660184026,
+          -1.934102367930265
+        ]
+      ]
+    },
+    {
+      "id": 399777,
+      "guid": "0asOZ0shXBKfx8aCC$yqDR",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5621424070557905,
+          -5.945460390873872,
+          -1.763560892325205
+        ],
+        [
+          -3.4802814419033266,
+          -5.8378412173984495,
+          -1.7243070733188295
+        ]
+      ]
+    },
+    {
+      "id": 399787,
+      "guid": "1SmKKxwQD7rwqMyGW7wu0k",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.34745341341691,
+          -5.987386981263619,
+          -1.9787180397185522
+        ],
+        [
+          -3.3040582082819285,
+          -5.9574933979242575,
+          -1.9334139946374136
+        ]
+      ]
+    },
+    {
+      "id": 399797,
+      "guid": "2tB60UbpP6tPi6Pb5WkRfc",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5311500084269505,
+          -5.881347166846273,
+          -1.9786656341972781
+        ],
+        [
+          -3.487724554477946,
+          -5.851436119345992,
+          -1.933396517437978
+        ]
+      ]
+    },
+    {
+      "id": 399807,
+      "guid": "3XIZUwXc17BB_PgM3Q0LHC",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5311046239142283,
+          -5.881355905445991,
+          -1.7665860053625866
+        ],
+        [
+          -3.487709418779247,
+          -5.85146232210663,
+          -1.721281960281448
+        ]
+      ]
+    },
+    {
+      "id": 399817,
+      "guid": "2zi$XPsGrCcuq4KKVBsgom",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3515198957267236,
+          -5.991734776639619,
+          -1.981423043784781
+        ],
+        [
+          -3.3058240057099075,
+          -5.963387172819486,
+          -1.9307089905711847
+        ]
+      ]
+    },
+    {
+      "id": 399827,
+      "guid": "2z6lXCJg13SfaPNRIGgGqE",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5351944106511013,
+          -5.885647272918518,
+          -1.9814660168710185
+        ],
+        [
+          -3.489572952203007,
+          -5.857342642184622,
+          -1.9306660174849464
+        ]
+      ]
+    },
+    {
+      "id": 399837,
+      "guid": "2BTVFH71L6LOHpzJM8vMYq",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5352316264354613,
+          -5.8856687594616375,
+          -1.7692910094288155
+        ],
+        [
+          -3.4895357364186452,
+          -5.857321155641504,
+          -1.718576956215219
+        ]
+      ]
+    },
+    {
+      "id": 399854,
+      "guid": "2RUt1Hx8b7Lf2rDZRBNNui",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir1",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3511734835316602,
+          -5.9915347803558285,
+          -1.7689339801669126
+        ],
+        [
+          -3.292872209806279,
+          -5.9405540165878365,
+          -1.7189339756965643
+        ]
+      ]
+    },
+    {
+      "id": 402222,
+      "guid": "2qWx7PJk132PJQ_N26FyW0",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3511734835316602,
+          -5.9915347803558285,
+          -1.9810660243034368
+        ],
+        [
+          -3.292872209806279,
+          -5.9405540165878365,
+          -1.9310660198330885
+        ]
+      ]
+    },
+    {
+      "id": 404590,
+      "guid": "1LYrS0taDAYA91ORQUX1Mu",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.534885222710612,
+          -5.885468758287566,
+          -1.9810660243034368
+        ],
+        [
+          -3.4765839489852306,
+          -5.8344879945195744,
+          -1.9310660198330885
+        ]
+      ]
+    },
+    {
+      "id": 406958,
+      "guid": "33v0PiMrXA8AKa40plBOmu",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.534885222710612,
+          -5.885468758287566,
+          -1.7689339801669126
+        ],
+        [
+          -3.4765839489852306,
+          -5.8344879945195744,
+          -1.7189339756965643
+        ]
+      ]
+    },
+    {
+      "id": 409326,
+      "guid": "3AAvi6tEPF_uCoSR_ZYQ74",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir2",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.492358248603124,
+          -5.96698182040705,
+          -1.773088744282723
+        ],
+        [
+          -3.3353991839137667,
+          -5.859040954468353,
+          -1.7456050053238874
+        ]
+      ]
+    },
+    {
+      "id": 409510,
+      "guid": "0b$xCY32n7AuuJFND_nk$8",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5117874335082626,
+          -5.887546140345472,
+          -1.9319601044058805
+        ],
+        [
+          -3.4729858177142066,
+          -5.847823509333236,
+          -1.7680398955941206
+        ]
+      ]
+    },
+    {
+      "id": 409694,
+      "guid": "2HxSZBC5LCfBLAbWhb0DHU",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.492358248603124,
+          -5.96698182040705,
+          -1.9543949946761137
+        ],
+        [
+          -3.3353991839137667,
+          -5.859040954468353,
+          -1.926911255717278
+        ]
+      ]
+    },
+    {
+      "id": 409878,
+      "guid": "2SoUbUXWzCcR8K9_3XYVRz",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.354771614802684,
+          -5.978199265542167,
+          -1.9319601044058805
+        ],
+        [
+          -3.315969999008628,
+          -5.938476634529931,
+          -1.7680398955941206
+        ]
+      ]
+    },
+    {
+      "id": 410062,
+      "guid": "0YjLdIeM93lBIQaXx$Q7ee",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · EMPAQUETADURA EPDM 3MM",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.583499559905892,
+          -6.027107834536502,
+          4.9699999928474465
+        ],
+        [
+          -3.270757872288792,
+          -5.844814286181325,
+          5.330000007152561
+        ]
+      ]
+    },
+    {
+      "id": 410079,
+      "guid": "1BK0vioHzAdOge1BScP4YL",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir1",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5889995598928537,
+          -6.036634113955547,
+          4.9699999928474465
+        ],
+        [
+          -3.274757872262715,
+          -5.851742489366433,
+          5.330000007152561
+        ]
+      ]
+    },
+    {
+      "id": 410083,
+      "guid": "1P$uPn7ZTBIBlFkt54S6B3",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir2",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.555549586415284,
+          -5.924263446364984,
+          5.237016016244892
+        ],
+        [
+          -3.506184578821343,
+          -5.882754843998003,
+          5.275116020441059
+        ]
+      ]
+    },
+    {
+      "id": 410087,
+      "guid": "37bRi$Paj0TxQZCc6o35WK",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3692856358150522,
+          -6.02885594103156,
+          5.234068968892101
+        ],
+        [
+          -3.325025063968456,
+          -5.9902943860173705,
+          5.27806306779385
+        ]
+      ]
+    },
+    {
+      "id": 410091,
+      "guid": "3DOI28Wxb8cxklJ1G2f2GK",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3718378536887244,
+          -6.030329464707956,
+          5.024883979558949
+        ],
+        [
+          -3.3224728460947834,
+          -5.988820862340975,
+          5.062983983755116
+        ]
+      ]
+    },
+    {
+      "id": 410095,
+      "guid": "1SytxQpmrFPwa3HvyORfja",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5529973685416114,
+          -5.9227899226885885,
+          5.021936932206158
+        ],
+        [
+          -3.5087367966950156,
+          -5.884228367674399,
+          5.065931031107906
+        ]
+      ]
+    },
+    {
+      "id": 410099,
+      "guid": "2eBG5sjAD72gC0NxBLO2QZ",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.383102854017146,
+          -6.049841017624062,
+          5.024883979558949
+        ],
+        [
+          -3.333737846423205,
+          -6.008332415257081,
+          5.062983983755116
+        ]
+      ]
+    },
+    {
+      "id": 410103,
+      "guid": "2TfxbLwpP0tQ84gmQCnneP",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.564262368870033,
+          -5.942301475604695,
+          5.021936932206158
+        ],
+        [
+          -3.520001797023437,
+          -5.903739920590505,
+          5.065931031107906
+        ]
+      ]
+    },
+    {
+      "id": 410107,
+      "guid": "3V9DZepeL1vR_$$vI1Pa55",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5668145867437056,
+          -5.94377499928109,
+          5.237016016244892
+        ],
+        [
+          -3.5174495791497646,
+          -5.90226639691411,
+          5.275116020441059
+        ]
+      ]
+    },
+    {
+      "id": 410111,
+      "guid": "37YrAh2zb8ZfOcvlNCciwo",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[4]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.380550636143474,
+          -6.048367493947667,
+          5.234068968892101
+        ],
+        [
+          -3.3362900642968776,
+          -6.009805938933477,
+          5.27806306779385
+        ]
+      ]
+    },
+    {
+      "id": 410122,
+      "guid": "2$hjn98AL9Ihyyd2cy2rcK",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir1",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3511734831963875,
+          -5.991534779775112,
+          5.018933975696569
+        ],
+        [
+          -3.2928722094710063,
+          -5.94055401600712,
+          5.068933980166918
+        ]
+      ]
+    },
+    {
+      "id": 410126,
+      "guid": "00aDwGYOj7kPixscrL4rTB",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3511734831963875,
+          -5.991534779775112,
+          5.231066019833094
+        ],
+        [
+          -3.292872209471007,
+          -5.94055401600712,
+          5.281066024303442
+        ]
+      ]
+    },
+    {
+      "id": 410130,
+      "guid": "3vrr_Ecj1Bb8Akgj3mA9T8",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.534885222375339,
+          -5.88546875770685,
+          5.231066019833094
+        ],
+        [
+          -3.476583948649958,
+          -5.834487993938858,
+          5.281066024303442
+        ]
+      ]
+    },
+    {
+      "id": 410134,
+      "guid": "1eqVD_WvfD0vT2u00Hs1sG",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.534885222375339,
+          -5.88546875770685,
+          5.018933975696569
+        ],
+        [
+          -3.476583948649958,
+          -5.834487993938858,
+          5.068933980166918
+        ]
+      ]
+    },
+    {
+      "id": 410138,
+      "guid": "3049t9fIX7DfFgwUIn_CUq",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir2",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4923582482678515,
+          -5.966981819826334,
+          5.0456050053238926
+        ],
+        [
+          -3.335399183578494,
+          -5.859040953887636,
+          5.073088744282728
+        ]
+      ]
+    },
+    {
+      "id": 410142,
+      "guid": "2HmkP2qef7IxruUNfolqFb",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.51178743317299,
+          -5.887546139764755,
+          5.068039895594126
+        ],
+        [
+          -3.4729858173789343,
+          -5.847823508752519,
+          5.231960104405886
+        ]
+      ]
+    },
+    {
+      "id": 410146,
+      "guid": "0PRDgC$rf4D9WCfKyxbd8y",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4923582482678515,
+          -5.966981819826334,
+          5.226911255717283
+        ],
+        [
+          -3.335399183578494,
+          -5.859040953887636,
+          5.254394994676119
+        ]
+      ]
+    },
+    {
+      "id": 410150,
+      "guid": "3A80riJbX4PPV1L41uKCpl",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3547716144674116,
+          -5.97819926496145,
+          5.068039895594126
+        ],
+        [
+          -3.3159699986733555,
+          -5.9384766339492145,
+          5.231960104405886
+        ]
+      ]
+    },
+    {
+      "id": 410154,
+      "guid": "01_DxM7Yj6yhmwnBsvvZJd",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.347438277703672,
+          -5.987413183999064,
+          5.021334365802728
+        ],
+        [
+          -3.3040128237546673,
+          -5.957502136498784,
+          5.066603482562028
+        ]
+      ]
+    },
+    {
+      "id": 410164,
+      "guid": "0qAqsRjdL1bhpD4ANi5ci4",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3514826799423663,
+          -5.991713290096499,
+          5.018533983128988
+        ],
+        [
+          -3.305861221494272,
+          -5.963408659362603,
+          5.06933398251506
+        ]
+      ]
+    },
+    {
+      "id": 410174,
+      "guid": "35gVnhcJT2W8ds2SYv$Jle",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3784275097167367,
+          -6.0515247620747115,
+          5.0219703335743064
+        ],
+        [
+          -3.298193029563208,
+          -5.943919677362006,
+          5.065897632069741
+        ]
+      ]
+    },
+    {
+      "id": 410191,
+      "guid": "33fSFQhOTEUvFmcBpn6MtQ",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.581999559781082,
+          -6.0245097581090015,
+          4.969999992847448
+        ],
+        [
+          -3.2657578722887792,
+          -5.836154032143488,
+          5.330000007152563
+        ]
+      ]
+    },
+    {
+      "id": 410195,
+      "guid": "2J2_27wr54fhWAeo9kGctN",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir2",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4283069196501574,
+          -5.930001768394098,
+          5.09000000134111
+        ],
+        [
+          -3.3689942520887284,
+          -5.843269215405221,
+          5.209999998658901
+        ]
+      ]
+    },
+    {
+      "id": 410199,
+      "guid": "2rJGXTlLH74vMPFJlXnsbb",
+      "name": "ACOPLE BRAZO-ASPA A36 · MatrizL1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.463813959766436,
+          -5.909501768293516,
+          5.09000000134111
+        ],
+        [
+          -3.404501293818105,
+          -5.82276921623596,
+          5.209999998658901
+        ]
+      ]
+    },
+    {
+      "id": 410203,
+      "guid": "0zg9ztNpr7Z8Gk$HtGa_SR",
+      "name": "ACOPLE BRAZO-ASPA A36 · Simetra1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.392799877920781,
+          -5.950501767563359,
+          5.09000000134111
+        ],
+        [
+          -3.33348721197245,
+          -5.863769215505804,
+          5.209999998658901
+        ]
+      ]
+    },
+    {
+      "id": 410207,
+      "guid": "0mjr5qdcH8d9_$bPCK7tGW",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.562142407055793,
+          -5.945460390873869,
+          5.024307073318834
+        ],
+        [
+          -3.480281441903329,
+          -5.837841217398447,
+          5.06356089232521
+        ]
+      ]
+    },
+    {
+      "id": 410217,
+      "guid": "2sk5yJOV98i8m1lZdFxKAx",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5352316264354644,
+          -5.885668759461636,
+          5.018576956215224
+        ],
+        [
+          -3.4895357364186483,
+          -5.857321155641502,
+          5.06929100942882
+        ]
+      ]
+    },
+    {
+      "id": 410227,
+      "guid": "1NLOuf6uH0qh8AYwMhwVHR",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5351944106511053,
+          -5.885647272918516,
+          5.2306660174849515
+        ],
+        [
+          -3.489572952203011,
+          -5.85734264218462,
+          5.281466016871024
+        ]
+      ]
+    },
+    {
+      "id": 410237,
+      "guid": "3KhfxeCFr61enDF3oWF7hT",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3515198957267276,
+          -5.991734776639618,
+          5.230708990571189
+        ],
+        [
+          -3.3058240057099115,
+          -5.963387172819484,
+          5.281423043784786
+        ]
+      ]
+    },
+    {
+      "id": 410247,
+      "guid": "0dcICFdBz3ZfSXY9fh_Ey0",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5621392404254744,
+          -5.945458744896728,
+          5.23410236793027
+        ],
+        [
+          -3.4819046539394187,
+          -5.837853660184022,
+          5.278029666425705
+        ]
+      ]
+    },
+    {
+      "id": 410257,
+      "guid": "1t45FRHnj7qgSR53ULNhWF",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.531104623899687,
+          -5.881355905420799,
+          5.021281960281453
+        ],
+        [
+          -3.4877094187647057,
+          -5.851462322081438,
+          5.066586005362591
+        ]
+      ]
+    },
+    {
+      "id": 410267,
+      "guid": "0WZt1h6jD7uvCVYT$dXcpo",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.34745341340237,
+          -5.987386981238426,
+          5.233413994637418
+        ],
+        [
+          -3.3040582082673886,
+          -5.957493397899065,
+          5.278718039718557
+        ]
+      ]
+    },
+    {
+      "id": 410277,
+      "guid": "34_zZdbFzCiekCY17Q04I5",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3784306763470573,
+          -6.051526408051851,
+          5.2364391076748
+        ],
+        [
+          -3.2965697111945933,
+          -5.943907234576429,
+          5.275692926681176
+        ]
+      ]
+    },
+    {
+      "id": 410287,
+      "guid": "3N0yu0CLX2UAw1a90GTzMk",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5311500084124106,
+          -5.881347166821081,
+          5.233396517437983
+        ],
+        [
+          -3.487724554463406,
+          -5.851436119320801,
+          5.278665634197283
+        ]
+      ]
+    },
+    {
+      "id": 410311,
+      "guid": "2l1ZmCETv9B9OVp1VMD9T$",
+      "name": "naca0018 1400mm · Saliente-Extruir1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -4.09070671289427,
+          5.695031023597713,
+          -5.349999999999998
+        ],
+        [
+          -2.882137070833916,
+          6.421507813137972,
+          8.650000000000002
+        ]
+      ]
+    },
+    {
+      "id": 410315,
+      "guid": "3oiqi$a9j5mRLi4xHiMGR4",
+      "name": "naca0018 1400mm · Saliente-Extruir2",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -4.086434824682221,
+          5.6990823482235555,
+          -2.349999999999998
+        ],
+        [
+          -2.8880358471879743,
+          6.416370102199443,
+          -1.349999999999997
+        ]
+      ]
+    },
+    {
+      "id": 410319,
+      "guid": "3DNm2DS6XA9QqJ9uZeXcEA",
+      "name": "naca0018 1400mm · Simetra1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -4.086434824682217,
+          5.699082348223557,
+          4.650000000000002
+        ],
+        [
+          -2.888035847187971,
+          6.416370102199445,
+          5.650000000000003
+        ]
+      ]
+    },
+    {
+      "id": 410323,
+      "guid": "2VFiCpuaXB8eE96D5dUCJ8",
+      "name": "naca0018 1400mm · Dar espesor1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -4.090840526725092,
+          5.6950185797647555,
+          8.650000000000002
+        ],
+        [
+          -2.892472655207495,
+          6.417222140929508,
+          8.775583648681643
+        ]
+      ]
+    },
+    {
+      "id": 410327,
+      "guid": "1T5GUOvpz5ERnwMCOi9smv",
+      "name": "naca0018 1400mm · Simetra2",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -4.090840526725098,
+          5.695018579764752,
+          -5.475583648681638
+        ],
+        [
+          -2.892472655207502,
+          6.417222140929504,
+          -5.349999999999997
+        ]
+      ]
+    },
+    {
+      "id": 410331,
+      "guid": "1MTm9jr1DBVBnDSY1KCtyV",
+      "name": "naca0018 1400mm · POLIURETANO",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5778043996023006,
+          5.953728575340865,
+          -5.461549854278561
+        ],
+        [
+          -3.4251847435017826,
+          6.168073562019718,
+          8.76073684692383
+        ]
+      ]
+    },
+    {
+      "id": 410335,
+      "guid": "34_vW9RNrBWA6qPFWYWXCX",
+      "name": "naca0018 1400mm · Dar espesor2",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.525047560305435,
+          5.992359220036211,
+          -5.456289863586423
+        ],
+        [
+          -3.387431582533716,
+          6.183463943041805,
+          8.757086658477785
+        ]
+      ]
+    },
+    {
+      "id": 410339,
+      "guid": "2ZoXK_hajBkQnNBIEqhmCj",
+      "name": "naca0018 1400mm · Dar espesor3",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.6199964041484676,
+          5.930649891714657,
+          -5.461549854278561
+        ],
+        [
+          -3.4725386968256498,
+          6.13874053656266,
+          8.76064672470093
+        ]
+      ]
+    },
+    {
+      "id": 410343,
+      "guid": "1bCKxEYUX6LAZ25CPkgv2g",
+      "name": "naca0018 1400mm · Saliente-Extruir4[1]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5292578619202413,
+          5.987813633216817,
+          -1.875000095367429
+        ],
+        [
+          -3.050146086073159,
+          6.342659547646653,
+          -1.8249999046325658
+        ]
+      ]
+    },
+    {
+      "id": 410347,
+      "guid": "02ibIa_xL5XOd7y5RPMer6",
+      "name": "naca0018 1400mm · Saliente-Extruir4[2]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.981276057967274,
+          5.7298951576781985,
+          -1.875000095367429
+        ],
+        [
+          -3.4692646394895377,
+          6.141724954497509,
+          -1.8249999046325653
+        ]
+      ]
+    },
+    {
+      "id": 410351,
+      "guid": "10jgkky5P2ZfpEeAlan2ID",
+      "name": "naca0018 1400mm · Dar espesor4",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.981276057967274,
+          5.7298951576781985,
+          -1.8249999046325658
+        ],
+        [
+          -3.4692646394895377,
+          6.141724954497509,
+          -1.7749999523162812
+        ]
+      ]
+    },
+    {
+      "id": 410355,
+      "guid": "3vKu60RIbFKfkNoezIqVm6",
+      "name": "naca0018 1400mm · Dar espesor5",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5292578619202413,
+          5.987813633216817,
+          -1.8249999046325658
+        ],
+        [
+          -3.050146086073159,
+          6.342659547646653,
+          -1.7749999523162816
+        ]
+      ]
+    },
+    {
+      "id": 410359,
+      "guid": "2iNtTUP$b2pAW_WwGr8kcR",
+      "name": "naca0018 1400mm · Simetra3[1]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.981276057967274,
+          5.7298951576781985,
+          -1.9250000476837132
+        ],
+        [
+          -3.4692646394895377,
+          6.141724954497509,
+          -1.8750000953674286
+        ]
+      ]
+    },
+    {
+      "id": 410363,
+      "guid": "00uZWbsUb1tR3ASrDCcsmx",
+      "name": "naca0018 1400mm · Simetra3[2]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5292578619202413,
+          5.987813633216817,
+          -1.9250000476837132
+        ],
+        [
+          -3.050146086073159,
+          6.342659547646653,
+          -1.875000095367429
+        ]
+      ]
+    },
+    {
+      "id": 410367,
+      "guid": "2LY63MPyjCIewz4iJ_hli_",
+      "name": "naca0018 1400mm · Simetra4[1]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5292578619202377,
+          5.987813633216819,
+          5.074999952316286
+        ],
+        [
+          -3.0501460860731555,
+          6.3426595476466545,
+          5.1249999046325705
+        ]
+      ]
+    },
+    {
+      "id": 410371,
+      "guid": "29k4YcRnL1zuteebsmNFOZ",
+      "name": "naca0018 1400mm · Simetra4[2]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.981276057967271,
+          5.7298951576782,
+          5.074999952316286
+        ],
+        [
+          -3.4692646394895346,
+          6.14172495449751,
+          5.124999904632571
+        ]
+      ]
+    },
+    {
+      "id": 410375,
+      "guid": "2lP$hQXPr07wkZeQoQsv0M",
+      "name": "naca0018 1400mm · Simetra4[3]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.981276057967271,
+          5.7298951576782,
+          5.1249999046325705
+        ],
+        [
+          -3.469264639489534,
+          6.14172495449751,
+          5.175000095367435
+        ]
+      ]
+    },
+    {
+      "id": 410379,
+      "guid": "0WnWM6rWn2sBW4Tm1CffOX",
+      "name": "naca0018 1400mm · Simetra4[4]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5292578619202377,
+          5.987813633216819,
+          5.1249999046325705
+        ],
+        [
+          -3.0501460860731555,
+          6.3426595476466545,
+          5.175000095367434
+        ]
+      ]
+    },
+    {
+      "id": 410383,
+      "guid": "3vkrrT8sTA_Q4vrksdUxd7",
+      "name": "naca0018 1400mm · Simetra4[5]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.981276057967271,
+          5.7298951576782,
+          5.175000095367434
+        ],
+        [
+          -3.469264639489534,
+          6.14172495449751,
+          5.225000047683719
+        ]
+      ]
+    },
+    {
+      "id": 410387,
+      "guid": "1LFQJxZJ15K9YhL$XJI5Qn",
+      "name": "naca0018 1400mm · Simetra4[6]",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5292578619202377,
+          5.987813633216819,
+          5.175000095367434
+        ],
+        [
+          -3.0501460860731555,
+          6.3426595476466545,
+          5.225000047683718
+        ]
+      ]
+    },
+    {
+      "id": 410391,
+      "guid": "0KYbPyf3H1x9x7qeGY$362",
+      "name": "naca0018 1400mm · Cortar-Extruir1",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.610897257807639,
+          5.837429293295806,
+          -2.0500000476837132
+        ],
+        [
+          -3.2549666681295637,
+          6.083900561451855,
+          -1.6499999523162816
+        ]
+      ]
+    },
+    {
+      "id": 410395,
+      "guid": "2V_7OR8mXEkh1bK_lDCit6",
+      "name": "naca0018 1400mm · Simetra5",
+      "assembly": "naca0018 1400mm",
+      "layer": "Rotor: palas",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.6108972578076353,
+          5.837429293295807,
+          4.949999952316286
+        ],
+        [
+          -3.25496666812956,
+          6.083900561451856,
+          5.350000047683718
+        ]
+      ]
+    },
+    {
+      "id": 410406,
+      "guid": "0zZaFQJz9189QeddWy2_PL",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir1",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5889995598928497,
+          5.851742489366439,
+          -2.0300000071525557
+        ],
+        [
+          -3.2747578722627093,
+          6.036634113955548,
+          -1.669999992847441
+        ]
+      ]
+    },
+    {
+      "id": 410410,
+      "guid": "1l6Gbak899Whs0naqY0yV4",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir2",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.371837853688719,
+          5.988820862340978,
+          -1.76298398375511
+        ],
+        [
+          -3.322472846094778,
+          6.030329464707958,
+          -1.724883979558943
+        ]
+      ]
+    },
+    {
+      "id": 410414,
+      "guid": "2BcV31kob0Auvqt9vJ23wB",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.552997368541607,
+          5.884228367674403,
+          -1.7659310311079008
+        ],
+        [
+          -3.508736796695011,
+          5.922789922688593,
+          -1.7219369322061522
+        ]
+      ]
+    },
+    {
+      "id": 410418,
+      "guid": "0s7Ac1dcvDMB1eL1qDbx$f",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5555495864152795,
+          5.882754843998008,
+          -1.9751160204410536
+        ],
+        [
+          -3.5061845788213386,
+          5.924263446364988,
+          -1.9370160162448866
+        ]
+      ]
+    },
+    {
+      "id": 410422,
+      "guid": "1gmi6CGlr1wQs9QkooDx5S",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3692856358150465,
+          5.990294386017373,
+          -1.9780630677938444
+        ],
+        [
+          -3.3250250639684507,
+          6.028855941031563,
+          -1.9340689688920958
+        ]
+      ]
+    },
+    {
+      "id": 410426,
+      "guid": "2rQnJjX6r3sRiELbVawd3o",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.566814586743701,
+          5.902266396914114,
+          -1.9751160204410536
+        ],
+        [
+          -3.5174495791497598,
+          5.943774999281095,
+          -1.9370160162448866
+        ]
+      ]
+    },
+    {
+      "id": 410430,
+      "guid": "1Gf3LaWGr3U8G7ji2GD23K",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.380550636143468,
+          6.0098059389334795,
+          -1.9780630677938444
+        ],
+        [
+          -3.336290064296872,
+          6.048367493947669,
+          -1.9340689688920958
+        ]
+      ]
+    },
+    {
+      "id": 410434,
+      "guid": "2Dhbfl3If9Nx0epCQp_mCa",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3831028540171406,
+          6.008332415257085,
+          -1.76298398375511
+        ],
+        [
+          -3.3337378464231993,
+          6.049841017624065,
+          -1.724883979558943
+        ]
+      ]
+    },
+    {
+      "id": 410438,
+      "guid": "3oJwIol8fEFP5ubxUBJ495",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[4]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.564262368870028,
+          5.9037399205905094,
+          -1.7659310311079008
+        ],
+        [
+          -3.5200017970234323,
+          5.942301475604699,
+          -1.7219369322061522
+        ]
+      ]
+    },
+    {
+      "id": 410442,
+      "guid": "03Je8i5QfA2vXxoFydh1c0",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · EMPAQUETADURA EPDM 3MM",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5834995598928496,
+          5.844814286158747,
+          -2.0300000071525557
+        ],
+        [
+          -3.2707578722757478,
+          6.02710783451392,
+          -1.669999992847441
+        ]
+      ]
+    },
+    {
+      "id": 410459,
+      "guid": "2BiEGQJRT5PxUunWaL_$vj",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5819995597811043,
+          5.836154032143478,
+          -2.0300000071525584
+        ],
+        [
+          -3.2657578722887997,
+          6.024509758108987,
+          -1.6699999928474436
+        ]
+      ]
+    },
+    {
+      "id": 410463,
+      "guid": "13Ea6IMuTBT8bOjsaF_c7u",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir2",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4283069196501788,
+          5.843269215405208,
+          -1.9099999986588965
+        ],
+        [
+          -3.3689942520887506,
+          5.930001768394086,
+          -1.7900000013411055
+        ]
+      ]
+    },
+    {
+      "id": 410467,
+      "guid": "0xUOAQ8JTEFOfIJNXh2x_G",
+      "name": "ACOPLE BRAZO-ASPA A36 · MatrizL1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.392799877920802,
+          5.8637692155057906,
+          -1.9099999986588965
+        ],
+        [
+          -3.333487211972472,
+          5.950501767563346,
+          -1.7900000013411055
+        ]
+      ]
+    },
+    {
+      "id": 410471,
+      "guid": "0Zuup0wBz4GA_IGn3RV0WL",
+      "name": "ACOPLE BRAZO-ASPA A36 · Simetra1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4638139597664575,
+          5.8227692162359475,
+          -1.9099999986588965
+        ],
+        [
+          -3.4045012938181274,
+          5.909501768293503,
+          -1.7900000013411055
+        ]
+      ]
+    },
+    {
+      "id": 410475,
+      "guid": "2$QYUq_t5Bgf$RM1Z3sr50",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5621392404254943,
+          5.837853660184011,
+          -1.7658976320697357
+        ],
+        [
+          -3.4819046539394396,
+          5.945458744896718,
+          -1.7219703335743006
+        ]
+      ]
+    },
+    {
+      "id": 410485,
+      "guid": "16pW3mjBD30ALx_EJXArTs",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5351944106511253,
+          5.8573426421846095,
+          -1.7693339825150542
+        ],
+        [
+          -3.489572952203031,
+          5.885647272918505,
+          -1.718533983128982
+        ]
+      ]
+    },
+    {
+      "id": 410495,
+      "guid": "2AjSEbZnP1zOM3iwDXTmFJ",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5311500084269745,
+          5.851436119345979,
+          -1.7666034825620227
+        ],
+        [
+          -3.4877245544779694,
+          5.881347166846259,
+          -1.7213343658027225
+        ]
+      ]
+    },
+    {
+      "id": 410505,
+      "guid": "24JF$MnePA2BCQGp$uc830",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.562142407055815,
+          5.837841217398434,
+          -1.9756929266811707
+        ],
+        [
+          -3.480281441903352,
+          5.945460390873857,
+          -1.936439107674795
+        ]
+      ]
+    },
+    {
+      "id": 410515,
+      "guid": "0WFwxGPCvCqf68eqWIJJXz",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3784275097167553,
+          5.9439196773619924,
+          -1.9780296664257
+        ],
+        [
+          -3.2981929232307006,
+          6.051524762074699,
+          -1.934102367930265
+        ]
+      ]
+    },
+    {
+      "id": 410525,
+      "guid": "3ozyRkC496LQfnPl_SAfjC",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3784306763470777,
+          5.943907797063845,
+          -1.763560892325205
+        ],
+        [
+          -3.2965697111946146,
+          6.051526408051837,
+          -1.7243070733188295
+        ]
+      ]
+    },
+    {
+      "id": 410535,
+      "guid": "1qCECpICL6LgM95IWH3lC5",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5311046239142527,
+          5.851462322106615,
+          -1.9787180397185522
+        ],
+        [
+          -3.487709418779271,
+          5.881355905445976,
+          -1.9334139946374136
+        ]
+      ]
+    },
+    {
+      "id": 410545,
+      "guid": "2cg1$No71Fj8FoKbu0iTm4",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.347438277718236,
+          5.957502136523961,
+          -1.9786656341972781
+        ],
+        [
+          -3.3040128237692308,
+          5.987413184024241,
+          -1.933396517437978
+        ]
+      ]
+    },
+    {
+      "id": 410555,
+      "guid": "2Z$gpBlKbD9v5TYesI7YGG",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3474534134169347,
+          5.9574933979242415,
+          -1.7665860053625866
+        ],
+        [
+          -3.3040582082819534,
+          5.987386981263603,
+          -1.721281960281448
+        ]
+      ]
+    },
+    {
+      "id": 410565,
+      "guid": "2HssO_VdPC1OO3tw5sKCiT",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5352316264354866,
+          5.857321155641491,
+          -1.981423043784781
+        ],
+        [
+          -3.4895357364186697,
+          5.885668759461624,
+          -1.9307089905711847
+        ]
+      ]
+    },
+    {
+      "id": 410575,
+      "guid": "04mz0F1SfFCvujeraVM3VC",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3514826799423862,
+          5.963408659362591,
+          -1.9814660168710185
+        ],
+        [
+          -3.305861221494292,
+          5.991713290096486,
+          -1.9306660174849464
+        ]
+      ]
+    },
+    {
+      "id": 410585,
+      "guid": "17F3nMh$b7fg_HuKVYwW5c",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.351519895726749,
+          5.963387172819471,
+          -1.7692910094288155
+        ],
+        [
+          -3.305824005709932,
+          5.991734776639604,
+          -1.718576956215219
+        ]
+      ]
+    },
+    {
+      "id": 410602,
+      "guid": "1Zzke73Y90guSN2WiZ86_i",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir1",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5348852227106358,
+          5.834487994519562,
+          -1.768933980166913
+        ],
+        [
+          -3.4765839489852546,
+          5.885468758287554,
+          -1.7189339756965647
+        ]
+      ]
+    },
+    {
+      "id": 410606,
+      "guid": "19P9BAxKHEdxpmNdulT0SI",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5348852227106358,
+          5.834487994519562,
+          -1.9810660243034373
+        ],
+        [
+          -3.476583948985255,
+          5.885468758287554,
+          -1.931066019833089
+        ]
+      ]
+    },
+    {
+      "id": 410610,
+      "guid": "2m7wMfVpTCLvcDFHMfN64D",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3511734835316833,
+          5.940554016587822,
+          -1.9810660243034373
+        ],
+        [
+          -3.292872209806302,
+          5.991534780355814,
+          -1.931066019833089
+        ]
+      ]
+    },
+    {
+      "id": 410614,
+      "guid": "2qaJq$QzbD$RvRZrVGki0n",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3511734835316833,
+          5.940554016587822,
+          -1.768933980166913
+        ],
+        [
+          -3.292872209806302,
+          5.991534780355814,
+          -1.7189339756965647
+        ]
+      ]
+    },
+    {
+      "id": 410618,
+      "guid": "3khrtffrj0CQLDSSzL4PpH",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir2",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.492358248603148,
+          5.859040954468339,
+          -1.7730887442827235
+        ],
+        [
+          -3.3353991839137898,
+          5.966981820407036,
+          -1.7456050053238878
+        ]
+      ]
+    },
+    {
+      "id": 410622,
+      "guid": "0PH7$9yz1D7fR3XYVmpaoX",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.354771614802707,
+          5.938476634529917,
+          -1.931960104405881
+        ],
+        [
+          -3.3159699990086517,
+          5.978199265542153,
+          -1.768039895594121
+        ]
+      ]
+    },
+    {
+      "id": 410626,
+      "guid": "0mlYeWfLn6xwWDTl2L5pT7",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.492358248603148,
+          5.859040954468339,
+          -1.954394994676114
+        ],
+        [
+          -3.33539918391379,
+          5.966981820407036,
+          -1.9269112557172785
+        ]
+      ]
+    },
+    {
+      "id": 410630,
+      "guid": "0vMXgiyFL7mfHzWPllb2RK",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5117874335082866,
+          5.847823509333224,
+          -1.931960104405881
+        ],
+        [
+          -3.472985817714231,
+          5.887546140345459,
+          -1.768039895594121
+        ]
+      ]
+    },
+    {
+      "id": 410634,
+      "guid": "0g8L9YRKP0sggRqhuCKT3N",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · EMPAQUETADURA EPDM 3MM",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.583499559905884,
+          5.8448142861813315,
+          4.9699999928474465
+        ],
+        [
+          -3.2707578722887822,
+          6.027107834536505,
+          5.330000007152561
+        ]
+      ]
+    },
+    {
+      "id": 410651,
+      "guid": "3Qo2CIfcD7x8fcrqPWxfr_",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir1",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5889995598928457,
+          5.8517424893664405,
+          4.9699999928474465
+        ],
+        [
+          -3.2747578722627053,
+          6.03663411395555,
+          5.330000007152561
+        ]
+      ]
+    },
+    {
+      "id": 410655,
+      "guid": "0TPEF$zYL788emP15ir_2y",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · Saliente-Extruir2",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.371837853688715,
+          5.9888208623409795,
+          5.237016016244892
+        ],
+        [
+          -3.322472846094774,
+          6.03032946470796,
+          5.275116020441059
+        ]
+      ]
+    },
+    {
+      "id": 410659,
+      "guid": "3nj2vG12P5TfmfD8PXrkoC",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.552997368541603,
+          5.884228367674405,
+          5.234068968892101
+        ],
+        [
+          -3.508736796695007,
+          5.922789922688595,
+          5.27806306779385
+        ]
+      ]
+    },
+    {
+      "id": 410663,
+      "guid": "1Hj4miWqP478PXXARosClk",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5555495864152755,
+          5.8827548439980095,
+          5.024883979558949
+        ],
+        [
+          -3.5061845788213346,
+          5.92426344636499,
+          5.062983983755116
+        ]
+      ]
+    },
+    {
+      "id": 410667,
+      "guid": "1_jtYmhBr3Dh3tuToqayj7",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizC1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3692856358150425,
+          5.990294386017375,
+          5.021936932206158
+        ],
+        [
+          -3.3250250639684467,
+          6.028855941031565,
+          5.065931031107906
+        ]
+      ]
+    },
+    {
+      "id": 410671,
+      "guid": "031Wg$2Qb6_eIoV5JbCTIE",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[1]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.566814586743697,
+          5.902266396914116,
+          5.024883979558949
+        ],
+        [
+          -3.5174495791497558,
+          5.943774999281096,
+          5.062983983755116
+        ]
+      ]
+    },
+    {
+      "id": 410675,
+      "guid": "0X2vnUlrj7BgmkOGEEBQqA",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[2]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.380550636143464,
+          6.009805938933481,
+          5.021936932206158
+        ],
+        [
+          -3.3362900642968683,
+          6.048367493947671,
+          5.065931031107906
+        ]
+      ]
+    },
+    {
+      "id": 410679,
+      "guid": "1X9Xc0uPv7NvvoL8UqLZoD",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[3]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3831028540171366,
+          6.008332415257087,
+          5.237016016244892
+        ],
+        [
+          -3.3337378464231953,
+          6.0498410176240665,
+          5.275116020441059
+        ]
+      ]
+    },
+    {
+      "id": 410683,
+      "guid": "3mXmzw_prATQS3J2IJ2Qt6",
+      "name": "PLATO APERNADO INTERIOR 6MM A36 · MatrizL1[4]",
+      "assembly": "PLATO APERNADO INTERIOR 6MM A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.564262368870024,
+          5.903739920590511,
+          5.234068968892101
+        ],
+        [
+          -3.5200017970234283,
+          5.942301475604701,
+          5.27806306779385
+        ]
+      ]
+    },
+    {
+      "id": 410694,
+      "guid": "0HY2GvTzf4JP5UouA5s3Ww",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir1",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5348852223753564,
+          5.834487993938849,
+          5.018933975696569
+        ],
+        [
+          -3.476583948649975,
+          5.885468757706841,
+          5.068933980166918
+        ]
+      ]
+    },
+    {
+      "id": 410698,
+      "guid": "2ar9BkSdL7nfRDt8$QHDRq",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5348852223753564,
+          5.834487993938849,
+          5.231066019833094
+        ],
+        [
+          -3.476583948649975,
+          5.885468757706841,
+          5.281066024303442
+        ]
+      ]
+    },
+    {
+      "id": 410702,
+      "guid": "1UNcCw4hr1uuQ3SvV3m4zY",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3511734831964035,
+          5.940554016007109,
+          5.231066019833094
+        ],
+        [
+          -3.2928722094710228,
+          5.991534779775101,
+          5.281066024303442
+        ]
+      ]
+    },
+    {
+      "id": 410706,
+      "guid": "2rnepPY3j1N8OKPP90kOL0",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC1[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.351173483196404,
+          5.940554016007109,
+          5.018933975696569
+        ],
+        [
+          -3.2928722094710228,
+          5.991534779775101,
+          5.068933980166918
+        ]
+      ]
+    },
+    {
+      "id": 410710,
+      "guid": "2sgtG4pVfBjRiTMpzAbd$L",
+      "name": "TRABA TUERCAS ASPA 4P · Saliente-Extruir2",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.492358248267869,
+          5.859040953887627,
+          5.0456050053238926
+        ],
+        [
+          -3.3353991835785104,
+          5.966981819826324,
+          5.073088744282728
+        ]
+      ]
+    },
+    {
+      "id": 410714,
+      "guid": "1_X3g6uzL4reW9W442j60t",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[1]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3547716144674276,
+          5.938476633949204,
+          5.068039895594126
+        ],
+        [
+          -3.315969998673372,
+          5.9781992649614395,
+          5.231960104405886
+        ]
+      ]
+    },
+    {
+      "id": 410718,
+      "guid": "1WHy7f17n8MPN2yhuBloYk",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[2]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.492358248267869,
+          5.859040953887627,
+          5.226911255717283
+        ],
+        [
+          -3.3353991835785104,
+          5.966981819826324,
+          5.254394994676119
+        ]
+      ]
+    },
+    {
+      "id": 410722,
+      "guid": "3G$QOQTon2bgK7ZrHr2zPo",
+      "name": "TRABA TUERCAS ASPA 4P · MatrizC2[3]",
+      "assembly": "TRABA TUERCAS ASPA 4P",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.511787433173007,
+          5.84782350875251,
+          5.068039895594126
+        ],
+        [
+          -3.4729858173789516,
+          5.887546139764746,
+          5.231960104405886
+        ]
+      ]
+    },
+    {
+      "id": 410726,
+      "guid": "3uytuPSo54_endv03uQ4FC",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5311500084124283,
+          5.851436119320792,
+          5.021334365802728
+        ],
+        [
+          -3.487724554463423,
+          5.881347166821072,
+          5.066603482562028
+        ]
+      ]
+    },
+    {
+      "id": 410736,
+      "guid": "3iwYaml0v3OvhkrDH2oQxU",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5351944106511217,
+          5.857342642184611,
+          5.018533983128988
+        ],
+        [
+          -3.4895729522030274,
+          5.885647272918507,
+          5.06933398251506
+        ]
+      ]
+    },
+    {
+      "id": 410746,
+      "guid": "0VSU4Dsmb02udC2zFGwVF5",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.562139240425491,
+          5.837853660184012,
+          5.0219703335743064
+        ],
+        [
+          -3.481904653939436,
+          5.945458744896719,
+          5.065897632069741
+        ]
+      ]
+    },
+    {
+      "id": 410763,
+      "guid": "3wO7MWCn5EFeg4JDAyJWT9",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5819995597811003,
+          5.83615403214348,
+          4.969999992847448
+        ],
+        [
+          -3.2657578722887957,
+          6.02450975810899,
+          5.330000007152563
+        ]
+      ]
+    },
+    {
+      "id": 410767,
+      "guid": "1$ri4rKK9CZhB13hsdRliX",
+      "name": "ACOPLE BRAZO-ASPA A36 · Saliente-Extruir2",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4283069196501748,
+          5.84326921540521,
+          5.09000000134111
+        ],
+        [
+          -3.3689942520887466,
+          5.930001768394089,
+          5.209999998658901
+        ]
+      ]
+    },
+    {
+      "id": 410771,
+      "guid": "1jU0TWVIT63RbJAHophc0U",
+      "name": "ACOPLE BRAZO-ASPA A36 · MatrizL1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.392799877920798,
+          5.863769215505793,
+          5.09000000134111
+        ],
+        [
+          -3.333487211972468,
+          5.950501767563349,
+          5.209999998658901
+        ]
+      ]
+    },
+    {
+      "id": 410775,
+      "guid": "3dxwaKIcj4EAYiveJjFosD",
+      "name": "ACOPLE BRAZO-ASPA A36 · Simetra1",
+      "assembly": "ACOPLE BRAZO-ASPA A36",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.4638139597664535,
+          5.82276921623595,
+          5.09000000134111
+        ],
+        [
+          -3.4045012938181234,
+          5.909501768293506,
+          5.209999998658901
+        ]
+      ]
+    },
+    {
+      "id": 410779,
+      "guid": "2ATVopm$f8fBwzYIur9ty$",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3784306763470746,
+          5.943907234576417,
+          5.024307073318834
+        ],
+        [
+          -3.2965697111946115,
+          6.051526408051839,
+          5.06356089232521
+        ]
+      ]
+    },
+    {
+      "id": 410789,
+      "guid": "2FyHq8fLH4EP2EsJHmAvoi",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3515198957267454,
+          5.9633871728194725,
+          5.018576956215224
+        ],
+        [
+          -3.3058240057099284,
+          5.991734776639606,
+          5.06929100942882
+        ]
+      ]
+    },
+    {
+      "id": 410799,
+      "guid": "2hFLqvkd1ABwF_fV6wQCkP",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3514826799423822,
+          5.9634086593625915,
+          5.2306660174849515
+        ],
+        [
+          -3.305861221494288,
+          5.991713290096487,
+          5.281466016871024
+        ]
+      ]
+    },
+    {
+      "id": 410809,
+      "guid": "3$tYufKSzDVP43VPUaYUiZ",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · flat washer type a narrow_ai_Preferred Narrow FW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5352316264354826,
+          5.857321155641493,
+          5.230708990571189
+        ],
+        [
+          -3.4895357364186657,
+          5.885668759461627,
+          5.281423043784786
+        ]
+      ]
+    },
+    {
+      "id": 410819,
+      "guid": "2Gr2XW7inEYAm7ufAefDn3",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3784275097167518,
+          5.943919677361995,
+          5.23410236793027
+        ],
+        [
+          -3.298193029563224,
+          6.051524762074702,
+          5.278029666425705
+        ]
+      ]
+    },
+    {
+      "id": 410829,
+      "guid": "3JYL1Mh$z1wfrFHNfr$ljT",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.3474534134023877,
+          5.957493397899054,
+          5.021281960281453
+        ],
+        [
+          -3.304058208267406,
+          5.987386981238415,
+          5.066586005362591
+        ]
+      ]
+    },
+    {
+      "id": 410839,
+      "guid": "21IKSSpbbF3AVeIpLZRWGT",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.5311046238997057,
+          5.851462322081429,
+          5.233413994637418
+        ],
+        [
+          -3.4877094187647244,
+          5.88135590542079,
+          5.278718039718557
+        ]
+      ]
+    },
+    {
+      "id": 410849,
+      "guid": "16kWrvAlfAqQ03w_wONM56",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · hex bolt_ai_HBOLT 1.0000-12x3.5x2.25-N",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.562142407055812,
+          5.837841217398437,
+          5.2364391076748
+        ],
+        [
+          -3.4802814419033488,
+          5.945460390873859,
+          5.275692926681176
+        ]
+      ]
+    },
+    {
+      "id": 410859,
+      "guid": "1ulHmAS259VvuPIijM0aYf",
+      "name": "ENSAMBLE ASPA NACA 0018 A1400 · GOLILLA PRESION 1 IN_Extra Duty LW 1",
+      "assembly": "ENSAMBLE ASPA NACA 0018 A1400",
+      "layer": "Rotor: uniones",
+      "rotating": true,
+      "bounds": [
+        [
+          -3.347438277703688,
+          5.957502136498772,
+          5.233396517437983
+        ],
+        [
+          -3.304012823754683,
+          5.9874131839990525,
+          5.278665634197283
+        ]
+      ]
+    },
+    {
+      "id": 410869,
+      "guid": "06Hr_r5QH54xs8HnIrWw_j",
+      "name": "ENSAMBLE TURBINA 80KW · NSK_23064came4_0",
+      "assembly": "ENSAMBLE TURBINA 80KW",
+      "layer": "Tren de potencia",
+      "rotating": false,
+      "bounds": [
+        [
+          -0.23999684743043959,
+          -0.23999684743043959,
+          0.01000000032782554
+        ],
+        [
+          0.23999684743043959,
+          0.23999684743043959,
+          0.13099999967217446
+        ]
+      ]
+    },
+    {
+      "id": 426827,
+      "guid": "00KAA40u59iOh$sZ30gT3t",
+      "name": "ENSAMBLE TURBINA 80KW · NSK_nu1064m_0_Default",
+      "assembly": "ENSAMBLE TURBINA 80KW",
+      "layer": "Tren de potencia",
+      "rotating": false,
+      "bounds": [
+        [
+          -0.23999999463558197,
+          -0.23999999463558197,
+          0.9259999990463257
+        ],
+        [
+          0.23999999463558197,
+          0.23999999463558197,
+          1.0
+        ]
+      ]
+    }
+  ]
+}

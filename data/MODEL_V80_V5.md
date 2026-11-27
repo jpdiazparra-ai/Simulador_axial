@@ -1,3 +1,5 @@
+> Fuente histórica. El modelo activo de 80 kW es el nuevo IFC de SolidWorks; ver [MODEL_80KW_IFC.md](MODEL_80KW_IFC.md).
+
 # Modelo activo: V80 v5 del HTML
 
 Fuente: `rotor_v80_v5_source.html`, copia exacta del HTML suministrado por el usuario. SHA-256: ae9eaaed7913c150e051470066938e4ea178adbb961f5425c89df1298cfdb880. Se leen exclusivamente los literales JSON META y GEO_B64; los scripts y enlaces del archivo no se ejecutan. El modelo activo es `v80_v5_mesh.json`; `v80_v5_audit.json` registra procedencia, capas y variantes.

@@ -1,4 +1,4 @@
-> Archivo histórico del v4. El modelo activo en los puntos 5 y 6 es el HTML V80 v5; ver [MODEL_V80_V5.md](MODEL_V80_V5.md).
+> Archivo histórico del v4. El modelo activo en los puntos 5 y 6 es ENSAMBLE TURBINA 80KW_1.IFC; ver [MODEL_80KW_IFC.md](MODEL_80KW_IFC.md).
 
 # Modelo IFC del punto 5
 

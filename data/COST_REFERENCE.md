@@ -22,11 +22,11 @@ La tabla conserva Criterio y Cantidad, normaliza HH/hh y muestra unitarios calcu
 
 ## Geometría V5
 
-La geometría activa de los puntos 5/6 procede del HTML V80 v5, con variantes A/B. El v4 permanece archivado. Los nombres canónicos de capa se conservan para enlazar los presupuestos de la planilla; la capa original del HTML aparece en cada ficha. La ausencia de anillo en A se muestra como ausencia de geometría, sin borrar partidas presupuestarias. Cambiar a B actualiza la imagen, no recalcula ni reemplaza presupuestos. Las fichas de costeo del HTML v5 se identifican por separado.
+La geometría activa de los puntos 5/6 procede de ENSAMBLE TURBINA 80KW_1.IFC; ver MODEL_80KW_IFC.md. El HTML V80 v5 y el IFC v4 permanecen archivados. Los nombres canónicos de capa conservan el vínculo con los presupuestos. El archivo activo no incluye torre ni fundación ni declara pesos; esas ausencias no borran partidas presupuestarias ni convierten datos pendientes en cero.
 
 ## Grupos rotor, torre y fundación
 
-Los accesos laterales del punto 6 y los tres KPI de conjuntos comparten `turbineLayerGroup`, evitando diferencias entre aislamiento geométrico y costos. Rotor agrupa las capas Rotor: … y Tren de potencia. Torre comprende exactamente Torre: montantes y riostras, Pernos y fijaciones de torre, Placas y conexiones de torre y Cabezal y soportes nuevos. Fundación incluye exclusivamente Fundación y morteros. Las demás categorías de fuente no se reasignan automáticamente.
+Los accesos laterales de los puntos 5/6 y los KPI de conjuntos comparten `turbineLayerGroup`, evitando diferencias entre aislamiento geométrico y costos. Rotor agrupa las capas Rotor: … y Tren de potencia. Torre comprende exactamente Torre: montantes y riostras, Pernos y fijaciones de torre, Placas y conexiones de torre y Cabezal y soportes nuevos. Fundación incluye exclusivamente Fundación y morteros. Las demás categorías de fuente no se reasignan automáticamente.
 
 Los KPI de conjuntos aparecen en la vista general y cuando hay dos o más conjuntos seleccionados. Sólo se muestran las tarjetas de los conjuntos activos: dos tarjetas para rotor + torre, por ejemplo, y tres con los tres conjuntos. Se ocultan al seleccionar un único conjunto, una capa o una actividad. La comparación se conserva al filtrar paquetes dentro de la selección múltiple. Los KPI financieros generales se conservan. Las tarjetas usan tonos neutros y la altura compacta existente.
 
@@ -47,3 +47,5 @@ El gráfico utiliza un único encabezado contextual (Costos por capa o por paque
 La descarga incorpora Three.js, las mallas de la variante y del alcance exportado, y el mismo visor independiente del punto 6. Aislar un conjunto o seleccionar una capa actualiza simultáneamente costos, geometría y componentes con sus pesos. El visor permite orbitar, acercar y centrar sin conexión; Restablecer recupera el alcance original. Se elimina la imagen fija del modelo.
 
 Los tres botones de conjuntos son conmutadores independientes: desde la vista general, el primer clic inicia la selección; los siguientes añaden o quitan conjuntos sin perder los demás. Los botones activos conservan el diseño existente mediante aria-pressed. Desmarcar todos muestra una selección vacía, y Restablecer recupera la vista completa (o el alcance inicial del HTML descargado). La combinación se aplica a costos, geometría y pesos y persiste en el estado de capas.
+
+Modelo activo actualizado: ENSAMBLE TURBINA 80KW_1.IFC (ver MODEL_80KW_IFC.md). Los presupuestos no cambian. Torre y fundación mantienen sus partidas y botones de consulta, pero muestran ausencia de geometría porque no existen en el archivo. Las cantidades y pesos no declarados en el IFC permanecen pendientes, sin copiar los valores del HTML v5 histórico. El título, la cámara y la descarga HTML identifican la nueva fuente.

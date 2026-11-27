@@ -128,7 +128,7 @@ def build_html(payload):
     template = template.replace('__ROTOR_JS__', assets.joinpath('rotor_visualization.js').read_text())
     template = template.replace('__IFC_VIEWER_JS__', assets.joinpath('ifc_viewer.js').read_text())
     template = template.replace('__THREE_JS__', assets.joinpath('vendor/three.r158.min.js').read_text())
-    model = Path(__file__).with_name('data').joinpath('v80_v5_mesh.json').read_text()
+    model = Path(__file__).with_name('data').joinpath('ifc_80kw_mesh.json').read_text()
     model = model.replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
     template = template.replace('__IFC_DATA__', model)
     cost_engine = assets.joinpath('cost_dashboard.js').read_text()
