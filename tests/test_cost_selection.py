@@ -35,6 +35,8 @@ if(costCsvData().rows.length!==expected.length)throw Error('CSV scope');
 const snapshot=costAnalysisSnapshot(),report=costExportDocument(snapshot,'','<section>Snapshot</section>');
 if(snapshot.tableRows.length!==expected.length||!report.includes('Capas: Rotor: palas · Fundación y morteros'))throw Error('HTML selection scope');
 const products=costPreviewProducts(model,CostView,'A');
+if(JSON.stringify(snapshot.model.meshes.map(p=>p.id))!==JSON.stringify(products.map(p=>p.id)))throw Error('download geometry must preserve the exact selected variant and layers');
+if(!report.includes('function createCostPreview')||!report.includes('function modelWeightGroups'))throw Error('download must include the offline viewer and declared weights engine');
 if(products.some(product=>!chosen.includes(product.layer))||!chosen.every(layer=>products.some(product=>product.layer===layer)))throw Error('geometry scope');
 updateCostPreview();if($('cost-preview-title').textContent!=='2 capas seleccionadas')throw Error('combined preview title');
 const groupNames=modelWeightGroups(products,'A').map(group=>group.layer);
@@ -49,6 +51,7 @@ if(CostView.layer!==chosen[0]||CostView.selectedLayers[0]!==chosen[0])throw Erro
 // Bulk changes render once, and no checked layers must never mean every layer.
 navigated=null;const previousRenders=renders;setIfcLayers(()=>false);
 if(renders!==previousRenders+1||navigated!==null)throw Error('batch should render exactly once without navigation');
+if(costAnalysisSnapshot().model.meshes.length)throw Error('empty export leaked model meshes');
 if(costFilteredRows().length||costPreviewProducts(model,CostView,'A').length)throw Error('empty selection leaked costs or geometry');
 if(!captureCostViewState().modelSelectionActive||!costExportDocument(costAnalysisSnapshot(),'','<section></section>').includes('Sin capas seleccionadas'))throw Error('empty selection not persisted/exported');
 setIfcLayers(()=>true);if(renders!==previousRenders+2)throw Error('select all batch');
