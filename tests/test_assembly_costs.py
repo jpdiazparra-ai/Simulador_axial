@@ -71,6 +71,27 @@ if($('cost-assembly-kpis').hidden||$('cost-assembly-grid').children.length!==3)t
 `,scope);
 ''')
 
+    def test_title_changes_only_for_complete_isolated_model_groups(self):
+        self.run_js(r'''
+vm.runInContext(`
+IFCView.data=model;
+const general='Costos de la turbina y sus capas',names=model.layers.map(l=>l.name);
+const state={modelSelectionActive:true,selectedLayers:names,layer:'all'};
+if(costSectionTitle(state)!==general)throw Error('all layers should keep title');
+for(const [group,title]of [['rotor','Costos del rotor'],['tower','Costos de la torre'],['foundation','Costos de fundación y morteros']]){
+ state.selectedLayers=names.filter(name=>turbineLayerGroup(name)===group);state.layer=state.selectedLayers.length===1?state.selectedLayers[0]:'all';
+ if(costSectionTitle(state)!==title)throw Error('isolated group title: '+group);
+ state.modelSelectionActive=false;
+ if(costSectionTitle(state)!==general)throw Error('ordinary filter should not rename heading');
+ state.modelSelectionActive=true;
+}
+state.layer='all';state.selectedLayers=['Rotor: palas'];
+if(costSectionTitle(state)!==general)throw Error('partial group should not rename heading');
+state.selectedLayers=[];
+if(costSectionTitle(state)!==general)throw Error('empty selection title');
+`,scope);
+''')
+
     def test_power_cost_uses_wholesale_80_kw_and_exchange_rate(self):
         self.run_js(r'''
 vm.runInContext(`
