@@ -15,7 +15,7 @@ function initIfcViewer(){
  setInterval(()=>{try{sessionStorage.setItem(v.storageKey,JSON.stringify(captureIfcViewState()));}catch{}},750);
  $('ifc-file-info').textContent=m.filename+' · '+m.schema+' · unidades: metros · '+m.meshes+' instancias de malla (variantes A/B) · '+m.triangles.toLocaleString('es-CL')+' triángulos · SHA-256: '+m.sha256;
  for(const l of v.data.layers){const label=document.createElement('label');label.className='ifc-layer';const input=document.createElement('input');input.type='checkbox';input.checked=restored?.hiddenLayers?!restored.hiddenLayers.includes(l.name):l.defaultVisible;input.dataset.layer=l.name;const dot=document.createElement('i');dot.className='ifc-layer-color';dot.style.background='rgb('+l.color.map(c=>Math.round(c*255)).join(',')+')';const name=document.createElement('span');name.textContent=l.name;const count=document.createElement('small');count.className='ifc-layer-count';count.textContent=l.count;label.append(input,dot,name,count);$('ifc-layers').append(label);input.onchange=()=>{if(v.layers.has(l.name))v.layers.get(l.name).visible=input.checked;applyModelVisibility();updateIfcLayerToggle();notifyIfcLayerCosts();};}
- $('ifc-all-layers').onclick=toggleIfcLayers;updateIfcLayerToggle();$('ifc-reset-layers').onclick=()=>setIfcLayers(l=>l.defaultVisible);$('ifc-rotor-only').onclick=()=>isolateIfcGroup('rotor');$('ifc-tower-only').onclick=()=>isolateIfcGroup('tower');$('ifc-foundation-only').onclick=()=>isolateIfcGroup('foundation');
+ $('ifc-all-layers').onclick=toggleIfcLayers;updateIfcLayerToggle();
  $('ifc-play').onclick=()=>{v.play=!v.play;ifcMotionLabels();v.dirty=true;};$('ifc-rpm').oninput=()=>{v.rpm=+$('ifc-rpm').value;ifcMotionLabels();};$('ifc-follow-rpm').onchange=()=>{v.follow=$('ifc-follow-rpm').checked;if(!v.follow)v.rpm=+$('ifc-rpm').value;updateIfcAnalysisContext();};$('ifc-time-scale').onchange=()=>{v.scale=+$('ifc-time-scale').value;ifcMotionLabels();};
  for(const [key,offer]of Object.entries(m.offers||{}))$('model-offer').append(element('option',{value:key},offer.label));$('model-offer').value=v.offer;$('model-offer').onchange=()=>{v.offer=$('model-offer').value;applyModelVisibility();updateModelOfferNote();if(v.selected)selectIfcPiece(v.selected);if(typeof CostView!=='undefined'&&CostView.data)renderCostDashboard();};updateModelOfferNote();
  updateIfcAnalysisContext();
@@ -95,7 +95,7 @@ function showIfcWeightGroup(group){
 
 function updateIfcLayerToggle(){
  const inputs=[...$('ifc-layers').querySelectorAll('input')],all=inputs.length>0&&inputs.every(input=>input.checked),button=$('ifc-all-layers');
- button.textContent=all?'Ocultar todas':'Mostrar todas';button.setAttribute('aria-label',all?'Desmarcar todas las capas del archivo':'Seleccionar todas las capas del archivo');updateIfcIsolationState();
+ button.textContent=all?'Ocultar todas':'Mostrar todas';button.setAttribute('aria-label',all?'Desmarcar todas las capas del archivo':'Seleccionar todas las capas del archivo');
 }
 function notifyIfcLayerCosts(){if(!IFCView.layerBatch&&typeof syncCostLayersFromModel==='function')syncCostLayersFromModel();}
 function setIfcLayers(predicate){
@@ -107,4 +107,3 @@ function setIfcLayers(predicate){
 function toggleIfcLayers(){const inputs=[...$('ifc-layers').querySelectorAll('input')],show=!inputs.every(input=>input.checked);setIfcLayers(()=>show);}
 
 function isolateIfcGroup(group){setIfcLayers(layer=>turbineLayerGroup(layer.name)===group);}
-function updateIfcIsolationState(){if(typeof turbineLayerGroup!=='function')return;const inputs=[...$('ifc-layers').querySelectorAll('input')];for(const [group,id]of [['rotor','ifc-rotor-only'],['tower','ifc-tower-only'],['foundation','ifc-foundation-only']]){const button=$(id);if(!button)continue;const active=inputs.some(input=>input.checked)&&inputs.every(input=>input.checked===(turbineLayerGroup(input.dataset.layer)===group));button.setAttribute('aria-pressed',String(active));}}

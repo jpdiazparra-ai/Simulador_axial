@@ -24,6 +24,8 @@ if(all.tableRows.length!==3||all.contextCount!==3||all.tableStats.current!==1176
 if(all.tableRows.some(r=>r.id==='A4'))throw Error('unrelated project included');
 CostView.layer='Rotor';CostView.package='Aspa';let selected=costAnalysisSnapshot();
 if(selected.tableRows.length!==1||selected.tableRows[0].id!=='A1'||selected.contextCount!==2)throw Error('package/table versus layer/chart scope');
+if(selected.contextRows.length!==2||selected.contextRows.some(r=>r.sourceLayer!=='Rotor')||selected.contextRows.some(r=>r.milestone!=='Producto 80 kW'))throw Error('offline navigation scope leaks unrelated rows');
+if(selected.contextRows.find(r=>r.id==='A2').current!==null||selected.contextRows.find(r=>r.id==='A2').previous!==0)throw Error('offline navigation must preserve missing and zero separately');
 if(selected.state.fxRate!==980||selected.tableStats.current!==9800)throw Error('exchange rate or source amounts changed');
 CostView.activity='A2';CostView.package='Carenado';let missing=costAnalysisSnapshot();
 if(missing.tableStats.currentCount!==0||missing.tableStats.previousCount!==1)throw Error('missing became zero');

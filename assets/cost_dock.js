@@ -1,0 +1,21 @@
+// Keep the isolation shortcuts available while reading point 6, including in the host page.
+function initCostDock(){
+ const frames=pageRefreshWindows(),host=frames.at(-1),doc=host.document;
+ host.__vawtCostDockCleanup?.();
+ const style=doc.createElement('style');style.textContent=`
+ #vawt-cost-dock{position:fixed;left:8px;top:45%;z-index:999990;display:flex;flex-direction:column;gap:5px;padding:7px;width:132px;box-sizing:border-box;border:1px solid #d8ddd9;border-radius:9px;background:#fcfcfbf5;color:#343d37;box-shadow:0 3px 12px #203d2c0c;font:500 11px/1.3 system-ui,-apple-system,sans-serif;backdrop-filter:blur(8px)}
+ #vawt-cost-dock[hidden]{display:none!important}#vawt-cost-dock button{font:inherit;color:inherit;border:1px solid #e0e3df;border-radius:5px;padding:7px 6px;background:#fcfcfb;cursor:pointer;text-align:left}#vawt-cost-dock button[aria-pressed=true]{background:#e8ece8;border-color:#9ba79e;font-weight:650}#vawt-cost-dock button:focus-visible{outline:2px solid #6e8173;outline-offset:2px}
+ #vawt-cost-dock .cost-dock-toggle{border:0;background:transparent;padding:2px 3px 5px;font-size:10px;color:#667268}#vawt-cost-dock[data-collapsed=true]{width:34px;padding:5px}#vawt-cost-dock[data-collapsed=true] .cost-dock-action{display:none}#vawt-cost-dock[data-collapsed=true] .cost-dock-toggle{writing-mode:vertical-rl;padding:5px 2px}
+ @media(max-width:700px){#vawt-cost-dock{left:4px;top:auto;bottom:70px;width:132px}}@media print{#vawt-cost-dock{display:none!important}}`;
+ const dock=doc.createElement('nav');dock.id='vawt-cost-dock';dock.hidden=true;dock.setAttribute('aria-label','Aislar conjuntos en costos');dock.dataset.collapsed=String(host.innerWidth<700);
+ const toggle=doc.createElement('button');toggle.type='button';toggle.className='cost-dock-toggle';toggle.textContent=host.innerWidth<700?'Conjuntos ›':'‹ Conjuntos';toggle.setAttribute('aria-expanded',String(host.innerWidth>=700));toggle.onclick=()=>{const collapsed=dock.dataset.collapsed!=='true';dock.dataset.collapsed=String(collapsed);toggle.textContent=collapsed?'Conjuntos ›':'‹ Conjuntos';toggle.setAttribute('aria-expanded',String(!collapsed));};dock.append(toggle);
+ for(const [group,label]of [['rotor','Aislar rotor'],['tower','Aislar torre'],['foundation','Aislar fundación y morteros'],['all','Restablecer']]){const button=doc.createElement('button');button.type='button';button.className='cost-dock-action';button.dataset.group=group;button.textContent=label;button.setAttribute('aria-pressed','false');button.onclick=()=>{if(group==='all'){setIfcLayers(()=>true);costNavigation('overview');}else isolateIfcGroup(group);updateCostDockSelection();};dock.append(button);}
+ doc.head.append(style);doc.body.append(dock);
+ let pending=false;const refresh=()=>{pending=false;const rect=$('step-6').getBoundingClientRect();let top=rect.top,bottom=rect.bottom;for(const frame of frames.slice(0,-1)){const offset=frame.frameElement?.getBoundingClientRect().top||0;top+=offset;bottom+=offset;}const shown=top<host.innerHeight*.65&&bottom>host.innerHeight*.2;dock.hidden=!shown;document.body.classList.toggle('cost-dock-visible',shown);};
+ const schedule=()=>{if(!pending){pending=true;host.requestAnimationFrame(refresh);}};
+ for(const frame of frames){frame.addEventListener('scroll',schedule,true);frame.addEventListener('resize',schedule);}
+ const observer=new ResizeObserver(schedule);observer.observe($('step-6'));
+ host.__vawtCostDockUpdate=()=>{const title=costSectionTitle();for(const button of dock.querySelectorAll('[data-group]'))button.setAttribute('aria-pressed',String(button.dataset.group==='rotor'?title==='Costos del rotor':button.dataset.group==='tower'?title==='Costos de la torre':button.dataset.group==='foundation'?title==='Costos de fundación y morteros':costAssemblyKpisVisible()));};
+ const cleanup=()=>{for(const frame of frames){frame.removeEventListener('scroll',schedule,true);frame.removeEventListener('resize',schedule);}observer.disconnect();dock.remove();style.remove();delete host.__vawtCostDockUpdate;};host.__vawtCostDockCleanup=cleanup;window.addEventListener('pagehide',cleanup,{once:true});refresh();updateCostDockSelection();
+}
+function updateCostDockSelection(){const frames=pageRefreshWindows();frames.at(-1).__vawtCostDockUpdate?.();}

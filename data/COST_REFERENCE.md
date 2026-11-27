@@ -26,7 +26,7 @@ La geometría activa de los puntos 5/6 procede del HTML V80 v5, con variantes A/
 
 ## Grupos rotor, torre y fundación
 
-Los botones del punto 5 y los tres KPI del punto 6 comparten `turbineLayerGroup`, evitando diferencias entre aislamiento geométrico y costos. Rotor agrupa las capas Rotor: … y Tren de potencia. Torre comprende exactamente Torre: montantes y riostras, Pernos y fijaciones de torre, Placas y conexiones de torre y Cabezal y soportes nuevos. Fundación incluye exclusivamente Fundación y morteros. Las demás categorías de fuente no se reasignan automáticamente.
+Los accesos laterales del punto 6 y los tres KPI de conjuntos comparten `turbineLayerGroup`, evitando diferencias entre aislamiento geométrico y costos. Rotor agrupa las capas Rotor: … y Tren de potencia. Torre comprende exactamente Torre: montantes y riostras, Pernos y fijaciones de torre, Placas y conexiones de torre y Cabezal y soportes nuevos. Fundación incluye exclusivamente Fundación y morteros. Las demás categorías de fuente no se reasignan automáticamente.
 
 Las tres tarjetas de rotor, torre y fundación aparecen únicamente en la vista completa: todas las capas seleccionadas, sin filtro de paquete, actividad ni búsqueda. Se ocultan al aislar un conjunto, una capa o cualquier selección parcial; los KPI financieros generales se conservan. El encabezado Panorama de costos se elimina y el selector CLP/USD permanece en una barra discreta. Las tarjetas usan tonos neutros y una altura reducida aproximadamente un 35 %.
 
@@ -35,3 +35,7 @@ Los KPI utilizan el contexto de capas del gráfico del punto 6 y la base de comp
 El encabezado del punto 6 agrupa fuente, acciones y tipo de cambio en una misma barra adaptable. El KPI Costo por potencia, junto a Comparación, usa el costo por mayor disponible de la selección dividido por la potencia de referencia fija de 80 kW (0,08 MW): USD/kW = CLP por mayor / dólar / 80; USD/MW = CLP por mayor / dólar / 0,08. Se actualiza con filtros y tipo de cambio. Los costos pendientes conservan la indicación de subtotal parcial; no es un indicador de energía ni USD/MWh.
 
 Al aislar un conjunto completo desde el modelo, el título del punto 6 identifica rotor, torre o fundación y morteros. La vista completa, los filtros ordinarios y las selecciones parciales conservan Costos de la turbina y sus capas. Los cinco KPI financieros usan superficies neutras y espaciado reducido aproximadamente un 20 %, conservando la señal de base activa.
+
+La barra lateral izquierda de aislamiento aparece únicamente al leer el punto 6 y permite aislar rotor, torre o fundación y morteros, además de restablecer la vista completa. Se retiran los botones duplicados del punto 5; sus casillas de capas conservan la sincronización. En móvil la barra se abre desde la pestaña Conjuntos.
+
+El HTML de costos descargado es interactivo y autónomo: incorpora el motor financiero local y únicamente las filas del contexto exportado (no otros hitos ni otras capas). Permite pulsar capas y paquetes para filtrar las partidas, recalcula los KPI y totales con las mismas funciones de la aplicación y ofrece Atrás y Restablecer informe. Los datos y el tipo de cambio quedan fijados a la descarga; la geometría y los pesos corresponden a la captura original y no cambian con estos filtros. No requiere conexión ni acceso a Google Sheets para navegar.
