@@ -131,10 +131,11 @@ def build_html(payload):
     model = Path(__file__).with_name('data').joinpath('v80_v5_mesh.json').read_text()
     model = model.replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
     template = template.replace('__IFC_DATA__', model)
-    template = template.replace('__COST_JS__', assets.joinpath('cost_dashboard.js').read_text() + '\n' + assets.joinpath('cost_preview.js').read_text())
+    template = template.replace('__COST_JS__', assets.joinpath('cost_dashboard.js').read_text() + '\n' + assets.joinpath('cost_preview.js').read_text() + '\n' + assets.joinpath('cost_export.js').read_text())
     costs = json.dumps(load_cost_reference(), ensure_ascii=False, allow_nan=False)
     costs = costs.replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
     template = template.replace('__COST_DATA__', costs)
+    template = template.replace('__PAGE_REFRESH_JS__', assets.joinpath('page_refresh.js').read_text())
     return template.replace('__PAYLOAD__', data)
 
 

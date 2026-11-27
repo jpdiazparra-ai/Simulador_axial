@@ -84,3 +84,10 @@ Para ejecutar las pruebas: `python -m unittest discover -s tests -v`. Las prueba
 ## Modelo 3D V80 v5 activo
 
 Los puntos 5 y 6 cargan la geometría del HTML V80 v5 suministrado, en lugar del IFC v4. La variante inicial A es la recomendada sin anillo; el selector también permite explorar B con anillo. Las palas son NACA 0018, 400 kg, y la transmisión declarada es 1:10. Los datos aerodinámicos QBlade D12 × H16 y los presupuestos de Google Sheets conservan su fuente y alcance propios. La procedencia, variantes, mapeo de capas y regeneración se documentan en [data/MODEL_V80_V5.md](data/MODEL_V80_V5.md).
+
+
+## Proyectos V80 y 10 kW
+
+La cabecera permite alternar entre **V80 · análisis** y **10 kW · IFC**. Cada proyecto conserva sus parámetros y sólo la vista activa crea sus controles y cálculos. El V80 sigue iniciando con QBlade; el proyecto 10 kW utiliza su IFC y el motor paramétrico con hipótesis propias, sin reutilizar las curvas QBlade del V80. Ver [data/MODEL_10KW.md](data/MODEL_10KW.md).
+
+El análisis de costos incorpora selección de capas y componentes, campos de consumo por unidad y presupuesto de referencia. La presentación en USD utiliza un tipo de cambio editable y conserva los importes de origen en CLP. La exportación HTML del punto 6 identifica el alcance de la tabla y del gráfico y conserva los datos y KPI del informe. El control **Actualizar** conserva la ubicación de lectura cuando es posible.

@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "filename": "B-ENSAMBLE FLUXIAL PLANTA.IFC",
+    "sha256": "57dbd6d89e6028c5f44e4dd924570dbf7ee5f9db4179523c75cbb1cba1702268",
+    "schema": "IFC2X3",
+    "units": "m",
+    "generatorDeclaredKW": 10,
+    "meshes": 133,
+    "assemblies": 26,
+    "triangles": 94890,
+    "bounds": [
+      [
+        -2.573845386505127,
+        -2.8267533779144287,
+        -5.052000045776367
+      ],
+      [
+        2.8256256580352783,
+        2.3597028255462646,
+        6.844143390655518
+      ]
+    ],
+    "axis": [
+      -2.7755575615628914e-16,
+      5.551115123125783e-17,
+      -0.23300003671646063
+    ],
+    "bladeCount": 3,
+    "diameterEnvelope": 5.679039229891029,
+    "bladeHeight": 4.0148911476086075,
+    "chordEstimate": null,
+    "dimensionMethod": "Diámetro envolvente de las palas respecto del centro del mástil; altura de las palas y cuerda aproximada de sección central por PCA. Confirmar cotas de diseño.",
+    "massStatus": "No hay cantidades de peso estructuradas; 158 kg aparece en el nombre de los conjuntos de pala, sin validar su alcance.",
+    "qbladeStatus": "Sin resultados QBlade de esta geometría. Análisis paramétrico separado del IFC.",
+    "converter": "IfcOpenShell 0.9.0.post1",
+    "originalVerticalAxis": 2,
+    "omitted": []
+  },
+  "layers": [
+    {
+      "name": "Generador 10 kW",
+      "count": 2
+    },
+    {
+      "name": "Acoples y transmisión",
+      "count": 30
+    },
+    {
+      "name": "Freno y caliper",
+      "count": 21
+    },
+    {
+      "name": "Columna y soportes",
+      "count": 1
+    },
+    {
+      "name": "Palas FRP",
+      "count": 12
+    },
+    {
+      "name": "Mástil",
+      "count": 31
+    },
+    {
+      "name": "Otros componentes",
+      "count": 18
+    },
+    {
+      "name": "Tensores",
+      "count": 18
+    }
+  ]
+}

@@ -14,9 +14,8 @@ function initIfcViewer(){
  $('ifc-rpm').value=v.rpm;$('ifc-time-scale').value=String(v.scale).replace(/^0\./,'.');$('ifc-follow-rpm').checked=v.follow;
  setInterval(()=>{try{sessionStorage.setItem(v.storageKey,JSON.stringify(captureIfcViewState()));}catch{}},750);
  $('ifc-file-info').textContent=m.filename+' · '+m.schema+' · unidades: metros · '+m.meshes+' instancias de malla (variantes A/B) · '+m.triangles.toLocaleString('es-CL')+' triángulos · SHA-256: '+m.sha256;
- for(const l of v.data.layers){const label=document.createElement('label');label.className='ifc-layer';const input=document.createElement('input');input.type='checkbox';input.checked=restored?.hiddenLayers?!restored.hiddenLayers.includes(l.name):l.defaultVisible;input.dataset.layer=l.name;const dot=document.createElement('i');dot.className='ifc-layer-color';dot.style.background='rgb('+l.color.map(c=>Math.round(c*255)).join(',')+')';const name=document.createElement('span');name.textContent=l.name;const count=document.createElement('small');count.className='ifc-layer-count';count.textContent=l.count;label.append(input,dot,name,count);$('ifc-layers').append(label);input.onchange=()=>{if(v.layers.has(l.name))v.layers.get(l.name).visible=input.checked;applyModelVisibility();};}
- const setLayers=fn=>{for(const l of v.data.layers){const input=[...$('ifc-layers').querySelectorAll('input')].find(i=>i.dataset.layer===l.name);input.checked=fn(l);input.onchange();}};
- $('ifc-all-layers').onclick=()=>setLayers(()=>true);$('ifc-reset-layers').onclick=()=>setLayers(l=>l.defaultVisible);$('ifc-rotor-only').onclick=()=>setLayers(l=>l.rotating);
+ for(const l of v.data.layers){const label=document.createElement('label');label.className='ifc-layer';const input=document.createElement('input');input.type='checkbox';input.checked=restored?.hiddenLayers?!restored.hiddenLayers.includes(l.name):l.defaultVisible;input.dataset.layer=l.name;const dot=document.createElement('i');dot.className='ifc-layer-color';dot.style.background='rgb('+l.color.map(c=>Math.round(c*255)).join(',')+')';const name=document.createElement('span');name.textContent=l.name;const count=document.createElement('small');count.className='ifc-layer-count';count.textContent=l.count;label.append(input,dot,name,count);$('ifc-layers').append(label);input.onchange=()=>{if(v.layers.has(l.name))v.layers.get(l.name).visible=input.checked;applyModelVisibility();updateIfcLayerToggle();notifyIfcLayerCosts();};}
+ $('ifc-all-layers').onclick=toggleIfcLayers;updateIfcLayerToggle();$('ifc-reset-layers').onclick=()=>setIfcLayers(l=>l.defaultVisible);$('ifc-rotor-only').onclick=()=>setIfcLayers(l=>l.rotating);
  $('ifc-play').onclick=()=>{v.play=!v.play;ifcMotionLabels();v.dirty=true;};$('ifc-rpm').oninput=()=>{v.rpm=+$('ifc-rpm').value;ifcMotionLabels();};$('ifc-follow-rpm').onchange=()=>{v.follow=$('ifc-follow-rpm').checked;if(!v.follow)v.rpm=+$('ifc-rpm').value;updateIfcAnalysisContext();};$('ifc-time-scale').onchange=()=>{v.scale=+$('ifc-time-scale').value;ifcMotionLabels();};
  for(const [key,offer]of Object.entries(m.offers||{}))$('model-offer').append(element('option',{value:key},offer.label));$('model-offer').value=v.offer;$('model-offer').onchange=()=>{v.offer=$('model-offer').value;applyModelVisibility();updateModelOfferNote();if(v.selected)selectIfcPiece(v.selected);if(typeof CostView!=='undefined'&&CostView.data)renderCostDashboard();};updateModelOfferNote();
  updateIfcAnalysisContext();
@@ -40,12 +39,70 @@ function createIfcScene(){
  $('ifc-focus-piece').onclick=()=>{if(!v.selected)return;const box=new T.Box3().setFromObject(v.selected);box.getCenter(v.target);v.distance=Math.max(2,box.getSize(new T.Vector3()).length()*1.8);camera();};
  if(v.restored?.camera){const c=v.restored.camera;if(c.target?.length===3&&c.target.every(Number.isFinite)&&[c.distance,c.azimuth,c.polar].every(Number.isFinite)){v.target.fromArray(c.target);v.distance=Math.max(1,Math.min(100,c.distance));v.azimuth=c.azimuth;v.polar=Math.max(.015,Math.min(Math.PI-.015,c.polar));}}resize();let last=0;function tick(t){requestAnimationFrame(tick);if(t-last<33)return;const dt=last?Math.min((t-last)/1000,.1):0;last=t;if(!v.visible||document.hidden)return;if(v.play&&v.rpm>0){v.angle=(v.angle+v.rpm*2*Math.PI/60*dt*v.scale)%(2*Math.PI);v.rotor.rotation.z=v.angle;v.dirty=true;}if(v.dirty){v.scene.updateMatrixWorld(true);v.renderer.render(v.scene,v.camera);const visible=v.meshes.filter(m=>m.visible).length;$('ifc-view-stats').textContent=visible+' / '+v.data.meshes.length+' mallas · V5 '+v.offer+' · metros';v.dirty=false;}}requestAnimationFrame(tick);
 }
-function selectIfcPiece(mesh){const v=IFCView,p=mesh.userData.product;if(v.selected)v.selected.material.forEach(m=>m.emissive.setHex(0));v.selected=mesh;mesh.material.forEach(m=>m.emissive.setHex(0x344519));v.play=false;ifcMotionLabels();v.dirty=true;$('ifc-selected-name').textContent=p.name;$('ifc-selected-summary').textContent=p.layer+' · '+p.type+' · #'+p.id+' · '+(p.rotating?'Conjunto giratorio':'Conjunto fijo');$('ifc-focus-piece').disabled=false;const dl=document.createElement('dl');dl.className='ifc-properties';Object.entries({...p.guid?{GUID:p.guid}:{'ID fuente':p.sourceId},...(p.propsByOffer?.[v.offer]||p.props)}).forEach(([k,value])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=k;dd.textContent=String(value);dl.append(dt,dd);});$('ifc-selected-properties').replaceChildren(dl);updateIfcCostSelection();}
+function selectIfcPiece(mesh){const v=IFCView,p=mesh.userData.product;if(v.selected)v.selected.material.forEach(m=>m.emissive.setHex(0));v.selected=mesh;mesh.material.forEach(m=>m.emissive.setHex(0x344519));v.play=false;ifcMotionLabels();v.dirty=true;$('ifc-selected-name').textContent=p.name;$('ifc-selected-summary').textContent=p.layer+' · '+p.type+' · #'+p.id+' · '+(p.rotating?'Conjunto giratorio':'Conjunto fijo');$('ifc-focus-piece').disabled=false;const dl=document.createElement('dl');dl.className='ifc-properties';const sourceProps=p.propsByOffer?.[v.offer]||p.props||{};Object.entries({...p.guid?{GUID:p.guid}:{'ID fuente':p.sourceId},...sourceProps,'Peso unitario':modelUnitWeight(sourceProps['Peso total'],sourceProps['Cantidad']).label}).forEach(([k,value])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=k;dd.textContent=String(value);dl.append(dt,dd);});$('ifc-selected-properties').replaceChildren(dl);renderIfcSelectedWeights(p);updateIfcCostSelection();}
 
 function captureIfcViewState(){const v=IFCView;return{offer:v.offer,rpm:v.rpm,scale:v.scale,play:v.play,follow:v.follow,angle:v.angle,hiddenLayers:[...$('ifc-layers').querySelectorAll('input')].filter(i=>!i.checked).map(i=>i.dataset.layer),camera:v.ready?{target:v.target.toArray(),distance:v.distance,azimuth:v.azimuth,polar:v.polar}:v.restored?.camera};}
 function decodeIfcMesh(encoded,Type){const s=atob(encoded),bytes=new Uint8Array(s.length);for(let i=0;i<s.length;i++)bytes[i]=s.charCodeAt(i);return new Type(bytes.buffer);}
 
 function makeIfcProductMesh(p,T){const geom=new T.BufferGeometry();geom.setAttribute('position',new T.BufferAttribute(decodeIfcMesh(p.vertices,Float32Array),3));const length=p.groups.reduce((n,g)=>n+decodeIfcMesh(g.indices,Uint32Array).length,0),indices=new Uint32Array(length);let offset=0;for(const g of p.groups){const array=decodeIfcMesh(g.indices,Uint32Array);indices.set(array,offset);geom.addGroup(offset,array.length,g.material);offset+=array.length;}geom.setIndex(new T.BufferAttribute(indices,1));geom.computeVertexNormals();const materials=p.materials.map(m=>new T.MeshStandardMaterial({color:new T.Color().setRGB(...m.rgb,T.SRGBColorSpace),roughness:.72,metalness:.12,side:T.DoubleSide,transparent:m.opacity<1,opacity:m.opacity,flatShading:true}));const mesh=new T.Mesh(geom,materials);mesh.userData.product=p;return mesh;}
 function modelOfferMatches(product){return !product.offer||product.offer==='AB'||product.offer===IFCView.offer;}
-function applyModelVisibility(){const v=IFCView;for(const mesh of v.meshes){const p=mesh.userData.product;mesh.visible=modelOfferMatches(p)&&(v.layers.get(p.layer)?.visible??true);}if(v.selected&&!v.selected.visible){v.selected.material.forEach(m=>m.emissive.setHex(0));v.selected=null;$('ifc-selected-name').textContent='Selecciona una pieza del modelo';$('ifc-selected-summary').textContent='La variante cambió; selecciona una malla visible para consultar su ficha.';$('ifc-selected-properties').replaceChildren();$('ifc-focus-piece').disabled=true;if(typeof CostView!=='undefined'&&CostView.data)updateIfcCostSelection();}v.dirty=true;}
+function applyModelVisibility(){const v=IFCView;for(const mesh of v.meshes){const p=mesh.userData.product;mesh.visible=modelOfferMatches(p)&&(v.layers.get(p.layer)?.visible??true);}if(v.selected&&!v.selected.visible){v.selected.material.forEach(m=>m.emissive.setHex(0));v.selected=null;$('ifc-selected-name').textContent='Selecciona una pieza del modelo';$('ifc-selected-summary').textContent='La variante cambió; selecciona una malla visible para consultar su ficha.';$('ifc-selected-properties').replaceChildren();$('ifc-selected-weights').replaceChildren();$('ifc-focus-piece').disabled=true;}if(typeof CostView!=='undefined'&&CostView.data)updateIfcCostSelection();v.dirty=true;}
 function updateModelOfferNote(){const v=IFCView,offer=v.data.metadata.offers?.[v.offer];$('model-offer-note').textContent=(offer?.description||'')+' · '+(offer?.meshes||0)+' instancias de malla.';for(const label of $('ifc-layers').querySelectorAll('label')){const name=label.querySelector('input').dataset.layer;label.querySelector('small').textContent=v.data.meshes.filter(m=>m.layer===name&&modelOfferMatches(m)).length;}const summary=v.data.sourceCostSummaries?.[v.offer];$('model-source-cost-note').textContent=summary?'Costeo declarado en el HTML v5, variante '+v.offer+': US$ '+summary.total.toLocaleString('es-CL')+'; tipo de cambio del archivo: 1.000 CLP/USD. Es una estimación de ese archivo, separada de los presupuestos de Google Sheets del punto 6.':'';}
+
+// Source weights belong to declared component groups, not individual mesh copies.
+function modelGroupKey(product){return product.layer+'::'+(product.sourceId||product.id);}
+function modelWeightKg(value){
+ if(typeof value==='number')return Number.isFinite(value)&&value>=0?value:null;
+ const match=String(value||'').match(/^\s*(?:≈|~)?\s*(\d+(?:\.\d{3})*(?:,\d+)?)\s*kg(?:\s|\(|$)/i);
+ if(!match)return null;return Number(match[1].replaceAll('.','').replace(',','.'));
+}
+function modelGroupQuantity(value){
+ if(typeof value==='number')return Number.isFinite(value)&&value>=0?value:null;
+ const match=String(value??'').match(/^\s*(\d+(?:\.\d{3})*(?:,\d+)?)(?:\s+(?:elementos?|unidades?|piezas?))?\s*$/i);
+ return match?Number(match[1].replaceAll('.','').replace(',','.')):null;
+}
+function modelUnitWeight(total,quantity){const mass=modelWeightKg(total),count=modelGroupQuantity(quantity);return mass!==null&&count!==null&&count>0?{kg:mass/count,label:(mass/count).toLocaleString('es-CL',{maximumFractionDigits:3})+' kg'}:{kg:null,label:'Sin dato'};}
+function modelWeightGroups(products,offer){
+ const groups=new Map();
+ for(const product of products){if(product.offer&&product.offer!=='AB'&&product.offer!==offer)continue;const key=modelGroupKey(product);
+  if(!groups.has(key)){const props=product.propsByOffer?.[offer]||product.props||{},unitMass=modelUnitWeight(props['Peso total'],props['Cantidad']);groups.set(key,{key,productId:product.id,name:product.sourceId||product.name,layer:product.layer,quantity:props['Cantidad']??'Sin dato',unitWeight:unitMass.label,unitKg:unitMass.kg,totalWeight:props['Peso total']??'Sin dato',totalKg:modelWeightKg(props['Peso total']),meshCount:0});}
+  groups.get(key).meshCount++;
+ }
+ return [...groups.values()];
+}
+function renderModelWeights(target,groups,title,onPick,activeKey=null){
+ const box=$(target);if(!box)return;box.replaceChildren();
+ const section=element('section',{className:'model-weight-panel'}),heading=element('div',{className:'model-weight-heading'});
+ heading.append(element('span',{},'PESOS DECLARADOS · HTML V5'),element('h4',{},title));section.append(heading);
+ if(!groups.length){section.append(element('p',{className:'model-weight-note'},'No hay componentes del HTML v5 vinculados a esta selección.'));box.append(section);return;}
+ const known=groups.filter(group=>group.totalKg!==null),total=known.reduce((sum,group)=>sum+group.totalKg,0),summary=element('div',{className:'model-weight-summary'});
+ for(const [label,value]of [['Grupos de componentes',String(groups.length)],['Peso de grupos disponible',known.length?f(total,1)+' kg':'Sin dato']]){const item=element('div');item.append(element('span',{},label),element('strong',{},value));summary.append(item);}section.append(summary);
+ const scroll=element('div',{className:'model-weight-scroll',tabIndex:0,role:'region',ariaLabel:'Pesos de los componentes del HTML v5'}),table=element('table'),thead=element('thead'),headers=element('tr');
+ for(const label of ['Componente','Cantidad','Peso unitario','Peso del grupo'])headers.append(element('th',{scope:'col'},label));thead.append(headers);table.append(thead);
+ const body=element('tbody');for(const group of groups){const row=element('tr'),name=element('td'),button=element('button',{type:'button',className:'model-weight-select',ariaPressed:String(group.key===activeKey)},group.name);button.dataset.modelGroup=group.key;button.onclick=()=>onPick(group);name.append(button,element('small',{},group.layer));row.append(name,element('td',{},String(group.quantity)),element('td',{},group.unitWeight),element('td',{},group.totalWeight));body.append(row);}table.append(body);scroll.append(table);section.append(scroll);
+ section.append(element('p',{className:'model-weight-note'},known.length+' / '+groups.length+' grupos con peso total informado. Peso unitario = peso del grupo ÷ cantidad. Cada grupo se cuenta una sola vez. Se conserva el peso total declarado, incluidas fundaciones si aparecen en la selección; no se calcula a partir de la malla.'));
+ box.append(section);
+}
+function renderIfcSelectedWeights(product){const box=$('ifc-selected-weights');if(!box)return;box.replaceChildren();const group=modelWeightGroups([product],IFCView.offer)[0];if(!group)return;
+ const summary=element('div',{className:'model-selected-weights'});for(const [label,value]of [['Cantidad del grupo',group.quantity],['Peso por unidad',group.unitWeight],['Peso del grupo',group.totalWeight]]){const item=element('div');item.append(element('span',{},label),element('strong',{},String(value)));summary.append(item);}box.append(summary,element('p',{className:'model-weight-note'},'Grupo '+group.name+'. Peso unitario = peso del grupo ÷ cantidad. La malla seleccionada es una instancia del grupo; el peso total no se repite por cada instancia.'));
+}
+function showIfcWeightGroup(group){
+ const v=IFCView;navigateToStep('step-5');
+ const input=[...$('ifc-layers').querySelectorAll('input')].find(item=>item.dataset.layer===group.layer);if(input&&!input.checked){input.checked=true;input.onchange();}
+ if(!v.ready){try{createIfcScene();}catch(error){$('ifc-selected-summary').textContent='No se pudo iniciar la geometría. Los pesos declarados siguen disponibles en la tabla.';return;}}
+ const mesh=v.meshes.find(item=>item.userData.product.id===group.productId&&modelOfferMatches(item.userData.product));if(!mesh)return;
+ selectIfcPiece(mesh);$('ifc-focus-piece').click();
+}
+
+function updateIfcLayerToggle(){
+ const inputs=[...$('ifc-layers').querySelectorAll('input')],all=inputs.length>0&&inputs.every(input=>input.checked),button=$('ifc-all-layers');
+ button.textContent=all?'Ocultar todas':'Mostrar todas';button.setAttribute('aria-label',all?'Desmarcar todas las capas del archivo':'Seleccionar todas las capas del archivo');
+}
+function notifyIfcLayerCosts(){if(!IFCView.layerBatch&&typeof syncCostLayersFromModel==='function')syncCostLayersFromModel();}
+function setIfcLayers(predicate){
+ const previous=!!IFCView.layerBatch;IFCView.layerBatch=true;
+ try{for(const input of $('ifc-layers').querySelectorAll('input')){const layer=IFCView.data.layers.find(item=>item.name===input.dataset.layer);input.checked=!!predicate(layer);input.onchange();}}
+ finally{IFCView.layerBatch=previous;}
+ notifyIfcLayerCosts();
+}
+function toggleIfcLayers(){const inputs=[...$('ifc-layers').querySelectorAll('input')],show=!inputs.every(input=>input.checked);setIfcLayers(()=>show);}

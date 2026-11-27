@@ -43,7 +43,7 @@ px.defaults.color_discrete_sequence = COLOR_SEQ
 os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib-cache")
 
 st.set_page_config(
-    page_title="Diseño VAWT – Aerodinámica + Generador GDG-1100",
+    page_title="Diseño VAWT · Proyectos V80 y 10 kW",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -3089,6 +3089,36 @@ AIRFOIL_LIBRARY = {
     },
 }
 
+
+# Independent project tabs: only the active workspace creates its widgets or calculations.
+from turbine10_view import render_turbine10
+
+def _change_main_workspace():
+    previous=st.session_state.get('_main_workspace_active','V80 · análisis')
+    current=st.session_state['main_project_workspace']
+    if previous=='V80 · análisis':
+        st.session_state['_v80_workspace_widgets']={key:value for key,value in st.session_state.items() if key.startswith(('rotor_','profile_','html_','wind_','source_cut_')) or key in {'aerodynamic_source','air_density','reference_config','source_rated','apply_rotor_rpm_limit','control_mode_widget','visualizer_selected_wind','visualizer_ui'}}
+    if current=='V80 · análisis':
+        for key,value in st.session_state.get('_v80_workspace_widgets',{}).items():st.session_state[key]=value
+    st.session_state['_main_workspace_active']=current
+    st.query_params['project']='10kw' if current=='10 kW · IFC' else 'v80'
+
+st.markdown("""<style>
+[data-testid="stMain"] [data-testid="stRadio"] [role="radiogroup"]{gap:8px;border-bottom:1px solid #d7e2dc;padding:0 0 12px;margin:0 0 12px}
+[data-testid="stMain"] [data-testid="stRadio"] label{border:1px solid #d7e2dc;border-radius:9px;padding:8px 16px;background:#fcfdfc;color:#36534a;font-weight:600;font-size:13px}
+[data-testid="stMain"] [data-testid="stRadio"] label:has(input:checked){background:#214d40;color:white;border-color:#214d40}
+[data-testid="stMain"] [data-testid="stRadio"] label:has(input:checked) :is(p,span){color:white!important}
+[data-testid="stMain"] [data-testid="stRadio"] label[data-baseweb="radio"]>div:first-child{display:none!important}
+[data-testid="stMain"] [data-testid="stRadio"] label:focus-within{outline:2px solid #398477;outline-offset:2px}
+.t10-intro{padding:15px 0 9px}.t10-intro>span{font-size:10px;letter-spacing:.13em;color:#398477;font-weight:700}.t10-intro h2{font-size:25px;letter-spacing:-.035em;margin:7px 0}.t10-intro p{font-size:12px;color:#66756e;margin-bottom:8px}
+</style>""",unsafe_allow_html=True)
+if 'main_project_workspace' not in st.session_state:
+    st.session_state['main_project_workspace']='10 kW · IFC' if st.query_params.get('project')=='10kw' else 'V80 · análisis'
+workspace=st.radio('Proyecto de análisis',['V80 · análisis','10 kW · IFC'],horizontal=True,key='main_project_workspace',on_change=_change_main_workspace,label_visibility='collapsed')
+st.session_state['_main_workspace_active']=workspace
+if workspace=='10 kW · IFC':
+    render_turbine10(compute_base_results,GENERATORS['GDG_10k'],build_lift_drag_polar)
+    st.stop()
 
 qblade_mode = render_sidebar_source()
 qblade_reference_mode = qblade_mode

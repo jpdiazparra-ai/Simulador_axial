@@ -31,6 +31,19 @@ def parse_quantity(value):
     return int(number) if number==number.to_integral_value() else float(number)
 
 
+def source_quantity(record, *names):
+    fields={' '.join(str(key).split()).casefold():value for key,value in record.items()}
+    for name in names:
+        value=fields.get(name.casefold(),'')
+        if str(value).strip():return parse_quantity(str(value))
+    return None
+
+
+def source_money(record, name):
+    fields={' '.join(str(key).split()).casefold():value for key,value in record.items()}
+    return parse_money(str(fields.get(name.casefold(),'') or ''))
+
+
 def parse_cost_csv(raw, fetched_at=None):
     if isinstance(raw, bytes): raw = raw.decode('utf-8-sig')
     rows = list(csv.reader(io.StringIO(raw)))
@@ -50,6 +63,11 @@ def parse_cost_csv(raw, fetched_at=None):
             'package':d['Paquete / línea'].strip(), 'activity':d['Actividad / entregable'].strip(),
             'criterion':d.get('Criterio','').strip(), 'quantity':d.get('Cantidad','').strip(),
             'quantityValue':parse_quantity(d.get('Cantidad','')),
+            'hoursPerUnit':source_quantity(d,'Hrs por unidad','Horas por unidad','HH por unidad'),
+            'kgPerUnit':source_quantity(d,'Kg por unidad','Kilogramos por unidad'),
+            'hasPerUnitColumns':any(' '.join(field.split()).casefold() in ('hrs por unidad','horas por unidad','hh por unidad','kg por unidad','kilogramos por unidad') for field in header),
+            'unit':next((d.get(field,'').strip() for field in ('Unidad de medida','Unidad','Unidad cantidad') if d.get(field,'').strip()),''),
+            'referenceBudget':source_money(d,'Presupuesto referencia'),
             'current':parse_money(d['Presupuesto vigente']), 'previous':parse_money(d['Comercial anterior']),
             'applies':'Aplica', 'approved':d.get('Base aprobada','').strip()})
     if not records: raise ValueError('La fuente no contiene partidas Aplica')
@@ -66,7 +84,7 @@ def load_cost_reference():
         with urllib.request.urlopen(request, timeout=12) as response:
             raw=response.read(4_000_001)
         if len(raw)>4_000_000: raise ValueError('La respuesta supera el tamaño permitido')
-        result=parse_cost_csv(raw);result['metadata']['status']='live';return result
+        result=parse_cost_csv(raw);result['metadata'].update(status='live',unitFieldsVersion=3,referenceBudgetSource='Presupuesto referencia');return result
     except Exception:
         result=json.loads(Path(__file__).with_name('data').joinpath('cost_reference_snapshot.json').read_text())
         result['metadata']['status']='snapshot'

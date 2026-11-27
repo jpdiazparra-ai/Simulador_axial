@@ -10,7 +10,8 @@
     "included": 222,
     "excluded": 419,
     "defaultMilestone": "Producto 80 kW",
-    "status": "snapshot"
+    "status": "snapshot",
+    "referenceBudgetSource": "Presupuesto referencia"
   },
   "rows": [
     {
@@ -27,7 +28,8 @@
       "current": 443344,
       "previous": 376842,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 443344
     },
     {
       "id": "A124",
@@ -43,7 +45,8 @@
       "current": 2665600,
       "previous": 1500000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 2665600
     },
     {
       "id": "A147",
@@ -59,7 +62,8 @@
       "current": 100000,
       "previous": 100000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 100000
     },
     {
       "id": "A161",
@@ -75,7 +79,8 @@
       "current": 104000,
       "previous": 83200,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A19",
@@ -91,7 +96,8 @@
       "current": 54000,
       "previous": 43200,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 9000
     },
     {
       "id": "A2",
@@ -107,7 +113,8 @@
       "current": 157437,
       "previous": 78719,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 52479
     },
     {
       "id": "A219",
@@ -123,7 +130,8 @@
       "current": 600000,
       "previous": 600000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 600000
     },
     {
       "id": "A220",
@@ -139,7 +147,8 @@
       "current": 420000,
       "previous": 420000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 420000
     },
     {
       "id": "A221",
@@ -155,7 +164,8 @@
       "current": 3800,
       "previous": 3800,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 3800
     },
     {
       "id": "A222",
@@ -171,7 +181,8 @@
       "current": 3990,
       "previous": 3990,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 3990
     },
     {
       "id": "A223",
@@ -187,7 +198,8 @@
       "current": 75784,
       "previous": 75784,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6315
     },
     {
       "id": "A224",
@@ -203,7 +215,8 @@
       "current": 17420,
       "previous": 17420,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 1452
     },
     {
       "id": "A225",
@@ -219,7 +232,8 @@
       "current": 25500,
       "previous": 25500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 25500
     },
     {
       "id": "A226",
@@ -235,7 +249,8 @@
       "current": 25500,
       "previous": 25500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 25500
     },
     {
       "id": "A232",
@@ -251,7 +266,8 @@
       "current": 83300,
       "previous": 16660,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 83300
     },
     {
       "id": "A233",
@@ -267,7 +283,8 @@
       "current": 25000,
       "previous": 25000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 25000
     },
     {
       "id": "A234",
@@ -283,7 +300,8 @@
       "current": 25000,
       "previous": 20000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 25000
     },
     {
       "id": "A235",
@@ -299,7 +317,8 @@
       "current": 250000,
       "previous": 175000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 250000
     },
     {
       "id": "A263",
@@ -315,7 +334,8 @@
       "current": 100000,
       "previous": 50000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 100000
     },
     {
       "id": "A268",
@@ -331,7 +351,8 @@
       "current": 3000000,
       "previous": 2400000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 500000
     },
     {
       "id": "A270",
@@ -347,7 +368,8 @@
       "current": 3600000,
       "previous": 2880000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 600000
     },
     {
       "id": "A290",
@@ -363,7 +385,8 @@
       "current": 250000,
       "previous": 125000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 250000
     },
     {
       "id": "A292",
@@ -379,7 +402,8 @@
       "current": 650000,
       "previous": 520000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 108333
     },
     {
       "id": "A299",
@@ -395,7 +419,8 @@
       "current": 11625070,
       "previous": 10695064,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 11625070
     },
     {
       "id": "A3",
@@ -411,7 +436,8 @@
       "current": 238000,
       "previous": 190400,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 238000
     },
     {
       "id": "A301",
@@ -427,7 +453,8 @@
       "current": 60869,
       "previous": 48695,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 60869
     },
     {
       "id": "A302",
@@ -443,7 +470,8 @@
       "current": 69614,
       "previous": 55691,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 69614
     },
     {
       "id": "A303",
@@ -459,7 +487,8 @@
       "current": 171539,
       "previous": 137231,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 171539
     },
     {
       "id": "A304",
@@ -475,7 +504,8 @@
       "current": 378676,
       "previous": 189338,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 378676
     },
     {
       "id": "A305",
@@ -491,7 +521,8 @@
       "current": 3308019,
       "previous": 1654010,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 3308019
     },
     {
       "id": "A306",
@@ -507,7 +538,8 @@
       "current": 951363,
       "previous": 475682,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 951363
     },
     {
       "id": "A309",
@@ -523,7 +555,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A319",
@@ -539,7 +572,8 @@
       "current": 25000,
       "previous": 25000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 25000
     },
     {
       "id": "A330",
@@ -555,7 +589,8 @@
       "current": 1800000,
       "previous": 1800000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 600000
     },
     {
       "id": "A355",
@@ -571,7 +606,8 @@
       "current": 107669,
       "previous": 75368,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 107669
     },
     {
       "id": "A356",
@@ -587,7 +623,8 @@
       "current": 38235,
       "previous": 30588,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 38235
     },
     {
       "id": "A357",
@@ -603,7 +640,8 @@
       "current": 238000,
       "previous": 190400,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 238000
     },
     {
       "id": "A408",
@@ -619,7 +657,8 @@
       "current": 500000,
       "previous": 500000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 500000
     },
     {
       "id": "A409",
@@ -635,7 +674,8 @@
       "current": 6500,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A410",
@@ -651,7 +691,8 @@
       "current": 1053000,
       "previous": 526500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A411",
@@ -667,7 +708,8 @@
       "current": 1053000,
       "previous": 526500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A412",
@@ -683,7 +725,8 @@
       "current": 526500,
       "previous": 263250,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A413",
@@ -699,7 +742,8 @@
       "current": 1053000,
       "previous": 526500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A414",
@@ -715,7 +759,8 @@
       "current": 6500,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A415",
@@ -731,7 +776,8 @@
       "current": 526500,
       "previous": 263250,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A416",
@@ -747,7 +793,8 @@
       "current": 6500,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A417",
@@ -763,7 +810,8 @@
       "current": 1404000,
       "previous": 702000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A418",
@@ -779,7 +827,8 @@
       "current": 6500,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A419",
@@ -795,7 +844,8 @@
       "current": 526500,
       "previous": 263250,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A420",
@@ -811,7 +861,8 @@
       "current": 600000,
       "previous": 600000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 200000
     },
     {
       "id": "A421",
@@ -827,7 +878,8 @@
       "current": 526500,
       "previous": 263250,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A436",
@@ -843,7 +895,8 @@
       "current": 59400,
       "previous": 38610,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6600
     },
     {
       "id": "A439",
@@ -859,7 +912,8 @@
       "current": 190400,
       "previous": 123760,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 190400
     },
     {
       "id": "A442",
@@ -875,7 +929,8 @@
       "current": 26400,
       "previous": 21120,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6600
     },
     {
       "id": "A443",
@@ -891,7 +946,8 @@
       "current": 19800,
       "previous": 15840,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6600
     },
     {
       "id": "A445",
@@ -907,7 +963,8 @@
       "current": 160000,
       "previous": 104000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 160000
     },
     {
       "id": "A46",
@@ -923,7 +980,8 @@
       "current": 104000,
       "previous": 83200,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A47",
@@ -939,7 +997,8 @@
       "current": 202200,
       "previous": 160000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 202200
     },
     {
       "id": "A471",
@@ -955,7 +1014,8 @@
       "current": 72000,
       "previous": 50400,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 3000
     },
     {
       "id": "A472",
@@ -971,7 +1031,8 @@
       "current": 16500,
       "previous": 11550,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 5500
     },
     {
       "id": "A473",
@@ -987,7 +1048,8 @@
       "current": 45000,
       "previous": 36000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 15000
     },
     {
       "id": "A474",
@@ -1003,7 +1065,8 @@
       "current": 80000,
       "previous": 64000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 80000
     },
     {
       "id": "A475",
@@ -1019,7 +1082,8 @@
       "current": 25990,
       "previous": 2079,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 2599
     },
     {
       "id": "A476",
@@ -1035,7 +1099,8 @@
       "current": 31990,
       "previous": 25592,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 31990
     },
     {
       "id": "A477",
@@ -1051,7 +1116,8 @@
       "current": 145000,
       "previous": 116000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 145000
     },
     {
       "id": "A478",
@@ -1067,7 +1133,8 @@
       "current": 32500,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A479",
@@ -1083,7 +1150,8 @@
       "current": 19500,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A480",
@@ -1099,7 +1167,8 @@
       "current": 15990,
       "previous": 15990,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 1333
     },
     {
       "id": "A481",
@@ -1115,7 +1184,8 @@
       "current": 19500,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A482",
@@ -1131,7 +1201,8 @@
       "current": 19500,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A483",
@@ -1147,7 +1218,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A484",
@@ -1163,7 +1235,8 @@
       "current": 19500,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A485",
@@ -1179,7 +1252,8 @@
       "current": 19500,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A486",
@@ -1195,7 +1269,8 @@
       "current": 52000,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A487",
@@ -1211,7 +1286,8 @@
       "current": 13000,
       "previous": 6500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A489",
@@ -1227,7 +1303,8 @@
       "current": 150000,
       "previous": 120000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 150000
     },
     {
       "id": "A492",
@@ -1243,7 +1320,8 @@
       "current": 6500,
       "previous": 5200,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A494",
@@ -1259,7 +1337,8 @@
       "current": 19500,
       "previous": 19500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A495",
@@ -1275,7 +1354,8 @@
       "current": 19500,
       "previous": 19500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A496",
@@ -1291,7 +1371,8 @@
       "current": 19500,
       "previous": 19500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A497",
@@ -1307,7 +1388,8 @@
       "current": 19500,
       "previous": 19500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A498",
@@ -1323,7 +1405,8 @@
       "current": 19500,
       "previous": 19500,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A5",
@@ -1339,7 +1422,8 @@
       "current": 351083,
       "previous": 175542,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 29257
     },
     {
       "id": "A50",
@@ -1355,7 +1439,8 @@
       "current": 21000,
       "previous": 16800,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 3500
     },
     {
       "id": "A503",
@@ -1371,7 +1456,8 @@
       "current": 100000,
       "previous": 80000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 100000
     },
     {
       "id": "A504",
@@ -1387,7 +1473,8 @@
       "current": 100000,
       "previous": 80000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 100000
     },
     {
       "id": "A505",
@@ -1403,7 +1490,8 @@
       "current": 100000,
       "previous": 80000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 100000
     },
     {
       "id": "A506",
@@ -1419,7 +1507,8 @@
       "current": 100000,
       "previous": 80000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 100000
     },
     {
       "id": "A507",
@@ -1435,7 +1524,8 @@
       "current": 100000,
       "previous": 80000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 100000
     },
     {
       "id": "A508",
@@ -1451,7 +1541,8 @@
       "current": 100000,
       "previous": 80000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 100000
     },
     {
       "id": "A509",
@@ -1467,7 +1558,8 @@
       "current": 100000,
       "previous": 100000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 100000
     },
     {
       "id": "A51",
@@ -1483,7 +1575,8 @@
       "current": 119000,
       "previous": 59500,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 119000
     },
     {
       "id": "A510",
@@ -1499,7 +1592,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A511",
@@ -1515,7 +1609,8 @@
       "current": 19500,
       "previous": 15600,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A512",
@@ -1531,7 +1626,8 @@
       "current": 168000,
       "previous": 84000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 7000
     },
     {
       "id": "A513",
@@ -1547,7 +1643,8 @@
       "current": 175500,
       "previous": 87750,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A514",
@@ -1563,7 +1660,8 @@
       "current": 450000,
       "previous": 405000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 75000
     },
     {
       "id": "A515",
@@ -1579,7 +1677,8 @@
       "current": 1500000,
       "previous": 1500000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 50000
     },
     {
       "id": "A516",
@@ -1595,7 +1694,8 @@
       "current": 202000,
       "previous": 141400,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 202000
     },
     {
       "id": "A517",
@@ -1611,7 +1711,8 @@
       "current": 149000,
       "previous": 119200,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 149000
     },
     {
       "id": "A518",
@@ -1627,7 +1728,8 @@
       "current": 60000,
       "previous": 48000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 60000
     },
     {
       "id": "A519",
@@ -1643,7 +1745,8 @@
       "current": 100000,
       "previous": 70000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 100000
     },
     {
       "id": "A520",
@@ -1659,7 +1762,8 @@
       "current": 4289294,
       "previous": 3431435,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 4289294
     },
     {
       "id": "A521",
@@ -1675,7 +1779,8 @@
       "current": 770436,
       "previous": 385218,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 770436
     },
     {
       "id": "A522",
@@ -1691,7 +1796,8 @@
       "current": 1817874,
       "previous": 1454299,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 1817874
     },
     {
       "id": "A523",
@@ -1707,7 +1813,8 @@
       "current": 1053249,
       "previous": 842599,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 1053249
     },
     {
       "id": "A525",
@@ -1723,7 +1830,8 @@
       "current": 150000,
       "previous": 120000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 150000
     },
     {
       "id": "A526",
@@ -1739,7 +1847,8 @@
       "current": 1677600,
       "previous": 838800,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 1677600
     },
     {
       "id": "A527",
@@ -1755,7 +1864,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 535500
     },
     {
       "id": "A528",
@@ -1771,7 +1881,8 @@
       "current": 430000,
       "previous": 344000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 430000
     },
     {
       "id": "A529",
@@ -1787,7 +1898,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A530",
@@ -1803,7 +1915,8 @@
       "current": 13000,
       "previous": 10400,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 13000
     },
     {
       "id": "A531",
@@ -1819,7 +1932,8 @@
       "current": 468000,
       "previous": 234000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A532",
@@ -1835,7 +1949,8 @@
       "current": 6048000,
       "previous": 4838400,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6048000
     },
     {
       "id": "A533",
@@ -1851,7 +1966,8 @@
       "current": 2567500,
       "previous": 2054000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 2567500
     },
     {
       "id": "A535",
@@ -1867,7 +1983,8 @@
       "current": 1000000,
       "previous": 800000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 1000000
     },
     {
       "id": "A536",
@@ -1883,7 +2000,8 @@
       "current": 2447966,
       "previous": 1958373,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 2447966
     },
     {
       "id": "A538",
@@ -1899,7 +2017,8 @@
       "current": 12631,
       "previous": 10105,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 12631
     },
     {
       "id": "A539",
@@ -1915,7 +2034,8 @@
       "current": 608000,
       "previous": 486400,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 608000
     },
     {
       "id": "A540",
@@ -1931,7 +2051,8 @@
       "current": 556800,
       "previous": 445440,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 556800
     },
     {
       "id": "A541",
@@ -1947,7 +2068,8 @@
       "current": 178449,
       "previous": 142759,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 178449
     },
     {
       "id": "A542",
@@ -1963,7 +2085,8 @@
       "current": 194238,
       "previous": 155390,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 194238
     },
     {
       "id": "A543",
@@ -1979,7 +2102,8 @@
       "current": 2610000,
       "previous": 2088000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 2610000
     },
     {
       "id": "A545",
@@ -1995,7 +2119,8 @@
       "current": 50000,
       "previous": 40000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 50000
     },
     {
       "id": "A546",
@@ -2011,7 +2136,8 @@
       "current": 50000,
       "previous": 40000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 50000
     },
     {
       "id": "A547",
@@ -2027,7 +2153,8 @@
       "current": 700000,
       "previous": 420000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 700000
     },
     {
       "id": "A548",
@@ -2043,7 +2170,8 @@
       "current": 200000,
       "previous": 160000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 200000
     },
     {
       "id": "A549",
@@ -2059,7 +2187,8 @@
       "current": 650000,
       "previous": 520000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 650000
     },
     {
       "id": "A55",
@@ -2075,7 +2204,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": null
     },
     {
       "id": "A550",
@@ -2091,7 +2221,8 @@
       "current": 156000,
       "previous": 156000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A551",
@@ -2107,7 +2238,8 @@
       "current": 52000,
       "previous": 5200,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A552",
@@ -2123,7 +2255,8 @@
       "current": 244308,
       "previous": 195446,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 244308
     },
     {
       "id": "A554",
@@ -2139,7 +2272,8 @@
       "current": 13195500,
       "previous": 10675160,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 13195500
     },
     {
       "id": "A555",
@@ -2155,7 +2289,8 @@
       "current": 7200000,
       "previous": 4320000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 7200000
     },
     {
       "id": "A556",
@@ -2171,7 +2306,8 @@
       "current": 343078,
       "previous": 55000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 343078
     },
     {
       "id": "A557",
@@ -2187,7 +2323,8 @@
       "current": 757352,
       "previous": 605882,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 757352
     },
     {
       "id": "A558",
@@ -2203,7 +2340,8 @@
       "current": 161500,
       "previous": 161500,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 161500
     },
     {
       "id": "A559",
@@ -2219,7 +2357,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A56",
@@ -2235,7 +2374,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": null
     },
     {
       "id": "A560",
@@ -2251,7 +2391,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A561",
@@ -2267,7 +2408,8 @@
       "current": 3600000,
       "previous": 2880000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 1200000
     },
     {
       "id": "A562",
@@ -2283,7 +2425,8 @@
       "current": 1425000,
       "previous": 1140000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 1425000
     },
     {
       "id": "A565",
@@ -2299,7 +2442,8 @@
       "current": 700000,
       "previous": 560000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 700000
     },
     {
       "id": "A566",
@@ -2315,7 +2459,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 1000000
     },
     {
       "id": "A567",
@@ -2331,7 +2476,8 @@
       "current": 2080000,
       "previous": 1040000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A568",
@@ -2347,7 +2493,8 @@
       "current": 2080000,
       "previous": 1040000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A569",
@@ -2363,7 +2510,8 @@
       "current": 1053000,
       "previous": 526500,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A570",
@@ -2379,7 +2527,8 @@
       "current": 2080000,
       "previous": 1040000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A571",
@@ -2395,7 +2544,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A572",
@@ -2411,7 +2561,8 @@
       "current": 2080000,
       "previous": 1040000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A573",
@@ -2427,7 +2578,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A574",
@@ -2443,7 +2595,8 @@
       "current": 2808000,
       "previous": 1404000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A575",
@@ -2459,7 +2612,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A576",
@@ -2475,7 +2629,8 @@
       "current": 1053000,
       "previous": 526500,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A577",
@@ -2491,7 +2646,8 @@
       "current": 1200000,
       "previous": 840000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 400000
     },
     {
       "id": "A578",
@@ -2507,7 +2663,8 @@
       "current": 1053000,
       "previous": 526500,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A579",
@@ -2523,7 +2680,8 @@
       "current": 290000,
       "previous": 232000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 290000
     },
     {
       "id": "A58",
@@ -2539,7 +2697,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": null
     },
     {
       "id": "A580",
@@ -2555,7 +2714,8 @@
       "current": 450000,
       "previous": 360000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 450000
     },
     {
       "id": "A581",
@@ -2571,7 +2731,8 @@
       "current": 3042000,
       "previous": 2433600,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 3042000
     },
     {
       "id": "A582",
@@ -2587,7 +2748,8 @@
       "current": 2110000,
       "previous": 1688000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 2110000
     },
     {
       "id": "A583",
@@ -2603,7 +2765,8 @@
       "current": 480000,
       "previous": 384000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 480000
     },
     {
       "id": "A584",
@@ -2619,7 +2782,8 @@
       "current": 216000,
       "previous": 151200,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6000
     },
     {
       "id": "A585",
@@ -2635,7 +2799,8 @@
       "current": 45000,
       "previous": 31500,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 15000
     },
     {
       "id": "A586",
@@ -2651,7 +2816,8 @@
       "current": 45000,
       "previous": 22500,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 15000
     },
     {
       "id": "A587",
@@ -2667,7 +2833,8 @@
       "current": 750000,
       "previous": 487500,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 750000
     },
     {
       "id": "A588",
@@ -2683,7 +2850,8 @@
       "current": 2200000,
       "previous": 1540000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 2200000
     },
     {
       "id": "A589",
@@ -2699,7 +2867,8 @@
       "current": 50000,
       "previous": 35000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 50000
     },
     {
       "id": "A59",
@@ -2715,7 +2884,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": null
     },
     {
       "id": "A591",
@@ -2731,7 +2901,8 @@
       "current": 100000,
       "previous": 80000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 100000
     },
     {
       "id": "A592",
@@ -2747,7 +2918,8 @@
       "current": 350000,
       "previous": 280000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 350000
     },
     {
       "id": "A595",
@@ -2763,7 +2935,8 @@
       "current": 3940052,
       "previous": 2364031,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 3940052
     },
     {
       "id": "A597",
@@ -2779,7 +2952,8 @@
       "current": 156000,
       "previous": 124800,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 156000
     },
     {
       "id": "A598",
@@ -2795,7 +2969,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A599",
@@ -2811,7 +2986,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A60",
@@ -2827,7 +3003,8 @@
       "current": 50000,
       "previous": 40000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 50000
     },
     {
       "id": "A600",
@@ -2843,7 +3020,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A601",
@@ -2859,7 +3037,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A602",
@@ -2875,7 +3054,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A603",
@@ -2891,7 +3071,8 @@
       "current": 250000,
       "previous": 50000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 50000
     },
     {
       "id": "A604",
@@ -2907,7 +3088,8 @@
       "current": 5500000,
       "previous": 1800000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 5500000
     },
     {
       "id": "A605",
@@ -2923,7 +3105,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A606",
@@ -2939,7 +3122,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A607",
@@ -2955,7 +3139,8 @@
       "current": null,
       "previous": null,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": null
     },
     {
       "id": "A61",
@@ -2971,7 +3156,8 @@
       "current": 50000,
       "previous": 40000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 50000
     },
     {
       "id": "A610",
@@ -2987,7 +3173,8 @@
       "current": 78000,
       "previous": 5200,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A611",
@@ -3003,7 +3190,8 @@
       "current": 39000,
       "previous": 5200,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A612",
@@ -3019,7 +3207,8 @@
       "current": 200000,
       "previous": 160000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 200000
     },
     {
       "id": "A613",
@@ -3035,7 +3224,8 @@
       "current": 200000,
       "previous": 160000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 200000
     },
     {
       "id": "A614",
@@ -3051,7 +3241,8 @@
       "current": 250000,
       "previous": 200000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 250000
     },
     {
       "id": "A615",
@@ -3067,7 +3258,8 @@
       "current": 1425128,
       "previous": 855077,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 1425128
     },
     {
       "id": "A616",
@@ -3083,7 +3275,8 @@
       "current": 3030000,
       "previous": 1515000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 3030000
     },
     {
       "id": "A617",
@@ -3099,7 +3292,8 @@
       "current": 3492946,
       "previous": 174647,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 3492946
     },
     {
       "id": "A618",
@@ -3115,7 +3309,8 @@
       "current": 32000,
       "previous": 32000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 32000
     },
     {
       "id": "A619",
@@ -3131,7 +3326,8 @@
       "current": 13000,
       "previous": 13000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 13000
     },
     {
       "id": "A620",
@@ -3147,7 +3343,8 @@
       "current": 150000,
       "previous": 120000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 150000
     },
     {
       "id": "A621",
@@ -3163,7 +3360,8 @@
       "current": 336000,
       "previous": 168000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 7000
     },
     {
       "id": "A622",
@@ -3179,7 +3377,8 @@
       "current": 117000,
       "previous": 5200,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A623",
@@ -3195,7 +3394,8 @@
       "current": 450000,
       "previous": 405000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 75000
     },
     {
       "id": "A624",
@@ -3211,7 +3411,8 @@
       "current": 2400000,
       "previous": 2400000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 40000
     },
     {
       "id": "A626",
@@ -3227,7 +3428,8 @@
       "current": 2443076,
       "previous": 1710153,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 2443076
     },
     {
       "id": "A627",
@@ -3243,7 +3445,8 @@
       "current": 1934102,
       "previous": 1353871,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 1934102
     },
     {
       "id": "A628",
@@ -3259,7 +3462,8 @@
       "current": 650000,
       "previous": 520000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 650000
     },
     {
       "id": "A64",
@@ -3275,7 +3479,8 @@
       "current": 468000,
       "previous": 234000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 6500
     },
     {
       "id": "A643",
@@ -3291,7 +3496,8 @@
       "current": 400000,
       "previous": 320000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 400000
     },
     {
       "id": "A644",
@@ -3307,7 +3513,8 @@
       "current": 50000,
       "previous": 40000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 50000
     },
     {
       "id": "A645",
@@ -3323,7 +3530,8 @@
       "current": 300000,
       "previous": 240000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 300000
     },
     {
       "id": "A646",
@@ -3339,7 +3547,8 @@
       "current": 100000,
       "previous": 80000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 100000
     },
     {
       "id": "A647",
@@ -3355,7 +3564,8 @@
       "current": 25000,
       "previous": 20000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 25000
     },
     {
       "id": "A648",
@@ -3371,7 +3581,8 @@
       "current": 20000,
       "previous": 16000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 20000
     },
     {
       "id": "A649",
@@ -3387,7 +3598,8 @@
       "current": 50000,
       "previous": 40000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 50000
     },
     {
       "id": "A650",
@@ -3403,7 +3615,8 @@
       "current": 75000,
       "previous": 60000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 75000
     },
     {
       "id": "A651",
@@ -3419,7 +3632,8 @@
       "current": 75000,
       "previous": 60000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 75000
     },
     {
       "id": "A75",
@@ -3435,7 +3649,8 @@
       "current": 550000,
       "previous": 550000,
       "applies": "Aplica",
-      "approved": "Sí"
+      "approved": "Sí",
+      "referenceBudget": 550000
     },
     {
       "id": "A639",
@@ -3451,7 +3666,8 @@
       "current": 400000,
       "previous": 320000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 400000
     },
     {
       "id": "A640",
@@ -3467,7 +3683,8 @@
       "current": 78000,
       "previous": 62400,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 6500
     },
     {
       "id": "A641",
@@ -3483,7 +3700,8 @@
       "current": 2200000,
       "previous": 1760000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 5500
     },
     {
       "id": "A642",
@@ -3499,7 +3717,8 @@
       "current": 2500,
       "previous": 2000,
       "applies": "Aplica",
-      "approved": "No"
+      "approved": "No",
+      "referenceBudget": 2500
     },
     {
       "id": "A660",
@@ -3515,7 +3734,8 @@
       "current": 350000,
       "previous": 280000,
       "applies": "Aplica",
-      "approved": ""
+      "approved": "",
+      "referenceBudget": 350000
     },
     {
       "id": "A661",
@@ -3531,7 +3751,8 @@
       "current": 52000,
       "previous": 41600,
       "applies": "Aplica",
-      "approved": ""
+      "approved": "",
+      "referenceBudget": 6500
     },
     {
       "id": "A662",
@@ -3547,7 +3768,8 @@
       "current": 250000,
       "previous": 200000,
       "applies": "Aplica",
-      "approved": ""
+      "approved": "",
+      "referenceBudget": 250000
     },
     {
       "id": "A663",
@@ -3563,7 +3785,8 @@
       "current": 52000,
       "previous": 41600,
       "applies": "Aplica",
-      "approved": ""
+      "approved": "",
+      "referenceBudget": 6500
     }
   ]
 }

@@ -1,0 +1,54 @@
+// Offline report of point 6. Keep the chart's layer scope and the table's package scope explicit.
+function costExportEscape(value){return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));}
+function costAnalysisSnapshot(){
+ const state=captureCostViewState(),table=costFilteredRows(),context=costChartRows(),board=costBoardData(context);
+ return {generatedAt:new Date().toISOString(),state,variant:IFCView.offer,tableRows:table.map(row=>({...row})),tableStats:costStats(table),contextCount:context.length,
+  board:{...board,groups:board.groups.map(group=>({key:group.key,name:group.name,count:group.rows.length,stats:{...group.stats}}))},
+  source:{...CostView.data.metadata},component:CostPreview.sourceKey||null};
+}
+function costExportBoardRows(snapshot){
+ const {board,state}=snapshot,span=board.maximum-board.minimum||1,e=costExportEscape;
+ const money=value=>value===null?'Sin dato':'US$ '+f(value/state.fxRate,2);
+ return board.groups.map((group,index)=>{
+  const comparisons=['current','previous'].map(key=>{const amount=group.stats[key],known=group.stats[key+'Count']>0,left=(Math.min(0,amount)-board.minimum)/span*100,width=Math.abs(amount)/span*100;
+   return '<span class="cost-board-series '+key+'"><span class="cost-board-track"><i class="cost-board-zero" style="left:'+(-board.minimum/span*100)+'%"></i>'+(known&&amount!==0?'<i class="cost-board-fill" style="left:'+left+'%;width:'+width+'%"></i>':'')+'</span><strong>'+e(money(known?amount:null))+'</strong></span>';
+  }).join('');
+  const share=group.stats[board.base+'Count']&&board.positive>0&&group.stats[board.base]>=0?f(group.stats[board.base]/board.positive*100,1)+' %':'—';
+  return '<div class="cost-board-row"><span class="cost-board-name"><span class="cost-board-rank">'+String(index+1).padStart(2,'0')+'</span><strong>'+e(group.name)+'</strong><small>'+group.count+' partidas</small></span><span class="cost-board-comparison">'+comparisons+'</span><span class="cost-board-share"><strong>'+e(share)+'</strong><small>participación</small></span></div>';
+ }).join('');
+}
+// Export controls keep their nested label, value, and note elements.
+function costExportFreezeButtons(section,doc=document){
+ for(const button of [...section.querySelectorAll('button')]){const replacement=doc.createElement(button.classList.contains('cost-kpi')?'div':'span');replacement.className=button.className;replacement.append(...button.childNodes);button.replaceWith(replacement);}
+}
+// Native scrolling only: no wheel or pointer handler captures the table's gestures.
+function initCostExportTableViewport(doc=document){
+ const table=doc.getElementById('cost-table'),wrap=table?.closest('.cost-table-wrap');if(!table||!wrap)return;
+ wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label','Partidas que componen la selección. Desplazamiento horizontal y vertical; encabezado, totales y columnas de los extremos fijos.');
+}
+function costExportDocument(snapshot,styles,sectionHtml){
+ const e=costExportEscape,s=snapshot.state,scope=[s.milestone==='all'?'Todos los hitos':s.milestone,s.layer==='all'?(s.modelSelectionActive&&!(s.selectedLayers||[]).length?'Sin capas seleccionadas':(s.selectedLayers||[]).length?'Capas: '+s.selectedLayers.join(' · '):'Todas las capas'):s.layer,s.package==='all'?'Todos los paquetes':s.package,s.activity==='all'?null:'Actividad '+s.activity,s.search?'Búsqueda: '+s.search:null].filter(Boolean).join(' · ');
+ const stamp=new Date(snapshot.generatedAt).toLocaleString('es-CL',{dateStyle:'medium',timeStyle:'short'});
+ const json=JSON.stringify(snapshot).replaceAll('<','\\u003c').replaceAll('>','\\u003e').replaceAll('&','\\u0026');
+ return '<!doctype html><html lang="es" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Costos de la turbina · análisis</title><style>'+styles+'\n'+
+ 'body{background:#f3f4f2}.cost-export-page{max-width:1900px;margin:auto;padding:24px}.cost-export-heading{padding:20px 24px;background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:16px}.cost-export-heading h1{font-size:25px;margin:0 0 8px}.cost-export-heading p{font-size:12px;line-height:1.7;color:var(--ink2);margin:4px 0}.cost-export-caption{padding:12px;font-size:11px;color:var(--ink2)}.cost-export-image{display:block;width:100%;height:100%;object-fit:contain;background:#eaf0f4}.cost-export-page #cost-preview-viewport{position:relative}.cost-export-page #cost-preview-tools,.cost-export-page .cost-controls,.cost-export-page #cost-preview-open,.cost-export-page .cost-chart-back,.cost-export-page .cost-kpi-action{display:none!important}.cost-export-page .cost-board-row{cursor:default}.cost-export-page .cost-chart-card #cost-chart-hint{display:none}.cost-export-page .cost-metrics .cost-kpi{display:flex;flex-direction:column;align-items:flex-start;min-width:0;box-sizing:border-box}.cost-export-page .cost-kpi :is(.cost-kpi-tag,.cost-kpi-label,strong,small){display:block;width:100%}.cost-export-page .cost-table-wrap{position:relative;isolation:isolate;max-height:min(70vh,650px);overflow:auto;overscroll-behavior:auto;scrollbar-width:auto;scrollbar-gutter:stable;touch-action:pan-x pan-y;cursor:auto}.cost-export-page #cost-table{border-collapse:separate;border-spacing:0}.cost-export-page #cost-table thead th{position:sticky;top:0;z-index:4;background:var(--cost-soft);box-shadow:0 1px 0 var(--cost-border)}.cost-export-page #cost-table tfoot td{position:sticky;bottom:0;z-index:4;background:var(--cost-soft);box-shadow:0 -1px 0 var(--cost-border)}.cost-export-page #cost-table tbody td:first-child{position:sticky;left:0;z-index:2;background:var(--surface);box-shadow:3px 0 8px #23354b0a}.cost-export-page #cost-table tbody td:last-child{position:sticky;right:0;z-index:2;background:var(--surface);box-shadow:-3px 0 8px #23354b0a}.cost-export-page #cost-table thead th:first-child,.cost-export-page #cost-table tfoot td:first-child{position:sticky;left:0;z-index:6;background:var(--cost-soft)}.cost-export-page #cost-table thead th:last-child,.cost-export-page #cost-table tfoot td:last-child{position:sticky;right:0;z-index:6;background:var(--cost-soft)}.cost-export-page .cost-crumb{display:inline-block}.cost-export-page .cost-fx-control>span{display:block}.cost-export-page .cost-fx-value{font-size:16px;font-weight:650}.cost-export-page select{max-width:100%}@media(max-width:600px){.cost-export-page{padding:10px}}@media print{@page{size:A3 landscape;margin:12mm}.cost-export-page{max-width:none;padding:0}.cost-export-page .cost-focus-layout{display:block}.cost-export-page :is(.cost-chart-card,.cost-preview-card,.cost-weights-card){height:auto!important;margin-bottom:12px;break-inside:avoid}.cost-export-page :is(#cost-layer-chart,.model-weight-scroll,.cost-board-rows,.cost-table-wrap){overflow:visible!important;max-height:none!important}.cost-export-page .cost-preview-card #cost-preview-viewport{height:300px!important;flex:none}.cost-export-page .model-weight-scroll{flex:none}#cost-table{min-width:0;font-size:8px}#cost-table :is(th,td){padding:5px;min-width:0!important;position:static!important}}'+
+ '</style></head><body><main class="cost-export-page"><header class="cost-export-heading"><h1>Costos de la turbina · análisis</h1><p>'+e(scope)+'</p><p>'+snapshot.tableRows.length+' partidas en la tabla · '+snapshot.contextCount+' partidas en los indicadores y el gráfico de contexto · USD · 1 USD = '+e(f(s.fxRate,2))+' CLP · Modelo V5 '+e(snapshot.variant)+'</p><p>Generado '+e(stamp)+'. Vista de geometría capturada del análisis; pesos declarados del HTML v5, separados de los kg de Costos.</p></header>'+sectionHtml+'</main><script id="cost-analysis-snapshot" type="application/json">'+json+'</'+'script><script>('+initCostExportTableViewport.toString()+')();</'+'script></body></html>';
+}
+function downloadCostAnalysisHtml(){
+ const snapshot=costAnalysisSnapshot(),section=$('step-6').cloneNode(true);
+ const originals=[...$('step-6').querySelectorAll('select,input')];[...section.querySelectorAll('select,input')].forEach((control,index)=>{control.value=originals[index].value;});
+ // The rendered table already contains every filtered row, including subtotals.
+ section.querySelector('.cost-controls')?.remove();
+ for(const selector of ['#cost-export-html','#cost-refresh','#cost-reset-mapping','#cost-layer-selection','.cost-chart-back','#cost-preview-open','#cost-preview-tools'])section.querySelector(selector)?.remove();
+ const rows=section.querySelector('.cost-board-rows');if(rows){rows.innerHTML=costExportBoardRows(snapshot);const bottom=section.querySelector('.cost-board-bottom');if(bottom)bottom.textContent=snapshot.board.groups.length+' categorías completas · orden por '+(snapshot.board.base==='current'?'costo al detalle':'costo por mayor')+(snapshot.state.package!=='all'?' · Tabla filtrada por: '+snapshot.state.package:'');}
+ let image=null;const preview=CostPreview,hasGeometry=costPreviewProducts(IFCView.data,CostView,IFCView.offer).length>0;
+ if(hasGeometry&&!preview.ready){const visible=preview.visible;try{preview.visible=true;updateCostPreview();}catch{}finally{preview.visible=visible;}}
+ if(hasGeometry&&preview.ready){const visible=preview.visible;try{preview.visible=true;preview.dirty=true;renderCostPreview();image=preview.renderer.domElement.toDataURL('image/png');}catch{}finally{preview.visible=visible;}}
+ const viewport=section.querySelector('#cost-preview-viewport');if(viewport){viewport.replaceChildren();if(image){const img=document.createElement('img');img.className='cost-export-image';img.src=image;img.alt=$('cost-preview-title').textContent;viewport.append(img);}else{const note=element('p',{className:'cost-export-caption'},'No se capturó la vista 3D. Los componentes y sus pesos declarados se incluyen en este informe.');viewport.append(note);}}
+ // Replace live controls with their displayed value; native details remain expandable.
+ for(const control of [...section.querySelectorAll('select,input')]){const original=$(control.id),value=original?.value??control.value,span=document.createElement('span');span.className='cost-fx-value';span.textContent=control.tagName==='SELECT'?(control.options[control.selectedIndex]?.textContent||value):value;control.replaceWith(span);}
+ costExportFreezeButtons(section);
+ const hint=section.querySelector('#cost-chart-hint');if(hint)hint.remove();
+ const styles=[...document.querySelectorAll('style')].map(style=>style.textContent).join('\n');
+ download('costos_turbina_'+(snapshot.state.layer==='all'&&!snapshot.state.modelSelectionActive&&!(snapshot.state.selectedLayers||[]).length&&snapshot.state.package==='all'&&snapshot.state.activity==='all'&&!snapshot.state.search?'total':'seleccion')+'.html',costExportDocument(snapshot,styles,section.outerHTML),'text/html;charset=utf-8');
+}
